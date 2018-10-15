@@ -11,9 +11,23 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'accounts' => [
+            'class' => 'backend\modules\Accounts\Account',
+        ],
+        'works' => [
+            'class' => 'backend\modules\works\Work',
+        ],
+        'queue' => [
+            'class' => 'backend\modules\queue\Queue',
+        ],
+        'settings' => [
+            'class' => 'backend\modules\settings\Settings',
+        ],
+    ],
     'components' => [
         'request' => [
+            'baseUrl' => '',
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
@@ -37,14 +51,23 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+
+'view' => [
+    'theme' => [
+        'pathMap' => [
+            '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
         ],
-        */
+    ],
+],
+
+//        'urlManager' => [
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+//            'rules' => [
+//
+//            ],
+//        ],
+
     ],
     'params' => $params,
 ];

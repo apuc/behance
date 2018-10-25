@@ -19,6 +19,7 @@ class m181015_083701_create_works_table extends Migration
             'url' => $this->string(),
             'name' => $this->string(),
             'image' => $this->string(),
+	        
         ]);
     }
 

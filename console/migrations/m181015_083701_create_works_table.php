@@ -13,8 +13,8 @@ class m181015_083701_create_works_table extends Migration
     public function safeUp()
     {
         $this->createTable('works', [
-            'id' => $this->primaryKey(),
-            'account_id' => $this->integer(),
+            'id' => $this->primaryKey()->unsigned(),
+            'account_id' => $this->integer()->unsigned(),
             'behance_id' => $this->string(),
             'url' => $this->string(),
             'name' => $this->string(),

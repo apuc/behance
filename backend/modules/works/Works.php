@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\modules\Accounts;
+namespace backend\modules\works;
 
 /**
- * accounts module definition class
+ * works module definition class
  */
-class Account extends \yii\base\Module
+class works extends \yii\base\Module
 {
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'backend\modules\Accounts\controllers';
+    public $controllerNamespace = 'backend\modules\works\controllers';
 
     /**
      * {@inheritdoc}

@@ -13,7 +13,7 @@ class m181015_083900_settings_table extends Migration
     public function safeUp()
     {
         $this->createTable('settings', [
-            'id' => $this->primaryKey(),
+            'id' => $this->primaryKey()->unsigned(),
             'key' => $this->string(),
             'value' => $this->string(),
         ]);

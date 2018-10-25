@@ -13,21 +13,21 @@ return [
     'bootstrap' => ['log'],
     'modules' => [
         'accounts' => [
-            'class' => 'backend\modules\Accounts\Account',
+            'class' => 'backend\modules\accounts\accounts',
         ],
         'works' => [
-            'class' => 'backend\modules\works\Work',
+            'class' => 'backend\modules\works\works',
         ],
         'queue' => [
             'class' => 'backend\modules\queue\Queue',
         ],
         'settings' => [
-            'class' => 'backend\modules\settings\Settings',
+            'class' => 'backend\modules\settings\settings',
         ],
     ],
     'components' => [
         'request' => [
-            'baseUrl' => '',
+            'baseUrl' => '/admin',
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
@@ -52,21 +52,25 @@ return [
             'errorAction' => 'site/error',
         ],
 
-'view' => [
-    'theme' => [
-        'pathMap' => [
-            '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
-        ],
-    ],
-],
-
-//        'urlManager' => [
-//            'enablePrettyUrl' => true,
-//            'showScriptName' => false,
-//            'rules' => [
-//
-//            ],
+//'view' => [
+//    'theme' => [
+//        'pathMap' => [
+//            '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
 //        ],
+//    ],
+//],
+	    /*ЧПУ*/
+        'urlManager' => [
+	        'enablePrettyUrl' => true,
+	        'showScriptName' => false,
+//	        'class'=>'backend\components\LangUrlManager',
+//	        'languages' => ['en', 'ru'],
+	        'rules' => [
+		        '/' => 'admin/index',
+		        '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+		        'page/<view:[a-zA-Z0-9-]+>' => 'site/page',
+	        ],
+        ],
 
     ],
     'params' => $params,

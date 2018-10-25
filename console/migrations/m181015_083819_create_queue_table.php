@@ -13,9 +13,9 @@ class m181015_083819_create_queue_table extends Migration
     public function safeUp()
     {
         $this->createTable('queue', [
-            'id' => $this->primaryKey(),
-            'work_id' => $this->integer(),
-            'likes_count' => $this->integer(),
+            'id' => $this->primaryKey()->unsigned(),
+            'work_id' => $this->integer()->unsigned(),
+            'likes_count' => $this->integer()->unsigned(),
         ]);
     }
 

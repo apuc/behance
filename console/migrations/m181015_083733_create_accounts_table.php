@@ -13,7 +13,7 @@ class m181015_083733_create_accounts_table extends Migration
     public function safeUp()
     {
         $this->createTable('accounts', [
-            'id' => $this->primaryKey(),
+            'id' => $this->primaryKey()->unsigned(),
             'url' => $this->string(),
             'title' => $this->string(),
         ]);

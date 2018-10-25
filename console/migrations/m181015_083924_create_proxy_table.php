@@ -13,7 +13,7 @@ class m181015_083924_create_proxy_table extends Migration
     public function safeUp()
     {
         $this->createTable('proxy', [
-            'id' => $this->primaryKey(),
+            'id' => $this->primaryKey()->unsigned(),
             'ip' => $this->string(),
         ]);
     }

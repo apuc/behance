@@ -21,6 +21,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
+    <?= $form->field($model, 'behance_id') ?>
+
+    <?= $form->field($model, 'display_name') ?>
+
+    <?php // echo $form->field($model, 'username') ?>
+
+    <?php // echo $form->field($model, 'image') ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('accounts', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('accounts', 'Reset'), ['class' => 'btn btn-default']) ?>

@@ -17,8 +17,8 @@ class AccountsSearch extends Accounts
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['url', 'title'], 'safe'],
+            [['id', 'behance_id'], 'integer'],
+            [['url', 'title', 'display_name', 'username', 'image'], 'safe'],
         ];
     }
 
@@ -59,10 +59,14 @@ class AccountsSearch extends Accounts
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'behance_id' => $this->behance_id,
         ]);
 
         $query->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'title', $this->title]);
+            ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'display_name', $this->display_name])
+            ->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;
     }

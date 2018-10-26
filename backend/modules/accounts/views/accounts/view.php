@@ -32,6 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'url:url',
             'title',
+            'behance_id',
+            'display_name',
+            'username',
+            'image:ntext',
         ],
     ]) ?>
 

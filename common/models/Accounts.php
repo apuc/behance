@@ -10,6 +10,10 @@ use Yii;
  * @property int $id
  * @property string $url
  * @property string $title
+ * @property int $behance_id
+ * @property string $display_name
+ * @property string $username
+ * @property string $image
  */
 class Accounts extends \yii\db\ActiveRecord
 {
@@ -27,7 +31,9 @@ class Accounts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['url', 'title'], 'string', 'max' => 255],
+            [['behance_id'], 'integer'],
+            [['image'], 'string'],
+            [['url', 'title', 'display_name', 'username'], 'string', 'max' => 255],
         ];
     }
 
@@ -40,6 +46,10 @@ class Accounts extends \yii\db\ActiveRecord
             'id' => Yii::t('accounts', 'ID'),
             'url' => Yii::t('accounts', 'Url'),
             'title' => Yii::t('accounts', 'Title'),
+            'behance_id' => Yii::t('accounts', 'Behance ID'),
+            'display_name' => Yii::t('accounts', 'Display Name'),
+            'username' => Yii::t('accounts', 'Username'),
+            'image' => Yii::t('accounts', 'Image'),
         ];
     }
 }

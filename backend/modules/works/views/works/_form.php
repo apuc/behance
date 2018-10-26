@@ -20,8 +20,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'preview')->textInput(['maxlength' => true]) ?>
-
     <div class="form-group">
         <?= Html::submitButton(Yii::t('works', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

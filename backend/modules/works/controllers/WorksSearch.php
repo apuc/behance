@@ -18,7 +18,7 @@ class WorksSearch extends Works
     {
         return [
             [['id', 'account_id'], 'integer'],
-            [['behance_id', 'url', 'name', 'preview'], 'safe'],
+            [['behance_id', 'url', 'name', 'image'], 'safe'],
         ];
     }
 
@@ -65,7 +65,7 @@ class WorksSearch extends Works
         $query->andFilterWhere(['like', 'behance_id', $this->behance_id])
             ->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'preview', $this->preview]);
+            ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;
     }

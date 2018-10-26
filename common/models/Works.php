@@ -12,7 +12,7 @@ use Yii;
  * @property string $behance_id
  * @property string $url
  * @property string $name
- * @property string $preview
+ * @property string $image
  */
 class Works extends \yii\db\ActiveRecord
 {
@@ -31,7 +31,7 @@ class Works extends \yii\db\ActiveRecord
     {
         return [
             [['account_id'], 'integer'],
-            [['behance_id', 'url', 'name', 'preview'], 'string', 'max' => 255],
+            [['behance_id', 'url', 'name', 'image'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,7 +46,7 @@ class Works extends \yii\db\ActiveRecord
             'behance_id' => Yii::t('works', 'Behance ID'),
             'url' => Yii::t('works', 'Url'),
             'name' => Yii::t('works', 'Name'),
-            'preview' => Yii::t('works', 'Preview'),
+            'image' => Yii::t('works', 'Image'),
         ];
     }
 }

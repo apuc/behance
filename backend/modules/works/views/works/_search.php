@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name') ?>
 
-    <?php // echo $form->field($model, 'preview') ?>
+    <?php // echo $form->field($model, 'image') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('works', 'Search'), ['class' => 'btn btn-primary']) ?>

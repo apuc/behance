@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'behance_id',
             'url:url',
             'name',
-            //'preview',
+            //'image',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

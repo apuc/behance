@@ -13,16 +13,16 @@ return [
     'bootstrap' => ['log'],
     'modules' => [
         'accounts' => [
-            'class' => 'backend\modules\accounts\accounts',
+            'class' => 'backend\modules\accounts\Accounts',
         ],
         'works' => [
-            'class' => 'backend\modules\works\works',
+            'class' => 'backend\modules\works\Works',
         ],
         'queue' => [
             'class' => 'backend\modules\queue\Queue',
         ],
         'settings' => [
-            'class' => 'backend\modules\settings\settings',
+            'class' => 'backend\modules\settings\Settings',
         ],
     ],
     'components' => [

@@ -12,7 +12,7 @@ namespace common\behance\traits;
 trait LikeTrait
 {
 
-    public function _like_($likesCount,$behanceId)
+    public function _like_($behanceId,$likesCount = 1)
     {
         $successfulLikes = 0;
 

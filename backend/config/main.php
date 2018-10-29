@@ -24,6 +24,9 @@ return [
         'settings' => [
             'class' => 'backend\modules\settings\Settings',
         ],
+        'balance' => [
+	        'class' => 'backend\modules\balance\Balance',
+        ],
     ],
     'components' => [
         'request' => [

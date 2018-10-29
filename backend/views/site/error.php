@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $name string */
@@ -8,6 +9,9 @@ use yii\helpers\Html;
 /* @var $exception Exception */
 
 $this->title = $name;
+if(Yii::$app->user->isGuest){
+	Yii::$app->response->redirect(Url::to(['/'], true));
+}
 ?>
 <section class="content">
 

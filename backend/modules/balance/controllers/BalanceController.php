@@ -1,20 +1,23 @@
 <?php
 
-namespace backend\modules\accounts\controllers;
+namespace backend\modules\balance\controllers;
 
+use common\models\Debug;
+use common\models\User;
 use Yii;
-use backend\modules\accounts\models\Accounts;
-use backend\modules\accounts\controllers\AccountsSearch;
+use backend\modules\balance\models\Balance;
+use backend\modules\balance\controllers\BalanceSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AccountsController implements the CRUD actions for Accounts model.
+ * BalanceController implements the CRUD actions for Balance model.
  */
-class AccountsController extends Controller
+class BalanceController extends Controller
 {
+	public $data = [];
     /**
      * {@inheritdoc}
      */
@@ -45,12 +48,12 @@ class AccountsController extends Controller
     }
 
     /**
-     * Lists all Accounts models.
+     * Lists all Balance models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AccountsSearch();
+        $searchModel = new BalanceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +63,7 @@ class AccountsController extends Controller
     }
 
     /**
-     * Displays a single Accounts model.
+     * Displays a single Balance model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -73,25 +76,29 @@ class AccountsController extends Controller
     }
 
     /**
-     * Creates a new Accounts model.
+     * Creates a new Balance model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Accounts();
+        $model = new Balance();
+        
+        foreach (User::find()->all() as $user){
+        	$this->data[$user->id] = $user->username;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model, 'data' => $this->data,
         ]);
     }
 
     /**
-     * Updates an existing Accounts model.
+     * Updates an existing Balance model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -100,18 +107,20 @@ class AccountsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+	    
+        $this->data[$model->user_id] = User::findOne($model->user_id)->username;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 'data' => $this->data,
         ]);
     }
 
     /**
-     * Deletes an existing Accounts model.
+     * Deletes an existing Balance model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -125,18 +134,18 @@ class AccountsController extends Controller
     }
 
     /**
-     * Finds the Accounts model based on its primary key value.
+     * Finds the Balance model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Accounts the loaded model
+     * @return Balance the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Accounts::findOne($id)) !== null) {
+        if (($model = Balance::findOne($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('accounts', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('balance', 'The requested page does not exist.'));
     }
 }

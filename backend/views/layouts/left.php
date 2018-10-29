@@ -32,10 +32,10 @@
                 'items' => [
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Accounts', 'icon' => 'fas fa-user-circle', 'url' => ['/accounts/accounts']],
-                    ['label' => 'Queue', 'icon' => '', 'url' => ['/queue/Queue']],
+                    ['label' => 'Queue', 'icon' => 'fas fa-pen', 'url' => ['/queue/queue']],
                     ['label' => 'Settings', 'icon' => 'fas fa-cogs', 'url' => ['/settings/settings']],
                     ['label' => 'Works', 'icon' => 'fas fa-briefcase', 'url' => ['/works/works']],
-                    ['label' => 'Balance', 'icon' => 'fas fa-briefcase', 'url' => ['/balance/balance']],
+                    ['label' => 'Balance', 'icon' => 'fas fa-shopping-basket', 'url' => ['/balance/balance']],
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],

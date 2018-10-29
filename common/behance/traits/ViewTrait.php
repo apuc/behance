@@ -11,7 +11,6 @@ namespace common\behance\traits;
 
 trait ViewTrait
 {
-
     public function _view_($url,$viewsCount = 1)
     {
         $successfulViews = 0;

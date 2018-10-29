@@ -12,6 +12,7 @@ namespace common\behance\lib;
 use common\behance\traits\CommonTrait;
 use common\behance\traits\LikeTrait;
 use common\behance\traits\ViewTrait;
+use common\models\Queue;
 
 class BehanceWork
 {
@@ -21,6 +22,7 @@ class BehanceWork
     public $url;
     public $name;
     public $image;
+    public $count;
 
 
 
@@ -32,20 +34,21 @@ class BehanceWork
         $this->url = (isset($data['url'])) ? $data['url'] : null;
         $this->name = (isset($data['name'])) ? $data['name'] : null;
         $this->image = (isset($data['image'])) ? $data['image'] : null;
+        $this->count = Queue::find()->where(['id' => 1])->one() ?? 1;
     }
 
 
 
-    public function like($count = 1)
+    public function like()
     {
-        $this->_like_($count, $this->behanceId);
+        $this->_like_($this->behanceId, $this->count->likes_count);
     }
 
 
 
-    public function view($count = 1)
+    public function view()
     {
-        $this->_view_($count, $this->url);
+        $this->_view_($this->url, $this->count->views_count);
     }
 
 }

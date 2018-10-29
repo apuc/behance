@@ -9,8 +9,9 @@ use Yii;
  *
  * @property int $id
  * @property int $work_id
- * @property int $likes_count
- * @property int $views_count
+ * @property int $likes_work
+ * @property int $views_work
+ * @property int $account_views
  */
 class Queue extends \yii\db\ActiveRecord
 {
@@ -28,7 +29,7 @@ class Queue extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['work_id', 'likes_count', 'views_count'], 'integer'],
+            [['work_id', 'likes_work', 'views_work', 'account_views'], 'integer'],
         ];
     }
 
@@ -40,8 +41,9 @@ class Queue extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('queue', 'ID'),
             'work_id' => Yii::t('queue', 'Work ID'),
-            'likes_count' => Yii::t('queue', 'Likes Count'),
-            'views_count' => Yii::t('queue', 'Views Count'),
+            'likes_work' => Yii::t('queue', 'Likes Work'),
+            'views_work' => Yii::t('queue', 'Views Work'),
+            'account_views' => Yii::t('queue', 'Account Views'),
         ];
     }
 }

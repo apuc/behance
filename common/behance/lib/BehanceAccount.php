@@ -10,6 +10,7 @@ namespace common\behance\lib;
 
 use common\behance\traits\CommonTrait;
 use common\behance\traits\ViewTrait;
+use common\models\Queue;
 
 class BehanceAccount
 {
@@ -22,6 +23,7 @@ class BehanceAccount
     public $image;
     public $works = [];
     private $token;
+    public $count;
 
     public function __construct($url,$token)
     {
@@ -33,6 +35,7 @@ class BehanceAccount
         $this->url = $account->user->url;
         $this->image = end($account->user->images);
         $this->getWorks();
+	    $this->count = Queue::find()->where(['work_id' => $this->behanceId])->one() ?? 1;
     }
 
 
@@ -110,8 +113,13 @@ class BehanceAccount
 
     public function view($count = 1)
     {
-        $this->_view_($count, $this->url);
+        $this->_view_($this->url, $count);
     }
+	
+	public function viewAccount($count = 1)
+	{
+		$this->_view_($this->url, $this->count->account_views);
+	}
 
 
 

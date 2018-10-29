@@ -34,7 +34,7 @@ class BehanceWork
         $this->url = (isset($data['url'])) ? $data['url'] : null;
         $this->name = (isset($data['name'])) ? $data['name'] : null;
         $this->image = (isset($data['image'])) ? $data['image'] : null;
-        $this->count = Queue::find()->where(['id' => 1])->one() ?? 1;
+        $this->count = Queue::find()->where(['work_id' => $this->behanceId])->one() ?? 1;
     }
 
 

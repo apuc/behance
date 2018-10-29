@@ -17,7 +17,7 @@ class QueueSearch extends Queue
     public function rules()
     {
         return [
-            [['id', 'work_id', 'likes_count', 'views_count'], 'integer'],
+            [['id', 'work_id', 'likes_work', 'views_work', 'account_views'], 'integer'],
         ];
     }
 
@@ -59,8 +59,9 @@ class QueueSearch extends Queue
         $query->andFilterWhere([
             'id' => $this->id,
             'work_id' => $this->work_id,
-            'likes_count' => $this->likes_count,
-            'views_count' => $this->views_count,
+            'likes_work' => $this->likes_work,
+            'views_work' => $this->views_work,
+            'account_views' => $this->account_views,
         ]);
 
         return $dataProvider;

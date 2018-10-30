@@ -19,6 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('accounts', 'Create Accounts'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+	<p>
+		<?= Html::a(Yii::t('accounts', 'Parse Works'), ['parse-works'], ['class' => 'btn btn-success']) ?>
+	</p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

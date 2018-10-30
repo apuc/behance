@@ -4,27 +4,32 @@ namespace common\behance;
 
 use common\behance\lib\BehanceAccount;
 
-class BehanceLiker
+class BehanceService
 {
-    protected $account;
+    public $account;
 
     public function __construct(BehanceAccount $account)
     {
         $this->account = $account;
+
     }
 
 
 
     public function standardScenario($workId)
     {
-        $this->account->view();
+       // $this->account->view();
         $this->account->likeWork([['id'=>$workId,"likes"=>1]]);
-        $this->account->viewWork([['id'=>$workId,"views"=>1]]);
+       // $this->account->viewWork([['id'=>$workId,"views"=>1]]);
         return $this;
     }
 
 
-
+    public function getWorks()
+    {
+        $this->account->getWorks();
+        return $this->account->works;
+    }
     /**
      * @param array(['id'=>'behanceId','likes'=>likesCount],[...])
      */

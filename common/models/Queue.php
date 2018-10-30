@@ -46,4 +46,10 @@ class Queue extends \yii\db\ActiveRecord
             'account_views' => Yii::t('queue', 'Account Views'),
         ];
     }
+
+
+    public function getWork()
+    {
+        return $this->hasOne(Works::className(),['id'=>'work_id']);
+    }
 }

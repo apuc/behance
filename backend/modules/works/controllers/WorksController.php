@@ -50,6 +50,7 @@ class WorksController extends Controller
      */
     public function actionIndex()
     {
+
         $searchModel = new WorksSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

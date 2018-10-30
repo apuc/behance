@@ -15,7 +15,11 @@ use common\behance\traits\ViewTrait;
 
 class BehanceWork
 {
-    use LikeTrait,ViewTrait,CommonTrait;
+    use LikeTrait,ViewTrait{
+        ViewTrait::getProxy insteadof LikeTrait;
+        ViewTrait::getUserAgent insteadof LikeTrait;
+        ViewTrait::behanceApiRequest insteadof LikeTrait;
+    }
 
     public $behanceId;
     public $url;

@@ -10,6 +10,10 @@ namespace common\behance\traits;
 
 
 
+use common\behance\Config;
+use common\behance\lib\UserAgentArray;
+
+
 trait CommonTrait
 {
     public function behanceApiRequest($url)
@@ -25,11 +29,11 @@ trait CommonTrait
 
     protected function getProxy()
     {
-        //
+
     }
 
     protected function getUserAgent()
     {
-        //
+        return Config::get()['userAgentDriver']::getRandom();
     }
 }

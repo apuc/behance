@@ -11,6 +11,7 @@ namespace common\behance\traits;
 
 trait LikeTrait
 {
+    use CommonTrait;
 
     public function _like_($behanceId,$likesCount = 1)
     {
@@ -21,7 +22,7 @@ trait LikeTrait
             $proxy = $this->getRandomProxy();
             $userAgent = $this->getRandomUserAgent();
             $url = "https://www.behance.net/v2/projects/{$behanceId}/appreciate?client_id=BehanceWebSusi1";
-
+            die($userAgent);
             $curl = curl_init();
 
             curl_setopt($curl, CURLOPT_POST, true);

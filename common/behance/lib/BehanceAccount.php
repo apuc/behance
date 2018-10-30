@@ -5,15 +5,18 @@
  * Date: 25.10.18
  * Time: 15:34
  */
+
 namespace common\behance\lib;
 
 
 use common\behance\traits\CommonTrait;
 use common\behance\traits\ViewTrait;
+use common\behance\Config;
+
 
 class BehanceAccount
 {
-    use ViewTrait,CommonTrait;
+    use ViewTrait;
 
     public $behanceId;
     public $displayName;
@@ -23,89 +26,86 @@ class BehanceAccount
     public $works = [];
     private $token;
 
-    public function __construct($url,$token)
+    public function __construct($url)
     {
-        $this->token = $token;
+        $this->token = Config::get()['apiKey'];
         $account = $this->getAccountFromUrl($url);
         $this->behanceId = $account->user->id;
         $this->displayName = $account->user->display_name;
         $this->username = $account->user->username;
         $this->url = $account->user->url;
         $this->image = end($account->user->images);
-        $this->getWorks();
+        //$this->getWorks();
     }
 
+    public function importWorks($works)
+    {
+        foreach ($works as $work)
+        {
 
+            $this->addWork($work);
+        }
+    }
 
     public function getWorks()
     {
-        $i=1;
+        $this->works = [];
+        $i = 1;
 
-        while($i>0)
-        {
+        while ($i > 0) {
             $url = "https://api.behance.net//v2/users/{$this->username}/projects?client_id={$this->token}&page={$i}";
             $res = $this->behanceApiRequest($url);
 
             $i++;
 
-            if(empty($res->projects))
+            if (empty($res->projects))
                 break;
 
-            foreach ($res->projects as $p)
-            {
+            foreach ($res->projects as $p) {
                 $this->addWork($p);
             }
         }
     }
 
 
-
     public function addWork($work)
     {
         $data = array();
-        $data['behance_id'] = $work->id;
+        $data['behance_id'] = (isset($work->behance_id)) ? $work->behance_id : $work->id;
         $data['name'] = $work->name;
         $data['url'] = $work->url;
-        $data['image'] = end($work->covers);
+        $data['image'] = (isset($work->covers)) ? end($work->covers) : $work->image;
+        $data['id'] = (isset($work->behance_id)) ? $work->id : null;
+        $data['account_id'] = (isset($work->behance_id)) ? $work->account_id : null;
+
         $workObj = new BehanceWork($data);
 
-        $this->works[$work->id] = $workObj;
+        $this->works[$data['behance_id']] = $workObj;
     }
-
 
 
     public function likeWork($data)
     {
-        if(count($data) > 1)
-        {
-            foreach ($data as $item)
-            {
+        if (count($data) > 1) {
+            foreach ($data as $item) {
                 $this->works[$item['id']]->like($item['likes']);
             }
-        }
-        else
-        {
+        } else {
             $this->works[$data[0]['id']]->like($data[0]['likes']);
         }
     }
 
 
-
     public function viewWork($data)
     {
-        if(count($data) > 1)
-        {
-            foreach ($data as $item)
-            {
+        if (count($data) > 1) {
+            foreach ($data as $item) {
                 $this->works[$item['id']]->view($item['views']);
             }
-        }
-        else
-        {
+        } else {
             $this->works[$data[0]['id']]->view($data[0]['views']);
         }
     }
-
 
 
     public function view($count = 1)
@@ -114,12 +114,12 @@ class BehanceAccount
     }
 
 
-
     private function getAccountFromUrl($url)
     {
-        $explodedUrl = explode("/",$url);
+        $explodedUrl = explode("/", $url);
         $username = end($explodedUrl);
         $apiString = "https://api.behance.net/v2/users/{$username}?client_id={$this->token}";
         return $this->behanceApiRequest($apiString);
     }
+
 }

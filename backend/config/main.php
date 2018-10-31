@@ -27,6 +27,9 @@ return [
         'balance' => [
 	        'class' => 'backend\modules\balance\Balance',
         ],
+        'cases' => [
+	        'class' => 'backend\modules\cases\Cases',
+        ],
     ],
     'components' => [
         'request' => [

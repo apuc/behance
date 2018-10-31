@@ -12,6 +12,7 @@ namespace common\behance\lib;
 use common\behance\traits\CommonTrait;
 use common\behance\traits\ViewTrait;
 use common\behance\Config;
+use common\models\Debug;
 
 
 class BehanceAccount

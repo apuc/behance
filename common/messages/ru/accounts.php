@@ -9,6 +9,7 @@ return [
 	'Title' => 'Заголовок',
 	'Url' => 'Адресс URL',
 	'Parse Works' => 'Парсить работы аккаунта',
+	'Parse Account' => 'Парсить аккаунт',
 	'ID' => 'ID',
 	'Create Accounts' => 'Создать аккаунт',
 	'Save' => 'Сохранить',

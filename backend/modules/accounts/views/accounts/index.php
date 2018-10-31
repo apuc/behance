@@ -20,6 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 	<p>
+		<?= Html::a(Yii::t('accounts', 'Parse Account'), ['parse-account'], ['class' => 'btn btn-success']) ?>
+	</p>
+
+	<p>
 		<?= Html::a(Yii::t('accounts', 'Parse Works'), ['parse-works'], ['class' => 'btn btn-success']) ?>
 	</p>
 

@@ -2,8 +2,11 @@
 
 namespace backend\modules\accounts\controllers;
 
+use backend\modules\works\models\Works;
+use common\behance\BehanceService;
 use common\behance\lib\BehanceAccount;
 use common\models\Debug;
+use function GuzzleHttp\Psr7\str;
 use Yii;
 use backend\modules\accounts\models\Accounts;
 use backend\modules\accounts\controllers\AccountsSearch;
@@ -37,7 +40,7 @@ class AccountsController extends Controller
 			            'allow' => true,
 		            ],
 		            [
-			            'actions' => ['logout', 'index', 'view', 'create', 'update'],
+			            'actions' => ['logout', 'index', 'view', 'create', 'update', 'save-works', 'save-acc', 'parse-account', 'parse-works'],
 			            'allow' => true,
 			            'roles' => ['@'],
 		            ],
@@ -91,7 +94,24 @@ class AccountsController extends Controller
             'model' => $model,
         ]);
     }
-
+    
+	public function actionParseAccount()
+	{
+		$model = new Accounts();
+		
+		return $this->render('_form_acc', [
+			'model' => $model,
+		]);
+	}
+	
+	public function actionParseWorks()
+	{
+		$model = new Accounts();
+		
+		return $this->render('_form_works', [
+			'model' => $model,
+		]);
+	}
     /**
      * Updates an existing Accounts model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -111,6 +131,56 @@ class AccountsController extends Controller
             'model' => $model,
         ]);
     }
+    
+    public function actionSaveWorks() {
+	    $post = Yii::$app->request->post()['Accounts'];
+	    if($post['url']) {
+		    $works = BehanceService::create(new BehanceAccount($post['url']))->getWorks();
+		    if($works) {
+			    foreach ($works as $key => $val) {
+				    $work_bd = new Works();
+				    $work_bd->behance_id = (string)$val->behanceId;
+				    $work_bd->image = (string)$val->image;
+				    $work_bd->account_id = (integer)$key;
+				    $work_bd->url = (string)$val->url;
+				    $work_bd->name = (string)$val->name;
+				    $work_bd->save();
+			    }
+			    Yii::$app->session->setFlash('success', "Данные сохранены");
+			    return $this->redirect('/admin/accounts/accounts/');
+		    }
+		    Yii::$app->session->setFlash('error', "Не верный токен!");
+		    return $this->redirect('/admin/accounts/accounts/parse-works');
+	    }
+	    Yii::$app->session->setFlash('error', "Не верно ведены данные!");
+	    return $this->redirect('/admin/accounts/accounts/parse-works');
+    }
+	
+	public function actionSaveAcc() {
+    	$post = Yii::$app->request->post()['Accounts'];
+    	if($post['url']) {
+		    $acc = new BehanceAccount($post['url']);
+		    if($acc) {
+			    if(Accounts::find()->where(['behance_id' => $acc->behanceId])->one()) {
+				    Yii::$app->session->setFlash('error', "Данные пользователя уже существуют");
+				    return $this->redirect('/admin/accounts/accounts/parse-account');
+			    }
+			    $acc_bd = new Accounts();
+			    $acc_bd->behance_id = (integer)$acc->behanceId;
+			    $acc_bd->display_name = (string)$acc->displayName;
+			    $acc_bd->username = (string)$acc->username;
+			    $acc_bd->url = (string)$acc->url;
+			    $acc_bd->image = (string)$acc->image;
+			    $acc_bd->save();
+			    Yii::$app->session->setFlash('success', "Данные сохранены");
+			    return $this->redirect('/admin/accounts/accounts/');
+		    }
+		    Yii::$app->session->setFlash('error', "Не верный токен!");
+		    return $this->redirect('/admin/accounts/accounts/parse-works');
+	    }
+		Yii::$app->session->setFlash('error', "Не верно ведены данные!");
+		return $this->redirect('/admin/accounts/accounts/parse-account');
+	}
 
     /**
      * Deletes an existing Accounts model.

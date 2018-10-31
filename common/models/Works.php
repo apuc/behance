@@ -31,6 +31,7 @@ class Works extends \yii\db\ActiveRecord
     {
         return [
             [['account_id'], 'integer'],
+	        [['behance_id', 'url', 'name', 'image'], 'safe'],
             [['behance_id', 'url', 'name', 'image'], 'string', 'max' => 255],
         ];
     }

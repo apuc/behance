@@ -2,6 +2,7 @@
 
 namespace backend\modules\balance\controllers;
 
+use backend\modules\Accounts\models\Accounts;
 use common\models\Debug;
 use common\models\User;
 use Yii;
@@ -84,8 +85,8 @@ class BalanceController extends Controller
     {
         $model = new Balance();
         
-        foreach (User::find()->all() as $user){
-        	$this->data[$user->id] = $user->username;
+        foreach (Accounts::find()->all() as $acc){
+        	$this->data[$acc->behance_id] = $acc->display_name;
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -108,7 +109,7 @@ class BalanceController extends Controller
     {
         $model = $this->findModel($id);
 	    
-        $this->data[$model->user_id] = User::findOne($model->user_id)->username;
+        $this->data[$model->user_id] = Accounts::findOne($model->user_id)->display_name;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

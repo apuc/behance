@@ -136,6 +136,7 @@ class AccountsController extends Controller
 	    $post = Yii::$app->request->post()['Accounts'];
 	    if($post['url']) {
 		    $works = BehanceService::create(new BehanceAccount($post['url']))->getWorks();
+		    Debug::toDebug($works);
 		    if($works) {
 			    foreach ($works as $key => $val) {
 				    $work_bd = new Works();

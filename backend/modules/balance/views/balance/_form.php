@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model backend\modules\balance\models\Balance */
 /* @var $form yii\widgets\ActiveForm
- * @var $data array
+ * @var $accounts array
  */
 ?>
 
@@ -14,8 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'user_id')->dropDownList(
-    		$items = $data, ['prompt' => 'Выберите пользователя']) ?>
+    <?= $form->field($model, 'accounts_id')->dropDownList($accounts, ['prompt' => 'Выберите пользователя...']) ?>
 
     <?= $form->field($model, 'views')->textInput() ?>
 

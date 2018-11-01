@@ -9,7 +9,7 @@ use Yii;
  * This is the model class for table "balance".
  *
  * @property int $id
- * @property int $user_id
+ * @property int $accounts_id
  * @property int $views
  * @property int $likes
  */

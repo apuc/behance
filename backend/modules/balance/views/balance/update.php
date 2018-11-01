@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\balance\models\Balance
- * @var  $data array
+ * @var $accounts array
  */
 
 $this->title = Yii::t('balance', 'Update Balance: ' . $model->id, [
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = Yii::t('balance', 'Update');
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model, 'data' => $data,
+        'model' => $model, 'accounts' => $accounts,
     ]) ?>
 
 </div>

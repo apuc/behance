@@ -17,7 +17,7 @@ class BalanceSearch extends Balance
     public function rules()
     {
         return [
-            [['id', 'user_id', 'views', 'likes'], 'integer'],
+            [['id', 'accounts_id', 'views', 'likes'], 'integer'],
         ];
     }
 
@@ -58,7 +58,7 @@ class BalanceSearch extends Balance
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            'accounts_id' => $this->accounts_id,
             'views' => $this->views,
             'likes' => $this->likes,
         ]);

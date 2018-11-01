@@ -11,7 +11,9 @@ namespace common\behance\lib;
 
 use common\behance\traits\CommonTrait;
 use common\behance\Config;
+
 use common\behance\interfaces\AccountInterface;
+
 
 class BehanceAccount implements AccountInterface
 {

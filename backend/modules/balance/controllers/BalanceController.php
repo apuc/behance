@@ -2,12 +2,12 @@
 
 namespace backend\modules\balance\controllers;
 
+use backend\modules\Accounts\models\Accounts;
 use common\models\Debug;
-use common\models\User;
 use Yii;
 use backend\modules\balance\models\Balance;
 use backend\modules\balance\controllers\BalanceSearch;
-use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -17,7 +17,8 @@ use yii\filters\VerbFilter;
  */
 class BalanceController extends Controller
 {
-	public $data = [];
+	public $accounts = [];
+	public $balance;
     /**
      * {@inheritdoc}
      */
@@ -30,23 +31,16 @@ class BalanceController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            'access' => [
-	            'class' => AccessControl::className(),
-	            'rules' => [
-		            [
-			            'actions' => ['login', 'error'],
-			            'allow' => true,
-		            ],
-		            [
-			            'actions' => ['logout', 'index', 'view', 'create', 'update'],
-			            'allow' => true,
-			            'roles' => ['@'],
-		            ],
-	            ],
-            ],
         ];
     }
-
+	
+	public function getAccounts () {
+    	$this->balance = ArrayHelper::getColumn(Balance::find()->all(), 'accounts_id');
+		foreach (Accounts::find()->where(['!=', 'id', $this->balance])->all() as $value) {
+			$this->accounts[$value->id] = $value->display_name;
+		}
+		return $this->accounts;
+	}
     /**
      * Lists all Balance models.
      * @return mixed
@@ -83,17 +77,13 @@ class BalanceController extends Controller
     public function actionCreate()
     {
         $model = new Balance();
-        
-        foreach (User::find()->all() as $user){
-        	$this->data[$user->id] = $user->username;
-        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model' => $model, 'data' => $this->data,
+            'model' => $model, 'accounts' => $this->getAccounts(),
         ]);
     }
 
@@ -107,15 +97,13 @@ class BalanceController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-	    
-        $this->data[$model->user_id] = User::findOne($model->user_id)->username;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model, 'data' => $this->data,
+            'model' => $model, 'accounts' => $this->getAccounts(),
         ]);
     }
 

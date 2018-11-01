@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\cases\controllers\CasesSearch */
+/* @var $model backend\modules\cases\controllers\CaseseSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -22,6 +22,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'views') ?>
 
     <?= $form->field($model, 'likes') ?>
+
+    <?= $form->field($model, 'name') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('cases', 'Search'), ['class' => 'btn btn-primary']) ?>

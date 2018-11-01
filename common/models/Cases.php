@@ -11,6 +11,7 @@ use Yii;
  * @property int $behance_id
  * @property int $views
  * @property int $likes
+ * @property string $name
  */
 class Cases extends \yii\db\ActiveRecord
 {
@@ -29,6 +30,7 @@ class Cases extends \yii\db\ActiveRecord
     {
         return [
             [['behance_id', 'views', 'likes'], 'integer'],
+            [['name'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,6 +44,7 @@ class Cases extends \yii\db\ActiveRecord
             'behance_id' => Yii::t('cases', 'Behance ID'),
             'views' => Yii::t('cases', 'Views'),
             'likes' => Yii::t('cases', 'Likes'),
+            'name' => Yii::t('cases', 'Name'),
         ];
     }
 }

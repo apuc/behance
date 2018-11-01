@@ -30,6 +30,9 @@ return [
         'cases' => [
 	        'class' => 'backend\modules\cases\Cases',
         ],
+        'orders' => [
+	        'class' => 'backend\modules\orders\Orders',
+        ],
     ],
     'components' => [
         'request' => [

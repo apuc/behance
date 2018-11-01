@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\balance\models\Balance
- * @var $data array
+ * @var $accounts array
  */
 
 $this->title = Yii::t('balance', 'Create Balance');
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model, 'data' => $data
+        'model' => $model, 'accounts' => $accounts,
     ]) ?>
 
 </div>

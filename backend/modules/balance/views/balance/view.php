@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\modules\balance\models\Balance */
 
-$this->title = $model->id;
+$this->title = Yii::t('balance', 'Balance')." пользователя ". \backend\modules\Accounts\models\Accounts::findOne(['id' => $model->accounts_id])->display_name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('balance', 'Balances'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'user_id',
+            'accounts_id',
             'views',
             'likes',
         ],

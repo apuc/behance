@@ -6,13 +6,15 @@
  * Time: 14:34
  */
 return [
-	'Views' => 'К-во просмотров',
-	'Likes' => 'К-во лайков',
+	'Title' => 'Заголовок',
+	'Url' => 'Адресс URL',
+	'Parse Works' => 'Парсить работы аккаунта',
+	'Parse Account' => 'Парсить аккаунт',
 	'ID' => 'ID',
-	'Create Balance' => 'Создать',
+	'Create Orders' => 'Создать заказ',
+	'Orders' => 'Заказы',
 	'Save' => 'Сохранить',
 	'Update' => 'Обновить',
 	'Delete' => 'Удалить',
-	'Balance' => 'Баланс',
 	'Are you sure you want to delete this item?' => 'Вы серьезно хотите удалить эту запись?',
 ];

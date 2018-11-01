@@ -1,25 +1,24 @@
 <?php
 
-namespace backend\modules\balance\controllers;
+namespace backend\modules\orders\controllers;
 
-use backend\modules\Accounts\models\Accounts;
-use common\models\Debug;
+use backend\modules\cases\models\Cases;
+use common\models\Accounts;
 use Yii;
-use backend\modules\balance\models\Balance;
-use backend\modules\balance\controllers\BalanceSearch;
-use yii\helpers\ArrayHelper;
+use backend\modules\orders\models\Orders;
+use backend\modules\orders\controllers\OrdersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BalanceController implements the CRUD actions for Balance model.
+ * OrdersController implements the CRUD actions for Orders model.
  */
-class BalanceController extends Controller
+class OrdersController extends Controller
 {
-	public $accounts = [];
-	public $balance;
-    /**
+    public $accounts = [];
+    public $cases = [];
+	/**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -33,21 +32,27 @@ class BalanceController extends Controller
             ],
         ];
     }
+
+    public function getAccounts () {
+    	foreach (Accounts::find()->all() as $value) {
+    		$this->accounts[$value->id] = $value->display_name;
+	    }
+	    return $this->accounts;
+    }
 	
-	public function getAccounts () {
-    	$this->balance = ArrayHelper::getColumn(Balance::find()->all(), 'accounts_id');
-		foreach (Accounts::find()->where(['!=', 'id', $this->balance])->all() as $value) {
-			$this->accounts[$value->id] = $value->display_name;
+	public function getCases () {
+		foreach (Cases::find()->all() as $value) {
+			$this->cases[$value->id] = $value->name;
 		}
-		return $this->accounts;
+		return $this->cases;
 	}
     /**
-     * Lists all Balance models.
+     * Lists all Orders models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BalanceSearch();
+        $searchModel = new OrdersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -57,7 +62,7 @@ class BalanceController extends Controller
     }
 
     /**
-     * Displays a single Balance model.
+     * Displays a single Orders model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -70,25 +75,25 @@ class BalanceController extends Controller
     }
 
     /**
-     * Creates a new Balance model.
+     * Creates a new Orders model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Balance();
-
+        $model = new Orders();
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model' => $model, 'accounts' => $this->getAccounts(),
+            'model' => $model, 'accounts' => $this->getAccounts(), 'cases' => $this->getCases(),
         ]);
     }
 
     /**
-     * Updates an existing Balance model.
+     * Updates an existing Orders model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -103,12 +108,12 @@ class BalanceController extends Controller
         }
 
         return $this->render('update', [
-            'model' => $model, 'accounts' => $this->getAccounts(),
+            'model' => $model, 'accounts' => $this->getAccounts(), 'cases' => $this->getCases(),
         ]);
     }
 
     /**
-     * Deletes an existing Balance model.
+     * Deletes an existing Orders model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -122,18 +127,18 @@ class BalanceController extends Controller
     }
 
     /**
-     * Finds the Balance model based on its primary key value.
+     * Finds the Orders model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Balance the loaded model
+     * @return Orders the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Balance::findOne($id)) !== null) {
+        if (($model = Orders::findOne($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('balance', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('orders', 'The requested page does not exist.'));
     }
 }

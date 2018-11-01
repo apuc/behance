@@ -1,15 +1,15 @@
 <?php
 
-namespace backend\modules\balance\controllers;
+namespace backend\modules\orders\controllers;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\balance\models\Balance;
+use backend\modules\orders\models\Orders;
 
 /**
- * BalanceSearch represents the model behind the search form of `backend\modules\balance\models\Balance`.
+ * OrdersSearch represents the model behind the search form of `backend\modules\orders\models\Orders`.
  */
-class BalanceSearch extends Balance
+class OrdersSearch extends Orders
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,8 @@ class BalanceSearch extends Balance
     public function rules()
     {
         return [
-            [['id', 'accounts_id', 'views', 'likes'], 'integer'],
+            [['id', 'accounts_id', 'cases_id', 'status'], 'integer'],
+            [['dt_add'], 'safe'],
         ];
     }
 
@@ -39,7 +40,7 @@ class BalanceSearch extends Balance
      */
     public function search($params)
     {
-        $query = Balance::find();
+        $query = Orders::find();
 
         // add conditions that should always apply here
 
@@ -59,8 +60,9 @@ class BalanceSearch extends Balance
         $query->andFilterWhere([
             'id' => $this->id,
             'accounts_id' => $this->accounts_id,
-            'views' => $this->views,
-            'likes' => $this->likes,
+            'cases_id' => $this->cases_id,
+            'status' => $this->status,
+            'dt_add' => $this->dt_add,
         ]);
 
         return $dataProvider;

@@ -10,13 +10,12 @@ namespace common\behance\lib;
 
 
 use common\behance\traits\CommonTrait;
-use common\behance\traits\ViewTrait;
 use common\behance\Config;
+use common\behance\interfaces\AccountInterface;
 
-
-class BehanceAccount
+class BehanceAccount implements AccountInterface
 {
-    use ViewTrait;
+    use CommonTrait;
 
     public $behanceId;
     public $displayName;
@@ -25,6 +24,8 @@ class BehanceAccount
     public $image;
     public $works = [];
     private $token;
+
+
 
     public function __construct($url)
     {
@@ -38,6 +39,8 @@ class BehanceAccount
         //$this->getWorks();
     }
 
+
+
     public function importWorks($works)
     {
         foreach ($works as $work)
@@ -46,6 +49,8 @@ class BehanceAccount
             $this->addWork($work);
         }
     }
+
+
 
     public function getWorks()
     {
@@ -68,6 +73,7 @@ class BehanceAccount
     }
 
 
+
     public function addWork($work)
     {
         $data = array();
@@ -84,6 +90,7 @@ class BehanceAccount
     }
 
 
+
     public function likeWork($data)
     {
         if (count($data) > 1) {
@@ -94,6 +101,7 @@ class BehanceAccount
             $this->works[$data[0]['id']]->like($data[0]['likes']);
         }
     }
+
 
 
     public function viewWork($data)
@@ -108,10 +116,12 @@ class BehanceAccount
     }
 
 
+
     public function view($count = 1)
     {
         $this->_view_($count, $this->url);
     }
+
 
 
     private function getAccountFromUrl($url)

@@ -6,7 +6,7 @@
  * Time: 16:20
  */
 
-namespace common\behance\lib;
+namespace common\behance\repositories;
 
 
 class UserAgentArray

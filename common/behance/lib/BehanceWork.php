@@ -10,16 +10,11 @@ namespace common\behance\lib;
 
 
 use common\behance\traits\CommonTrait;
-use common\behance\traits\LikeTrait;
-use common\behance\traits\ViewTrait;
+use common\behance\interfaces\WorkInterface;
 
-class BehanceWork
+class BehanceWork implements WorkInterface
 {
-    use LikeTrait,ViewTrait{
-        ViewTrait::getProxy insteadof LikeTrait;
-        ViewTrait::getUserAgent insteadof LikeTrait;
-        ViewTrait::behanceApiRequest insteadof LikeTrait;
-    }
+    use CommonTrait;
 
     public $behanceId;
     public $url;
@@ -42,14 +37,15 @@ class BehanceWork
 
     public function like($count = 1)
     {
-        $this->_like_($count, $this->behanceId);
+        $this->_like_($this->behanceId,$count);
     }
 
 
 
     public function view($count = 1)
     {
-        $this->_view_($count, $this->url);
+
+        $this->_view_($this->url,$count);
     }
 
 }

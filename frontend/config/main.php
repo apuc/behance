@@ -10,6 +10,12 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+	    'cabinet' => [
+		    'class' => 'frontend\modules\cabinet\Cabinet',
+		    'layout' => 'new',
+	    ],
+    ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -42,6 +48,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+	            '/cabinet/<slug>' => '/cabinet/cabinet/single-cabinet',
+	            'cabinet' => '/cabinet/cabinet',
             ],
         ],
 

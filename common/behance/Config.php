@@ -14,9 +14,9 @@ class Config
   public  static function get()
   {
       return [
-        'apiKey'=>'KNz3GDfb1CYLB2XWVhMhYFAMLsy5tO9L',
-        'proxyDriver' => 'common\behance\lib\UserAgentArray',
-        'userAgentDriver' => 'common\behance\lib\UserAgentArray'
+        'apiKey'=>'H4Va0PDSnn8UhDxdqtkYNOkFJC8lbcYU',
+        'proxyDriver' => 'common\behance\repositories\ProxyDbYii',
+        'userAgentDriver' => 'common\behance\repositories\UserAgentArray'
       ];
   }
 }

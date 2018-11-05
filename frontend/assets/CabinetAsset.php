@@ -24,8 +24,10 @@ class CabinetAsset extends FrontAsset
 		'js/material.js',
 		'js/dashboard.js',
 	];
+
 	public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-	];
+        ];
+
 }

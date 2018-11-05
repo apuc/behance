@@ -52,6 +52,7 @@ return [
             'rules' => [
 //	            '/cabinet/<slug>' => '/cabinet/cabinet/single-cabinet',
 	            'cabinet' => '/cabinet/cabinet',
+	            
             ],
         ],
 

@@ -38,7 +38,7 @@ class CabinetController extends \yii\web\Controller
     {
         return $this->render('index');
     }
-	
+    
 	public function actionLogout()
 	{
 		Yii::$app->user->logout();

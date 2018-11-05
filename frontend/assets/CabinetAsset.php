@@ -26,4 +26,8 @@ class CabinetAsset extends FrontAsset
 //	public $depends = [
 //		'frontend\assets\CommonAsset',
 //	];
+	public $depends = [
+		'yii\web\YiiAsset',
+		'yii\bootstrap\BootstrapAsset',
+	];
 }

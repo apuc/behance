@@ -118,3 +118,12 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+.content-wrapper{
+    padding: 30px 20px 0px 275px !important;
+}
+
+.mdc-list-item a{
+    font-size: 15px !important;
+}

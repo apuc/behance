@@ -29,16 +29,9 @@ class BehanceAccount implements AccountInterface
 
 
 
-    public function __construct($url)
+    public function __construct()
     {
         $this->token = Config::get()['apiKey'];
-        $account = $this->getAccountFromUrl($url);
-        $this->behanceId = $account->user->id;
-        $this->displayName = $account->user->display_name;
-        $this->username = $account->user->username;
-        $this->url = $account->user->url;
-        $this->image = end($account->user->images);
-        //$this->getWorks();
     }
 
 
@@ -126,12 +119,29 @@ class BehanceAccount implements AccountInterface
 
 
 
-    private function getAccountFromUrl($url)
+    public function getAccountFromUrl($url)
     {
         $explodedUrl = explode("/", $url);
+
         $username = end($explodedUrl);
+
         $apiString = "https://api.behance.net/v2/users/{$username}?client_id={$this->token}";
-        return $this->behanceApiRequest($apiString);
+
+        $account = $this->behanceApiRequest($apiString);
+
+
+        if($account->http_code != '200')
+        {
+
+           return false;
+        }
+
+        $this->behanceId = $account->user->id;
+        $this->displayName = $account->user->display_name;
+        $this->username = $account->user->username;
+        $this->url = $account->user->url;
+        $this->image = end($account->user->images);
+        return true;
     }
 
 }

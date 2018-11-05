@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use common\behance\BehanceService;
+use common\behance\lib\BehanceAccount;
 
 /**
  * This is the model class for table "accounts".
@@ -34,6 +36,7 @@ class Accounts extends \yii\db\ActiveRecord
             [['behance_id'], 'integer'],
             [['image'], 'string'],
             [['url', 'title', 'display_name', 'username'], 'string', 'max' => 255],
+            [['url'], 'required'],
         ];
     }
 
@@ -52,4 +55,31 @@ class Accounts extends \yii\db\ActiveRecord
             'image' => Yii::t('accounts', 'Image'),
         ];
     }
+
+
+    public function parseAccount($url) {
+
+        $service = BehanceService::create(new BehanceAccount());
+        $account = $service->getAccount($url);
+
+        if($account)
+        {
+            if($this->find()->where(['behance_id' => $account->behanceId])->one())
+            {
+                return 'Аккаунт уже добавлен!';
+            }
+
+            $this->behance_id = (integer)$account->behanceId;
+            $this->display_name = (string)$account->displayName;
+            $this->username = (string)$account->username;
+            $this->url = (string)$account->url;
+            $this->image = (string)$account->image;
+            $this->save();
+
+            return true;
+        }
+
+        return 'Не удалось получить аккаунт! Неверный url адресс!';
+    }
+
 }

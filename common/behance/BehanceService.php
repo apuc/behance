@@ -30,6 +30,16 @@ class BehanceService
         $this->account->getWorks();
         return $this->account->works;
     }
+
+
+
+    public function getAccount($url)
+    {
+        if($this->account->getAccountFromUrl($url))
+           return $this->account;
+
+           return false;
+    }
     /**
      * @param array(['id'=>'behanceId','likes'=>likesCount],[...])
      */

@@ -2,12 +2,15 @@
 
 namespace frontend\modules\cabinet\controllers;
 
+use common\models\Works;
 use Yii;
 use common\models\Accounts;
 use frontend\modules\cabinet\models\AccountsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\behance\BehanceService;
+use common\behance\lib\BehanceAccount;
 
 /**
  * AccountsController implements the CRUD actions for Accounts model.
@@ -64,15 +67,45 @@ class AccountsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Accounts();
+        $accountModel = new Accounts();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if(Yii::$app->request->post())
+        {
+
+            $url = Yii::$app->request->post()['Accounts']['url'];
+
+            $res = $accountModel->parseAccount($url);
+
+            if(is_string($res))
+            {
+                Yii::$app->session->setFlash('error',$res);
+                return $this->redirect('/cabinet/accounts');
+            }
+
+            $worksModel = new Works();
+            $res = $worksModel->parseWorks($url);
+
+            if(is_string($res))
+            {
+                Yii::$app->session->setFlash('error',$res);
+                return $this->redirect('/cabinet/accounts');
+            }
+
+            Yii::$app->session->setFlash('success','Данные сохранены!');
+            return $this->redirect('/cabinet/accounts');
         }
 
+
+
+//
+//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//            return $this->redirect(['view', 'id' => $model->id]);
+//        }
+//
         return $this->render('create', [
-            'model' => $model,
+            'model' => $accountModel,
         ]);
+        //var_dump(Yii::$app->request->post('url'));
     }
 
     /**

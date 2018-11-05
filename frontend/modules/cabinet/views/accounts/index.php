@@ -12,28 +12,40 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Аккаунты</h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Accounts', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить аккаунт', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'url:url',
-            'title',
-            'behance_id',
+            //'id',
+            [
+                    'attribute'=>'image',
+                'format'=>'raw',
+                'value'=>function($data){
+                   return Html::img($data->image,['width'=>100,'height'=>'100']);
+                }
+            ],
             'display_name',
-            //'username',
-            //'image:ntext',
+            'username',
+            'url:url',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            //'title',
+            //'behance_id',
+
+
+
+            [
+                    'class' => 'yii\grid\ActionColumn',
+                'template'=>'{delete}'
+            ],
         ],
     ]); ?>
 

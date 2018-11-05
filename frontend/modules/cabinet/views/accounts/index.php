@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             [
                     'attribute'=>'image',
+                'filter'=>false,
                 'format'=>'raw',
                 'value'=>function($data){
                    return Html::img($data->image,['width'=>100,'height'=>'100']);
@@ -35,7 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'display_name',
             'username',
-            'url:url',
+            [
+                'attribute'=>'url',
+                'filter'=>false,
+                'format'=>'raw',
+                'value'=>function($data){
+                    return Html::a($data->url,$data->url,['target'=>'_blank']);
+                }
+            ],
 
             //'title',
             //'behance_id',

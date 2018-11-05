@@ -8,6 +8,7 @@
 return [
 	'Name' => 'Название',
 	'Url' => 'Адресс URL',
+    'image'=>'Картинка',
 	'Parse Works' => "Спарсить работы",
 	'ID' => 'ID',
 	'Create Works' => 'Создать работу',

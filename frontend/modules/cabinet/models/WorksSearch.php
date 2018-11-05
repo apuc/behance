@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\cabinet\controllers;
+namespace frontend\modules\cabinet\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

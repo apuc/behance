@@ -31,14 +31,34 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'account_id',
+            [
+              'attribute'=>'img',
+              'label'=>'Картинка',
+              'format'=>'raw',
+              'value'=>function($data){
+                return Html::img($data->image,['width'=>'200','height'=>'150']);
+              }
+            ],
+            [
+                'attribute'=>'account_id',
+                'value'=>function($data){
+                    return $data->account['display_name'];
+                }
+            ],
             //'behance_id',
             'name',
-            'url:url',
+            [
+               'attribute'=>'url',
+               'filter'=>false,
+                'format'=>'raw',
+                'value'=>function($data){
+                  return Html::a($data->url,$data->url,['target'=>'_blank']);
+                }
+            ],
 
-            //'image',
 
-            ['class' => 'yii\grid\ActionColumn'],
+
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

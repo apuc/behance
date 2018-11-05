@@ -5,6 +5,7 @@
 
 use frontend\assets\CabinetAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 CabinetAsset::register($this);
 ?>
@@ -35,14 +36,14 @@ CabinetAsset::register($this);
                 <nav class="mdc-list mdc-drawer-menu">
 
                     <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="index.html">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
                             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">desktop_mac</i>
                             Аккаунты
                         </a>
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="pages/forms/basic-forms.html">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/works']); ?>">
                             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">track_changes</i>
                             Работы
                         </a>

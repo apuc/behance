@@ -35,7 +35,7 @@ class WorksController extends Controller
 			            'allow' => true,
 		            ],
 		            [
-			            'actions' => ['logout', 'index', 'view', 'create', 'update', 'save-works', 'save-acc', 'parse-account', 'parse-works'],
+			            'actions' => ['logout', 'index', 'view', 'update'],
 			            'allow' => true,
 			            'roles' => ['@'],
 		            ],

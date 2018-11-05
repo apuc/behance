@@ -23,6 +23,8 @@ class AccountsController extends Controller
     /**
      * {@inheritdoc}
      */
+    public $url;
+    
     public function behaviors()
     {
         return [
@@ -63,8 +65,15 @@ class AccountsController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
-    /**
+    
+    public function beforeAction( $action ) {
+	    if(Yii::$app->request->post()['Accounts']['url']) {
+	    	$this->url = Yii::$app->request->post()['Accounts']['url'];
+	    }
+	    return $this;
+    }
+	
+	/**
      * Displays a single Accounts model.
      * @param integer $id
      * @return mixed
@@ -133,55 +142,42 @@ class AccountsController extends Controller
     }
     
     public function actionSaveWorks() {
-	    $post = Yii::$app->request->post()['Accounts'];
-	    if($post['url']) {
-		    $works = BehanceService::create(new BehanceAccount($post['url']))->getWorks();
-		    Debug::toDebug($works);
-		    if($works) {
-			    foreach ($works as $key => $val) {
-				    $work_bd = new Works();
-				    $work_bd->behance_id = (string)$val->behanceId;
-				    $work_bd->image = (string)$val->image;
-				    $work_bd->account_id = (integer)$key;
-				    $work_bd->url = (string)$val->url;
-				    $work_bd->name = (string)$val->name;
-				    $work_bd->save();
-			    }
-			    Yii::$app->session->setFlash('success', "Данные сохранены");
-			    return $this->redirect('/admin/accounts/accounts/');
+	    if($this->url) {
+	    	$works = new Works();
+	    	$result = $works->parseWorks($this->url);
+		    if(!$result) {
+			    Yii::$app->session->setFlash('error', "Не верный токен!");
+			    return $this->redirect('/admin/accounts/accounts/parse-works');
 		    }
-		    Yii::$app->session->setFlash('error', "Не верный токен!");
-		    return $this->redirect('/admin/accounts/accounts/parse-works');
+		    if(is_string($result)) {
+			    Yii::$app->session->setFlash('error', $result);
+			    return $this->redirect('/admin/accounts/accounts/parse-works');
+		    }
+		    Yii::$app->session->setFlash('success', "Данные сохранены");
+		    return $this->redirect('/admin/accounts/accounts/');
 	    }
 	    Yii::$app->session->setFlash('error', "Не верно ведены данные!");
 	    return $this->redirect('/admin/accounts/accounts/parse-works');
     }
 	
 	public function actionSaveAcc() {
-    	$post = Yii::$app->request->post()['Accounts'];
-    	if($post['url']) {
-		    $acc = new BehanceAccount($post['url']);
-		    if($acc) {
-			    if(Accounts::find()->where(['behance_id' => $acc->behanceId])->one()) {
-				    Yii::$app->session->setFlash('error', "Данные пользователя уже существуют");
-				    return $this->redirect('/admin/accounts/accounts/parse-account');
-			    }
-			    $acc_bd = new Accounts();
-			    $acc_bd->behance_id = (integer)$acc->behanceId;
-			    $acc_bd->display_name = (string)$acc->displayName;
-			    $acc_bd->username = (string)$acc->username;
-			    $acc_bd->url = (string)$acc->url;
-			    $acc_bd->image = (string)$acc->image;
-			    $acc_bd->save();
-			    Yii::$app->session->setFlash('success', "Данные сохранены");
-			    return $this->redirect('/admin/accounts/accounts/');
+    	if($this->url) {
+		    $accounts = new Accounts();
+		    $result = $accounts->parseAccount($this->url);
+		    if(!$result) {
+			    Yii::$app->session->setFlash('error', "Не верный токен!");
+			    return $this->redirect('/admin/accounts/accounts/parse-account');
 		    }
-		    Yii::$app->session->setFlash('error', "Не верный токен!");
-		    return $this->redirect('/admin/accounts/accounts/parse-works');
+	        if(is_string($result)) {
+			    Yii::$app->session->setFlash('error', $result);
+			    return $this->redirect('/admin/accounts/accounts/parse-account');
+	         }
+            Yii::$app->session->setFlash('success', "Данные сохранены");
+		    return $this->redirect('/admin/accounts/accounts/');
+    	}
+			Yii::$app->session->setFlash('error', "Не верно ведены данные!");
+			return $this->redirect('/admin/accounts/accounts/parse-account');
 	    }
-		Yii::$app->session->setFlash('error', "Не верно ведены данные!");
-		return $this->redirect('/admin/accounts/accounts/parse-account');
-	}
 
     /**
      * Deletes an existing Accounts model.

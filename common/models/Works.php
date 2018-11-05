@@ -45,11 +45,11 @@ class Works extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('works', 'ID'),
-            'account_id' => Yii::t('works', 'Account ID'),
+            'account_id' => Yii::t('works', 'Аккаунт'),
             'behance_id' => Yii::t('works', 'Behance ID'),
             'url' => Yii::t('works', 'Url'),
             'name' => Yii::t('works', 'Name'),
-            'image' => Yii::t('works', 'Image'),
+            'image' => Yii::t('works', 'Картинка'),
         ];
     }
 
@@ -85,5 +85,10 @@ class Works extends \yii\db\ActiveRecord
             return 'Не удалось получить работы!';
         }
 
+    }
+
+    public function getAccount()
+    {
+        return $this->hasOne(Accounts::className(),['id'=>'account_id']);
     }
 }

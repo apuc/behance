@@ -28,9 +28,10 @@ CabinetAsset::register($this);
     <aside class="mdc-persistent-drawer mdc-persistent-drawer--open" style="height: 100%;">
         <nav class="mdc-persistent-drawer__drawer">
             <div class="mdc-persistent-drawer__toolbar-spacer">
-                <a href="#" class="brand-logo">
-                    <?= Yii::$app->user->identity->username; ?>
-                </a>
+                <?= Html::img('/images/account.png',['width'=>'32','height'=>'32']) ?>
+                <span class="brand-logo">
+                   <?= Yii::$app->user->identity->username; ?>
+                </span>
             </div>
             <div class="mdc-list-group">
                 <nav class="mdc-list mdc-drawer-menu">
@@ -40,13 +41,11 @@ CabinetAsset::register($this);
 
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
                             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">desktop_mac</i>
-                            Аккаунты
+                            <span>Аккаунты</span>
                         </a>
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
-
-
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/works']); ?>">
                             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">track_changes</i>
                             <span>Работы</span>
@@ -58,7 +57,7 @@ CabinetAsset::register($this);
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="pages/charts/chartjs.html">
                             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pie_chart_outlined</i>
-                            Баланс
+                            <span>Баланс</span>
                         </a>
                     </div>
 
@@ -158,7 +157,8 @@ CabinetAsset::register($this);
 
                             <li class="mdc-list-item" role="menuitem" tabindex="0">
 
-                                <a  style="text-decoration: none" href="<?= Url::toRoute(['cabinet/logout']); ?>"><i class="material-icons mdc-theme--primary mr-1">power_settings_new</i>
+                                <a  style="text-decoration: none; font-size: 14px;" href="<?= Url::toRoute(['cabinet/logout']); ?>">
+                                    <i class="material-icons mdc-theme--primary mr-1" style="font-size: 16px;">power_settings_new</i>
 	                                Logout</a>
 
                             </li>

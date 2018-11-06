@@ -10,8 +10,8 @@ use yii\helpers\Url;
  * @var $history object
  * @var $account object
  */
-
-$this->title = Yii::t('balance', 'History')." ". $account->display_name;
+$title = (is_string($account)) ? $account : $account->display_name;
+$this->title = Yii::t('balance', 'History'). " " . $title;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="balance-index">

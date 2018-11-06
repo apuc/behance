@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->dropDownList(['0' => 'Не выполнен', '1' => 'Выполнено']) ?>
 
-    <?= $form->field($model, 'dt_add')->textInput() ?>
+    <?= $form->field($model, 'dt_add')->hiddenInput()->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('orders', 'Save'), ['class' => 'btn btn-success']) ?>

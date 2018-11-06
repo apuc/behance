@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
 <!--    <p>-->
 <!--        --><?//= Html::a(Yii::t('balance', 'Create Balance'), ['create'], ['class' => 'btn btn-success']) ?>
 <!--    </p>-->
@@ -31,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'views',
             'likes',
 	        [
-		        'header'=> Yii::t('balance', 'History'),
+		        'header'=> '<a href="'.Url::to(['history','slug' => 'all']).'">'.Yii::t('balance', 'History').'</a>',
 		        'format' => 'raw',
 		        'value' => function($model) {
 			        return Html::a(
@@ -39,16 +38,15 @@ $this->params['breadcrumbs'][] = $this->title;
 				        Url::to(['history', 'slug' => $model->accounts_id]),
 				        [
 					        'data-id' => $model->id,
-//					        'data-pjax'=>true,
 					        'action'=>Url::to(['cart/add']),
 					        'class'=>'btn btn-success gridview-add-to-cart',
 				        ]
 			        );
 		        }
 	        ],
-
-            ['class' => 'yii\grid\ActionColumn'],
-
+	      
+            ['class' => 'yii\grid\ActionColumn',   'template' => '{delete}',],
+	       
         ],
     ]); ?>
 </div>

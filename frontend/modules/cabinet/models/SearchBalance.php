@@ -61,6 +61,7 @@ class SearchBalance extends Balance
             'accounts_id' => $this->accounts_id,
             'views' => $this->views,
             'likes' => $this->likes,
+            'history' => $this->history,
         ]);
 
         return $dataProvider;

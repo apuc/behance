@@ -10,6 +10,7 @@ return [
 	'Likes' => 'К-во лайков',
 	'ID' => 'ID',
 	'Create Balance' => 'Создать',
+	'All operations' => 'всех операций',
 	'Save' => 'Сохранить',
 	'Update' => 'Обновить',
 	'Delete' => 'Удалить',

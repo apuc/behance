@@ -63,12 +63,14 @@ class BalanceController extends Controller
     }
     
     public function actionHistory($slug) {
-        if($slug) {
-        	$history = History::find()->where(['accounts_id' => 1])->all();
-        	$account = Accounts::findOne(['user_id' => $slug]);
+        if(is_numeric($slug)) {
+        	$history = History::find()->where(['accounts_id' => $slug])->all();
+        	$account = Accounts::findOne(['id' => $slug]);
         	return $this->render('_history',['history' => $history, 'account' => $account ]);
+        } else {
+	        $history = History::find()->all();
+	        return $this->render('_history',['history' => $history , 'account' => Yii::t('balance', 'All operations') ]);
         }
-        return false;
     }
 
     /**

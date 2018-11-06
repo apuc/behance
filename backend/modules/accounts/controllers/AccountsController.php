@@ -164,6 +164,7 @@ class AccountsController extends Controller
     	if($this->url) {
 		    $accounts = new Accounts();
 		    $result = $accounts->parseAccount($this->url);
+		    
 		    if(!$result) {
 			    Yii::$app->session->setFlash('error', "Не верный токен!");
 			    return $this->redirect('/admin/accounts/accounts/parse-account');

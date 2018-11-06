@@ -52,9 +52,11 @@ $this->params['breadcrumbs'][] = $this->title;
                'filter'=>false,
                 'format'=>'raw',
                 'value'=>function($data){
-                  return Html::a($data->url,$data->url,['target'=>'_blank']);
+                  return Html::a('Ссылка',$data->url,['target'=>'_blank']);
                 }
             ],
+            'start_likes',
+            'start_views'
 
 
 

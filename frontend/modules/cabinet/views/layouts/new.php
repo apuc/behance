@@ -28,13 +28,8 @@ CabinetAsset::register($this);
     <aside class="mdc-persistent-drawer mdc-persistent-drawer--open" style="height: 100%;">
         <nav class="mdc-persistent-drawer__drawer">
             <div class="mdc-persistent-drawer__toolbar-spacer">
-<<<<<<< HEAD
                 <a href="#" class="brand-logo">
                     <?= Yii::$app->user->identity->username; ?>
-=======
-                <a href="<?= Url::toRoute(['/cabinet']); ?>" class="brand-logo">
-                    <img src="/images/logo.svg" alt="logo">
->>>>>>> 2fc4f6ae352e0eae713dd45caccb41ce47e1035e
                 </a>
             </div>
             <div class="mdc-list-group">

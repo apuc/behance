@@ -1,6 +1,6 @@
 html,
 body {
-    height: 100%;
+
 }
 
 .wrap {
@@ -125,3 +125,39 @@ a.desc:after {
 }
 
 .mdc-persistent-drawer .mdc-drawer-item .mdc-drawer-link{font-size: 15px !important;}
+
+.auth-form-wrap{
+    height: calc(100vh - 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-wrap-auth{
+    background-color: #53b3fa;
+    background-image: none;
+
+}
+
+.header__phone-wrap-auth{
+    height: 400px;
+    width: 300px;
+}
+
+.header-wrap-auth .has-error p{
+    color:#e32c74 !important;
+}
+
+.header-wrap-auth .has-error label{
+    color:#e32c74 !important;
+}
+
+.header-wrap-auth .has-error .form-control{
+    border-color:#e32c74 !important;
+}
+
+.header-wrap-auth .form-control{
+    border-radius: 19px;
+    border: 1px solid rgba(227, 44, 116, 0.48);
+    height: 38px;
+}

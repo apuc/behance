@@ -20,6 +20,8 @@ class BehanceWork implements WorkInterface
     public $url;
     public $name;
     public $image;
+    public $startLikes;
+    public $startViews;
 
 
 
@@ -31,6 +33,8 @@ class BehanceWork implements WorkInterface
         $this->url = (isset($data['url'])) ? $data['url'] : null;
         $this->name = (isset($data['name'])) ? $data['name'] : null;
         $this->image = (isset($data['image'])) ? $data['image'] : null;
+        $this->startLikes = (isset($data['start_likes'])) ? $data['start_likes'] : null;
+        $this->startViews =(isset($data['start_views'])) ? $data['start_views'] : null;
     }
 
 

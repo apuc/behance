@@ -48,6 +48,11 @@ class WorksSearch extends Works
         $account_id = ArrayHelper::getColumn($account_id,'id');
         $account_id = implode(',',$account_id);
 
+        if(empty($account_id))
+        {
+            $account_id = '0';
+        }
+
         $query = Works::find()->where("account_id IN({$account_id})");
 
         // add conditions that should always apply here

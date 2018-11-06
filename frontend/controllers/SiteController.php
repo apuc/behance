@@ -75,14 +75,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-////        $acc = new BehanceAccount("https://www.behance.net/k0tya_ka83bf");
-////
-////        var_dump($acc)
-////
-//        $serv = BehanceService::create(new BehanceAccount("https://www.behance.net/k0tya_ka83bf"));
-//        $serv->account->getWorks();
-//        $like = $serv->likeWork([['id'=>'71447631','likes'=>'2']]);
-//        var_dump($like);
+//        $service = BehanceService::create(new BehanceAccount());
+//        $account =$service->getAccount("https://www.behance.net/k0tya_ka83bf");
+//        $works = $service->getWorks();
+//        var_dump($works); die();
+
         return $this->render('index');
     }
 

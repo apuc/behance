@@ -11,6 +11,8 @@ use common\behance\lib\BehanceAccount;
  *
  * @property int $id
  * @property int $account_id
+ * @property int $start_views
+ * @property int $start_likes
  * @property string $behance_id
  * @property string $url
  * @property string $name
@@ -33,7 +35,7 @@ class Works extends \yii\db\ActiveRecord
     {
         return [
             [['account_id'], 'integer'],
-	        [['behance_id', 'url', 'name', 'image'], 'safe'],
+	        [['behance_id', 'url', 'name', 'image','start_views','start_likes'], 'safe'],
             [['behance_id', 'url', 'name', 'image'], 'string', 'max' => 255],
         ];
     }
@@ -46,6 +48,8 @@ class Works extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('works', 'ID'),
             'account_id' => Yii::t('works', 'Аккаунт'),
+            'start_likes' => Yii::t('works', 'Изначально лайков'),
+            'start_views' => Yii::t('works', 'Изначально просмотров'),
             'behance_id' => Yii::t('works', 'Behance ID'),
             'url' => Yii::t('works', 'Url'),
             'name' => Yii::t('works', 'Name'),
@@ -68,7 +72,7 @@ class Works extends \yii\db\ActiveRecord
                 $id = Accounts::find()->where(['behance_id'=>$account->behanceId])->all();
                 $id = $id[0]->id;
 
-                foreach ($works as $key => $val)
+                foreach ($works as  $val)
                 {
                     $work_bd = new Works();
                     $work_bd->behance_id = (string)$val->behanceId;
@@ -76,6 +80,8 @@ class Works extends \yii\db\ActiveRecord
                     $work_bd->account_id = (integer)$id;
                     $work_bd->url = (string)$val->url;
                     $work_bd->name = (string)$val->name;
+                    $work_bd->start_likes = (string)$val->startViews;
+                    $work_bd->start_views = (string)$val->startLikes;
                     $work_bd->save();
                 }
 

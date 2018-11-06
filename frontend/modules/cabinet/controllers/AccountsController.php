@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\behance\BehanceService;
 use common\behance\lib\BehanceAccount;
+use yii\filters\AccessControl;
 
 /**
  * AccountsController implements the CRUD actions for Accounts model.
@@ -29,6 +30,20 @@ class AccountsController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'rules' => [
+//                    [
+//                        'actions' => ['login', 'error'],
+//                        'allow' => true,
+//                    ],
+//                    [
+//                        'actions' => ['@'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
         ];
     }
 

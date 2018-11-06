@@ -2,9 +2,13 @@
 
 namespace frontend\modules\cabinet\models;
 
+use common\models\Accounts;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\modules\cabinet\models\Works;
+use Yii;
+use yii\helpers\ArrayHelper;
+
 
 /**
  * WorksSearch represents the model behind the search form of `frontend\modules\cabinet\models\Works`.
@@ -40,7 +44,11 @@ class WorksSearch extends Works
      */
     public function search($params)
     {
-        $query = Works::find();
+        $account_id = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->select('id')->all();
+        $account_id = ArrayHelper::getColumn($account_id,'id');
+        $account_id = implode(',',$account_id);
+
+        $query = Works::find()->where("account_id IN({$account_id})");
 
         // add conditions that should always apply here
 

@@ -28,8 +28,13 @@ CabinetAsset::register($this);
     <aside class="mdc-persistent-drawer mdc-persistent-drawer--open" style="height: 100%;">
         <nav class="mdc-persistent-drawer__drawer">
             <div class="mdc-persistent-drawer__toolbar-spacer">
+<<<<<<< HEAD
                 <a href="#" class="brand-logo">
                     <?= Yii::$app->user->identity->username; ?>
+=======
+                <a href="<?= Url::toRoute(['/cabinet']); ?>" class="brand-logo">
+                    <img src="/images/logo.svg" alt="logo">
+>>>>>>> 2fc4f6ae352e0eae713dd45caccb41ce47e1035e
                 </a>
             </div>
             <div class="mdc-list-group">
@@ -157,8 +162,10 @@ CabinetAsset::register($this);
                         <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
 
                             <li class="mdc-list-item" role="menuitem" tabindex="0">
-                                <a href="/site/logout"> <i class="material-icons mdc-theme--primary mr-1">power_settings_new</i>
-                                Logout</a>
+
+                                <a  style="text-decoration: none" href="<?= Url::toRoute(['cabinet/logout']); ?>"><i class="material-icons mdc-theme--primary mr-1">power_settings_new</i>
+	                                Logout</a>
+
                             </li>
                         </ul>
                     </div>

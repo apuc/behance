@@ -6,6 +6,7 @@ use common\models\Works;
 use Yii;
 use common\models\Accounts;
 use frontend\modules\cabinet\models\AccountsSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -60,6 +61,17 @@ class AccountsController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionParse($id,$url)
+    {
+        Works::deleteAll(['account_id'=>$id]);
+
+        $model = new Works();
+        $model->parseWorks($url);
+
+        Yii::$app->session->setFlash('success','Работы обновлены!');
+        return $this->redirect('/cabinet/accounts');
     }
 
     /**

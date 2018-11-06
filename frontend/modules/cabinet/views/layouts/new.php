@@ -178,7 +178,7 @@ CabinetAsset::register($this);
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <strong><?= Yii::$app->session->getFlash('error'); ?></strong>
+                    <strong style="font-size: 15px;"><?= Yii::$app->session->getFlash('error'); ?></strong>
                 </div>
                 <?php endif; ?>
 
@@ -187,7 +187,7 @@ CabinetAsset::register($this);
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <strong><?= Yii::$app->session->getFlash('success'); ?></strong>
+                        <strong style="font-size: 15px;"><?= Yii::$app->session->getFlash('success'); ?></strong>
                     </div>
                 <?php endif; ?>
 
@@ -211,6 +211,10 @@ CabinetAsset::register($this);
 		</div>
 	</div>
 </footer>
+
+<!--        <script>-->
+<!--            document.querySelectorAll('.close');-->
+<!--        </script>-->
 
 <?php $this->endBody() ?>
 </body>

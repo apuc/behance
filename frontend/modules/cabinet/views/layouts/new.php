@@ -55,7 +55,7 @@ CabinetAsset::register($this);
 
 
                     <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="pages/charts/chartjs.html">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/balance') ?>">
                             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pie_chart_outlined</i>
                             <span>Баланс</span>
                         </a>

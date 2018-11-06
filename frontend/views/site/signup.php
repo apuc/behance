@@ -10,26 +10,55 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
+<header class="header-wrap header-wrap-auth">
+    <div class="header__stars1 header__stars">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
+    <div class="header__stars2 header__stars">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
+    <div class="header__stars3 header__stars">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
+    <div class="header__stars4 header__stars">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
+    <div class="header__stars5 header__stars">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
+    <div class="container auth-form-wrap">
+        <div class="header">
 
-    <p>Please fill out the following fields to signup:</p>
+            <div class="header__phone">
+                <div class="header__phone-wrap header__phone-wrap-auth">
+                    <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+                    <?= $form->field($model, 'email') ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <?= $form->field($model, 'email') ?>
+                    <?= $form->field($model, 'password_repeat')->passwordInput() ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                    <div class="form-group">
+                        <?= Html::submitButton('Регистрация', ['class' => 'btn btn-primary', 'name' => 'signup-button',
+                            'style'=>'margin: 0 auto']) ?>
+                    </div>
 
-                <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?php ActiveForm::end(); ?>
                 </div>
 
-            <?php ActiveForm::end(); ?>
+            </div>
         </div>
     </div>
-</div>
+</header>
+

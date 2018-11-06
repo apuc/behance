@@ -48,7 +48,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //'title',
             //'behance_id',
 
-
+            [
+              'format'=>'raw',
+              'value'=>function($data){
+                return Html::a('Обновить работы','/cabinet/accounts/parse?id='.$data->id.'&url='.$data->url,['class'=>'btn btn-primary']);
+              }
+            ],
 
             [
                     'class' => 'yii\grid\ActionColumn',

@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use common\behance\BehanceService;
 use common\behance\lib\BehanceAccount;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "works".
@@ -92,6 +93,53 @@ class Works extends \yii\db\ActiveRecord
         }
 
     }
+
+
+
+    public static function updateWorks($url)
+    {
+        $service = BehanceService::create(new BehanceAccount());
+        $account =$service->getAccount($url);
+
+        if($account)
+        {
+            $works = $service->getWorks();
+
+            if($works)
+            {
+                $id = Accounts::find()->where(['behance_id'=>$account->behanceId])->all();
+                $id = $id[0]->id;
+
+                $works_in_db = Works::find()->where(['account_id'=>$id])->select('behance_id')->all();
+                $works_in_db = ArrayHelper::getColumn($works_in_db,'behance_id');
+
+                $works_aded = 0;
+
+                foreach ($works as  $val)
+                {
+                    if(!in_array($val->behanceId,$works_in_db))
+                    {
+                        $work_bd = new Works();
+                        $work_bd->behance_id = (string)$val->behanceId;
+                        $work_bd->image = (string)$val->image;
+                        $work_bd->account_id = (integer)$id;
+                        $work_bd->url = (string)$val->url;
+                        $work_bd->name = (string)$val->name;
+                        $work_bd->start_likes = (string)$val->startViews;
+                        $work_bd->start_views = (string)$val->startLikes;
+                        $work_bd->save();
+                        $works_aded++;
+                    }
+                }
+
+                return $works_aded;
+            }
+
+            return 'Не удалось получить работы!';
+        }
+    }
+
+
 
     public function getAccount()
     {

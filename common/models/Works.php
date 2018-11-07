@@ -141,6 +141,23 @@ class Works extends \yii\db\ActiveRecord
 
 
 
+    public  static function getRandomWorks($account_id,$count)
+    {
+        $works_ids = Works::find()->where(['account_id'=>$account_id])->select('id')->all();
+
+        $rand_ids = array();
+
+        for($i = 0; $i< $count; $i++)
+        {
+          $rand_ids[] = $works_ids[rand(0,count($works_ids)-1)]->id;
+        }
+
+        $rand_ids=implode(',',$rand_ids);
+        return Works::find()->where("id IN({$rand_ids})")->all();
+    }
+
+
+
     public function getAccount()
     {
         return $this->hasOne(Accounts::className(),['id'=>'account_id']);

@@ -40,8 +40,8 @@ class AccountsController extends Controller
 
     public function actionParse($id,$url)
     {
-        $model = new Works();
-        $res = $model->updateWorks($url);
+
+        $res = Works::updateWorks($url);
 
         if(is_string($res))
         {

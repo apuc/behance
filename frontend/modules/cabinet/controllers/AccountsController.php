@@ -30,9 +30,17 @@ class AccountsController extends Controller
         $searchModel = new AccountsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $accounts = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->all();
+        $display_names = ArrayHelper::map($accounts,'display_name','display_name');
+
+
+        $user_names = ArrayHelper::map($accounts,'username','username');
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'display_names'=>$display_names,
+            'usernames'=>$user_names
         ]);
     }
 

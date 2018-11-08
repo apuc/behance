@@ -34,14 +34,36 @@ $this->params['breadcrumbs'][] = $this->title;
                    return Html::img($data->image,['width'=>100,'height'=>'100']);
                 }
             ],
-            'display_name',
-            'username',
+           [
+                   'attribute'=>'display_name',
+               'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+               'attribute' => 'display_name',
+                    'data' => $display_names,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
+           ],
+            [
+                'attribute'=>'username',
+                'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'username',
+                    'data' => $usernames,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
+            ],
             [
                 'attribute'=>'url',
                 'filter'=>false,
                 'format'=>'raw',
                 'value'=>function($data){
-                    return Html::a($data->url,$data->url,['target'=>'_blank']);
+                    return Html::a('ссылка',$data->url,['target'=>'_blank']);
                 }
             ],
 

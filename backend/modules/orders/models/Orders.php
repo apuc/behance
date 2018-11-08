@@ -31,9 +31,9 @@ class Orders extends \common\models\Orders
 			$history = new History();
 			if($bal) {
 				$bal->likes = $bal->likes + $case->likes;
-				$bal->views = $bal->likes + $case->views;
+				$bal->views = $bal->views + $case->views;
 				$history->name = $history::TRANSFER_TO_BALANCE;
-				$history->description = $history::TRANSFER_TO_BALANCE.' лайков = '.$case->likes.', просмотров = '. $case->views;
+				$history->description = $history::TRANSFER_TO_BALANCE. ' просмотров = '. $case->views. ', лайков = '.$case->likes;
 				$history->accounts_id = $bal->accounts_id;
 			} else {
 				$bal = new Balance();
@@ -41,7 +41,7 @@ class Orders extends \common\models\Orders
 				$bal->likes = $case->likes;
 				$bal->views = $case->views;
 				$history->name = $history::CREATE_BALANCE;
-				$history->description = $history::TRANSFER_TO_BALANCE.' лайков = '.$case->likes.', просмотров = '. $case->views;
+				$history->description = $history::TRANSFER_TO_BALANCE. ' просмотров = '. $case->views. ', лайков = '.$case->likes;
 				$history->accounts_id = $bal->accounts_id;
 			}
 			$bal->save();

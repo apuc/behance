@@ -40,7 +40,7 @@ class BalanceController extends Controller
 			            'allow' => true,
 		            ],
 		            [
-			            'actions' => ['logout', 'index', 'view', 'history'],
+			            'actions' => ['logout', 'index','history'],
 			            'allow' => true,
 			            'roles' => ['@'],
 		            ],

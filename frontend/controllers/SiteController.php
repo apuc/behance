@@ -2,6 +2,8 @@
 namespace frontend\controllers;
 
 
+use common\models\Accounts;
+use common\models\Works;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -79,6 +81,13 @@ class SiteController extends Controller
 //        $account =$service->getAccount("https://www.behance.net/k0tya_ka83bf");
 //        $works = $service->getWorks();
 //        var_dump($works); die();
+
+        if(!Yii::$app->user->isGuest)
+        {
+            $phone_account = Accounts::getRandomAccount();
+            $phone_works = Works::getRandomWorks($phone_account->id,5);
+            return $this->render('index',compact('phone_account','phone_works'));
+        }
 
         return $this->render('index');
     }

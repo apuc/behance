@@ -85,4 +85,13 @@ class Accounts extends \yii\db\ActiveRecord
         return 'Не удалось получить аккаунт! Неверный url адресс!';
     }
 
+
+
+    public static function getRandomAccount()
+    {
+        $accounts_ids = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->select('id')->all();
+        $id = rand(0,count($accounts_ids)-1);
+        return Accounts::find()->where(['id'=>$accounts_ids[$id]->id])->one();
+    }
+
 }

@@ -19,34 +19,7 @@ use yii\filters\AccessControl;
  */
 class AccountsController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'rules' => [
-//                    [
-//                        'actions' => ['login', 'error'],
-//                        'allow' => true,
-//                    ],
-//                    [
-//                        'actions' => ['@'],
-//                        'allow' => true,
-//                        'roles' => ['@'],
-//                    ],
-//                ],
-//            ],
-        ];
-    }
+
 
     /**
      * Lists all Accounts models.
@@ -63,16 +36,24 @@ class AccountsController extends Controller
         ]);
     }
 
+
+
     public function actionParse($id,$url)
     {
-        Works::deleteAll(['account_id'=>$id]);
 
-        $model = new Works();
-        $model->parseWorks($url);
+        $res = Works::updateWorks($url);
 
-        Yii::$app->session->setFlash('success','Работы обновлены!');
+        if(is_string($res))
+        {
+            Yii::$app->session->setFlash('error',$res);
+            return $this->redirect('/cabinet/accounts');
+        }
+
+        Yii::$app->session->setFlash('success',"Добавленно работ: {$res}");
         return $this->redirect('/cabinet/accounts');
     }
+
+
 
     /**
      * Displays a single Accounts model.

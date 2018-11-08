@@ -36,14 +36,29 @@ $this->title = 'My Yii Application';
     <div class="container">
         <div class="header">
             <div class="header__menu">
-                <div class="header__left"><a class="header__menu-btn" href="#"><span class="header__menu-btn-round">@</span><span class="header__menu-btn-text"><span class="fz12 fw-extra-bold">info@avtouzor.ru</span></span></a><a class="header__menu-btn" href="#"><span class="header__menu-btn-round"><i class="fa fa-phone"></i></span><span class="header__menu-btn-text"><span class="fz12 fw-extra-bold">+8 812 319-36-02</span><span class="fz8 fw-medium">Заказать обратный звонок</span></span></a>
+                <div class="header__left">
+                    <a class="header__menu-btn" href="mailto:info@avtouzor.ru">
+                        <span class="header__menu-btn-round">@</span>
+                        <span class="header__menu-btn-text">
+                            <span class="fz12 fw-extra-bold">info@avtouzor.ru</span>
+                        </span>
+                    </a>
+                    <a class="header__menu-btn" href="tel:">
+                        <span class="header__menu-btn-round">
+                            <i class="fa fa-phone"></i>
+                        </span>
+                        <span class="header__menu-btn-text">
+                            <span class="fz12 fw-extra-bold">+8 812 319-36-02</span>
+                            <span class="fz8 fw-medium">Заказать обратный звонок</span>
+                        </span>
+                    </a>
                 </div>
                 <div class="header__right">
                     <nav class="header__nav">
                     </nav>
-                    <a class="header__nav-item" href="#">О сервисе</a>
-                    <a class="header__nav-item" href="#">Тарифы</a>
-                    <a class="header__nav-item" href="#">Отзывы</a>
+                    <a class="header__nav-item" href="#services">О сервисе</a>
+                    <a class="header__nav-item" href="#tarif">Тарифы</a>
+                    <a class="header__nav-item" href="#reviews">Отзывы</a>
 <!--                    <a class="header__nav-item" href="#">Блог</a>-->
                     <?php if(Yii::$app->user->isGuest):?>
                     <a class="header__icon" href="<?= Url::toRoute(['/site/login']); ?>">
@@ -61,7 +76,9 @@ $this->title = 'My Yii Application';
             <div class="header__phone">
                 <div class="header__phone-wrap">
                     <img class="header__phone-img" src="/images/phone.png" alt="" role="presentation"/>
-                    <div class="header__phone-info"><span class="header__phone-name">Ekaterina Boyko</span>
+                    <div class="header__phone-info">
+                        <?php if(Yii::$app->user->isGuest): ?>
+                            <span class="header__phone-name">Ekaterina Boyko</span>
                         <div class="header__phone-main">
                             <div class="header__phone-avatar"><img src="/images/girl.png"/>
                             </div>
@@ -92,6 +109,32 @@ $this->title = 'My Yii Application';
                                 </div><span class="font-weight-bold mb-2">Креативый дизайн буклета детского клуба</span><span>Ekaterina Boyko</span>
                             </div>
                         </div>
+                        <?php endif; ?>
+
+                        <?php if(!Yii::$app->user->isGuest): ?>
+                            <span class="header__phone-name"><?= $phone_account->display_name; ?></span>
+                            <div class="header__phone-main">
+                                <div class="header__phone-avatar"><img src="<?= $phone_account->image; ?>"/>
+                                </div>
+                                <div class="d-flex flex-column"><span>Graphic designer</span><span>Craft Group</span><span class="c-gray mt-1"><i class="fa fa-map-marker"></i>Moscow, Russian Federation</span><span class="c-gray mt-1 text-underline">https://vk.com/kotya_ka</span></div>
+                            </div>
+                            <div class="d-flex justify-content-between pr-2">
+                                <div class="header__phone-btn header__phone-btn-blue">Следить
+                                </div>
+                                <div class="header__phone-btn"><i class="fa fa-envelope"></i> Сообщение
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4"><span class="pr-4">Инф</span><span class="pr-4">Проекты</span><span class="pr-4">Коллекции</span><span>Стена</span></div>
+                            <div class="d-flex flex-wrap">
+                                <?php foreach($phone_works as $w): ?>
+                                <div class="header__phone-item">
+                                    <div class="header__phone-item-img"><img src="<?=$w->image?>"/>
+                                    </div><span class="font-weight-bold mb-2"><?=$w->name?></span><span><?= $phone_account->display_name; ?></span>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+
                     </div>
                 </div>
                 <div class="header__phone-text"><a class="btn btn-pink" href="#"><span class="btn-thumb"><i class="fa fa-thumbs-up wow"></i><span class="btn-thumb-circle wow"></span></span><span>получить <span class="fw-extra-bold"><span class="btn-number">100</span> лайков</span></span></a><a class="header__more" href="#">Узнать подробнее</a>
@@ -102,7 +145,7 @@ $this->title = 'My Yii Application';
 </header>
 
 <main class="main">
-    <section class="action-wrap">
+    <section class="action-wrap" id="services">
         <div class="container">
             <div class="action">
                 <div class="action__title-wrap row">
@@ -161,7 +204,7 @@ $this->title = 'My Yii Application';
             </div>
         </div>
     </section>
-    <section class="prices-wrap">
+    <section class="prices-wrap" id="tarif">
         <div class="stars-wrap prices-stars">
             <div id="stars"></div>
             <div id="stars2"></div>
@@ -206,7 +249,7 @@ $this->title = 'My Yii Application';
             </div>
         </div>
     </section>
-    <section class="reviews-wrap">
+    <section class="reviews-wrap" id="reviews">
         <div class="container">
             <div class="reviews">
                 <div class="d-flex justify-content-center">
@@ -320,7 +363,7 @@ $this->title = 'My Yii Application';
         <div class="footer offset-xl-1">
             <div class="footer__nav"><a class="footer__nav-item" href="#">Кейсы</a><a class="footer__nav-item" href="#">Контакты</a><a class="footer__nav-item" href="#">Акции</a><a class="footer__nav-item" href="#">Отзывы</a>
             </div>
-            <div class="d-flex flex-wrap align-items-center justify-content-center"><a class="footer__btn" href="#"><span class="footer__btn-round"><i class="fa fa-phone"></i></span><span class="footer__btn-text"><span class="fz15 fw-extra-bold">+8 812 319-36-02</span><span class="fz10 fw-medium">Заказать обратный звонок</span></span></a><a class="footer__btn" href="#"><span class="footer__btn-round">@</span><span class="footer__btn-text"><span class="fz15 fw-extra-bold">info@avtouzor.ru</span></span></a>
+            <div class="d-flex flex-wrap align-items-center justify-content-center"><a class="footer__btn" href="tel:"><span class="footer__btn-round"><i class="fa fa-phone"></i></span><span class="footer__btn-text"><span class="fz15 fw-extra-bold">+8 812 319-36-02</span><span class="fz10 fw-medium">Заказать обратный звонок</span></span></a><a class="footer__btn" href="mailto:info@avtouzor.ru"><span class="footer__btn-round">@</span><span class="footer__btn-text"><span class="fz15 fw-extra-bold">info@avtouzor.ru</span></span></a>
             </div>
         </div>
     </div>

@@ -18,6 +18,7 @@ use yii\filters\VerbFilter;
  */
 class BalanceController extends Controller
 {
+
 	public $account;
     /**
      * {@inheritdoc}

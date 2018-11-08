@@ -8,31 +8,7 @@ use yii\filters\VerbFilter;
 
 class CabinetController extends \yii\web\Controller
 {
-	public function behaviors()
-	{
-		return [
-			'verbs' => [
-				'class' => VerbFilter::className(),
-				'actions' => [
-					'delete' => ['POST'],
-				],
-			],
-			'access' => [
-				'class' => AccessControl::className(),
-				'rules' => [
-					[
-						'actions' => ['login', 'error'],
-						'allow' => true,
-					],
-					[
-						'actions' => ['logout', 'index', 'view', 'create', 'update', 'save-works', 'save-acc', 'parse-account', 'parse-works'],
-						'allow' => true,
-						'roles' => ['@'],
-					],
-				],
-			],
-		];
-	}
+
 	
     public function actionIndex()
     {

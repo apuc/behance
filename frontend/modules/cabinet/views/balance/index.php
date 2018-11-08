@@ -6,8 +6,9 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\modules\cabinet\models\SearchBalance */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
+/* @var $dataProvider yii\data\ActiveDataProvider
+ * @var $account object
+ */
 $this->title = Yii::t('balance', 'Balances');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -21,16 +22,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+//        'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'accounts_id',
+//            'id',
+//            'accounts_id',
+	        [
+		        'attribute'=>'accounts_id',
+		        'label'=>'Аккаунт',
+		        'format'=>'raw',
+		       'value' => function ($model) use ($account) {
+                return  $account->display_name;},
+	        ],
             'views',
             'likes',
 	        [
-		        'header'=> '<a href="'.Url::to(['history','slug' => 'all']).'">'.Yii::t('balance', 'History').'</a>',
+		        'header'=> Yii::t('balance', 'History'),
 		        'format' => 'raw',
 		        'value' => function($model) {
 			        return Html::a(

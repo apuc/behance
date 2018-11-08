@@ -18,6 +18,7 @@ use yii\filters\VerbFilter;
  */
 class BalanceController extends Controller
 {
+	public $account;
     /**
      * {@inheritdoc}
      */
@@ -55,10 +56,10 @@ class BalanceController extends Controller
     {
         $searchModel = new SearchBalance();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+		$this->account = Accounts::findOne(['user_id'=>Yii::$app->user->identity->id]);
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider, 'account' => $this->account,
         ]);
     }
     

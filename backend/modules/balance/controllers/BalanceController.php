@@ -4,6 +4,7 @@ namespace backend\modules\balance\controllers;
 
 use backend\modules\Accounts\models\Accounts;
 use common\models\Debug;
+use common\models\History;
 use Yii;
 use backend\modules\balance\models\Balance;
 use backend\modules\balance\controllers\BalanceSearch;
@@ -136,4 +137,15 @@ class BalanceController extends Controller
 
         throw new NotFoundHttpException(Yii::t('balance', 'The requested page does not exist.'));
     }
+	
+	public function actionHistory($slug) {
+		if(is_numeric($slug)) {
+			$history = History::find()->where(['accounts_id' => $slug])->all();
+			$account = Accounts::findOne(['id' => $slug]);
+			return $this->render('_history',['history' => $history, 'account' => $account ]);
+		} else {
+			$history = History::find()->all();
+			return $this->render('_history',['history' => $history , 'account' => Yii::t('balance', 'All operations') ]);
+		}
+	}
 }

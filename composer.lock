@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d664f64c2f87d4d61769821586abe0bc",
+    "content-hash": "1e892ef8f55421d43ce8edea042362e4",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -669,12 +669,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "d83b74022e2cba650072270738bdf63fb4ff007f"
+                "reference": "2bbb9cae329bd536f1a22ae14f8e0dc890063f66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/d83b74022e2cba650072270738bdf63fb4ff007f",
-                "reference": "d83b74022e2cba650072270738bdf63fb4ff007f",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/2bbb9cae329bd536f1a22ae14f8e0dc890063f66",
+                "reference": "2bbb9cae329bd536f1a22ae14f8e0dc890063f66",
                 "shasum": ""
             },
             "require": {
@@ -714,7 +714,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-10-25T03:23:23+00:00"
+            "time": "2018-11-05T12:34:42+00:00"
         },
         {
             "name": "rmrevin/yii2-fontawesome",

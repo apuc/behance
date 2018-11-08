@@ -43,10 +43,30 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'account_id',
                 'value'=>function($data){
                     return $data->account['display_name'];
-                }
+                },
+                'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'account_id',
+                    'data' => $account_names,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
             ],
             //'behance_id',
-            'name',
+            [
+                'attribute'=>'name',
+                'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'name',
+                    'data' => $works_names,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
+            ],
             [
                'attribute'=>'url',
                'filter'=>false,

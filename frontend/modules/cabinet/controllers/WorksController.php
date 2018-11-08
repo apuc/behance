@@ -9,6 +9,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * WorksController implements the CRUD actions for Works model.
@@ -27,9 +28,21 @@ class WorksController extends Controller
         $searchModel = new WorksSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $works = Works::find()->where($dataProvider->query->where)->all();
+        $works_names = ArrayHelper::map($works,'name','name');
+        $account_names = array();
+
+        foreach ($works as $w)
+        {
+            $account_names[$w->account_id] = $w->account['display_name'];
+        }
+
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'works_names'=>$works_names,
+            'account_names'=>$account_names
         ]);
     }
 

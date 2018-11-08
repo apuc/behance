@@ -8,6 +8,7 @@ use common\models\History;
 use Yii;
 use backend\modules\balance\models\Balance;
 use backend\modules\balance\controllers\BalanceSearch;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -31,6 +32,20 @@ class BalanceController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+            'access' => [
+	            'class' => AccessControl::className(),
+	            'rules' => [
+		            [
+			            'actions' => ['login', 'error'],
+			            'allow' => true,
+		            ],
+		            [
+			            'actions' => ['logout', 'index', 'view', 'history', 'update', 'delete', 'create'],
+			            'allow' => true,
+			            'roles' => ['@'],
+		            ],
+	            ],
             ],
         ];
     }
@@ -118,6 +133,8 @@ class BalanceController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+	    $history = new History();
+	    $history->delBalance(Balance::findOne(['id'=>$id])->accounts_id);
 
         return $this->redirect(['index']);
     }

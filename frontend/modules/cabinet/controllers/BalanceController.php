@@ -40,7 +40,7 @@ class BalanceController extends Controller
 			            'allow' => true,
 		            ],
 		            [
-			            'actions' => ['logout', 'index', 'view', 'create', 'update', 'history'],
+			            'actions' => ['logout', 'index', 'view', 'history'],
 			            'allow' => true,
 			            'roles' => ['@'],
 		            ],
@@ -136,6 +136,8 @@ class BalanceController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        $history = new History();
+        $history->delBalance(Balance::findOne(['id'=>$id])->accounts_id);
 
         return $this->redirect(['index']);
     }

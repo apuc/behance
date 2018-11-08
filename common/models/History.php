@@ -17,6 +17,7 @@ class History extends \yii\db\ActiveRecord
 {
 	const TRANSFER_TO_BALANCE = 'Зачисление на баланс';
 	const CREATE_BALANCE = 'Создание счета';
+	const DELETE_BALANCE = 'Удаление счета';
     /**
      * {@inheritdoc}
      */
@@ -59,5 +60,13 @@ class History extends \yii\db\ActiveRecord
 			return true;
 		}
 		return false;
+	}
+	
+	public function delBalance($accounts_id){
+    	$history = new History();
+    	$history->accounts_id = $accounts_id;
+    	$history->name = self::DELETE_BALANCE;
+    	$history->description = self::DELETE_BALANCE;
+    	$history->save();
 	}
 }

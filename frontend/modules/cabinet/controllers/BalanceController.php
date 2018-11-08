@@ -19,6 +19,36 @@ use yii\filters\VerbFilter;
 class BalanceController extends Controller
 {
 
+	public $account;
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+	            'class' => AccessControl::className(),
+	            'rules' => [
+		            [
+			            'actions' => ['login', 'error'],
+			            'allow' => true,
+		            ],
+		            [
+			            'actions' => ['logout', 'index', 'view', 'create', 'update', 'history'],
+			            'allow' => true,
+			            'roles' => ['@'],
+		            ],
+	            ],
+            ],
+        ];
+    }
+
     /**
      * Lists all Balance models.
      * @return mixed
@@ -27,10 +57,10 @@ class BalanceController extends Controller
     {
         $searchModel = new SearchBalance();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+		$this->account = Accounts::findOne(['user_id'=>Yii::$app->user->identity->id]);
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider, 'account' => $this->account,
         ]);
     }
     

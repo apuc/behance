@@ -2,9 +2,13 @@
 
 namespace frontend\modules\cabinet\models;
 
+use common\models\Accounts;
+use common\models\Debug;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\modules\cabinet\models\Balance;
+use yii\helpers\ArrayHelper;
 
 /**
  * SearchBalance represents the model behind the search form of `frontend\modules\cabinet\models\Balance`.
@@ -39,8 +43,8 @@ class SearchBalance extends Balance
      */
     public function search($params)
     {
-        $query = Balance::find();
-
+	    $account_id = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->select('id')->one();
+        $query = Balance::find()->where(['accounts_id'=>$account_id]);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -61,7 +65,6 @@ class SearchBalance extends Balance
             'accounts_id' => $this->accounts_id,
             'views' => $this->views,
             'likes' => $this->likes,
-            'history' => $this->history,
         ]);
 
         return $dataProvider;

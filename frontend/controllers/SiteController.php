@@ -14,7 +14,7 @@ use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
+use \common\models\ContactForm;
 use common\behance\lib\BehanceAccount;
 use common\behance\BehanceService;
 
@@ -85,7 +85,7 @@ class SiteController extends Controller
         if(!Yii::$app->user->isGuest)
         {
             $phone_account = Accounts::getRandomAccount();
-            $phone_works = Works::getRandomWorks($phone_account->id,5);
+            $phone_works = Works::getRandomWorks($phone_account->id,6);
             return $this->render('index',compact('phone_account','phone_works'));
         }
 
@@ -134,19 +134,18 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-            }
 
-            return $this->refresh();
-        } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
+        $form = new ContactForm();
+        $post['ContactForm'] = Yii::$app->request->post();
+
+        if ($form->load($post) && $form->validate())
+        {
+            $form->save(false);
+            echo "Ваша заявка принята!";
+        }
+        else
+        {
+            echo "Ошибка! Введите корректные данные!";
         }
     }
 

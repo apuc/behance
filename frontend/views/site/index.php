@@ -330,11 +330,11 @@ $this->title = 'My Yii Application';
                         <h2 class="title"><span class="title-light">Наслаждайтесь творчеством</span><span class="title-extra-bold">остальное доверьте нам!</span></h2>
                         <p class="callback__main-text main-text">Низкие цены на продвижение своих работ на Behance? Вы нашли, чтоискали! У нас вы получаете комплексное индивидуальное продвижение по максимально выгодным ценам!
                         </p>
-                        <form class="callback__form">
-                            <input placeholder="Ваше имя"/>
-                            <input placeholder="Ваш e-mail"/>
-                            <input class="mb-3" placeholder="Ссылка на Ваше портфолио"/>
-                            <textarea class="mb-3" placeholder="Ваше сообщение"></textarea>
+                        <form class="callback__form" method="post">
+                            <input placeholder="Ваше имя" name="name" required/>
+                            <input placeholder="Ваш e-mail" name="email" required type="email"/>
+                            <input class="mb-3" placeholder="Ссылка на Ваше портфолио" name="link" type="url" required/>
+                            <textarea class="mb-3" placeholder="Ваше сообщение" name="message"></textarea>
                             <div class="checkbox-wrap mb-3">
                                 <input type="checkbox" id="agree"/>
                                 <div class="checkbox">
@@ -347,7 +347,7 @@ $this->title = 'My Yii Application';
                                     <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1 wow" d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58" />
                                     <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2 wow" d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9" />
 </svg>
-                                <button class="btn btn-pink"><span><span class="fw-extra-bold">оформить</span> заказ</span></button>
+                                <button type="submit" id="contact-submit" disabled class="btn btn-pink"><span><span class="fw-extra-bold">оформить</span> заказ</span></button>
                             </div>
                         </form>
                     </div>

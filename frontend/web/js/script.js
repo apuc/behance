@@ -84,7 +84,32 @@ if ($('.reviews__slider').length > 0) {
   });
 }
 
+$(".callback__form").on('submit',function (e) {
 
+    e.preventDefault();
+    var data = $(this).serialize();
+
+    $.ajax({
+        type:"POST",
+        url:"/site/contact",
+        data: data,
+        success:function (data) {
+            alert(data);
+        }
+    })
+});
+
+
+$("#agree").on('change',function () {
+    var button = $('#contact-submit')
+    if($(this).is(':checked')) {
+        button.removeAttr('disabled');
+    }
+    else
+    {
+        button.attr('disabled','true');
+    }
+});
 
 $(document).ready(function () {
     $(".header__nav-item").on('click',function (e) {

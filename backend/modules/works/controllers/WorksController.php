@@ -2,10 +2,12 @@
 
 namespace backend\modules\works\controllers;
 
+use common\models\Accounts;
 use Yii;
 use backend\modules\works\models\Works;
 use backend\modules\works\controllers\WorksSearch;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -30,9 +32,17 @@ class WorksController extends Controller
         $searchModel = new WorksSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $works_names = Works::find()->all();
+        $works_names = ArrayHelper::map($works_names,'name','name');
+
+        $account_names = Accounts::find()->all();
+        $account_names = ArrayHelper::map($account_names,'id','display_name');
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'works_names' => $works_names,
+            'account_names' => $account_names,
         ]);
     }
 

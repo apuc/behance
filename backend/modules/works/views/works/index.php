@@ -23,16 +23,61 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'account_id',
-            'behance_id',
-            'url:url',
-            'name',
-            //'image',
+            //'id',
+            [
+                'attribute'=>'img',
+                'label'=>'Картинка',
+                'format'=>'raw',
+                'value'=>function($data){
+                    return Html::img($data->image,['width'=>'200','height'=>'150']);
+                }
+            ],
+            [
+                'attribute'=>'account_id',
+                'value'=>function($data){
+                    return $data->account['display_name'];
+                },
+                'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'account_id',
+                    'data' => $account_names,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
+            ],
+            //'behance_id',
+            [
+                'attribute'=>'name',
+                'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'name',
+                    'data' => $works_names,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
+            ],
+            [
+                'attribute'=>'url',
+                'filter'=>false,
+                'format'=>'raw',
+                'value'=>function($data){
+                    return Html::a('Ссылка',$data->url,['target'=>'_blank']);
+                }
+            ],
+            'start_likes',
+            'start_views',
 
-            ['class' => 'yii\grid\ActionColumn'],
+
+
+            ['class' => 'yii\grid\ActionColumn',
+                'template'=>'{delete} {update}'
+            ],
         ],
     ]); ?>
 </div>

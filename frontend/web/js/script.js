@@ -94,7 +94,9 @@ $(".callback__form").on('submit',function (e) {
         url:"/site/contact",
         data: data,
         success:function (data) {
-            alert(data);
+            swal({
+                text: data,
+            });
         }
     })
 });

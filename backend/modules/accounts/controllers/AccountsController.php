@@ -43,7 +43,7 @@ class AccountsController extends Controller
     }
     
     public function beforeAction( $action ) {
-	    if(Yii::$app->request->post()['Accounts']['url']) {
+	    if(isset(Yii::$app->request->post()['Accounts']['url'])) {
 	    	$this->url = Yii::$app->request->post()['Accounts']['url'];
 	    }
 	    return $this;

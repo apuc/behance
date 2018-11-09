@@ -77,7 +77,7 @@ $this->title = 'My Yii Application';
                 <div class="header__phone-wrap">
                     <img class="header__phone-img" src="/images/phone.png" alt="" role="presentation"/>
                     <div class="header__phone-info">
-                        <?php if(Yii::$app->user->isGuest): ?>
+                        <?php if(Yii::$app->user->isGuest || !$userHaveAccounts): ?>
                             <span class="header__phone-name">Ekaterina Boyko</span>
                         <div class="header__phone-main">
                             <div class="header__phone-avatar"><img src="/images/girl.png"/>
@@ -111,7 +111,7 @@ $this->title = 'My Yii Application';
                         </div>
                         <?php endif; ?>
 
-                        <?php if(3==5): ?>
+                        <?php if($userHaveAccounts): ?>
                             <span class="header__phone-name"><?= $phone_account->display_name; ?></span>
                             <div class="header__phone-main">
                                 <div class="header__phone-avatar"><img src="<?= $phone_account->image; ?>"/>

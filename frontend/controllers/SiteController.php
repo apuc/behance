@@ -82,14 +82,24 @@ class SiteController extends Controller
 //        $works = $service->getWorks();
 //        var_dump($works); die();
 
-//        if(!Yii::$app->user->isGuest)
-//        {
-//            $phone_account = Accounts::getRandomAccount();
-//            $phone_works = Works::getRandomWorks($phone_account->id,6);
-//            return $this->render('index',compact('phone_account','phone_works'));
-//        }
+        if(isset(Yii::$app->user->identity))
+        {
+            $userHaveAccounts = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->all();
+        }
+        else
+        {
+            $userHaveAccounts = false;
+        }
 
-        return $this->render('index');
+
+        if(!Yii::$app->user->isGuest && $userHaveAccounts)
+        {
+            $phone_account = Accounts::getRandomAccount();
+            $phone_works = Works::getRandomWorks($phone_account->id,6);
+            return $this->render('index',compact('phone_account','phone_works','userHaveAccounts'));
+        }
+
+        return $this->render('index',['userHaveAccounts'=>$userHaveAccounts]);
     }
 
     /**
@@ -105,7 +115,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goHome();
         } else {
             $model->password = '';
 

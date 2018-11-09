@@ -4,6 +4,7 @@ namespace console\controllers;
 use Yii;
 use yii\console\Controller;
 use common\models\User;
+use yii\helpers\Console;
 
 class RbacController extends Controller
 {
@@ -22,14 +23,16 @@ class RbacController extends Controller
         $auth->add($manager);
 
         $user = new User();
-        $user->email = 'super@admin.com';
+        $user->email = 'apuc06@mail.ru';
         $user->username = 'superadmin';
-        $user->setPassword('321756');
+        $user->setPassword('ZEVyaDUeKj');
         $user->generateAuthKey();
         $user->save();
 
 
         $authorRole = $auth->getRole('admin');
         $auth->assign($authorRole, $user->getId());
+
+        $this->stdout("Complete!\n",Console::FG_GREEN);
     }
 }

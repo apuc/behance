@@ -60,7 +60,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if(Yii::$app->user->isGuest || !Yii::$app->user->can('admin')){
+        if(Yii::$app->user->isGuest || (!Yii::$app->user->can('admin') && !Yii::$app->user->can('manager'))){
             return $this->redirect('error');
         }
 

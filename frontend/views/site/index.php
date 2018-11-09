@@ -111,7 +111,7 @@ $this->title = 'My Yii Application';
                         </div>
                         <?php endif; ?>
 
-                        <?php if(!Yii::$app->user->isGuest): ?>
+                        <?php if(3==5): ?>
                             <span class="header__phone-name"><?= $phone_account->display_name; ?></span>
                             <div class="header__phone-main">
                                 <div class="header__phone-avatar"><img src="<?= $phone_account->image; ?>"/>

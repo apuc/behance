@@ -24,31 +24,7 @@ class BalanceController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-            'access' => [
-	            'class' => AccessControl::className(),
-	            'rules' => [
-		            [
-			            'actions' => ['login', 'error'],
-			            'allow' => true,
-		            ],
-		            [
-			            'actions' => ['logout', 'index', 'view', 'history', 'update', 'delete', 'create'],
-			            'allow' => true,
-			            'roles' => ['@'],
-		            ],
-	            ],
-            ],
-        ];
-    }
+
 	
 	public function getAccounts () {
     	$this->balance = ArrayHelper::getColumn(Balance::find()->all(), 'accounts_id');

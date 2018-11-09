@@ -7,11 +7,11 @@ use yii\helpers\Url;
 /* @var $name string */
 /* @var $message string */
 /* @var $exception Exception */
-
-$this->title = $name;
-if(Yii::$app->user->isGuest){
-	Yii::$app->response->redirect(Url::to(['/'], true));
-}
+$this->context->layout = 'error';
+//$this->title = $name;
+//if(Yii::$app->user->isGuest || !Yii::$app->user->can('admin')){
+//	Yii::$app->response->redirect(Url::to(['/'], true));
+//}
 ?>
 <section class="content">
 

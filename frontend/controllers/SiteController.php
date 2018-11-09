@@ -82,12 +82,12 @@ class SiteController extends Controller
 //        $works = $service->getWorks();
 //        var_dump($works); die();
 
-        if(!Yii::$app->user->isGuest)
-        {
-            $phone_account = Accounts::getRandomAccount();
-            $phone_works = Works::getRandomWorks($phone_account->id,6);
-            return $this->render('index',compact('phone_account','phone_works'));
-        }
+//        if(!Yii::$app->user->isGuest)
+//        {
+//            $phone_account = Accounts::getRandomAccount();
+//            $phone_works = Works::getRandomWorks($phone_account->id,6);
+//            return $this->render('index',compact('phone_account','phone_works'));
+//        }
 
         return $this->render('index');
     }
@@ -169,6 +169,11 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
+
+                $auth = Yii::$app->authManager;
+                $authorRole = $auth->getRole('user');
+                $auth->assign($authorRole, $user->getId());
+
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
                 }

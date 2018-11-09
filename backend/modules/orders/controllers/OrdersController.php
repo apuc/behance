@@ -21,17 +21,7 @@ class OrdersController extends Controller
 	/**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+
 
     public function getAccounts () {
     	foreach (Accounts::find()->all() as $value) {

@@ -25,31 +25,7 @@ class AccountsController extends Controller
      */
     public $url;
     
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-            'access' => [
-	            'class' => AccessControl::className(),
-	            'rules' => [
-		            [
-			            'actions' => ['login', 'error'],
-			            'allow' => true,
-		            ],
-		            [
-			            'actions' => ['logout', 'index', 'view', 'create', 'update', 'save-works', 'save-acc', 'parse-account', 'parse-works'],
-			            'allow' => true,
-			            'roles' => ['@'],
-		            ],
-	            ],
-            ],
-        ];
-    }
+
 
     /**
      * Lists all Accounts models.
@@ -67,7 +43,7 @@ class AccountsController extends Controller
     }
     
     public function beforeAction( $action ) {
-	    if(Yii::$app->request->post()['Accounts']['url']) {
+	    if(isset(Yii::$app->request->post()['Accounts']['url'])) {
 	    	$this->url = Yii::$app->request->post()['Accounts']['url'];
 	    }
 	    return $this;

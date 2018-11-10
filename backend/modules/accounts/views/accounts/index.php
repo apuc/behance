@@ -31,17 +31,64 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'url:url',
-            'title',
-            'behance_id',
-            'display_name',
-            //'username',
-            //'image:ntext',
+            //'id',
+            [
+                'attribute'=>'image',
+                'filter'=>false,
+                'format'=>'raw',
+                'value'=>function($data){
+                    return Html::img($data->image,['width'=>100,'height'=>'100']);
+                }
+            ],
+            [
+                'attribute'=>'display_name',
+//                'filter'    => kartik\select2\Select2::widget([
+//                    'model' => $searchModel,
+//                    'attribute' => 'display_name',
+//                    'data' => $display_names,
+//                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+//                    'pluginOptions' => [
+//                        'allowClear' => true
+//                    ],
+//                ]),
+            ],
+            [
+                'attribute'=>'username',
+//                'filter'    => kartik\select2\Select2::widget([
+//                    'model' => $searchModel,
+//                    'attribute' => 'username',
+//                    'data' => $usernames,
+//                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+//                    'pluginOptions' => [
+//                        'allowClear' => true
+//                    ],
+//                ]),
+            ],
+            [
+                'attribute'=>'url',
+                'filter'=>false,
+                'format'=>'raw',
+                'value'=>function($data){
+                    return Html::a('ссылка',$data->url,['target'=>'_blank']);
+                }
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            //'title',
+            //'behance_id',
+
+//            [
+//                'format'=>'raw',
+//                'value'=>function($data){
+//                    return Html::a('Обновить работы','/cabinet/accounts/parse?id='.$data->id.'&url='.$data->url,['class'=>'btn btn-primary']);
+//                }
+//            ],
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{delete}'
+            ],
         ],
     ]); ?>
 </div>

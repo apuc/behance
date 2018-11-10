@@ -21,7 +21,8 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/slick.min.js',
         'js/wow.min.js',
-        'js/script.js'
+        'js/script.js',
+        'https://unpkg.com/sweetalert/dist/sweetalert.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

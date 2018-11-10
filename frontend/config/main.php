@@ -23,15 +23,20 @@ return [
         'request' => [
             'baseUrl' => '',
             'csrfParam' => '_csrf-frontend',
+            'cookieValidationKey' => $params['cookieValidationKey'],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'identityCookie' => ['name' => '_identity', 'httpOnly' => true],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend',
+            'name' => 'advanced',
+            'cookieParams' =>[
+                'httpOnly' => true,
+                //'domain' => $params['cookieDomain'],
+            ]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

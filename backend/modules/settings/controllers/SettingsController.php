@@ -18,31 +18,7 @@ class SettingsController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-            'access' => [
-	            'class' => AccessControl::className(),
-	            'rules' => [
-		            [
-			            'actions' => ['login', 'error'],
-			            'allow' => true,
-		            ],
-		            [
-			            'actions' => ['logout', 'index', 'view', 'create', 'update'],
-			            'allow' => true,
-			            'roles' => ['@'],
-		            ],
-	            ],
-            ],
-        ];
-    }
+
 
     /**
      * Lists all Settings models.

@@ -14,7 +14,7 @@ use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
+use \common\models\ContactForm;
 use common\behance\lib\BehanceAccount;
 use common\behance\BehanceService;
 
@@ -82,14 +82,24 @@ class SiteController extends Controller
 //        $works = $service->getWorks();
 //        var_dump($works); die();
 
-        if(!Yii::$app->user->isGuest)
+        if(isset(Yii::$app->user->identity))
         {
-            $phone_account = Accounts::getRandomAccount();
-            $phone_works = Works::getRandomWorks($phone_account->id,5);
-            return $this->render('index',compact('phone_account','phone_works'));
+            $userHaveAccounts = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->all();
+        }
+        else
+        {
+            $userHaveAccounts = false;
         }
 
-        return $this->render('index');
+
+        if(!Yii::$app->user->isGuest && $userHaveAccounts)
+        {
+            $phone_account = Accounts::getRandomAccount();
+            $phone_works = Works::getRandomWorks($phone_account->id,6);
+            return $this->render('index',compact('phone_account','phone_works','userHaveAccounts'));
+        }
+
+        return $this->render('index',['userHaveAccounts'=>$userHaveAccounts]);
     }
 
     /**
@@ -105,7 +115,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goHome();
         } else {
             $model->password = '';
 
@@ -134,19 +144,18 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-            }
 
-            return $this->refresh();
-        } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
+        $form = new ContactForm();
+        $post['ContactForm'] = Yii::$app->request->post();
+
+        if ($form->load($post) && $form->validate())
+        {
+            $form->save(false);
+            echo "Ваша заявка принята!";
+        }
+        else
+        {
+            echo "Ошибка! Введите корректные данные!";
         }
     }
 
@@ -170,6 +179,11 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
+
+                $auth = Yii::$app->authManager;
+                $authorRole = $auth->getRole('user');
+                $auth->assign($authorRole, $user->getId());
+
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
                 }

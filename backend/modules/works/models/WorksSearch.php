@@ -1,15 +1,14 @@
 <?php
 
-namespace backend\modules\orders\controllers;
+namespace backend\modules\works\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\orders\models\Orders;
 
 /**
- * OrdersSearch represents the model behind the search form of `backend\modules\orders\models\Orders`.
+ * WorksSearch represents the model behind the search form of `backend\modules\works\models\Works`.
  */
-class OrdersSearch extends Orders
+class WorksSearch extends Works
 {
     /**
      * {@inheritdoc}
@@ -17,8 +16,8 @@ class OrdersSearch extends Orders
     public function rules()
     {
         return [
-            [['id', 'accounts_id', 'cases_id', 'status'], 'integer'],
-            [['dt_add'], 'safe'],
+            [['id', 'account_id'], 'integer'],
+            [['behance_id', 'url', 'name', 'image'], 'safe'],
         ];
     }
 
@@ -40,7 +39,7 @@ class OrdersSearch extends Orders
      */
     public function search($params)
     {
-        $query = Orders::find();
+        $query = Works::find();
 
         // add conditions that should always apply here
 
@@ -59,11 +58,13 @@ class OrdersSearch extends Orders
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'accounts_id' => $this->accounts_id,
-            'cases_id' => $this->cases_id,
-            'status' => $this->status,
-            'dt_add' => $this->dt_add,
+            'account_id' => $this->account_id,
         ]);
+
+        $query->andFilterWhere(['like', 'behance_id', $this->behance_id])
+            ->andFilterWhere(['like', 'url', $this->url])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;
     }

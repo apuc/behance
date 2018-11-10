@@ -11,6 +11,7 @@ use Yii;
  * @property int $behance_id
  * @property int $views
  * @property int $likes
+ * @property string $name
  */
 class Cases extends \common\models\Cases
 {

@@ -1,15 +1,14 @@
 <?php
 
-namespace backend\modules\settings\controllers;
+namespace backend\modules\balance\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\settings\models\Settings;
 
 /**
- * SettingsSearch represents the model behind the search form of `backend\modules\settings\models\Settings`.
+ * BalanceSearch represents the model behind the search form of `backend\modules\balance\models\Balance`.
  */
-class SettingsSearch extends Settings
+class BalanceSearch extends Balance
 {
     /**
      * {@inheritdoc}
@@ -17,8 +16,7 @@ class SettingsSearch extends Settings
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['key', 'value'], 'safe'],
+            [['id', 'accounts_id', 'views', 'likes'], 'integer'],
         ];
     }
 
@@ -40,7 +38,7 @@ class SettingsSearch extends Settings
      */
     public function search($params)
     {
-        $query = Settings::find();
+        $query = Balance::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +57,10 @@ class SettingsSearch extends Settings
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'accounts_id' => $this->accounts_id,
+            'views' => $this->views,
+            'likes' => $this->likes,
         ]);
-
-        $query->andFilterWhere(['like', 'key', $this->key])
-            ->andFilterWhere(['like', 'value', $this->value]);
 
         return $dataProvider;
     }

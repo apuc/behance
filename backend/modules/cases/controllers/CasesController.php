@@ -4,7 +4,7 @@ namespace backend\modules\cases\controllers;
 
 use Yii;
 use backend\modules\cases\models\Cases;
-use backend\modules\cases\controllers\CaseseSearch;
+use backend\modules\cases\models\CasesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,7 +35,7 @@ class CasesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CaseseSearch();
+        $searchModel = new CasesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

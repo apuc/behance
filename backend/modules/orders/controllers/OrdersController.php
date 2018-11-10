@@ -6,7 +6,7 @@ use backend\modules\cases\models\Cases;
 use common\models\Accounts;
 use Yii;
 use backend\modules\orders\models\Orders;
-use backend\modules\orders\controllers\OrdersSearch;
+use backend\modules\orders\models\OrdersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

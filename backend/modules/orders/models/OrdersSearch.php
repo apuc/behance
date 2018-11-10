@@ -1,15 +1,14 @@
 <?php
 
-namespace backend\modules\cases\controllers;
+namespace backend\modules\orders\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\cases\models\Cases;
 
 /**
- * CasesSearch represents the model behind the search form of `backend\modules\cases\models\Cases`.
+ * OrdersSearch represents the model behind the search form of `backend\modules\orders\models\Orders`.
  */
-class CasesSearch extends Cases
+class OrdersSearch extends Orders
 {
     /**
      * {@inheritdoc}
@@ -17,7 +16,8 @@ class CasesSearch extends Cases
     public function rules()
     {
         return [
-            [['id', 'behance_id', 'views', 'likes'], 'integer'],
+            [['id', 'accounts_id', 'cases_id', 'status'], 'integer'],
+            [['dt_add'], 'safe'],
         ];
     }
 
@@ -39,7 +39,7 @@ class CasesSearch extends Cases
      */
     public function search($params)
     {
-        $query = Cases::find();
+        $query = Orders::find();
 
         // add conditions that should always apply here
 
@@ -58,9 +58,10 @@ class CasesSearch extends Cases
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'behance_id' => $this->behance_id,
-            'views' => $this->views,
-            'likes' => $this->likes,
+            'accounts_id' => $this->accounts_id,
+            'cases_id' => $this->cases_id,
+            'status' => $this->status,
+            'dt_add' => $this->dt_add,
         ]);
 
         return $dataProvider;

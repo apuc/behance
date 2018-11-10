@@ -9,7 +9,7 @@ use common\models\Debug;
 use function GuzzleHttp\Psr7\str;
 use Yii;
 use backend\modules\accounts\models\Accounts;
-use backend\modules\accounts\controllers\AccountsSearch;
+use backend\modules\accounts\models\AccountsSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

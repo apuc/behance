@@ -3,11 +3,10 @@
 namespace backend\modules\balance\controllers;
 
 use backend\modules\Accounts\models\Accounts;
-use common\models\Debug;
 use common\models\History;
 use Yii;
 use backend\modules\balance\models\Balance;
-use backend\modules\balance\controllers\BalanceSearch;
+use backend\modules\balance\models\BalanceSearch;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;

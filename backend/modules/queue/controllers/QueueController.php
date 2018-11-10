@@ -4,7 +4,7 @@ namespace backend\modules\queue\controllers;
 
 use Yii;
 use backend\modules\queue\models\Queue;
-use backend\modules\queue\controllers\QueueSearch;
+use backend\modules\queue\models\QueueSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

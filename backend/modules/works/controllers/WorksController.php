@@ -4,7 +4,7 @@ namespace backend\modules\works\controllers;
 
 use Yii;
 use backend\modules\works\models\Works;
-use backend\modules\works\controllers\WorksSearch;
+use backend\modules\works\models\WorksSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

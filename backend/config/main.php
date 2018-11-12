@@ -33,6 +33,13 @@ return [
         'orders' => [
 	        'class' => 'backend\modules\orders\Orders',
         ],
+        'reviews' => [
+	        'class' => 'backend\modules\reviews\Reviews',
+        ],
+        'history' => [
+	        'class' => 'backend\modules\history\History',
+        ]
+
     ],
     'components' => [
         'request' => [

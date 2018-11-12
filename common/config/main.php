@@ -41,4 +41,29 @@ return [
 	        ],
         ],
     ],
+    'controllerMap' => [
+	    'elfinder' => [
+		    'class' => 'mihaildev\elfinder\PathController',
+		    'access' => ['@'],
+		    'root' => [
+			    'baseUrl' => '',
+			    'basePath' => '@frontend/web',
+			    'path' => 'uploads/global',
+			    'name' => 'Global'
+		    ],
+		    'connectOptions' => [
+			    'bind' => array(
+				    'upload.presave' => array(
+					    'Plugin.CompressingImage.onUpLoadPreSave'
+				    )
+			    ),
+			    'plugin' => [
+				    'CompressingImage' => [
+					    'quality' => 85
+				    ]
+			
+			    ],
+		    ],
+	    ]
+    ],
 ];

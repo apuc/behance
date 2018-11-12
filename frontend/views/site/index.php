@@ -1,7 +1,9 @@
 <?php
 use yii\helpers\Url;
 
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $reviews object
+ */
 
 $this->title = 'My Yii Application';
 ?>
@@ -293,56 +295,22 @@ $this->title = 'My Yii Application';
                     <h2 class="title"><span class="title-light">Что говорят наши</span><span class="title-extra-bold">Довольные клиенты</span></h2>
                 </div>
                 <div class="reviews__slider">
-                    <div class="reviews__slider-item">
-                        <div class="reviews__slider-top">
-                            <div class="reviews__slider-photo"><img src="/images/photo.png"/>
-                            </div>
-                            <div class="reviews__slider-info"><span>Елена Дмитренко</span><span class="fw-extra-bold">@elena</span>
-                            </div>
-                        </div>
-                        <p class="reviews__slider-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                    </div>
-                    <div class="reviews__slider-item">
-                        <div class="reviews__slider-top">
-                            <div class="reviews__slider-photo"><img src="/images/photo.png"/>
-                            </div>
-                            <div class="reviews__slider-info"><span>Елена Дмитренко</span><span class="fw-extra-bold">@elena</span>
-                            </div>
-                        </div>
-                        <p class="reviews__slider-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                    </div>
-                    <div class="reviews__slider-item">
-                        <div class="reviews__slider-top">
-                            <div class="reviews__slider-photo"><img src="/images/photo.png"/>
-                            </div>
-                            <div class="reviews__slider-info"><span>Елена Дмитренко</span><span class="fw-extra-bold">@elena</span>
-                            </div>
-                        </div>
-                        <p class="reviews__slider-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                    </div>
-                    <div class="reviews__slider-item">
-                        <div class="reviews__slider-top">
-                            <div class="reviews__slider-photo"><img src="/images/photo.png"/>
-                            </div>
-                            <div class="reviews__slider-info"><span>Елена Дмитренко</span><span class="fw-extra-bold">@elena</span>
-                            </div>
-                        </div>
-                        <p class="reviews__slider-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                    </div>
-                    <div class="reviews__slider-item">
-                        <div class="reviews__slider-top">
-                            <div class="reviews__slider-photo"><img src="/images/photo.png"/>
-                            </div>
-                            <div class="reviews__slider-info"><span>Елена Дмитренко</span><span class="fw-extra-bold">@elena</span>
-                            </div>
-                        </div>
-                        <p class="reviews__slider-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                    </div>
+	                <?php if(isset($reviews)):?>
+		                <?php foreach ($reviews as $review):?>
+	                        <div class="reviews__slider-item">
+	                        <div class="reviews__slider-top">
+	                            <div class="reviews__slider-photo">
+		                            <img src="<?=$review->photo?>"/>
+	                            </div>
+	                            <div class="reviews__slider-info"><span><?=$review->name?></span><span class="fw-extra-bold"><?=$review->nick_name?></span>
+	                            </div>
+	                        </div>
+	                        <p class="reviews__slider-text">
+		                        <?=$review->content?>
+	                        </p>
+	                    </div>
+		                <?php endforeach;?>
+	                <?php endif;?>
                 </div>
             </div>
         </div>

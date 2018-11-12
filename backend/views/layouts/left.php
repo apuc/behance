@@ -36,7 +36,13 @@ if($contact_count == 0)
                     ['label' => Yii::t('balance', 'Balance'), 'icon' => 'fas fa-shopping-basket', 'url' => ['/balance/balance']],
                     ['label' => 'Cases', 'icon' => 'fas fa-suitcase', 'url' => ['/cases/cases']],
                     ['label' => Yii::t('orders', 'Orders'), 'icon' => 'fas fa-shopping-cart', 'url' => ['/orders/orders']],
+
                     ['label' => 'Заявки', 'icon' => 'fas fa-clipboard-list', 'url' => ['/orders/contact'] ,'template'=>'<a href="{url}">{icon}<span>{label}</span><span class="pull-right-container"><small class="label pull-right bg-red">'.$contact_count.'</small></span></a>'],
+
+	                ['label' => Yii::t('reviews', 'Reviews'), 'icon' => 'fas fa-comments', 'url' => ['/reviews/reviews']],
+                    ['label' => 'Заявки', 'icon' => 'fas fa-shopping-cart', 'url' => ['/orders/contact']],
+	                ['label' => Yii::t('history', 'History'), 'icon' => 'fas fa-history', 'url' => ['/history/history']],
+
                    // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                    // ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
 //                    [

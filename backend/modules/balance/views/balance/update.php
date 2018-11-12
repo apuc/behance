@@ -7,9 +7,7 @@ use yii\helpers\Html;
  * @var $accounts array
  */
 
-$this->title = Yii::t('balance', 'Update Balance: ' . $model->id, [
-    'nameAttribute' => '' . $model->id,
-]);
+$this->title = 'Изменить баланс пользователя '.$model->user['email'];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('balance', 'Balances'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('balance', 'Update');
@@ -19,7 +17,7 @@ $this->params['breadcrumbs'][] = Yii::t('balance', 'Update');
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model, 'accounts' => $accounts,
+        'model' => $model,
     ]) ?>
 
 </div>

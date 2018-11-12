@@ -1,8 +1,6 @@
 <?php
 use yii\helpers\Html;
 
-/* @var $this \yii\web\View */
-/* @var $content string */
 ?>
 
 <header class="main-header">
@@ -169,6 +167,8 @@ use yii\helpers\Html;
                         </li>
                     </ul>
                 </li>
+
+
 
                 <!-- User Account: style can be found in dropdown.less -->
 <!--                <li>-->

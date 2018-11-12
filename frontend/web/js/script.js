@@ -94,9 +94,16 @@ $(".callback__form").on('submit',function (e) {
         url:"/site/contact",
         data: data,
         success:function (data) {
+            var res = JSON.parse(data);
+
             swal({
-                text: data,
+                text: res.message,
             });
+
+            if(res.status == "ok")
+            {
+                $(".callback__form")[0].reset();
+            }
         }
     })
 });

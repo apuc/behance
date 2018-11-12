@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 
 use common\models\Accounts;
+use common\models\Balance;
 use common\models\Reviews;
 use common\models\Works;
 use Yii;
@@ -90,7 +91,7 @@ class SiteController extends Controller
             $phone_account = Accounts::getRandomAccount();
             $reviews = $this->reviews;
             $phone_works = ($phone_account) ? Works::getRandomWorks($phone_account->id,6) : false;
-            return $this->render('index', compact('phone_account','phone_works','userHaveAccounts', 'reviews'));
+            return $this->render('index', compact('phone_account','phone_works','reviews'));
         }
         
         return $this->render('index', ['reviews' => $this->reviews, 'phone_account' => '', 'phone_works' => '']);
@@ -131,43 +132,32 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return mixed
-     */
+
     public function actionContact()
     {
 
         $form = new ContactForm();
         $post['ContactForm'] = Yii::$app->request->post();
+        $response = array();
 
         if ($form->load($post) && $form->validate())
         {
             $form->save(false);
-            echo "Ваша заявка принята!";
+            $response['message']='Ваша заявка принята!';
+            $response['status']='ok';
+
         }
         else
         {
-            echo "Ошибка! Введите корректные данные!";
+            $response['message']='Ошибка! Введите корректные данные!';
+            $response['status']='error';
         }
+
+        echo json_encode($response);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 
-    /**
-     * Signs user up.
-     *
-     * @return mixed
-     */
+
     public function actionSignup()
     {
         $model = new SignupForm();
@@ -177,6 +167,12 @@ class SiteController extends Controller
                 $auth = Yii::$app->authManager;
                 $authorRole = $auth->getRole('user');
                 $auth->assign($authorRole, $user->getId());
+
+                $balance = new Balance();
+                $balance->user_id = $user->getId();
+                $balance->views = 0;
+                $balance->likes = 0;
+                $balance->save();
 
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
@@ -189,11 +185,7 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Requests password reset.
-     *
-     * @return mixed
-     */
+
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
@@ -212,13 +204,8 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Resets password.
-     *
-     * @param string $token
-     * @return mixed
-     * @throws BadRequestHttpException
-     */
+
+
     public function actionResetPassword($token)
     {
         try {

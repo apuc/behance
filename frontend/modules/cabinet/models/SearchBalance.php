@@ -21,7 +21,7 @@ class SearchBalance extends Balance
     public function rules()
     {
         return [
-            [['id', 'accounts_id', 'views', 'likes'], 'integer'],
+            [['id', 'user_id', 'views', 'likes'], 'integer'],
         ];
     }
 
@@ -43,8 +43,8 @@ class SearchBalance extends Balance
      */
     public function search($params)
     {
-	    $account_id = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->select('id')->one();
-        $query = Balance::find()->where(['accounts_id'=>$account_id]);
+
+        $query = Balance::find();
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -62,7 +62,7 @@ class SearchBalance extends Balance
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'accounts_id' => $this->accounts_id,
+            'user_id' => $this->user_id,
             'views' => $this->views,
             'likes' => $this->likes,
         ]);

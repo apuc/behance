@@ -73,6 +73,13 @@
  */
 /* TODO(sgomes): Figure out what to do about desktop font sizes. */
 /* TODO(sgomes): Figure out what to do about i18n and i18n font sizes. */
+
+.balance-block span{
+  color:white;
+  font-size:15px;
+  font-weight: bold;
+}
+
 .mdc-button {
   font-family: Roboto, sans-serif;
   -moz-osx-font-smoothing: grayscale;

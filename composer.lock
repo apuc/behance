@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad5b9235a77fa5c1e300af206ea5daeb",
+    "content-hash": "9f284666875ebdaac85dec627484aaff",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -73,6 +73,29 @@
             ]
         },
         {
+            "name": "bower-asset/fancybox",
+            "version": "2.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fancyapps/fancybox.git",
+                "reference": "780d933e4ecd696233135081c6ad663cac220467"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fancyapps/fancybox/zipball/780d933e4ecd696233135081c6ad663cac220467",
+                "reference": "780d933e4ecd696233135081c6ad663cac220467",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.10",
+                "bower-asset/jquery-mousewheel": "~3.1.3"
+            },
+            "type": "bower-asset",
+            "license": [
+                "GPLv3"
+            ]
+        },
+        {
             "name": "bower-asset/font-awesome",
             "version": "dev-master",
             "source": {
@@ -124,6 +147,47 @@
                 "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/77d2a51d0520d2ee44173afdf4e40a9201f5964e",
                 "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e",
                 "shasum": null
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/jquery-mousewheel",
+            "version": "3.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jquery/jquery-mousewheel.git",
+                "reference": "c559933f485ae34fed561b042e87abd245858c24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jquery/jquery-mousewheel/zipball/c559933f485ae34fed561b042e87abd245858c24",
+                "reference": "c559933f485ae34fed561b042e87abd245858c24",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.2.2"
+            },
+            "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/jquery-ui",
+            "version": "1.12.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jqueryui.git",
+                "reference": "44ecf3794cc56b65954cc19737234a3119d036cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jqueryui/zipball/44ecf3794cc56b65954cc19737234a3119d036cc",
+                "reference": "44ecf3794cc56b65954cc19737234a3119d036cc",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.6"
             },
             "type": "bower-asset",
             "license": [
@@ -736,6 +800,109 @@
             "time": "2018-11-05T12:34:42+00:00"
         },
         {
+            "name": "mihaildev/yii2-ckeditor",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MihailDev/yii2-ckeditor.git",
+                "reference": "d20aa7f6bcf610fee226d6eb15212a279875bf87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MihailDev/yii2-ckeditor/zipball/d20aa7f6bcf610fee226d6eb15212a279875bf87",
+                "reference": "d20aa7f6bcf610fee226d6eb15212a279875bf87",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "mihaildev\\ckeditor\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Mihail",
+                    "email": "mihail.kucher@gmail.com",
+                    "homepage": "https://github.com/MihailDev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 CKEditor",
+            "homepage": "https://github.com/MihailDev/yii2-ckeditor",
+            "keywords": [
+                "CKEditor",
+                "editor",
+                "wysiwyg",
+                "yii"
+            ],
+            "time": "2014-11-19T22:04:08+00:00"
+        },
+        {
+            "name": "mihaildev/yii2-elfinder",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MihailDev/yii2-elfinder.git",
+                "reference": "3cc3001a84e3cc3841131a0a947d7917948a60b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MihailDev/yii2-elfinder/zipball/3cc3001a84e3cc3841131a0a947d7917948a60b1",
+                "reference": "3cc3001a84e3cc3841131a0a947d7917948a60b1",
+                "shasum": ""
+            },
+            "require": {
+                "studio-42/elfinder": "^2.1.10",
+                "yiisoft/yii2": "~2.0.13",
+                "yiisoft/yii2-jui": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "mihaildev\\elfinder\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Mihail",
+                    "email": "mihail.kucher@gmail.com",
+                    "homepage": "https://github.com/MihailDev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 ElFinder",
+            "homepage": "https://github.com/MihailDev/yii2-elfinder",
+            "keywords": [
+                "elfinder",
+                "filemanager",
+                "yii"
+            ],
+            "time": "2018-10-01T17:00:54+00:00"
+        },
+        {
             "name": "rmrevin/yii2-fontawesome",
             "version": "3.x-dev",
             "source": {
@@ -790,6 +957,64 @@
                 "yii"
             ],
             "time": "2018-04-01T12:51:52+00:00"
+        },
+        {
+            "name": "studio-42/elfinder",
+            "version": "2.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Studio-42/elFinder.git",
+                "reference": "d7d2761f68f76608099cfd52f7a429c3e4fe8c3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/d7d2761f68f76608099cfd52f7a429c3e4fe8c3a",
+                "reference": "d7d2761f68f76608099cfd52f7a429c3e4fe8c3a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "suggest": {
+                "barryvdh/elfinder-flysystem-driver": "VolumeDriver for elFinder to use Flysystem as a root.",
+                "google/apiclient": "VolumeDriver GoogleDrive require `google/apiclient:^2.0.",
+                "kunalvarma05/dropbox-php-sdk": "VolumeDriver `Dropbox`2 require `kunalvarma05/dropbox-php-sdk.",
+                "nao-pon/flysystem-google-drive": "require in GoogleDrive network volume mounting with Flysystem."
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Levashov",
+                    "email": "dio@std42.ru",
+                    "homepage": "http://std42.ru"
+                },
+                {
+                    "name": "Troex Nevelin",
+                    "email": "troex@fury.scancode.ru",
+                    "homepage": "http://std42.ru"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Studio-42/elFinder/contributors"
+                },
+                {
+                    "name": "Naoki Sawada",
+                    "email": "hypweb+elfinder@gmail.com",
+                    "homepage": "http://xoops.hypweb.net"
+                }
+            ],
+            "description": "File manager for web",
+            "homepage": "http://elfinder.org",
+            "time": "2018-11-07T15:22:39+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -849,6 +1074,48 @@
                 "mailer"
             ],
             "time": "2018-09-11T07:13:26+00:00"
+        },
+        {
+            "name": "xtarantulz/yii2-input-img-preview",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xtarantulz/yii2-input-img-preview.git",
+                "reference": "c2f1467a0461c4fa63fe55bef6d81a60df73c66b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xtarantulz/yii2-input-img-preview/zipball/c2f1467a0461c4fa63fe55bef6d81a60df73c66b",
+                "reference": "c2f1467a0461c4fa63fe55bef6d81a60df73c66b",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/fancybox": "~2.1.5",
+                "mihaildev/yii2-elfinder": "*",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "xtarantulz\\preview\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Batrakov Vladimir",
+                    "email": "xtarantulz@mail.ru",
+                    "homepage": "https://github.com/xtarantulz",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Розширение для yii2-elfinder input, чтобы отображать превью выбраных файлов + fancybox",
+            "homepage": "https://github.com/xtarantulz/yii2-input-img-preview",
+            "time": "2018-03-02T10:11:15+00:00"
         },
         {
             "name": "yii2mod/yii2-sweet-alert",
@@ -1111,6 +1378,64 @@
                 "yii2"
             ],
             "time": "2018-08-25T10:44:34+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-jui",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-jui.git",
+                "reference": "8195a03e1a0bf64fe1df20b8993b6c7bad0e1b10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/8195a03e1a0bf64fe1df20b8993b6c7bad0e1b10",
+                "reference": "8195a03e1a0bf64fe1df20b8993b6c7bad0e1b10",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-ui": "~1.12.1",
+                "yiisoft/yii2": "~2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\jui\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Kochetov",
+                    "email": "creocoder@gmail.com"
+                },
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com"
+                },
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc"
+                },
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru"
+                }
+            ],
+            "description": "The Jquery UI extension for the Yii framework",
+            "keywords": [
+                "jQuery UI",
+                "yii2"
+            ],
+            "time": "2018-09-18T13:26:35+00:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -3894,7 +4219,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "bower-asset/font-awesome": 20,
-        "kartik-v/yii2-widget-select2": 20
+        "kartik-v/yii2-widget-select2": 20,
+        "xtarantulz/yii2-input-img-preview": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 
 use common\models\Accounts;
+use common\models\Reviews;
 use common\models\Works;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -23,6 +24,7 @@ use common\behance\BehanceService;
  */
 class SiteController extends Controller
 {
+	public $reviews;
     /**
      * {@inheritdoc}
      */
@@ -81,6 +83,7 @@ class SiteController extends Controller
 //        $account =$service->getAccount("https://www.behance.net/k0tya_ka83bf");
 //        $works = $service->getWorks();
 //        var_dump($works); die();
+	    $this->reviews = Reviews::find()->all();
 
         if(isset(Yii::$app->user->identity))
         {
@@ -99,7 +102,7 @@ class SiteController extends Controller
             return $this->render('index',compact('phone_account','phone_works','userHaveAccounts'));
         }
 
-        return $this->render('index',['userHaveAccounts'=>$userHaveAccounts]);
+        return $this->render('index',['userHaveAccounts'=>$userHaveAccounts, 'reviews' => $this->reviews]);
     }
 
     /**

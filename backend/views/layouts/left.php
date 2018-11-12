@@ -28,6 +28,7 @@
                     ['label' => Yii::t('balance', 'Balance'), 'icon' => 'fas fa-shopping-basket', 'url' => ['/balance/balance']],
                     ['label' => 'Cases', 'icon' => 'fas fa-suitcase', 'url' => ['/cases/cases']],
                     ['label' => Yii::t('orders', 'Orders'), 'icon' => 'fas fa-shopping-cart', 'url' => ['/orders/orders']],
+	                ['label' => Yii::t('reviews', 'Reviews'), 'icon' => 'fas fa-shopping-cart', 'url' => ['/reviews/reviews']],
                    // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],

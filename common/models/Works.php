@@ -145,6 +145,11 @@ class Works extends \yii\db\ActiveRecord
     {
         $works_ids = Works::find()->where(['account_id'=>$account_id])->select('id')->all();
 
+        if(empty($works_ids))
+        {
+            return false;
+        }
+
         $rand_ids = array();
 
         for($i = 0; $i< $count; $i++)

@@ -44,27 +44,27 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'display_name',
-//                'filter'    => kartik\select2\Select2::widget([
-//                    'model' => $searchModel,
-//                    'attribute' => 'display_name',
-//                    'data' => $display_names,
-//                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
-//                    'pluginOptions' => [
-//                        'allowClear' => true
-//                    ],
-//                ]),
+                'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'display_name',
+                    'data' => $display_names,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
             ],
             [
                 'attribute'=>'username',
-//                'filter'    => kartik\select2\Select2::widget([
-//                    'model' => $searchModel,
-//                    'attribute' => 'username',
-//                    'data' => $usernames,
-//                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
-//                    'pluginOptions' => [
-//                        'allowClear' => true
-//                    ],
-//                ]),
+                'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'username',
+                    'data' => $usernames,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
             ],
             [
                 'attribute'=>'url',

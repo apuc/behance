@@ -28,10 +28,13 @@
                     ['label' => Yii::t('balance', 'Balance'), 'icon' => 'fas fa-shopping-basket', 'url' => ['/balance/balance']],
                     ['label' => 'Cases', 'icon' => 'fas fa-suitcase', 'url' => ['/cases/cases']],
                     ['label' => Yii::t('orders', 'Orders'), 'icon' => 'fas fa-shopping-cart', 'url' => ['/orders/orders']],
+<<<<<<< HEAD
 	                ['label' => Yii::t('reviews', 'Reviews'), 'icon' => 'fas fa-shopping-cart', 'url' => ['/reviews/reviews']],
+=======
+                    ['label' => 'Заявки', 'icon' => 'fas fa-shopping-cart', 'url' => ['/orders/contact']],
+>>>>>>> 27e1a9dc47898ecd1e8059ed36f2920cf4ab51ac
                    // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                   // ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
 //                    [
 //                        'label' => 'Some tools',
 //                        'icon' => 'share',

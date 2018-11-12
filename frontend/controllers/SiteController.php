@@ -85,24 +85,18 @@ class SiteController extends Controller
 //        var_dump($works); die();
 	    $this->reviews = Reviews::find()->all();
 
-        if(isset(Yii::$app->user->identity))
-        {
-            $userHaveAccounts = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->all();
-        }
-        else
-        {
-            $userHaveAccounts = false;
-        }
-
-
-        if(!Yii::$app->user->isGuest && $userHaveAccounts)
+        if(!Yii::$app->user->isGuest)
         {
             $phone_account = Accounts::getRandomAccount();
-            $phone_works = Works::getRandomWorks($phone_account->id,6);
+            $phone_works = ($phone_account) ? Works::getRandomWorks($phone_account->id,6) : false;
             return $this->render('index',compact('phone_account','phone_works','userHaveAccounts'));
         }
 
+<<<<<<< HEAD
         return $this->render('index',['userHaveAccounts'=>$userHaveAccounts, 'reviews' => $this->reviews]);
+=======
+        return $this->render('index');
+>>>>>>> 27e1a9dc47898ecd1e8059ed36f2920cf4ab51ac
     }
 
     /**

@@ -5,7 +5,7 @@ namespace backend\modules\works\controllers;
 use common\models\Accounts;
 use Yii;
 use backend\modules\works\models\Works;
-use backend\modules\works\controllers\WorksSearch;
+use backend\modules\works\models\WorksSearch;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;

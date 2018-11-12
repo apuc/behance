@@ -1,10 +1,9 @@
 <?php
 
-namespace backend\modules\queue\controllers;
+namespace backend\modules\queue\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\queue\models\Queue;
 
 /**
  * QueueSearch represents the model behind the search form of `backend\modules\queue\models\Queue`.

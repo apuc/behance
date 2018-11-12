@@ -25,6 +25,7 @@ class BehanceService
     }
 
 
+
     public function getWorks()
     {
         $this->account->getWorks();
@@ -64,5 +65,6 @@ class BehanceService
     {
         return new self($account);
     }
+
 
 }

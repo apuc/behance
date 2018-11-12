@@ -11,6 +11,7 @@ use Yii;
 use backend\modules\accounts\models\Accounts;
 use backend\modules\accounts\models\AccountsSearch;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,10 +36,16 @@ class AccountsController extends Controller
     {
         $searchModel = new AccountsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $acc = Accounts::find()->all();
+        $usernames = ArrayHelper::map($acc,'username','username');
+        $display_names = ArrayHelper::map($acc,'display_name','display_name');
 	    
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'usernames' => $usernames,
+            'display_names' => $display_names,
         ]);
     }
     

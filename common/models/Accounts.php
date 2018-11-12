@@ -90,8 +90,15 @@ class Accounts extends \yii\db\ActiveRecord
     public static function getRandomAccount()
     {
         $accounts_ids = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->select('id')->all();
+
+        if(empty($accounts_ids))
+        {
+            return false;
+        }
+
         $id = rand(0,count($accounts_ids)-1);
-        return Accounts::find()->where(['id'=>$accounts_ids[$id]->id])->one();
+        $acc = Accounts::find()->where(['id'=>$accounts_ids[$id]->id])->one();
+        return $acc;
     }
 
 }

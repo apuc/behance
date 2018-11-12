@@ -20,6 +20,8 @@ class History extends \yii\db\ActiveRecord
 	const TRANSFER_TO_BALANCE = 'Зачисление на баланс';
 	const CREATE_BALANCE = 'Создание счета';
 	const DELETE_BALANCE = 'Удаление счета';
+	const DEBIT = 'Дебит';
+	const CREDIT = 'Кредит';
     /**
      * {@inheritdoc}
      */
@@ -74,4 +76,23 @@ class History extends \yii\db\ActiveRecord
 		$history->save();
 	}
 	
+	public function setDebit($user_id, $views, $likes, $desc) {
+    	$history = new History();
+    	$history->user_id = $user_id;
+    	$history->views = $views;
+    	$history->likes = $likes;
+    	$history->type = self::DEBIT;
+    	$history->description = $desc;
+    	$history->save();
+	}
+	
+	public function setCredit($user_id, $views, $likes, $desc) {
+		$history = new History();
+		$history->user_id = $user_id;
+		$history->views = $views;
+		$history->likes = $likes;
+		$history->type = self::CREDIT;
+		$history->description = $desc;
+		$history->save();
+	}
 }

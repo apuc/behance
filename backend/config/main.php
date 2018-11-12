@@ -36,6 +36,9 @@ return [
         'reviews' => [
 	        'class' => 'backend\modules\reviews\Reviews',
         ],
+        'history' => [
+	        'class' => 'backend\modules\history\History',
+        ]
 
     ],
     'components' => [

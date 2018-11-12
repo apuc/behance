@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel backend\modules\balance\controllers\BalanceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('balance', 'Balances');
+$this->title = "Баланс пользователей";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="balance-index">
@@ -16,37 +16,47 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('balance', 'Create Balance'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+<!--    <p>-->
+<!--        --><?="" //Html::a(Yii::t('balance', 'Начислить лайки и просмотры'), ['create'], ['class' => 'btn btn-success']) ?>
+<!--    </p>-->
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'accounts_id',
-            'views',
-            'likes',
-	        [
-		        'header'=> '<a href="'.Url::to(['history','slug' => 'all']).'">'.Yii::t('balance', 'History').'</a>',
-		        'format' => 'raw',
-		        'value' => function($model) {
-			        return Html::a(
-				        '<i class="fa fa-shopping-cart">'.Yii::t('balance', 'Look').'</i>',
-				        Url::to(['history', 'slug' => $model->accounts_id]),
-				        [
-					        'data-id' => $model->id,
-					        'action'=>Url::to(['cart/add']),
-					        'class'=>'btn btn-success gridview-add-to-cart',
-				        ]
-			        );
-		        }
-	        ],
+            //'id',
+            [
+                    'attribute'=>'user_id',
+                   'value'=>function($data){
+                       return $data->user['email'];
+                   },
+                   'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'user_id',
+                    'data' => $users,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
+            ],
+            [
+                'attribute'=>'views',
+                'filter'=>false,
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ],
+            [
+                'attribute'=>'likes',
+                'filter'=>false,
+            ],
+
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{update} {delete}'
+            ],
         ],
     ]); ?>
 </div>

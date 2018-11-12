@@ -14,8 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'accounts_id')->dropDownList($accounts, ['prompt' => 'Выберите пользователя...']) ?>
-
     <?= $form->field($model, 'views')->textInput() ?>
 
     <?= $form->field($model, 'likes')->textInput() ?>

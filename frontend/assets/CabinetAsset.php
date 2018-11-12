@@ -13,7 +13,7 @@ class CabinetAsset extends FrontAsset
 	public $css = [
         'css/style.css',
 		//'css/materialdesignicons.min.css',
-
+       'css/font-awesome.min.css'
 
 	];
 	public $js = [

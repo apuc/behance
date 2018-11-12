@@ -1,3 +1,12 @@
+<?php
+use common\models\ContactForm;
+
+$contact_count = ContactForm::find()->where(['status'=>0])->count();
+
+if($contact_count == 0)
+    $contact_count = '';
+
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -10,7 +19,7 @@
             <div class="pull-left info">
                 <p><?= Yii::$app->user->identity->username?></p>
 
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="/">Перейти на главную</a>
             </div>
         </div>
 
@@ -20,7 +29,6 @@
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
-
                     ['label' => 'Аккаунты', 'icon' => 'fas fa-user-circle', 'url' => ['/accounts/accounts']],
                     ['label' => 'Очередь', 'icon' => 'fas fa-list-ol', 'url' => ['/queue/queue']],
                     ['label' => 'Настройки', 'icon' => 'fas fa-cogs', 'url' => ['/settings/settings']],
@@ -28,7 +36,7 @@
                     ['label' => Yii::t('balance', 'Balance'), 'icon' => 'fas fa-shopping-basket', 'url' => ['/balance/balance']],
                     ['label' => 'Cases', 'icon' => 'fas fa-suitcase', 'url' => ['/cases/cases']],
                     ['label' => Yii::t('orders', 'Orders'), 'icon' => 'fas fa-shopping-cart', 'url' => ['/orders/orders']],
-                    ['label' => 'Заявки', 'icon' => 'fas fa-shopping-cart', 'url' => ['/orders/contact']],
+                    ['label' => 'Заявки', 'icon' => 'fas fa-clipboard-list', 'url' => ['/orders/contact'] ,'template'=>'<a href="{url}">{icon}<span>{label}</span><span class="pull-right-container"><small class="label pull-right bg-red">'.$contact_count.'</small></span></a>'],
                    // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                    // ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
 //                    [

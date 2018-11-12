@@ -6,6 +6,11 @@
 use frontend\assets\CabinetAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use common\models\Balance;
+
+
+
+$balance = Balance::find()->where(['user_id'=>Yii::$app->user->getId()])->one();
 
 CabinetAsset::register($this);
 ?>
@@ -121,8 +126,6 @@ CabinetAsset::register($this);
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                 <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
 
-
-          </span>
             </section>
             <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
                 <!--				<div class="mdc-menu-anchor">-->
@@ -147,6 +150,16 @@ CabinetAsset::register($this);
                 <!--						</ul>-->
                 <!--					</div>-->
                 <!--				</div>-->
+
+                <?php if(!empty($balance)): ?>
+                <div class="balance-block">
+                    <span class="mdc-toolbar__menu-icon">Лайки: <?=$balance->likes; ?></span>
+                </div>
+
+                <div class="balance-block">
+                    <span class="mdc-toolbar__menu-icon">Просмотры: <?=$balance->views; ?></span>
+                </div>
+                <?php  endif; ?>
 
                 <div class="mdc-menu-anchor mr-1">
                     <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="logout-menu" data-mdc-auto-init="MDCRipple">

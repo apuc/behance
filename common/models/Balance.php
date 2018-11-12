@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "balance".
  *
  * @property int $id
- * @property int $accounts_id
+ * @property int $user_id
  * @property int $views
  * @property int $likes
  */
@@ -28,7 +28,7 @@ class Balance extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['accounts_id', 'views', 'likes'], 'integer'],
+            [['user_id', 'views', 'likes'], 'integer'],
         ];
     }
 
@@ -39,9 +39,14 @@ class Balance extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('balance', 'ID'),
-            'accounts_id' => Yii::t('balance', 'Accounts ID'),
+            'user_id' => 'Пользователь',
             'views' => Yii::t('balance', 'Views'),
             'likes' => Yii::t('balance', 'Likes'),
         ];
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(),['id'=>'user_id']);
     }
 }

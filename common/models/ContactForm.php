@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "contact_form".
  *
  * @property int $id
+ * @property int $status
  * @property string $name
  * @property string $email
  * @property string $link
@@ -33,6 +34,7 @@ class ContactForm extends \yii\db\ActiveRecord
             [['name', 'email', 'link'], 'required'],
             [['name', 'email', 'link','message'], 'trim'],
             [['dt_add'], 'safe'],
+            [['status'], 'safe'],
             [['email'], 'email'],
             [['link'], 'url'],
         ];
@@ -41,6 +43,7 @@ class ContactForm extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         $this->dt_add = date('d-m-Y H:i:s');
+        $this->status = 0;
         return true;
     }
 
@@ -51,11 +54,12 @@ class ContactForm extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'status' => 'Статус',
+            'name' => 'Имя',
             'email' => 'Email',
-            'link' => 'Link',
-            'message' => 'Message',
-            'dt_add' => 'Dt Add',
+            'link' => 'Ссылка',
+            'message' => 'Сообщение',
+            'dt_add' => 'Дата отправки',
         ];
     }
 }

@@ -82,16 +82,6 @@ class SiteController extends Controller
 //        $works = $service->getWorks();
 //        var_dump($works); die();
 
-//        if(isset(Yii::$app->user->identity))
-//        {
-//            $userHaveAccounts = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->all();
-//        }
-//        else
-//        {
-//            $userHaveAccounts = false;
-//        }
-
-
         if(!Yii::$app->user->isGuest)
         {
             $phone_account = Accounts::getRandomAccount();

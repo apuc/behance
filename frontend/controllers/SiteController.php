@@ -94,7 +94,7 @@ class SiteController extends Controller
             return $this->render('index', compact('phone_account','phone_works','reviews'));
         }
         
-        return $this->render('index', ['reviews' => $this->reviews]);
+        return $this->render('index', ['reviews' => $this->reviews, 'phone_account' => '', 'phone_works' => '']);
     }
 
     /**

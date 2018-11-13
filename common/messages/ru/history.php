@@ -15,9 +15,11 @@ return [
 	'Save' => 'Сохранить',
 	'Update' => 'Обновить',
 	'Delete' => 'Удалить',
-	'Balance' => 'Баланс',
+	'Type' => 'Действие',
 	'Balances' => 'Баланс',
 	'History' => 'История',
 	'Look' => 'Посмотреть',
+	'Likes' => 'Лайки',
+	'Views' => 'Просмотры',
 	'Are you sure you want to delete this item?' => 'Вы серьезно хотите удалить эту запись?',
 ];

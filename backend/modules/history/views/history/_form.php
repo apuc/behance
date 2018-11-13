@@ -14,8 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'dt_add')->textInput() ?>
-
     <div class="form-group">
         <?= Html::submitButton(Yii::t('history', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

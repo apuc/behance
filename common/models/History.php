@@ -18,6 +18,7 @@ use Yii;
 class History extends \yii\db\ActiveRecord
 {
 	const TRANSFER_TO_BALANCE = 'Зачисление на баланс';
+	const TRANSFER_FROM_BALANCE = 'Снятие с баланса';
 	const CREATE_BALANCE = 'Создание счета';
 	const DELETE_BALANCE = 'Удаление счета';
     /**
@@ -73,5 +74,10 @@ class History extends \yii\db\ActiveRecord
 		$history->description = self::DELETE_BALANCE;
 		$history->save();
 	}
+
+	public function getUser()
+    {
+        return $this->hasOne(User::className(),['id'=>'user_id']);
+    }
 	
 }

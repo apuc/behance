@@ -3,7 +3,7 @@
 namespace backend\modules\history\controllers;
 
 use Yii;
-use backend\modules\history\models\History;
+use common\models\History;
 use backend\modules\history\models\HistorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

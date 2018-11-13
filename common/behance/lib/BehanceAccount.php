@@ -52,7 +52,8 @@ class BehanceAccount implements AccountInterface
         $this->works = [];
         $i = 1;
 
-        while ($i > 0) {
+        while ($i > 0)
+        {
             $url = "https://api.behance.net//v2/users/{$this->username}/projects?client_id={$this->token}&page={$i}";
             $res = $this->behanceApiRequest($url);
 

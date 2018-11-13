@@ -66,7 +66,7 @@ class Accounts extends \yii\db\ActiveRecord
 
         if($account)
         {
-            if($this->find()->where(['behance_id' => $account->behanceId])->one())
+            if($this->find()->where(['behance_id' => $account->behanceId])->limit(1)->one())
             {
                 return 'Аккаунт уже добавлен!';
             }
@@ -97,8 +97,7 @@ class Accounts extends \yii\db\ActiveRecord
         }
 
         $id = rand(0,count($accounts_ids)-1);
-        $acc = Accounts::find()->where(['id'=>$accounts_ids[$id]->id])->one();
-        return $acc;
+        return Accounts::find()->where(['id'=>$accounts_ids[$id]->id])->one();
     }
 
 }

@@ -60,9 +60,9 @@ CabinetAsset::register($this);
 
 
                     <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/balance') ?>">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history') ?>">
                             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pie_chart_outlined</i>
-                            <span>Баланс</span>
+                            <span>История пополнений</span>
                         </a>
                     </div>
 

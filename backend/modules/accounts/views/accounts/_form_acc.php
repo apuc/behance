@@ -11,7 +11,9 @@ $this->title = Yii::t('accounts', 'Parse Account');
 
 <div class="accounts-form">
 
-    <?php $form = ActiveForm::begin(['action' => ['/accounts/accounts/save-acc'], 'method' => 'post']); ?>
+    <?php $form = ActiveForm::begin([ 'method' => 'post']); ?>
+
+    <?= $form->field($model, 'user_id')->dropDownList($users) ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 

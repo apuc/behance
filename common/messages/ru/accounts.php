@@ -7,6 +7,7 @@
  */
 return [
     'Image'=>'Картинка',
+    'Accounts'=>'Аккаунты',
     'Username'=>'Имя пользователя',
     'Display Name'=>'Имя аккакунта',
 	'Title' => 'Заголовок',
@@ -18,5 +19,6 @@ return [
 	'Save' => 'Сохранить',
 	'Update' => 'Обновить',
 	'Delete' => 'Удалить',
+    'User'=>'Пользователь',
 	'Are you sure you want to delete this item?' => 'Вы серьезно хотите удалить эту запись?',
 ];

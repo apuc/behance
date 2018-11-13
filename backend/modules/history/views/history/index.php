@@ -15,25 +15,60 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('history', 'Create History'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
+//
+//            'id',
 
-            'id',
-            'type',
-            'description:ntext',
-            'user_id',
+            [
+               'attribute'=>'likes',
+               'filter'=>false
+            ],
+            [
+                'attribute'=>'views',
+                'filter'=>false
+            ],
+            [
+               'attribute'=>'type',
+                'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'type',
+                    'data' => $statuses,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
+            ],
+            [
+                'attribute'=>'description',
+                'filter'=>false
+            ],
+            [
+               'attribute'=>'user_id',
+               'value'=>function($data){
+                  return $data->user['email'];
+               },
+                'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'user_id',
+                    'data' => $users,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
+            ],
             'dt_add',
             //'likes',
             //'views',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

@@ -13,19 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="accounts-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a(Yii::t('accounts', 'Create Accounts'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
 	<p>
 		<?= Html::a(Yii::t('accounts', 'Parse Account'), ['parse-account'], ['class' => 'btn btn-success']) ?>
-	</p>
+        <?= Html::a(Yii::t('accounts', 'Parse Works'), ['parse-works'], ['class' => 'btn btn-success']) ?>
+    </p>
 
-	<p>
-		<?= Html::a(Yii::t('accounts', 'Parse Works'), ['parse-works'], ['class' => 'btn btn-success']) ?>
-	</p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -55,11 +48,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
             ],
             [
-                'attribute'=>'username',
+                'attribute'=>'user_id',
+                'value'=>function($data){
+                    return $data->user['email'];
+                },
                 'filter'    => kartik\select2\Select2::widget([
                     'model' => $searchModel,
-                    'attribute' => 'username',
-                    'data' => $usernames,
+                    'attribute' => 'user_id',
+                    'data' => $users,
                     'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
                     'pluginOptions' => [
                         'allowClear' => true
@@ -75,8 +71,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
 
-            //'title',
-            //'behance_id',
+            [
+               'attribute'=>'behance_id',
+               'filter'=>false
+            ],
 
 //            [
 //                'format'=>'raw',

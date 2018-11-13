@@ -12,6 +12,7 @@ namespace common\behance\traits;
 
 use common\behance\Config;
 use common\behance\lib\UserAgentArray;
+use common\behance\lib\BehanceApiException;
 
 
 trait CommonTrait
@@ -23,7 +24,19 @@ trait CommonTrait
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $res = curl_exec($curl);
         curl_close($curl);
-        return json_decode($res);
+        $res = json_decode($res);
+
+        if($res->http_code == '404')
+        {
+            throw new BehanceApiException('User not found!',404);
+        }
+
+        if($res->http_code == '403')
+        {
+            throw new BehanceApiException('Bad token!',403);
+        }
+
+        return $res;
     }
 
 

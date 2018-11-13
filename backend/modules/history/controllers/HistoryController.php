@@ -2,9 +2,11 @@
 
 namespace backend\modules\history\controllers;
 
+use common\models\User;
 use Yii;
 use common\models\History;
 use backend\modules\history\models\HistorySearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -17,17 +19,7 @@ class HistoryController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+
 
     /**
      * Lists all History models.
@@ -38,9 +30,15 @@ class HistoryController extends Controller
         $searchModel = new HistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $statuses = [History::TRANSFER_TO_BALANCE,History::TRANSFER_FROM_BALANCE];
+        $users = User::find()->all();
+        $users = ArrayHelper::map($users,'id','email');
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'statuses' => $statuses,
+            'users' => $users,
         ]);
     }
 

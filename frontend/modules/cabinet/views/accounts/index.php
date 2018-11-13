@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
               'format'=>'raw',
               'value'=>function($data){
-                return Html::a('Обновить работы','/cabinet/accounts/parse?id='.$data->id.'&url='.$data->url,['class'=>'btn btn-primary']);
+                return Html::a('Обновить работы','/cabinet/accounts/parse?url='.$data->url,['class'=>'btn btn-primary']);
               }
             ],
 

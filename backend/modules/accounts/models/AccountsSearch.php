@@ -5,6 +5,7 @@ namespace backend\modules\accounts\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
+
 /**
  * AccountsSearch represents the model behind the search form of `backend\modules\accounts\models\Accounts`.
  */
@@ -17,7 +18,7 @@ class AccountsSearch extends Accounts
     {
         return [
             [['id', 'behance_id'], 'integer'],
-            [['url', 'title', 'display_name', 'username', 'image'], 'safe'],
+            [['url', 'title', 'display_name', 'username', 'image','user_id'], 'safe'],
         ];
     }
 
@@ -58,14 +59,15 @@ class AccountsSearch extends Accounts
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'behance_id' => $this->behance_id,
+            'user_id' => $this->user_id,
         ]);
 
         $query->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'display_name', $this->display_name])
             ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'image', $this->image])
+            ->andFilterWhere(['like', 'user_id', $this->user_id]);
 
         return $dataProvider;
     }

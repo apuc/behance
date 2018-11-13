@@ -9,10 +9,12 @@
 namespace common\behance\lib;
 
 
+
 use common\behance\traits\CommonTrait;
 use common\behance\Config;
 
 use common\behance\interfaces\AccountInterface;
+use yii\db\Exception;
 
 
 class BehanceAccount implements AccountInterface
@@ -131,13 +133,6 @@ class BehanceAccount implements AccountInterface
         $apiString = "https://api.behance.net/v2/users/{$username}?client_id={$this->token}";
 
         $account = $this->behanceApiRequest($apiString);
-
-
-        if($account->http_code != '200')
-        {
-
-           return false;
-        }
 
         $this->behanceId = $account->user->id;
         $this->displayName = $account->user->display_name;

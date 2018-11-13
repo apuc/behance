@@ -11,12 +11,16 @@ $this->title = Yii::t('accounts', 'Parse Works');
 
 <div class="accounts-form">
 
-    <?php $form = ActiveForm::begin(['action' => ['/accounts/accounts/save-works'], 'method' => 'post']); ?>
+    <?php $form = ActiveForm::begin(['method' => 'post']); ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('accounts', 'Save'), ['class' => 'btn btn-success']) ?>
+        <label for="">Выберите аккаунт</label>
+        <?= Html::dropDownList('account','',$accounts,['class'=>'form-control']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= Html::submitButton(Yii::t('accounts', 'Parse'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

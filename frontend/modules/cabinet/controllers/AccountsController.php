@@ -13,6 +13,7 @@ use yii\filters\VerbFilter;
 use common\behance\BehanceService;
 use common\behance\lib\BehanceAccount;
 use yii\filters\AccessControl;
+use common\behance\lib\BehanceAccountException;
 
 /**
  * AccountsController implements the CRUD actions for Accounts model.
@@ -46,19 +47,23 @@ class AccountsController extends Controller
 
 
 
-    public function actionParse($id,$url)
+    public function actionParse($url)
     {
-
-        $res = Works::updateWorks($url);
-
-        if(is_string($res))
+        try
         {
-            Yii::$app->session->setFlash('error',$res);
+            $worksModel = new Works();
+            $service =BehanceService::create(new BehanceAccount());
+            $service->getAccount($url);
+            $res = $worksModel->parseWorks($service,true);
+
+            Yii::$app->session->setFlash('success',"Добавленно работ: {$res}");
             return $this->redirect('/cabinet/accounts');
         }
-
-        Yii::$app->session->setFlash('success',"Добавленно работ: {$res}");
-        return $this->redirect('/cabinet/accounts');
+        catch (\Exception $e)
+        {
+            Yii::$app->session->setFlash('error',$e->getMessage());
+            return $this->redirect('/cabinet/accounts');
+        }
     }
 
 
@@ -90,25 +95,24 @@ class AccountsController extends Controller
 
             $url = Yii::$app->request->post()['Accounts']['url'];
 
-            $res = $accountModel->parseAccount($url);
-
-            if(is_string($res))
+            try
             {
-                Yii::$app->session->setFlash('error',$res);
+                $service = BehanceService::create(new BehanceAccount());
+                $service->getAccount($url);
+                $accountModel->parseAccount($service);
+
+                $worksModel = new Works();
+                $worksModel->parseWorks($service);
+
+                Yii::$app->session->setFlash('success','Аккаунт получен! Работы добавленны!');
+                return $this->redirect('/cabinet/accounts');
+            }
+            catch (\Exception $e)
+            {
+                Yii::$app->session->setFlash('error',$e->getMessage());
                 return $this->redirect('/cabinet/accounts');
             }
 
-            $worksModel = new Works();
-            $res = $worksModel->parseWorks($url);
-
-            if(is_string($res))
-            {
-                Yii::$app->session->setFlash('error',$res);
-                return $this->redirect('/cabinet/accounts');
-            }
-
-            Yii::$app->session->setFlash('success','Данные сохранены!');
-            return $this->redirect('/cabinet/accounts');
         }
 
         return $this->render('create', [

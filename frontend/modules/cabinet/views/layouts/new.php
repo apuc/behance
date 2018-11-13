@@ -225,9 +225,7 @@ CabinetAsset::register($this);
 	</div>
 </footer>
 
-<!--        <script>-->
-<!--            document.querySelectorAll('.close');-->
-<!--        </script>-->
+
 
 <?php $this->endBody() ?>
 </body>

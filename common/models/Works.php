@@ -59,22 +59,33 @@ class Works extends \yii\db\ActiveRecord
     }
 
 
-    public function parseWorks($url)
+    public function parseWorks(BehanceService $service,$isUpdate = false)
     {
-        $service = BehanceService::create(new BehanceAccount());
-        $account =$service->getAccount($url);
-
-        if($account)
-        {
             $works = $service->getWorks();
 
             if($works)
             {
-                $id = Accounts::find()->where(['behance_id'=>$account->behanceId])->all();
+                $id = Accounts::find()->where(['behance_id'=>$service->account->behanceId])->all();
                 $id = $id[0]->id;
+
+                $works_aded = 0;
+                $works_in_db = array();
+
+                if($isUpdate)
+                {
+                    $works_in_db = Works::find()->where(['account_id'=>$id])->select('behance_id')->all();
+                    $works_in_db = ArrayHelper::getColumn($works_in_db,'behance_id');
+                }
+
 
                 foreach ($works as  $val)
                 {
+
+                    if(in_array($val->behanceId,$works_in_db))
+                    {
+                        continue;
+                    }
+
                     $work_bd = new Works();
                     $work_bd->behance_id = (string)$val->behanceId;
                     $work_bd->image = (string)$val->image;
@@ -84,13 +95,14 @@ class Works extends \yii\db\ActiveRecord
                     $work_bd->start_likes = (string)$val->startViews;
                     $work_bd->start_views = (string)$val->startLikes;
                     $work_bd->save();
+                    $works_aded++;
+
                 }
 
-                return true;
+                return $works_aded;
             }
 
-            return 'Не удалось получить работы!';
-        }
+            throw new \Exception("Не удалось получить работы!");
 
     }
 

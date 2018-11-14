@@ -45,6 +45,41 @@ class Balance extends \yii\db\ActiveRecord
         ];
     }
 
+
+    /**
+     * @param $likes
+     * @param $views
+     * @return boolean
+     */
+    public function addBalance($likes,$views)
+    {
+
+       $this->likes += (integer)$likes;
+       $this->views += (integer)$views;
+       $this->save();
+
+       return true;
+    }
+
+
+
+    /**
+     * @param $likes
+     * @param $views
+     * @return bool
+     */
+    public function removeFromBalance($likes,$views)
+    {
+
+        $this->likes -= (integer)$likes;
+        $this->views -= (integer)$views;
+        $this->save();
+
+        return true;
+    }
+
+
+
     public function getUser()
     {
         return $this->hasOne(User::className(),['id'=>'user_id']);

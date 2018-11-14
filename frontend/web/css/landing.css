@@ -90,7 +90,8 @@
 .btn-pink {
     background-color: #e32c74; }
 .btn-pink:hover {
-    background-color: #cb1b60; }
+    background-color: #cb1b60;
+color:white;}
 .btn-number {
     font-size: 1.2em; }
 .btn .btn-thumb {
@@ -956,8 +957,11 @@ img {
     font-weight: 700;
     text-decoration: none;
     letter-spacing: 0.68px; }
+
 .header__nav-item:hover {
-    color: #e32c74; }
+    color: #e32c74 !important; }
+.header__nav-item:focus {
+    color:white; }
 .header__phone {
     position: relative;
     display: -webkit-box;

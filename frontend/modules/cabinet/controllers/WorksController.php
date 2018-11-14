@@ -2,6 +2,9 @@
 
 namespace frontend\modules\cabinet\controllers;
 
+use common\models\History;
+use common\models\Queue;
+use frontend\modules\cabinet\models\Balance;
 use Yii;
 use frontend\modules\cabinet\models\Works;
 use frontend\modules\cabinet\models\WorksSearch;
@@ -16,8 +19,6 @@ use yii\helpers\ArrayHelper;
  */
 class WorksController extends Controller
 {
-
-
 
     /**
      * Lists all Works models.
@@ -45,6 +46,46 @@ class WorksController extends Controller
             'account_names'=>$account_names
         ]);
     }
+
+
+
+    public function actionAssignBalance()
+    {
+        $post = Yii::$app->request->post();
+        $post['account_views'] = 0;
+
+        if(empty($post['likes_work']) && empty($post['views_work']))
+        {
+            return "Введите количество лайков или просмотров!";
+        }
+
+        $user_id = Yii::$app->user->getId();
+        $user_balance = Balance::findOne(['user_id'=>$user_id]);
+
+        if($post['likes_work'] > $user_balance->likes)
+        {
+            return "Не достаточно лайков на балансе!";
+        }
+
+        if($post['views_work'] > $user_balance->views)
+        {
+            return "Не достаточно просмотров на балансе!";
+        }
+
+        $queue = new Queue();
+
+        if($queue->load(['Queue'=>$post]) && $queue->save())
+        {
+           $user_balance->removeFromBalance($post['likes_work'],$post['views_work']);
+           $history = new History();
+           $history->setHistory($user_id,History::TRANSFER_FROM_BALANCE,$post['likes_work'],$post['views_work'],"Лайки и просмотры назначены на работу");
+
+           return true;
+        }
+
+    }
+
+
 
     /**
      * Displays a single Works model.

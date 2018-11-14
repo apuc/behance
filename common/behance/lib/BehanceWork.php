@@ -24,7 +24,10 @@ class BehanceWork implements WorkInterface
     public $startViews;
 
 
-
+    /**
+     * BehanceWork constructor.
+     * @param $data
+     */
     public function __construct($data)
     {
         $this->id = (isset($data['id'])) ? $data['id'] : null;
@@ -38,14 +41,18 @@ class BehanceWork implements WorkInterface
     }
 
 
-
+    /**
+     * @param int $count
+     */
     public function like($count = 1)
     {
         $this->_like_($this->behanceId,$count);
     }
 
 
-
+    /**
+     * @param int $count
+     */
     public function view($count = 1)
     {
 

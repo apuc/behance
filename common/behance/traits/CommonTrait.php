@@ -17,6 +17,11 @@ use common\behance\lib\BehanceApiException;
 
 trait CommonTrait
 {
+    /**
+     * @param $url
+     * @return mixed
+     * @throws BehanceApiException
+     */
     public function behanceApiRequest($url)
     {
         $curl = curl_init();
@@ -40,14 +45,18 @@ trait CommonTrait
     }
 
 
-
+    /**
+     * @return mixed
+     */
     public function getRandomProxy()
     {
         return Config::get()['proxyDriver']::getRandom();
     }
 
 
-
+    /**
+     * @return mixed
+     */
     public function getRandomUserAgent()
     {
 
@@ -55,7 +64,11 @@ trait CommonTrait
     }
 
 
-
+    /**
+     * @param $behanceId
+     * @param int $likesCount
+     * @return int
+     */
     public function _like_($behanceId,$likesCount = 1)
     {
         $successfulLikes = 0;
@@ -92,7 +105,11 @@ trait CommonTrait
     }
 
 
-
+    /**
+     * @param $url
+     * @param int $viewsCount
+     * @return int
+     */
     public function _view_($url,$viewsCount = 1)
     {
 

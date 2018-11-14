@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'password_repeat')->passwordInput() ?>
 
                     <div class="form-group">
-                        <?= Html::submitButton('Регистрация', ['class' => 'btn btn-primary', 'name' => 'signup-button',
+                        <?= Html::submitButton('Регистрация', ['class' => 'btn btn-pink', 'name' => 'signup-button',
                             'style'=>'margin: 0 auto']) ?>
                     </div>
 

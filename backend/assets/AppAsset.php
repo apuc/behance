@@ -15,9 +15,10 @@ class AppAsset extends AssetBundle
         'css/site.css',
         'css/AdminLTE.min.css',
         'css/font-awesome.min.css',
-        '/fonts/fontawesome-webfont.ttf'
+        'fonts/fontawesome-webfont.ttf'
     ];
     public $js = [
+        'js/main.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

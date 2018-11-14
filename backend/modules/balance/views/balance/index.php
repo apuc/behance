@@ -16,9 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-<!--    <p>-->
-<!--        --><?="" //Html::a(Yii::t('balance', 'Начислить лайки и просмотры'), ['create'], ['class' => 'btn btn-success']) ?>
-<!--    </p>-->
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -51,12 +49,52 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'likes',
                 'filter'=>false,
             ],
-
+            [
+                    'format'=>'raw',
+                    'value'=>function($data){
+                       return "<button type='button' class='btn btn-primary btn-balance-grid' 
+                               data-toggle='modal' data-id='{$data->user_id}'
+                               data-target='#exampleModal'>Пополнить</button>";
+                    }
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template'=>'{update} {delete}'
+                'template'=>'{delete}'
             ],
         ],
     ]); ?>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Пополнить баланс пользоваетеля</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="balance-add-form">
+                        <div class="form-group">
+                            <labe>Добавить лайков:</labe>
+                            <input type="number" name="likes" class="form-control" value="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <labe>Добавить просмотров:</labe>
+                            <input type="number" name="views" class="form-control" value="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <span style="color: red" id="balance-form-error"></span>
+                            <input type="hidden" name="user_id" id="user-id-input">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" id="balance-form-send">Пополнить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+

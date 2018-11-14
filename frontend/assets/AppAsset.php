@@ -22,11 +22,10 @@ class AppAsset extends AssetBundle
         'js/slick.min.js',
         'js/wow.min.js',
         'js/script.js',
-        'https://unpkg.com/sweetalert/dist/sweetalert.min.js'
+        'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'dmstr\web\AdminLteAsset',
     ];
 }

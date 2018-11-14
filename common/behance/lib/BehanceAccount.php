@@ -30,14 +30,18 @@ class BehanceAccount implements AccountInterface
     private $token;
 
 
-
+    /**
+     * BehanceAccount constructor.
+     */
     public function __construct()
     {
         $this->token = Config::get()['apiKey'];
     }
 
 
-
+    /**
+     * @param $works
+     */
     public function importWorks($works)
     {
         foreach ($works as $work)
@@ -48,7 +52,9 @@ class BehanceAccount implements AccountInterface
     }
 
 
-
+    /**
+     * @throws BehanceApiException
+     */
     public function getWorks()
     {
         $this->works = [];
@@ -71,7 +77,9 @@ class BehanceAccount implements AccountInterface
     }
 
 
-
+    /**
+     * @param $work
+     */
     public function addWork($work)
     {
         $data = array();
@@ -90,7 +98,9 @@ class BehanceAccount implements AccountInterface
     }
 
 
-
+    /**
+     * @param $data
+     */
     public function likeWork($data)
     {
         if (count($data) > 1) {
@@ -103,7 +113,9 @@ class BehanceAccount implements AccountInterface
     }
 
 
-
+    /**
+     * @param $data
+     */
     public function viewWork($data)
     {
         if (count($data) > 1) {
@@ -116,14 +128,20 @@ class BehanceAccount implements AccountInterface
     }
 
 
-
+    /**
+     * @param int $count
+     */
     public function view($count = 1)
     {
         $this->_view_($count, $this->url);
     }
 
 
-
+    /**
+     * @param $url
+     * @return bool
+     * @throws BehanceApiException
+     */
     public function getAccountFromUrl($url)
     {
         $explodedUrl = explode("/", $url);

@@ -153,11 +153,11 @@ CabinetAsset::register($this);
 
                 <?php if(!empty($balance)): ?>
                 <div class="balance-block">
-                    <span class="mdc-toolbar__menu-icon">Лайки: <?=$balance->likes; ?></span>
+                    <span class="mdc-toolbar__menu-icon" id="balance_likes">Лайки: <?=$balance->likes; ?></span>
                 </div>
 
                 <div class="balance-block">
-                    <span class="mdc-toolbar__menu-icon">Просмотры: <?=$balance->views; ?></span>
+                    <span class="mdc-toolbar__menu-icon" id="balance_views">Просмотры: <?=$balance->views; ?></span>
                 </div>
                 <?php  endif; ?>
 

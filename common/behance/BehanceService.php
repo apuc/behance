@@ -8,14 +8,21 @@ class BehanceService
 {
     public $account;
 
+
+    /**
+     * BehanceService constructor.
+     * @param BehanceAccount $account
+     */
     public function __construct(BehanceAccount $account)
     {
         $this->account = $account;
-
     }
 
 
-
+    /**
+     * @param $workId
+     * @return $this
+     */
     public function standardScenario($workId)
     {
        // $this->account->view();
@@ -25,7 +32,11 @@ class BehanceService
     }
 
 
-
+    /**
+     * returns works from account
+     *
+     * @return array
+     */
     public function getWorks()
     {
         $this->account->getWorks();
@@ -33,7 +44,10 @@ class BehanceService
     }
 
 
-
+    /**
+     * @param $url
+     * @return bool|BehanceAccount
+     */
     public function getAccount($url)
     {
         if($this->account->getAccountFromUrl($url))
@@ -41,6 +55,7 @@ class BehanceService
 
            return false;
     }
+
     /**
      * @param array(['id'=>'behanceId','likes'=>likesCount],[...])
      */
@@ -60,7 +75,10 @@ class BehanceService
     }
 
 
-
+    /**
+     * @param BehanceAccount $account
+     * @return BehanceService
+     */
     public static function create(BehanceAccount $account)
     {
         return new self($account);

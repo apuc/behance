@@ -25,7 +25,7 @@ use common\behance\BehanceService;
  */
 class SiteController extends Controller
 {
-	public $reviews;
+
     /**
      * {@inheritdoc}
      */
@@ -80,21 +80,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-//        $service = BehanceService::create(new BehanceAccount());
-//        $account =$service->getAccount("https://www.behance.net/k0tya_ka83bf");
-//        $works = $service->getWorks();
-//        var_dump($works); die();
-	    $this->reviews = Reviews::find()->all();
+//      $service = BehanceService::create(new BehanceAccount());
+//      $account =$service->getAccount("https://www.behance.net/k0tya_ka83bf");
+//      $works = $service->get
+//      var_dump($works); die();
+	    $reviews = Reviews::find()->all();
 	    
         if(!Yii::$app->user->isGuest)
         {
             $phone_account = Accounts::getRandomAccount();
-            $reviews = $this->reviews;
             $phone_works = ($phone_account) ? Works::getRandomWorks($phone_account->id,6) : false;
             return $this->render('index', compact('phone_account','phone_works','reviews'));
         }
         
-        return $this->render('index', ['reviews' => $this->reviews, 'phone_account' => '', 'phone_works' => '']);
+        return $this->render('index', ['reviews' => $reviews]);
     }
 
     /**
@@ -104,20 +103,23 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest)
+        {
             return $this->goHome();
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goHome();
-        } else {
-            $model->password = '';
 
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post()) && $model->login())
+        {
+            return $this->goHome();
         }
+
+        $model->password = '';
+
+        return $this->render('login', [
+                'model' => $model,
+        ]);
     }
 
     /**
@@ -131,6 +133,7 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
 
 
     public function actionContact()
@@ -161,8 +164,11 @@ class SiteController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
+
+        if ($model->load(Yii::$app->request->post()))
+        {
+            if ($user = $model->signup())
+            {
 
                 $auth = Yii::$app->authManager;
                 $authorRole = $auth->getRole('user');
@@ -174,7 +180,8 @@ class SiteController extends Controller
                 $balance->likes = 0;
                 $balance->save();
 
-                if (Yii::$app->getUser()->login($user)) {
+                if (Yii::$app->getUser()->login($user))
+                {
                     return $this->goHome();
                 }
             }
@@ -186,15 +193,21 @@ class SiteController extends Controller
     }
 
 
+
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        {
+            if ($model->sendEmail())
+            {
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
 
                 return $this->goHome();
-            } else {
+            }
+            else
+            {
                 Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
             }
         }
@@ -208,13 +221,17 @@ class SiteController extends Controller
 
     public function actionResetPassword($token)
     {
-        try {
+        try
+        {
             $model = new ResetPasswordForm($token);
-        } catch (InvalidArgumentException $e) {
+        }
+        catch (InvalidArgumentException $e)
+        {
             throw new BadRequestHttpException($e->getMessage());
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword())
+        {
             Yii::$app->session->setFlash('success', 'New password saved.');
 
             return $this->goHome();

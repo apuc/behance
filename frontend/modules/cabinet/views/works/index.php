@@ -18,11 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="works-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-<!--    	<p>-->
-<!--    		--><?php //echo Html::a(Yii::t('frontend', 'Create Works'), ['create'], ['class' => 'btn btn-success']) ?>
-<!--    	</p>-->
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -75,14 +71,54 @@ $this->params['breadcrumbs'][] = $this->title;
                   return Html::a('Ссылка',$data->url,['target'=>'_blank']);
                 }
             ],
-            'start_likes',
-            'start_views',
-
+            [
+                'format'=>'raw',
+                'value'=>function($data){
+                    return "<button type='button' class='btn btn-pink btn-works-grid' 
+                               data-toggle='modal' data-id='{$data->id}'
+                               data-target='#exampleModal'>Добавить в лайкер</button>";
+                }
+            ],
 
 
             ['class' => 'yii\grid\ActionColumn',
                 'template'=>'{delete}'
             ],
         ],
-    ]); ?>
+    ]);
+
+
+    ?>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Назначить лайки и просмотры работе</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="works-grid-form">
+                        <div class="form-group">
+                            <labe>Добавить лайков:</labe>
+                            <input type="number" name="likes_work" class="form-control" value="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <labe>Добавить просмотров:</labe>
+                            <input type="number" name="views_work" id="form-likes" class="form-control" value="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <span style="color: red" id="works-form-error"></span>
+                            <input type="hidden" name="work_id" id="work-id-input" id="form-views">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary" id="works-form-send">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+

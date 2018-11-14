@@ -60,22 +60,32 @@ class History extends \yii\db\ActiveRecord
         ];
     }
 	
-	public function beforeSave( $insert ) {
-		if ( parent::beforeSave( $insert ) ) {
-			$date = date("Y-m-d H:i:s");
-			$this->dt_add = $date;
-			return true;
-		}
-		return false;
-	}
+
+
+    /**
+     * @param $user_id
+     * @param $type
+     * @param $likes
+     * @param $views
+     * @param $desc
+     */
+	public function setHistory($user_id,$type,$likes,$views,$desc)
+    {
+       $this->user_id = $user_id;
+       $this->likes = $likes;
+       $this->views = $views;
+       $this->description = $desc;
+       $this->type = $type;
+       $this->dt_add = date("Y-m-d H:i:s");
+       $this->save();
+    }
 	
-	public function delBalance($accounts_id){
-		$history = new History();
-		$history->accounts_id = $accounts_id;
-		$history->name = self::DELETE_BALANCE;
-		$history->description = self::DELETE_BALANCE;
-		$history->save();
-	}
+
+    public function getTypes()
+    {
+
+    }
+
 
 	public function getUser()
     {

@@ -44,12 +44,36 @@ class BalanceController extends Controller
     }
 
 
+
+    public function actionAddBalance()
+    {
+       $post = Yii::$app->request->post();
+       $balanceModel = Balance::findOne(['user_id'=>$post['user_id']]);
+
+        if(empty($post['likes']) && empty($post['views']))
+        {
+            return "Укажите количество лайков или просмотров!";
+        }
+
+        $balanceModel->addBalance($post['likes'],$post['views']);
+
+        $historyModel = new History();
+
+        $historyModel->setHistory($post['user_id'],History::TRANSFER_TO_BALANCE,$post['likes'],$post['views'],"Счет пополнен");
+
+        Yii::$app->session->setFlash('success','Баланс пополнен!');
+        return true;
+    }
+
+
+
     public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
+
 
 
     public function actionCreate()
@@ -64,6 +88,7 @@ class BalanceController extends Controller
             'model' => $model,
         ]);
     }
+
 
 
     public function actionUpdate($id)

@@ -68,7 +68,10 @@ $this->params['breadcrumbs'][] = $this->title;
             //'likes',
             //'views',
 
-            //['class' => 'yii\grid\ActionColumn'],
+            [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template'=>'{delete}'
+            ],
         ],
     ]); ?>
 </div>

@@ -29,7 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'views',
             'likes',
             'name',
-            'img:ntext',
+//            'img:ntext',
+	        [
+		        'attribute'=>'img',
+		        'label'=>'Картинка тарифа',
+		        'format'=>'raw',
+		        'value' => function ($model) {
+			        return '<img src="'.$model->img.'">';},
+	        ],
             'status',
             //'price',
             //'term',

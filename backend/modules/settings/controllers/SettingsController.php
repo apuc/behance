@@ -5,7 +5,8 @@ namespace backend\modules\settings\controllers;
 use Yii;
 use backend\modules\settings\models\Settings;
 use backend\modules\settings\models\SettingsSearch;
-use yii\filters\AccessControl;
+use common\models\Proxy;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -29,10 +30,34 @@ class SettingsController extends Controller
         $searchModel = new SettingsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $names = Settings::find()->all();
+        $names = ArrayHelper::map($names,'key','key');
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'names' => $names,
         ]);
+    }
+
+
+
+    public function actionFillProxy()
+    {
+        $proxy = file($_FILES['ipfile']['tmp_name']);
+
+        $res = array();
+        foreach ($proxy as $ip)
+        {
+            $res[] = [$ip];
+        }
+
+        $model = new Proxy();
+        $model->Fill($res);
+
+        Yii::$app->session->setFlash("success","Адресса proxy добавленны!");
+        return $this->redirect(['index']);
+
     }
 
     /**
@@ -57,12 +82,15 @@ class SettingsController extends Controller
     {
         $model = new Settings();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+            Yii::$app->session->setFlash("success",'Настройка добавлена');
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'create'=>true
         ]);
     }
 
@@ -77,8 +105,10 @@ class SettingsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+            Yii::$app->session->setFlash("success",'Настройка изменена');
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

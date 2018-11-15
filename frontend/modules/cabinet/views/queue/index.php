@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\modules\cabinet\models\QueueSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Queues';
+$this->title = 'Работы в очереди на лайк';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="queue-index">

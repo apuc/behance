@@ -5,12 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\modules\settings\models\Settings */
 
-$this->title = Yii::t('settings', 'Update Settings: ' . $model->id, [
-    'nameAttribute' => '' . $model->id,
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('settings', 'Settings'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('settings', 'Update');
+$this->title = 'Изменить настройку '.$model->key;
+
 ?>
 <div class="settings-update">
 

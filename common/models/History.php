@@ -19,10 +19,7 @@ class History extends \yii\db\ActiveRecord
 {
 	const TRANSFER_TO_BALANCE = 'Зачисление на баланс';
 	const TRANSFER_FROM_BALANCE = 'Снятие с баланса';
-	const CREATE_BALANCE = 'Создание счета';
-	const DELETE_BALANCE = 'Удаление счета';
-	const DEBIT = 'Дебит';
-	const CREDIT = 'Кредит';
+
     /**
      * {@inheritdoc}
      */
@@ -59,8 +56,16 @@ class History extends \yii\db\ActiveRecord
             'views' => Yii::t('history', 'Views'),
         ];
     }
-	
 
+
+    public function beforeSave($insert)
+    {
+
+        (empty($this->likes)) ? $this->likes = 0 : "";
+        (empty($this->views)) ? $this->views = 0 : "";
+
+        return true;
+    }
 
     /**
      * @param $user_id
@@ -81,34 +86,11 @@ class History extends \yii\db\ActiveRecord
     }
 	
 
-    public function getTypes()
-    {
-
-    }
-
 
 	public function getUser()
     {
         return $this->hasOne(User::className(),['id'=>'user_id']);
     }
 	
-	public function setDebit($user_id, $views, $likes, $desc) {
-    	$history = new History();
-    	$history->user_id = $user_id;
-    	$history->views = $views;
-    	$history->likes = $likes;
-    	$history->type = self::DEBIT;
-    	$history->description = $desc;
-    	$history->save();
-	}
-	
-	public function setCredit($user_id, $views, $likes, $desc) {
-		$history = new History();
-		$history->user_id = $user_id;
-		$history->views = $views;
-		$history->likes = $likes;
-		$history->type = self::CREDIT;
-		$history->description = $desc;
-		$history->save();
-	}
+
 }

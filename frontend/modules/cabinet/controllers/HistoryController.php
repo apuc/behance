@@ -18,12 +18,10 @@ class HistoryController extends Controller
     {
         $searchModel = new HistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $statuses = [History::TRANSFER_FROM_BALANCE,History::TRANSFER_TO_BALANCE];
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'statuses' => $statuses,
         ]);
     }
 

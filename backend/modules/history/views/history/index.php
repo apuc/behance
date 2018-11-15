@@ -35,15 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                'attribute'=>'type',
-                'filter'    => kartik\select2\Select2::widget([
-                    'model' => $searchModel,
-                    'attribute' => 'type',
-                    'data' => $statuses,
-                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]),
+                'filter'    => false
             ],
             [
                 'attribute'=>'description',

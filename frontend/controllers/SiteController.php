@@ -4,6 +4,9 @@ namespace frontend\controllers;
 
 use common\models\Accounts;
 use common\models\Balance;
+use common\models\Cases;
+use common\models\Debug;
+use common\models\Declensions;
 use common\models\Reviews;
 use common\models\Works;
 use Yii;
@@ -85,15 +88,16 @@ class SiteController extends Controller
 //      $works = $service->get
 //      var_dump($works); die();
 	    $reviews = Reviews::find()->all();
-	    
+	    $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
+//	    Debug::toDebug(Declensions::CheckDay(5 - 6));
         if(!Yii::$app->user->isGuest)
         {
             $phone_account = Accounts::getRandomAccount();
             $phone_works = ($phone_account) ? Works::getRandomWorks($phone_account->id,6) : false;
-            return $this->render('index', compact('phone_account','phone_works','reviews'));
+            return $this->render('index', compact('phone_account','phone_works','reviews', 'cases'));
         }
         
-        return $this->render('index', ['reviews' => $reviews]);
+        return $this->render('index', ['reviews' => $reviews, 'cases' => $cases]);
     }
 
     /**

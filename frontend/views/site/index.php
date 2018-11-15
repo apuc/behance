@@ -3,6 +3,7 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View
  * @var $reviews object
+ * @var $cases object
  */
 
 $this->title = 'My Yii Application';
@@ -255,35 +256,44 @@ $this->title = 'My Yii Application';
                     <h2 class="title"><span class="title-light">Ищите качественные</span><span class="title-extra-bold">услуги по продвижению?</span></h2>
                     <p class="main-text offset-xl-1">Низкие цены на продвижение своих работ на Behance? Вы нашли, чтоискали! У нас вы получаете комплексное индивидуальное продвижение по максимально выгодным ценам!</p>
                 </div>
-                <div class="prices__items"><img class="prices__img-drop" src="/images/drop.png" alt="" role="presentation"/>
-                    <div class="prices__item-wrap">
-                        <div class="prices__item">
-                            <div class="prices__item-img"><img src="/images/icons/ico-paper-plane.png"/>
-                            </div><span class="prices__item-title mb20">Light Start</span><span>100 лайков</span><span class="mb20">1000 просмотров</span><span class="mb20">делаем за 1 день</span><span class="prices__item-price mb20">500<span class="prices__item-ruble">₽</span></span>
-                            <button class="btn btn-small btn-white">Заказать</button>
-                        </div><span class="prices__item-after">При регистрации <span class="fw-extra-bold">БЕСПЛАТНО</span></span>
-                    </div>
-                    <div class="prices__item-wrap">
-                        <div class="prices__item">
-                            <div class="prices__item-img"><img src="/images/icons/ico-plane.png"/>
-                            </div><span class="prices__item-title mb20">Start</span><span>250 лайков</span><span class="mb20">2000 просмотров</span><span class="mb20">делаем за 1-2 день</span><span class="prices__item-price mb20">1 000<span class="prices__item-ruble">₽</span></span>
-                            <button class="btn btn-small btn-white">Заказать</button>
-                        </div>
-                    </div>
-                    <div class="prices__item-wrap">
-                        <div class="prices__item">
-                            <div class="prices__item-img"><img src="/images/icons/ico-rocket.png"/>
-                            </div><span class="prices__item-title mb20">Fast Start</span><span>100 лайков</span><span class="mb20">5000 просмотров</span><span class="mb20">делаем за 5-6 день</span><span class="prices__item-price mb20">2 000<span class="prices__item-ruble">₽</span></span>
-                            <button class="btn btn-small btn-white">Заказать</button>
-                        </div>
-                    </div>
-                    <div class="prices__item-wrap">
-                        <div class="prices__item prices__item-pink">
-                            <div class="prices__item-img"><img src="/images/icons/ico-diamond.png"/>
-                            </div><span class="prices__item-title mb20">maximum</span><span>2000 лайков</span><span class="mb20">10 000 просмотров</span><span class="mb20">делаем за 10 день</span><span class="prices__item-price mb20">5 000<span class="prices__item-ruble">₽</span></span>
-                            <button class="btn btn-small btn-white-on-pink">Заказать</button>
-                        </div>
-                    </div>
+                <div class="prices__items">
+	                <img class="prices__img-drop" src="/images/drop.png" alt="" role="presentation"/>
+                    <?php if(isset($cases)):?>
+		                <?php $i=0; foreach ($cases as $case): $i++;?>
+		                    <div class="prices__item-wrap">
+			                    <div class="prices__item <?=($i == count($cases))? 'prices__item-pink' : ''?>">
+				                    <div class="prices__item-img">
+					                    <img src="<?=$case->img?>"/>
+				                    </div>
+				                    <span class="prices__item-title mb20">
+					                    <?=$case->name?>
+				                    </span>
+				                    <span>
+					                    <?=$case->likes?> лайков
+				                    </span>
+				                    <span class="mb20">
+					                    <?=$case->views?> просмотров
+				                    </span>
+				                    <span class="mb20">делаем за
+					                    <?=$case->term?>
+				                    </span>
+				                    <span class="prices__item-price mb20">
+					                    <?=str_replace('.00','', $case->price)?>
+					                    <span class="prices__item-ruble">₽</span>
+				                    </span>
+				                    <button class="btn btn-small btn-white">Заказать</button>
+			                    </div>
+			                    <?php if($i == 1):?>
+				                    <span class="prices__item-after">
+					                    При регистрации
+					                    <span class="fw-extra-bold">
+						                    БЕСПЛАТНО
+					                    </span>
+				                    </span>
+			                    <?php endif;?>
+		                    </div>
+		                <?php endforeach;?>
+                    <?php endif;?>
                 </div>
             </div>
         </div>

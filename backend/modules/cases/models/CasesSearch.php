@@ -4,7 +4,7 @@ namespace backend\modules\cases\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-
+use backend\modules\cases\models\Cases;
 
 /**
  * CasesSearch represents the model behind the search form of `backend\modules\cases\models\Cases`.
@@ -17,8 +17,9 @@ class CasesSearch extends Cases
     public function rules()
     {
         return [
-            [['id', 'behance_id', 'views', 'likes'], 'integer'],
-	        [['name'], 'safe'],
+            [['id', 'views', 'likes', 'status'], 'integer'],
+            [['name', 'img', 'term'], 'safe'],
+            [['price'], 'number'],
         ];
     }
 
@@ -59,10 +60,16 @@ class CasesSearch extends Cases
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'behance_id' => $this->behance_id,
             'views' => $this->views,
             'likes' => $this->likes,
+            'status' => $this->status,
+            'price' => $this->price,
         ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'img', $this->img])
+            ->andFilterWhere(['like', 'term', $this->term])
+            ->andFilterWhere(['like', 'status', $this->term]);
 
         return $dataProvider;
     }

@@ -28,15 +28,25 @@ $(document).ready(function () {
 
                 if (response == true)
                 {
-                    //balanceLikes.html(likesInput.val());
-                    //balanceViews.html(viewsInput.val());
-                    alert(response);
+                    var newLikes = parseInt(balanceLikes.html()) - parseInt(likesInput.val());
+                    var newViews = parseInt(balanceViews.html()) - parseInt(viewsInput.val());
+
+                    if(newLikes)
+                    balanceLikes.html(newLikes);
+
+                    if(newViews)
+                    balanceViews.html(newViews);
+
+                    $("#works-grid-form")[0].reset();
+
+                    $("#exampleModal").modal("hide");
                 }
                 else
                 {
                     errorSpan.html(response);
                 }
             }
+
         });
 
     })

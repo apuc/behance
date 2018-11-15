@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\works\models\Works */
+/* @var $model frontend\modules\works\models\Works */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('works', 'Works'), 'url' => ['index']];
+$this->title = 'Просмотр работы';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Works'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('works', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('works', 'Delete'), ['delete', 'id' => $model->id], [
+
+        <?= Html::a('Удалить работу', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('works', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('frontend', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,12 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'account_id',
+            [
+                'attribute'=>'image',
+                'format'=>'raw',
+                'value'=>function($model){
+                    return Html::img($model->image,['width'=>200,'height'=>200]);
+                }
+            ],
+            [
+                'attribute'=>'account_id',
+                'value'=>function($model){
+                    return $model->account['display_name'];
+                }
+            ],
             'behance_id',
             'url:url',
             'name',
-            'image',
+            'start_likes',
+            'start_views',
         ],
     ]) ?>
 

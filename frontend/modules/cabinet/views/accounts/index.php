@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Добавить аккаунт', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить аккаунт', ['create'], ['class' => 'btn btn-pink']) ?>
     </p>
 
     <?= GridView::widget([
@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
               'format'=>'raw',
               'value'=>function($data){
-                return Html::a('Обновить работы','/cabinet/accounts/parse?url='.$data->url,['class'=>'btn btn-primary']);
+                return Html::a('Обновить работы','/cabinet/accounts/parse?url='.$data->url,['class'=>'btn btn-pink']);
               }
             ],
 

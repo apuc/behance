@@ -42,6 +42,13 @@ CabinetAsset::register($this);
                 <nav class="mdc-list mdc-drawer-menu">
 
                     <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/']); ?>">
+                            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>
+                            <span>На гавную</span>
+                        </a>
+                    </div>
+
+                    <div class="mdc-list-item mdc-drawer-item">
 
 
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
@@ -57,7 +64,12 @@ CabinetAsset::register($this);
                         </a>
                     </div>
 
-
+                    <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/queue']); ?>">
+                            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">dashboard</i>
+                            <span>Работы в лайкере</span>
+                        </a>
+                    </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history') ?>">
@@ -66,54 +78,54 @@ CabinetAsset::register($this);
                         </a>
                     </div>
 
-                    					<div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="sample-page-submenu">
-                    						<a class="mdc-drawer-link" href="#">
-                    							<i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>
-                    							Sample Pages
-                    							<i class="mdc-drawer-arrow material-icons">arrow_drop_down</i>
-                    						</a>
-
-                    						<div class="mdc-expansion-panel" id="sample-page-submenu">
-                    							<nav class="mdc-list mdc-drawer-submenu">
-                    								<div class="mdc-list-item mdc-drawer-item">
-                    									<a class="mdc-drawer-link" href="pages/samples/blank-page.html">
-                    										Blank Page
-                    									</a>
-                    								</div>
-                    								<div class="mdc-list-item mdc-drawer-item">
-                    									<a class="mdc-drawer-link" href="pages/samples/403.html">
-                    										403
-                    									</a>
-                    								</div>
-                    								<div class="mdc-list-item mdc-drawer-item">
-                    									<a class="mdc-drawer-link" href="pages/samples/404.html">
-                    										404
-                    									</a>
-                    								</div>
-                    								<div class="mdc-list-item mdc-drawer-item">
-                    									<a class="mdc-drawer-link" href="pages/samples/500.html">
-                    										500
-                    									</a>
-                    								</div>
-                    								<div class="mdc-list-item mdc-drawer-item">
-                    									<a class="mdc-drawer-link" href="pages/samples/505.html">
-                    										505
-                    									</a>
-                    								</div>
-                    								<div class="mdc-list-item mdc-drawer-item">
-                    									<a class="mdc-drawer-link" href="pages/samples/login.html">
-                    										Login
-                    									</a>
-                    								</div>
-                    								<div class="mdc-list-item mdc-drawer-item">
-                    									<a class="mdc-drawer-link" href="pages/samples/register.html">
-                    										Register
-                    									</a>
-                    								</div>
-
-                    							</nav>
-                    						</div>
-                    					</div>
+<!--                    					<div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="sample-page-submenu">-->
+<!--                    						<a class="mdc-drawer-link" href="#">-->
+<!--                    							<i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>-->
+<!--                    							Sample Pages-->
+<!--                    							<i class="mdc-drawer-arrow material-icons">arrow_drop_down</i>-->
+<!--                    						</a>-->
+<!---->
+<!--                    						<div class="mdc-expansion-panel" id="sample-page-submenu">-->
+<!--                    							<nav class="mdc-list mdc-drawer-submenu">-->
+<!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+<!--                    									<a class="mdc-drawer-link" href="pages/samples/blank-page.html">-->
+<!--                    										Blank Page-->
+<!--                    									</a>-->
+<!--                    								</div>-->
+<!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+<!--                    									<a class="mdc-drawer-link" href="pages/samples/403.html">-->
+<!--                    										403-->
+<!--                    									</a>-->
+<!--                    								</div>-->
+<!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+<!--                    									<a class="mdc-drawer-link" href="pages/samples/404.html">-->
+<!--                    										404-->
+<!--                    									</a>-->
+<!--                    								</div>-->
+<!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+<!--                    									<a class="mdc-drawer-link" href="pages/samples/500.html">-->
+<!--                    										500-->
+<!--                    									</a>-->
+<!--                    								</div>-->
+<!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+<!--                    									<a class="mdc-drawer-link" href="pages/samples/505.html">-->
+<!--                    										505-->
+<!--                    									</a>-->
+<!--                    								</div>-->
+<!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+<!--                    									<a class="mdc-drawer-link" href="pages/samples/login.html">-->
+<!--                    										Login-->
+<!--                    									</a>-->
+<!--                    								</div>-->
+<!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+<!--                    									<a class="mdc-drawer-link" href="pages/samples/register.html">-->
+<!--                    										Register-->
+<!--                    									</a>-->
+<!--                    								</div>-->
+<!---->
+<!--                    							</nav>-->
+<!--                    						</div>-->
+<!--                    					</div>-->
 
                 </nav>
             </div>
@@ -153,11 +165,11 @@ CabinetAsset::register($this);
 
                 <?php if(!empty($balance)): ?>
                 <div class="balance-block">
-                    <span class="mdc-toolbar__menu-icon" id="balance_likes">Лайки: <?=$balance->likes; ?></span>
+                    <span class="mdc-toolbar__menu-icon">Лайки:<span id="balance_likes"><?=$balance->likes; ?></span></span>
                 </div>
 
                 <div class="balance-block">
-                    <span class="mdc-toolbar__menu-icon" id="balance_views">Просмотры: <?=$balance->views; ?></span>
+                    <span class="mdc-toolbar__menu-icon">Просмотры:<span id="balance_views"><?=$balance->views; ?></span></span>
                 </div>
                 <?php  endif; ?>
 

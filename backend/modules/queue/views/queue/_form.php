@@ -15,14 +15,14 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 	
-	<?= $form->field($model, 'work_id')->widget(Select2::classname(), [
-		'data' => $data,
+	<?php echo (isset($works)) ? $form->field($model, 'work_id')->widget(Select2::classname(), [
+		'data' => $works,
 		'language' => 'ru',
-		'options' => ['multiple' => true, 'placeholder' => 'Выберите работы'],
+		'options' => ['multiple' => false, 'placeholder' => 'Выберите работу'],
 		'pluginOptions' => [
 			'allowClear' => true
 		],
-	])->label('Св-во');?>
+	])->label('Работа') : "" ?>
 
     <?= $form->field($model, 'likes_work')->textInput() ?>
 

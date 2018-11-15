@@ -23,15 +23,43 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'work_id',
-            'likes_work',
-            'views_work',
-            'account_views',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'label'=>'Картинка',
+                'format'=>'raw',
+                'value'=>function($data){
+                    return Html::img($data->work['image'],['width'=>150,'height'=>150]);
+                }
+            ],
+            [
+               'attribute'=>'work_id',
+               'value'=>function($data){
+                    return $data->work['name'];
+               },
+                'filter'    => kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'work_id',
+                    'data' => $works,
+                    'options' => ['placeholder' => 'Начните вводить...','class' => 'form-control'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]),
+            ],
+            [
+               'attribute'=>'likes_work',
+               'filter'=>false
+            ],
+            [
+                'attribute'=>'views_work',
+                'filter'=>false
+            ],
+            [
+                'attribute'=>'account_views',
+                'filter'=>false
+            ],
+            [    'class' => 'yii\grid\ActionColumn',
+                 'template'=>'{update} {delete}'
+            ],
         ],
     ]); ?>
 </div>

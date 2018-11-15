@@ -4,10 +4,10 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\queue\models\Queue */
+/* @var $model common\models\Queue */
 
-$this->title = Yii::t('queue', 'Create Queue');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('queue', 'Queues'), 'url' => ['index']];
+$this->title = 'Create Queue';
+$this->params['breadcrumbs'][] = ['label' => 'Queues', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="queue-create">
@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'works' => $works,
     ]) ?>
 
 </div>

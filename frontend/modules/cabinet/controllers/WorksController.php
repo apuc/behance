@@ -52,7 +52,6 @@ class WorksController extends Controller
     public function actionAssignBalance()
     {
         $post = Yii::$app->request->post();
-        $post['account_views'] = 0;
 
         if(empty($post['likes_work']) && empty($post['views_work']))
         {

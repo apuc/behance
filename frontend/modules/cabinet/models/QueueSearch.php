@@ -1,12 +1,17 @@
 <?php
 
-namespace backend\modules\queue\models;
+namespace frontend\modules\cabinet\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use common\models\Queue;
+use common\models\Accounts;
+use common\models\Works;
+use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
- * QueueSearch represents the model behind the search form of `backend\modules\queue\models\Queue`.
+ * QueueSearch represents the model behind the search form of `common\models\Queue`.
  */
 class QueueSearch extends Queue
 {
@@ -38,7 +43,15 @@ class QueueSearch extends Queue
      */
     public function search($params)
     {
-        $query = Queue::find()->orderBy("id desc");
+        $account_id = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->select('id')->all();
+        $account_id = ArrayHelper::getColumn($account_id,'id');
+        $account_id = implode(',',$account_id);
+
+        $works_id = Works::find()->where("account_id IN({$account_id})")->select('id')->all();
+        $works_id = ArrayHelper::getColumn($works_id,'id');
+        $works_id = implode(',',$works_id);
+
+        $query = Queue::find()->where("work_id IN({$works_id})")->orderBy("id desc");
 
         // add conditions that should always apply here
 

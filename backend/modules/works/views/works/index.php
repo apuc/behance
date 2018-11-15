@@ -13,11 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="works-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('works', 'Create Works'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -70,13 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a('Ссылка',$data->url,['target'=>'_blank']);
                 }
             ],
-            'start_likes',
-            'start_views',
-
 
 
             ['class' => 'yii\grid\ActionColumn',
-                'template'=>'{delete} {update}'
+                'template'=>'{delete} {view}'
             ],
         ],
     ]); ?>

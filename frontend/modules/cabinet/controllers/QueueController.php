@@ -1,12 +1,10 @@
 <?php
 
-namespace backend\modules\queue\controllers;
+namespace frontend\modules\cabinet\controllers;
 
-use common\models\Works;
 use Yii;
-use backend\modules\queue\models\Queue;
-use backend\modules\queue\models\QueueSearch;
-use yii\helpers\ArrayHelper;
+use common\models\Queue;
+use frontend\modules\cabinet\models\QueueSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -17,6 +15,21 @@ use yii\filters\VerbFilter;
 class QueueController extends Controller
 {
     /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
+    /**
      * Lists all Queue models.
      * @return mixed
      */
@@ -24,12 +37,10 @@ class QueueController extends Controller
     {
         $searchModel = new QueueSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $works = $this->getWorksNames();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'works' => $works,
         ]);
     }
 
@@ -53,20 +64,14 @@ class QueueController extends Controller
      */
     public function actionCreate()
     {
-
         $model = new Queue();
 
-        $works = $this->getWorksNames(true);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-        {
-            Yii::$app->session->setFlash('success','Работа добавлена');
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'works' => $works,
         ]);
     }
 
@@ -81,10 +86,8 @@ class QueueController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-        {
-            Yii::$app->session->setFlash('success','Изменения сохранены');
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -119,30 +122,6 @@ class QueueController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('queue', 'The requested page does not exist.'));
-    }
-
-    /**
-     * @param bool $excludeQueue
-     * @return array|\yii\db\ActiveRecord[]
-     */
-    private function getWorksNames($excludeQueue = false)
-    {
-        if($excludeQueue)
-        {
-            $worksQueue = Queue::find()->select('work_id')->all();
-            $worksQueue = ArrayHelper::getColumn($worksQueue,'work_id');
-            $worksQueue = implode(',',$worksQueue);
-
-            $works = Works::find()->where("id NOT IN({$worksQueue})")->all();
-            $works = ArrayHelper::map($works,'id','name');
-
-            return $works;
-        }
-
-        $works = Works::find()->all();
-        $works = ArrayHelper::map($works,'id','name');
-
-        return $works;
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

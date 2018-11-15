@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             ['class' => 'yii\grid\ActionColumn',
-                'template'=>'{delete}'
+                'template'=>'{view} {delete}'
             ],
         ],
     ]);
@@ -100,11 +100,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <form id="works-grid-form">
                         <div class="form-group">
                             <labe>Добавить лайков:</labe>
-                            <input type="number" name="likes_work" class="form-control" value="0" min="0">
+                            <input type="number" name="likes_work"  id="form-likes" class="form-control" value="0" min="0">
                         </div>
                         <div class="form-group">
                             <labe>Добавить просмотров:</labe>
-                            <input type="number" name="views_work" id="form-likes" class="form-control" value="0" min="0">
+                            <input type="number" name="views_work" id="form-views" class="form-control" value="0" min="0">
                         </div>
                         <div class="form-group">
                             <span style="color: red" id="works-form-error"></span>

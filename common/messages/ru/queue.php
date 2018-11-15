@@ -7,12 +7,12 @@
  */
 return [
 	'Queues' => 'Очередь',
-	'Work ID' => 'ID работы',
-	'Likes Work' => 'Лайки работ',
+	'Work ID' => 'Имя работы',
+	'Likes Work' => 'Лайки работы',
 	'ID' => 'ID',
-	'Views Work' => 'Просмотры работ',
+	'Views Work' => 'Просмотры работы',
 	'Account Views' => 'Просмотры акаунта',
-	'Create Queue' => 'Создать очередь',
+	'Create Queue' => 'Добавить в очередь',
 	'Save' => 'Сохранить',
 	'Update' => 'Обновить',
 	'Delete' => 'Удалить',

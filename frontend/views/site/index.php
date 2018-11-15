@@ -7,6 +7,7 @@ use yii\helpers\Url;
  */
 
 $this->title = 'My Yii Application';
+$this->registerCssFile('/css/landing.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
 ?>
 
 
@@ -59,9 +60,9 @@ $this->title = 'My Yii Application';
                 <div class="header__right">
                     <nav class="header__nav">
                     </nav>
-                    <a class="header__nav-item" href="#services">О сервисе</a>
-                    <a class="header__nav-item" href="#tarif">Тарифы</a>
-                    <a class="header__nav-item" href="#reviews">Отзывы</a>
+                    <a class="header__nav-item" href="/site/about">О сервисе</a>
+                    <a class="header__nav-item header__nav-item-scroll" href="#tarif">Тарифы</a>
+                    <a class="header__nav-item header__nav-item-scroll" href="#reviews">Отзывы</a>
 <!--                    <a class="header__nav-item" href="#">Блог</a>-->
                     <?php if(Yii::$app->user->isGuest):?>
                     <a class="header__icon" href="<?= Url::toRoute(['/site/login']); ?>">

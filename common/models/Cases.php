@@ -40,6 +40,7 @@ class Cases extends \yii\db\ActiveRecord
             [['img'], 'string'],
             [['price'], 'number'],
             [['name', 'term'], 'string', 'max' => 255],
+            [['views', 'likes','name','price','term'], 'required'],
         ];
     }
 

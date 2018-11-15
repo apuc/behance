@@ -15,7 +15,6 @@ class AppAsset extends AssetBundle
         'css/slick.css',
         'css/bootstrap-grid.min.css',
         'css/slick.css',
-        'css/landing.css',
         'css/site.css',
     ];
     public $js = [

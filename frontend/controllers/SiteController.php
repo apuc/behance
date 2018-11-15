@@ -89,7 +89,6 @@ class SiteController extends Controller
 //      var_dump($works); die();
 	    $reviews = Reviews::find()->all();
 	    $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
-//	    Debug::toDebug(Declensions::CheckDay(5 - 6));
         if(!Yii::$app->user->isGuest)
         {
             $phone_account = Accounts::getRandomAccount();
@@ -124,6 +123,12 @@ class SiteController extends Controller
         return $this->render('login', [
                 'model' => $model,
         ]);
+    }
+
+
+    public function actionAbout()
+    {
+        return $this->render('about');
     }
 
     /**

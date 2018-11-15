@@ -7,8 +7,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Войти';
+$this->registerCssFile('/css/landing.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
 ?>
 <header class="header-wrap header-wrap-auth">
     <div class="header__stars1 header__stars">

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Cases;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\cases\models\CasesSearch */
@@ -21,20 +22,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+
+            [
+              'attribute'=>'img',
+                'format'=>'raw',
+                'value'=>function($model){
+                   return Html::img($model->img);
+                }
+            ],
+            'name',
             'views',
             'likes',
-            'name',
-            'img:ntext',
-            'status',
-            //'price',
-            //'term',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            'price',
+            'term',
+            [
+               'attribute'=>'status',
+               'value'=>function($model){
+                  return Cases::STATUS[$model->status];
+               }
+            ],
+            ['class' => 'yii\grid\ActionColumn',
+               'template'=>'{update} {delete}'
+            ],
         ],
     ]); ?>
 </div>

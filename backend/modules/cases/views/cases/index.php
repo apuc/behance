@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\modules\cases\controllers\CaseseSearch */
+/* @var $searchModel backend\modules\cases\models\CasesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('cases', 'Cases');
@@ -26,10 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'behance_id',
             'views',
             'likes',
             'name',
+            'img:ntext',
+            'status',
+            //'price',
+            //'term',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

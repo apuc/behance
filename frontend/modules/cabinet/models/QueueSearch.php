@@ -47,9 +47,15 @@ class QueueSearch extends Queue
         $account_id = ArrayHelper::getColumn($account_id,'id');
         $account_id = implode(',',$account_id);
 
+        if(empty($account_id))
+            $account_id = 0;
+
         $works_id = Works::find()->where("account_id IN({$account_id})")->select('id')->all();
         $works_id = ArrayHelper::getColumn($works_id,'id');
         $works_id = implode(',',$works_id);
+
+        if(empty($works_id))
+            $works_id = 0;
 
         $query = Queue::find()->where("work_id IN({$works_id})")->orderBy("id desc");
 

@@ -60,13 +60,13 @@ class HistorySearch extends History
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'dt_add' => $this->dt_add,
             'likes' => $this->likes,
             'views' => $this->views,
         ]);
 
         $query->andFilterWhere(['like', 'type', $this->type])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'dt_add', $this->dt_add]);
 
         return $dataProvider;
     }

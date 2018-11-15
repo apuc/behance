@@ -29,7 +29,7 @@ class Queue extends \yii\db\ActiveRecord
 
        (empty($this->likes_work)) ? $this->likes_work = 0 : "";
        (empty($this->views_work)) ? $this->views_work = 0 : "";
-        (empty($this->account_views)) ? $this->account_views = 0 : "";
+       (empty($this->account_views)) ? $this->account_views = 0 : "";
 
         return true;
     }

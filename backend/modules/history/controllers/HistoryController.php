@@ -30,14 +30,12 @@ class HistoryController extends Controller
         $searchModel = new HistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $statuses = [History::TRANSFER_TO_BALANCE,History::TRANSFER_FROM_BALANCE];
         $users = User::find()->all();
         $users = ArrayHelper::map($users,'id','email');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'statuses' => $statuses,
             'users' => $users,
         ]);
     }

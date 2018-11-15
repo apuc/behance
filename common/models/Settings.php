@@ -28,6 +28,7 @@ class Settings extends \yii\db\ActiveRecord
     {
         return [
             [['key', 'value'], 'string', 'max' => 255],
+            [['key'], 'unique'],
         ];
     }
 

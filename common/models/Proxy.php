@@ -40,4 +40,10 @@ class Proxy extends \yii\db\ActiveRecord
             'ip' => Yii::t('proxy', 'Ip'),
         ];
     }
+
+    public function Fill($data)
+    {
+        Yii::$app->db->createCommand()->setRawSql("TRUNCATE TABLE {$this::tableName()}")->execute();
+        Yii::$app->db->createCommand()->batchInsert($this::tableName(), ['ip'], $data)->execute();
+    }
 }

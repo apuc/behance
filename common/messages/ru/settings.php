@@ -12,6 +12,7 @@ return [
 	'Create Settings' => 'Создать настройку',
 	'Save' => 'Сохранить',
 	'Update' => 'Обновить',
+	'Settings' => 'Настройки',
 	'Delete' => 'Удалить',
 	'Are you sure you want to delete this item?' => 'Вы серьезно хотите удалить эту запись?',
 ];

@@ -12,6 +12,6 @@ namespace common\behance\interfaces;
 interface AccountInterface
 {
   public function getWorks();
-  public function likeWork($data);
-  public function viewWork($data);
+  public function likeWork($workBehanceId,$proxy,$userAgent);
+  public function viewWork($workBehanceId,$proxy,$userAgent);
 }

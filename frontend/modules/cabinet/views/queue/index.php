@@ -47,6 +47,15 @@ $this->params['breadcrumbs'][] = $this->title;
 //                ]),
             ],
             [
+                'label'=>'Ссылка',
+                'format'=>'raw',
+                'value'=>function($data){
+                    return Html::a('Ссылка',$data->work['url'],['target'=>'_blank']);
+                },
+                'filter'=>false,
+
+            ],
+            [
                 'attribute'=>'likes_work',
                 'filter'=>false
             ],

@@ -29,37 +29,64 @@ class BehanceController extends Controller
 
     public function actionLike()
     {
+        $take_from_queue = Settings::find()->where("settings.key='max_likes'")->select('value')->one();
+        $take_from_queue = $take_from_queue->value;
 
-        $count = Settings::find()->where('name="max_likes"')->one();
-        $count = $count->value;
-
-
-        $queue = Queue::find()->orderBy("id desc")->limit($count)->all();
-
+        $queue = Queue::find()->orderBy("id desc")->limit($take_from_queue)->all();
 
         if(empty($queue))
             return $this->stdout("В очереди нет работ!\n", Console::FG_RED);
 
+        $service = BehanceService::create(new BehanceAccount());
 
         foreach ($queue as $q)
         {
             $workAccount = Accounts::findOne($q->work['account_id']);
 
-
-            var_dump($service->account->works); die();
+            $service->importAccount($workAccount);
             $service->account->addWork($q->work);
 
-            $service->standardScenario($q->work->behance_id);
-//            if($q->likes_count > 0 && $q->views_count >0)
-//            {
-//
-//            }
+            $this->stdout("Применяем сценарий к работе {$q->work['name']} !\n",Console::FG_GREEN);
 
+            if($q->likes_work > 0 && $q->views_work > 0)
+            {
+               if($service->standardScenario($q->work['behance_id']))
+               {
+                 $q->refreshLikes(1,1);
+                 $this->stdout("Сценарий успешно применен!\n",Console::FG_GREEN);
+               }
+               else
+               {
+                   $this->stdout("Ошибка!\n",Console::FG_RED);
+               }
+            }
+
+            if($q->likes_work > 0 && $q->views_work == 0)
+            {
+                if($service->onlyLikeScenario($q->work['behance_id']))
+                {
+                    $q->refreshLikes(1,0);
+                    $this->stdout("Сценарий успешно применен!\n",Console::FG_GREEN);
+                }
+                else
+                {
+                    $this->stdout("Ошибка!\n",Console::FG_RED);
+                }
+            }
+
+            if($q->likes_work == 0 && $q->views_work > 0)
+            {
+                if($service->onlyViewScenario($q->work['behance_id']))
+                {
+                    $q->refreshLikes(0,1);
+                    $this->stdout("Сценарий успешно применен!\n",Console::FG_GREEN);
+                }
+                else
+                {
+                    $this->stdout("Ошибка!\n",Console::FG_RED);
+                }
+            }
         }
-
-        //
-        //$serv = new BehanceService($acc);
-        //$serv->acc
 
     }
 

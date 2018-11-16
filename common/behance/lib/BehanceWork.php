@@ -12,7 +12,7 @@ namespace common\behance\lib;
 use common\behance\traits\CommonTrait;
 use common\behance\interfaces\WorkInterface;
 
-class BehanceWork implements WorkInterface
+class BehanceWork implements  WorkInterface
 {
     use CommonTrait;
 
@@ -30,8 +30,6 @@ class BehanceWork implements WorkInterface
      */
     public function __construct($data)
     {
-        $this->id = (isset($data['id'])) ? $data['id'] : null;
-        $this->accountId = (isset($data['account_id'])) ? $data['account_id'] : null;
         $this->behanceId = (isset($data['behance_id'])) ? $data['behance_id'] : null;
         $this->url = (isset($data['url'])) ? $data['url'] : null;
         $this->name = (isset($data['name'])) ? $data['name'] : null;
@@ -42,21 +40,24 @@ class BehanceWork implements WorkInterface
 
 
     /**
-     * @param int $count
+     * @param $proxy
+     * @param $userAgent
+     * @return bool
      */
-    public function like($count = 1)
+    public function likeOnce($proxy,$userAgent)
     {
-        $this->_like_($this->behanceId,$count);
+       return $this->_like_($this->behanceId,$proxy,$userAgent);
     }
 
 
     /**
-     * @param int $count
+     * @param $proxy
+     * @param $userAgent
+     * @return bool
      */
-    public function view($count = 1)
+    public function viewOnce($proxy,$userAgent)
     {
-
-        $this->_view_($this->url,$count);
+        return $this->_view_($this->url,$proxy,$userAgent);
     }
 
 }

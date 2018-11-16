@@ -11,6 +11,6 @@ namespace common\behance\interfaces;
 
 interface WorkInterface
 {
-  public function like($count=1);
-  public function view($count=1);
+  public function likeOnce($proxy,$userAgent);
+  public function viewOnce($proxy,$userAgent);
 }

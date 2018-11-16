@@ -13,8 +13,8 @@ class ProxyDbYii
 {
     public static function getRandom()
     {
-       $count = Proxy::find()->select('id')->count();
-       $rand_id = rand(1,$count);
+       $ids = Proxy::find()->select('id')->all();
+       $rand_id = $ids[rand(1,count($ids)-1)]->id;
        $prpxy = Proxy::find()->asArray()->where('id='.$rand_id)->all();
        return $prpxy[0]['ip'];
     }

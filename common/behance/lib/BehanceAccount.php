@@ -39,18 +39,6 @@ class BehanceAccount implements AccountInterface
     }
 
 
-    /**
-     * @param $works
-     */
-    public function importWorks($works)
-    {
-        foreach ($works as $work)
-        {
-
-            $this->addWork($work);
-        }
-    }
-
 
     /**
      * @throws BehanceApiException
@@ -86,11 +74,10 @@ class BehanceAccount implements AccountInterface
         $data['behance_id'] = (isset($work->behance_id)) ? $work->behance_id : $work->id;
         $data['name'] = $work->name;
         $data['url'] = $work->url;
-        $data['start_likes'] = $work->stats->appreciations;
-        $data['start_views'] = $work->stats->views;
+        $data['start_likes'] = (isset($work->start_likes)) ? $work->start_likes : $work->stats->appreciations;
+        $data['start_views'] = (isset($work->start_views)) ? $work->start_views : $work->stats->views;;
         $data['image'] = (isset($work->covers)) ? end($work->covers) : $work->image;
-        $data['id'] = (isset($work->behance_id)) ? $work->id : null;
-        $data['account_id'] = (isset($work->behance_id)) ? $work->account_id : null;
+
 
         $workObj = new BehanceWork($data);
 
@@ -99,41 +86,38 @@ class BehanceAccount implements AccountInterface
 
 
     /**
-     * @param $data
+     * @param $workBehanceId
+     * @param $proxy
+     * @param $userAgent
+     * @return bool
      */
-    public function likeWork($data)
+    public function likeWork($workBehanceId,$proxy,$userAgent)
     {
-        if (count($data) > 1) {
-            foreach ($data as $item) {
-                $this->works[$item['id']]->like($item['likes']);
-            }
-        } else {
-            $this->works[$data[0]['id']]->like($data[0]['likes']);
-        }
+        return $this->works[$workBehanceId]->likeOnce($proxy,$userAgent);
     }
 
 
     /**
-     * @param $data
+     * @param $workBehanceId
+     * @param $proxy
+     * @param $userAgent
+     * @return bool
      */
-    public function viewWork($data)
+    public function viewWork($workBehanceId,$proxy,$userAgent)
     {
-        if (count($data) > 1) {
-            foreach ($data as $item) {
-                $this->works[$item['id']]->view($item['views']);
-            }
-        } else {
-            $this->works[$data[0]['id']]->view($data[0]['views']);
-        }
+        return $this->works[$workBehanceId]->viewOnce($proxy,$userAgent);
     }
 
 
     /**
+     * @param $proxy
+     * @param $userAgent
      * @param int $count
+     * @return bool
      */
-    public function view($count = 1)
+    public function view($proxy,$userAgent)
     {
-        $this->_view_($count, $this->url);
+        return $this->_view_($this->url,$proxy,$userAgent);
     }
 
 

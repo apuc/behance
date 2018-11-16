@@ -20,6 +20,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use \common\models\ContactForm;
+use common\models\Proxy;
 use common\behance\lib\BehanceAccount;
 use common\behance\BehanceService;
 

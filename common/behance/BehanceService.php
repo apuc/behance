@@ -3,9 +3,12 @@
 namespace common\behance;
 
 use common\behance\lib\BehanceAccount;
+use common\behance\traits\RepoTrait;
 
 class BehanceService
 {
+    use RepoTrait;
+
     public $account;
 
 
@@ -20,62 +23,6 @@ class BehanceService
 
 
     /**
-     * @param $workId
-     * @return $this
-     */
-    public function standardScenario($workId)
-    {
-       // $this->account->view();
-        $this->account->likeWork([['id'=>$workId,"likes"=>1]]);
-       // $this->account->viewWork([['id'=>$workId,"views"=>1]]);
-        return $this;
-    }
-
-
-    /**
-     * returns works from account
-     *
-     * @return array
-     */
-    public function getWorks()
-    {
-        $this->account->getWorks();
-        return $this->account->works;
-    }
-
-
-    /**
-     * @param $url
-     * @return bool|BehanceAccount
-     */
-    public function getAccount($url)
-    {
-        if($this->account->getAccountFromUrl($url))
-           return $this->account;
-
-           return false;
-    }
-
-    /**
-     * @param array(['id'=>'behanceId','likes'=>likesCount],[...])
-     */
-    public function likeWork($data)
-    {
-        $this->account->likeWork($data);
-    }
-
-
-
-    /**
-     * @param array(['id'=>'behanceId','views'=>viewsCount],[...])
-     */
-    public function viewWork($data)
-    {
-       $this->account->viewWork($data);
-    }
-
-
-    /**
      * @param BehanceAccount $account
      * @return BehanceService
      */
@@ -84,5 +31,109 @@ class BehanceService
         return new self($account);
     }
 
+
+    /**
+     * @return array
+     * @throws lib\BehanceApiException
+     */
+    public function getWorks()
+    {
+        $this->account->getWorks();
+        return $this->account->works;
+    }
+
+
+
+    /**
+     * @param $account
+     */
+    public function importAccount($account)
+    {
+        $this->account->url = $account->url;
+        $this->account->behanceId = $account->behance_id;
+        $this->account->displayName = $account->display_name;
+        $this->account->username = $account->username;
+        $this->account->image = $account->image;
+    }
+
+
+
+    /**
+     * @param $url
+     * @return bool|BehanceAccount
+     * @throws lib\BehanceApiException
+     */
+    public function getAccount($url)
+    {
+        if($this->account->getAccountFromUrl($url))
+            return $this->account;
+
+        return false;
+    }
+
+
+
+    /**
+     * @param $workBehanceId
+     * @return bool
+     */
+    public function standardScenario($workBehanceId)
+    {
+        $userAgent = $this->getRandomUserAgent();
+        $proxy = $this->getRandomProxy();
+
+        $accountViewSuccess = $this->account->view($proxy,$userAgent);
+        $workViewSuccess = $this->account->viewWork($workBehanceId,$proxy,$userAgent);
+        $workLikeSuccess =$this->account->likeWork($workBehanceId,$proxy,$userAgent);
+
+        if($accountViewSuccess && $workViewSuccess && $workLikeSuccess)
+        {
+           return true;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * @param $workBehanceId
+     * @return bool
+     */
+    public function onlyViewScenario($workBehanceId)
+    {
+        $userAgent = $this->getRandomUserAgent();
+        $proxy = $this->getRandomProxy();
+
+        $accountViewSuccess = $this->account->view($proxy,$userAgent);
+        $workViewSuccess =$this->account->viewWork($workBehanceId,$proxy,$userAgent);
+
+        if($accountViewSuccess && $workViewSuccess)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * @param $workBehanceId
+     * @return bool
+     */
+    public function onlyLikeScenario($workBehanceId)
+    {
+        $userAgent = $this->getRandomUserAgent();
+        $proxy = $this->getRandomProxy();
+
+        $accountViewSuccess = $this->account->view($proxy,$userAgent);
+        $workLikeSuccess = $this->account->likeWork($workBehanceId,$proxy,$userAgent);
+
+        if($accountViewSuccess  && $workLikeSuccess)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
 }

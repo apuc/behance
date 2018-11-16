@@ -59,6 +59,22 @@ class Queue extends \yii\db\ActiveRecord
     }
 
 
+    /**
+     * @param null $likes
+     * @param null $views
+     */
+    public function refreshLikes($likes,$views)
+    {
+        if($likes > 0)
+          $this->likes_work -= $likes;
+
+        if($views > 0)
+            $this->views_work -= $views;
+
+        $this->save();
+    }
+
+
     public function getWork()
     {
         return $this->hasOne(Works::className(),['id'=>'work_id']);

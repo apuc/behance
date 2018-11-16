@@ -46,101 +46,70 @@ trait CommonTrait
 
 
     /**
-     * @return mixed
-     */
-    public function getRandomProxy()
-    {
-        return Config::get()['proxyDriver']::getRandom();
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getRandomUserAgent()
-    {
-
-        return Config::get()['userAgentDriver']::getRandom();
-    }
-
-
-    /**
      * @param $behanceId
-     * @param int $likesCount
-     * @return int
+     * @param $proxy
+     * @param $userAgent
+     * @return bool
      */
-    public function _like_($behanceId,$likesCount = 1)
+    public function _like_($behanceId,$proxy,$userAgent)
     {
-        $successfulLikes = 0;
 
-        for($i = 0; $i < $likesCount; $i++)
+        $url = "https://www.behance.net/v2/projects/{$behanceId}/appreciate?client_id=BehanceWebSusi1";
+
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_URL,$url);
+        curl_setopt($curl,  CURLOPT_PROXY, $proxy);
+        curl_setopt($curl,CURLOPT_USERAGENT, $userAgent);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_exec($curl);
+
+        $error = curl_error($curl);
+        curl_close($curl);
+
+        if(empty($error))
         {
-            $proxy = $this->getRandomProxy();
-            $userAgent = $this->getRandomUserAgent();
-            $url = "https://www.behance.net/v2/projects/{$behanceId}/appreciate?client_id=BehanceWebSusi1";
-
-            $curl = curl_init();
-
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_URL,$url);
-            curl_setopt($curl,  CURLOPT_PROXY, $proxy);
-            curl_setopt($curl,CURLOPT_USERAGENT, $userAgent);
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_HEADER, true);
-            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
-            curl_exec($curl);
-
-            $error = curl_error($curl);
-            curl_close($curl);
-
-            if(empty($error))
-            {
-                $successfulLikes++;
-            }
+            return true;
         }
 
-        return $successfulLikes;
+        return false;
     }
 
 
     /**
      * @param $url
-     * @param int $viewsCount
-     * @return int
+     * @param $proxy
+     * @param $userAgent
+     * @return bool
      */
-    public function _view_($url,$viewsCount = 1)
+    public function _view_($url,$proxy,$userAgent)
     {
 
-        $successfulViews = 0;
+        $curl = curl_init();
 
-        for($i=0; $i<$viewsCount; $i++)
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_PROXY, $proxy);
+        curl_setopt($curl, CURLOPT_USERAGENT, $userAgent);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_exec($curl);
+
+        $error = curl_error($curl);
+        curl_close($curl);
+
+        if(empty($error))
         {
-            $proxy = $this->getRandomProxy();
-            $userAgent = $this->getRandomUserAgent();
-
-            $curl = curl_init();
-
-            curl_setopt($curl, CURLOPT_URL, $url);
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($curl, CURLOPT_HEADER, true);
-            curl_setopt($curl, CURLOPT_PROXY, $proxy);
-            curl_setopt($curl, CURLOPT_USERAGENT, $userAgent);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
-            curl_exec($curl);
-
-            $error = curl_error($curl);
-            curl_close($curl);
-
-            if(empty($error))
-            {
-                $successfulViews++;
-            }
+            return true;
         }
 
-        return $successfulViews;
+        return false;
     }
 }

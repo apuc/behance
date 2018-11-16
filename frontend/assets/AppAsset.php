@@ -12,10 +12,8 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/slick.css',
         'css/bootstrap-grid.min.css',
         'css/slick.css',
-        'css/site.css',
     ];
     public $js = [
         'js/slick.min.js',

@@ -7,15 +7,19 @@
  */
 
 namespace frontend\assets;
+use yii\web\AssetBundle;
 
-class CabinetAsset extends FrontAsset
+class CabinetAsset extends AssetBundle
 {
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
+
 	public $css = [
         'css/style.css',
-		//'css/materialdesignicons.min.css',
-       'css/font-awesome.min.css'
+        'css/font-awesome.min.css'
 
 	];
+
 	public $js = [
 		'node_modules/material-components-web/dist/material-components-web.min.js',
         'js/cabinet.js',
@@ -27,6 +31,6 @@ class CabinetAsset extends FrontAsset
 	public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        ];
+    ];
 
 }

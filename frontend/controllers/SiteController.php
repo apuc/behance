@@ -89,12 +89,6 @@ class SiteController extends Controller
 //      var_dump($works); die();
 	    $reviews = Reviews::find()->all();
 	    $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
-        if(!Yii::$app->user->isGuest)
-        {
-            $phone_account = Accounts::getRandomAccount();
-            $phone_works = ($phone_account) ? Works::getRandomWorks($phone_account->id,6) : false;
-            return $this->render('index', compact('phone_account','phone_works','reviews', 'cases'));
-        }
         
         return $this->render('index', ['reviews' => $reviews, 'cases' => $cases]);
     }

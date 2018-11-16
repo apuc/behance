@@ -121,7 +121,7 @@ $("#agree").on('change',function () {
 });
 
 $(document).ready(function () {
-    $(".header__nav-item-scroll").on('click',function (e) {
+    $(".header__nav-item-scroll,.footer__nav-item-scroll").on('click',function (e) {
         e.preventDefault();
 
         var elementClick = $(this).attr("href");

@@ -1,5 +1,3 @@
-'use strict';
-
 new WOW().init();
 
 function countNumber(item) {
@@ -63,6 +61,34 @@ document.addEventListener("DOMContentLoaded", function () {
       wowObserver.observe(wow);
     });
   }
+
+  const openModalBackCall = document.querySelectorAll('.js-backCall');
+  const closeModalBtn = document.querySelectorAll('.js-close-modal');
+  const modal = document.querySelector('.js-modal');
+  const callBackSubmit = document.querySelector('.js-callback');
+  const callBackName = document.querySelector('.js-callBackName');
+  const callBackTel = document.querySelector('.js-callBackTel');
+  const regExpName = new RegExp('[а-яА-ЯёЁa-zA-Z]{2,60}$');
+  let isNameValid = false;
+
+  for (let i = 0; i < openModalBackCall.length; i++) {
+    openModalBackCall[i].addEventListener('click', () => {
+      modal.classList.add('modal-callback_active');
+    })
+  }
+
+  for (let i = 0; i < closeModalBtn.length; i++) {
+    closeModalBtn[i].addEventListener('click', () => {
+      modal.classList.remove('modal-callback_active');
+    })
+  }
+
+  callBackName.addEventListener('input', e => {
+    const value = e.target.value;
+    isNameValid = regExpName.test(value);
+    console.log( regExpName.test(value));
+  });
+
 });
 
 if ($('.reviews__slider').length > 0) {
@@ -84,52 +110,57 @@ if ($('.reviews__slider').length > 0) {
   });
 }
 
-$(".callback__form").on('submit',function (e) {
+$(".callback__form").on('submit', function (e) {
 
-    e.preventDefault();
-    var data = $(this).serialize();
+  e.preventDefault();
+  var data = $(this).serialize();
 
-    $.ajax({
-        type:"POST",
-        url:"/site/contact",
-        data: data,
-        success:function (data) {
-            var res = JSON.parse(data);
+  $.ajax({
+    type: "POST",
+    url: "/site/contact",
+    data: data,
+    success: function (data) {
+      var res = JSON.parse(data);
 
-            swal({
-                text: res.message,
-            });
-
-            if(res.status == "ok")
-            {
-                $(".callback__form")[0].reset();
-            }
+      swal({
+        text: res.message,
+        buttons: {
+          confirm: {
+            text: 'OK',
+            value: true,
+            visible: true,
+            className: "btn btn-pink",
+            closeModal: true
+          }
         }
-    })
+      });
+
+      if (res.status == "ok") {
+        $(".callback__form")[0].reset();
+      }
+    }
+  })
 });
 
 
-$("#agree").on('change',function () {
-    var button = $('#contact-submit')
-    if($(this).is(':checked')) {
-        button.removeAttr('disabled');
-    }
-    else
-    {
-        button.attr('disabled','true');
-    }
+$("#agree").on('change', function () {
+  var button = $('#contact-submit');
+  if ($(this).is(':checked')) {
+    button.removeAttr('disabled');
+  }
+  else {
+    button.attr('disabled', 'true');
+  }
 });
 
 $(document).ready(function () {
-    $(".header__nav-item-scroll,.footer__nav-item-scroll").on('click',function (e) {
-        e.preventDefault();
+  $(".header__nav-item-scroll,.footer__nav-item-scroll").on('click', function (e) {
+    e.preventDefault();
 
-        var elementClick = $(this).attr("href");
-        var destination = $(elementClick).offset().top;
+    var elementClick = $(this).attr("href");
+    var destination = $(elementClick).offset().top;
 
-            $('body,html').animate({ scrollTop: destination }, 1100); //1100 - скорость
-
-
-    });
+    $('body,html').animate({scrollTop: destination}, 1100); //1100 - скорость
+  });
 });
 //# sourceMappingURL=script.js.map

@@ -845,6 +845,16 @@ img {
     position: relative;
     padding: 10px 0 50px;
     color: #ffffff; }
+    .header__btn {
+	    padding: 0;
+	    color: #ffffff;
+	    background-color: transparent;
+	    border: none;
+	    cursor: pointer;
+	    transition: color 0.2s }
+	    .header__btn:hover, .header__btn:active, .header__btn:focus {
+	      color: #e32c74;
+	      transition: color 0.2s }
 .header-wrap {
     margin-top: 40px;
     position: relative;

@@ -160,7 +160,9 @@ class SiteController extends Controller
             $response['status']='error';
         }
 
-        echo json_encode($response);
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        return json_encode($response);
     }
 
 

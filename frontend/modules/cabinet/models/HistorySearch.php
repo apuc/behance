@@ -40,7 +40,7 @@ class HistorySearch extends History
      */
     public function search($params)
     {
-        $query = History::find()->where(['user_id'=>\Yii::$app->user->getId()]);
+        $query = History::find()->where(['user_id'=>\Yii::$app->user->getId()])->orderBy("id desc");
 
         // add conditions that should always apply here
 

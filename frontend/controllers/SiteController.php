@@ -147,26 +147,17 @@ class SiteController extends Controller
         if ($form->load($post) && $form->validate())
         {
             $form->save(false);
-            $response['message']='Ваша заявка принята!';
-            $response['status']='ok';
-
-        }
-        else
-        {
-            $response['message']='Ошибка! Введите корректные данные!';
-            $response['status']='error';
+            return true;
         }
 
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-        return json_encode($response);
+        return false;
     }
 
 
 
     public function actionCallback()
     {
-        echo "Cпасибо! Мы вам перезвоним!";
+        print_r(Yii::$app->request->post()['phone']);
     }
 
 

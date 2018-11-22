@@ -18,7 +18,7 @@
             <div class="no-gutters">
                 <div class="col-xl-7 col-lg-9">
                     <h2 class="title"><span class="title-light">Наслаждайтесь творчеством</span><span class="title-extra-bold">остальное доверьте нам!</span></h2>
-                    <p class="callback__main-text main-text">Низкие цены на продвижение своих работ на Behance? Вы нашли, чтоискали! У нас вы получаете комплексное индивидуальное продвижение по максимально выгодным ценам!
+                    <p class="callback__main-text main-text">Низкие цены на продвижение своих работ на Behance? Вы нашли, что искали! У нас Вы получаете комплексное индивидуальное продвижение по максимально выгодным ценам!
                     </p>
                     <form class="callback__form" method="post">
                         <input placeholder="Ваше имя" name="name" required/>

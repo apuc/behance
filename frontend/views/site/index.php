@@ -47,7 +47,7 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
             <?= \frontend\widgets\BehancePhoneWidget::widget(['userIsGuest' => Yii::$app->user->isGuest]); ?>
           <div class="header__phone-text">
             <a class="btn btn-pink"
-               href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['site/cabinet']); ?>">
+               href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                         <span class="btn-thumb">
                             <i class="fa fa-thumbs-up wow"></i>
                             <span class="btn-thumb-circle wow"></span>
@@ -135,7 +135,7 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
                       d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9"/>
 </svg>
               <a
-                href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['site/cabinet']); ?>">
+                href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                 <button class="btn btn-pink"><span>получить <span class="fw-extra-bold">
                                         <span class="btn-number"><?= (Yii::$app->user->isGuest) ? 50 : 100 ?></span> лайков</span></span>
                 </button>

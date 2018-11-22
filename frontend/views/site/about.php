@@ -26,7 +26,7 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
                 <div class="header__phone">
                     <?= \frontend\widgets\BehancePhoneWidget::widget(['userIsGuest'=>Yii::$app->user->isGuest]); ?>
                     <div class="header__phone-text">
-                        <a class="btn btn-pink" href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['site/cabinet']); ?>">
+                        <a class="btn btn-pink" href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                             <span class="btn-thumb">
                                 <i class="fa fa-thumbs-up wow"></i>
                                 <span class="btn-thumb-circle wow"></span>
@@ -47,25 +47,25 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
                         <h1 class="title-big title-big-second">О сервисе</h1>
                     </div>
                     <div class="about__main-text main-text">
-                        <p>Выйти на новый уровень дизайнеру поможет Behance — ресурс, где с хорошим портфолио и рейтинговым кол-вом лайков / просмотров предложения о сотрудничестве будут приходить сами без долгих дополнительных поисков.</p>
-                        <p>Наш сервис это не просто  «накрутка», мы делаем уникальное продвижение ваших работ по разработанному алгоритму, которое позволяет увеличить лайки аккаунта и единичной работы до 3000 и просмотры до 10000, благодаря чему Ваш проект попадает в недельный ТОП Behance и получает ряд преимуществ:</p>
+                        <p>Выйти на новый уровень дизайнеру поможет Behance — ресурс, где с хорошим портфолио и рейтинговым кол-вом лайков / просмотров, предложения о сотрудничестве будут приходить сами, без долгих дополнительных поисков.</p>
+                        <p>Наш сервис это не просто  «накрутка», мы делаем уникальное продвижение Ваших работ по разработанному алгоритму, которое позволяет увеличить лайки аккаунта и отдельной работы до 3000 и просмотры до 10000, благодаря чему Ваш проект попадает в недельный ТОП Behance и получает ряд преимуществ:</p>
                     </div>
                     <div class="about__main">
                         <div class="about__main-left">
                             <div class="about__item action__item">
                                 <div class="action__item-img"><img src="/images/icons/action1.png" alt=""/></div>
                                 <div class="action__item-main"><span class="action__item-title">Как можно больше активности </span><span class="action__item-text">от пользователей Behance (лайки, подписки и добавление работ в коллекции)
-Коментарии и адекватную критику своих работ а так же выгодно выделиться
+коментарии и адекватную критику своих работ, а так же выгодно выделиться
 на фоне новичков.</span></div>
                             </div>
                             <div class="about__item action__item">
                                 <div class="action__item-img"><img src="/images/icons/action1.png" alt=""/></div>
                                 <div class="action__item-main"><span class="action__item-title">Получте уже сейчас</span><span class="action__item-text">коммерческие заказы  / предложения долгосрочного сотрудничества
-и начните зарабатывать на своих работах не прилогая усилий</span></div>
+и начните зарабатывать на своих работах, не прилагая усилий</span></div>
                             </div>
                             <div class="about__item action__item">
                                 <div class="action__item-img"><img src="/images/icons/action1.png" alt=""/></div>
-                                <div class="action__item-main"><span class="action__item-title">вывод в топ</span><span class="action__item-text">Возможность быстрее других своих коллег попасть в ТОП, Вероятность что
+                                <div class="action__item-main"><span class="action__item-title">вывод в топ</span><span class="action__item-text">Возможность быстрее конкурентов попасть в ТОП, вероятность что
 кураторы Behance добавят Вашу работу в одну из курируемых галерей
 возрастает (behance.net/galleries)
 </span></div>
@@ -76,7 +76,7 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
                                         <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1 wow" d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58" />
                                         <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2 wow" d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9" />
 </svg>
-                                    <a href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['site/cabinet']); ?>">
+                                    <a href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                                         <button class="btn btn-pink"><span>получить <span class="fw-extra-bold">
                                         <span class="btn-number"><?= (Yii::$app->user->isGuest) ? 50 : 100 ?></span> лайков</span></span>
                                         </button>
@@ -97,6 +97,38 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
         </section>
         <?= $this->render('contact'); ?>
     </main>
+    <div class="modal-callback js-modal">
+        <div class="modal-callback__backdrop js-close-modal"></div>
+
+        <div class="form__block form__main">
+            <button class="form__close js-close-modal">
+                <span></span><span></span>
+            </button>
+
+            <div class="callback callback_modal">
+                <form class="callback__form">
+                    <input class="js-callBackName" placeholder="Ваше имя" name="name" required/>
+                    <input class="js-callBackTel" placeholder="Ваш телефон" name="tel" required type="email"/>
+
+                    <div class="btn-arrow">
+                        <svg class="arrow-svg" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9"
+                             style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
+<path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow wow"
+      d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1 wow"
+                                  d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2 wow"
+                                  d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9"/>
+</svg>
+                        <button disabled class="btn btn-pink js-callback">
+                            <span><span class="fw-extra-bold">Заказать</span> звонок</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <?= $this->render('footer'); ?>
 </div>
 

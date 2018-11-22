@@ -14,6 +14,7 @@ use yii\web\IdentityInterface;
  * @property string $username
  * @property string $password_hash
  * @property string $password_reset_token
+ * @property string $ref_hash
  * @property string $email
  * @property string $auth_key
  * @property integer $status
@@ -52,8 +53,15 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            [['ref_hash'], 'safe'],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
+    }
+
+
+    public function generateRefHash()
+    {
+        $this->ref_hash = md5($this->email);
     }
 
     /**

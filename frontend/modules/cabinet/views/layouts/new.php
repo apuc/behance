@@ -78,7 +78,15 @@ CabinetAsset::register($this);
                         </a>
                     </div>
 
-<!--                    					<div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="sample-page-submenu">-->
+                    <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/cabinet/referal') ?>">
+                            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pie_chart_outlined</i>
+                            <span>Партнерская программа</span>
+                        </a>
+                    </div>
+
+
+                    <!--                    					<div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="sample-page-submenu">-->
 <!--                    						<a class="mdc-drawer-link" href="#">-->
 <!--                    							<i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>-->
 <!--                    							Sample Pages-->

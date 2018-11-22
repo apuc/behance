@@ -7,6 +7,7 @@ use common\models\Balance;
 use common\models\Cases;
 use common\models\Debug;
 use common\models\Declensions;
+use common\models\History;
 use common\models\Reviews;
 use common\models\Works;
 use Yii;
@@ -84,10 +85,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-//      $service = BehanceService::create(new BehanceAccount());
-//      $account =$service->getAccount("https://www.behance.net/k0tya_ka83bf");
-//      $works = $service->get
-//      var_dump($works); die();
 	    $reviews = Reviews::find()->all();
 	    $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
         
@@ -167,6 +164,13 @@ class SiteController extends Controller
 
 
 
+    public function actionCallback()
+    {
+        echo "Cпасибо! Мы вам перезвоним!";
+    }
+
+
+
     public function actionSignup()
     {
         $model = new SignupForm();
@@ -176,14 +180,25 @@ class SiteController extends Controller
             if ($user = $model->signup())
             {
 
+                if($hash = Yii::$app->request->get('ref'))
+                {
+                    if($referer = $user::findOne(['ref_hash'=>$hash]))
+                    {
+                        $referer_balance = Balance::findOne(['user_id'=>$referer->id]);
+                        $referer_balance->addBalance(100,0);
+                        $history = new History();
+                        $history->setHistory($referer->id,History::TRANSFER_TO_BALANCE,100,0,"Начислено 100 лайков регестрацию по реферальной ссылке");
+                    }
+                }
+
                 $auth = Yii::$app->authManager;
                 $authorRole = $auth->getRole('user');
                 $auth->assign($authorRole, $user->getId());
 
                 $balance = new Balance();
                 $balance->user_id = $user->getId();
-                $balance->views = 0;
-                $balance->likes = 0;
+                $balance->views = 50;
+                $balance->likes = 50;
                 $balance->save();
 
                 if (Yii::$app->getUser()->login($user))

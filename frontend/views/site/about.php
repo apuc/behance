@@ -8,7 +8,8 @@ use yii\helpers\Url;
 
 $this->title = 'О сервисе';
 $this->registerCssFile('/css/service.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
-
+$this->registerCssFile('/css/font-awesome.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
+$this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
 ?>
 
 

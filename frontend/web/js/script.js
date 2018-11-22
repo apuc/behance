@@ -66,10 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeModalBtn = document.querySelectorAll('.js-close-modal');
   const modal = document.querySelector('.js-modal');
   const callBackSubmit = document.querySelector('.js-callback');
-  const callBackName = document.querySelector('.js-callBackName');
   const callBackTel = document.querySelector('.js-callBackTel');
-  const regExpName = new RegExp('[а-яА-ЯёЁa-zA-Z]{2,60}$');
-  let isNameValid = false;
+  let phone = {
+    value: '',
+    regExp: new RegExp('^((\\+)+([0-9]){11,12})$'),
+    isValid: false
+  };
 
   for (let i = 0; i < openModalBackCall.length; i++) {
     openModalBackCall[i].addEventListener('click', () => {
@@ -83,12 +85,29 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   }
 
-  callBackName.addEventListener('input', e => {
-    const value = e.target.value;
-    isNameValid = regExpName.test(value);
-    console.log( regExpName.test(value));
+  callBackTel.addEventListener('input', e => {
+    phone.value = e.target.value;
+    phone.isValid = phone.regExp.test(phone.value);
+
+    phone.isValid ?
+      callBackSubmit.removeAttribute('disabled')
+    :
+      callBackSubmit.setAttribute('disabled', '');
   });
 
+
+  callBackSubmit.addEventListener('click', () => {
+    fetch('/site/callback', {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(phone.value)
+    })
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
+  })
 });
 
 if ($('.reviews__slider').length > 0) {

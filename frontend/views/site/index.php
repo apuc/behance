@@ -241,7 +241,7 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
 
           <p class="modal-callback__text">Оставьте номер и мы вам перезвоним</p>
 
-          <form class="callback__form">
+          <form class="modal-callback__form">
             <input class="modal-callback__input js-callBackTel" placeholder="Номер телефона*" name="tel" required type="tel"/>
 
             <div class="btn-arrow btn-arrow_callback">
@@ -258,6 +258,26 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
               <button disabled class="btn btn-pink btn_callback js-callback">Жду звонка</button>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-callback js-modalError">
+    <div class="modal-callback__backdrop js-close-modal"></div>
+
+    <div class="form__block form__main">
+      <div class="callback callback_modal">
+        <button class="form__close js-close-modal">
+          <span></span><span></span>
+        </button>
+
+        <div class="modal-callback__container">
+          <h3 class="modal-callback__title modal-callback__title_error">Заказать звонок</h3>
+
+          <img src="/images/circle.png" alt="">
+
+          <p class="modal-callback__text modal-callback__text_error">Вы ввели неверные данные. Вернитесь и заполните форму верно.</p>
         </div>
       </div>
     </div>

@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const openModalBackCall = document.querySelectorAll('.js-backCall');
   const closeModalBtn = document.querySelectorAll('.js-close-modal');
   const modal = document.querySelector('.js-modal');
+  const modalError = document.querySelector('.js-modalError');
   const callBackSubmit = document.querySelector('.js-callback');
   const callBackTel = document.querySelector('.js-callBackTel');
   let phone = {
@@ -76,12 +77,14 @@ document.addEventListener("DOMContentLoaded", function () {
   for (let i = 0; i < openModalBackCall.length; i++) {
     openModalBackCall[i].addEventListener('click', () => {
       modal.classList.add('modal-callback_active');
+      modalError.classList.add('modal-callback_active');
     })
   }
 
   for (let i = 0; i < closeModalBtn.length; i++) {
     closeModalBtn[i].addEventListener('click', () => {
       modal.classList.remove('modal-callback_active');
+      modalError.classList.remove('modal-callback_active');
     })
   }
 
@@ -96,16 +99,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  callBackSubmit.addEventListener('click', () => {
+  callBackSubmit.addEventListener('click', e => {
+    e.preventDefault();
     fetch('/site/callback', {
       method: 'POST',
-      headers: {
-        "Accept": "application/json",
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(phone.value)
+      body: phone.value
     })
-      .then(response => console.log(response))
+      .then(response => response.text())
+      .then(data => {
+        console.log(data)
+      })
       .catch(error => console.log(error))
   })
 });

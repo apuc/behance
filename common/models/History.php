@@ -68,21 +68,22 @@ class History extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param $user_id
+     * @param $user
      * @param $type
      * @param $likes
      * @param $views
      * @param $desc
      */
-	public function setHistory($user_id,$type,$likes,$views,$desc)
+	public static function create($user,$type,$likes,$views,$desc)
     {
-       $this->user_id = $user_id;
-       $this->likes = $likes;
-       $this->views = $views;
-       $this->description = $desc;
-       $this->type = $type;
-       $this->dt_add = date("Y-m-d H:i:s");
-       $this->save();
+        $history = new self;
+        $history->user_id = $user;
+        $history->likes = $likes;
+        $history->views = $views;
+        $history->description = $desc;
+        $history->type = $type;
+        $history->dt_add = date("Y-m-d H:i:s");
+        $history->save();
     }
 	
 

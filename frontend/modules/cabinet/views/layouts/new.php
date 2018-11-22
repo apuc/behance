@@ -43,7 +43,7 @@ CabinetAsset::register($this);
 
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/']); ?>">
-                            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>
+                            <i class="fa fa-home" style="visibility: visible;"></i>
                             <span>На гавную</span>
                         </a>
                     </div>
@@ -52,35 +52,35 @@ CabinetAsset::register($this);
 
 
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
-                            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">desktop_mac</i>
+                            <i class="fa fa-user" style="visibility: visible;"></i>
                             <span>Аккаунты</span>
                         </a>
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/works']); ?>">
-                            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">track_changes</i>
+                            <i class="fa fa-suitcase" style="visibility: visible;"></i>
                             <span>Работы</span>
                         </a>
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/queue']); ?>">
-                            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">dashboard</i>
+                            <i class="fa fa-heart" style="visibility: visible;"></i>
                             <span>Работы в лайкере</span>
                         </a>
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history') ?>">
-                            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pie_chart_outlined</i>
+                            <i class="fa fa-history" style="visibility: visible;"></i>
                             <span>История пополнений</span>
                         </a>
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/cabinet/referal') ?>">
-                            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pie_chart_outlined</i>
+                            <i class="fa fa-users"></i>
                             <span>Партнерская программа</span>
                         </a>
                     </div>

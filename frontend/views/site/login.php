@@ -10,8 +10,6 @@ use yii\helpers\Url;
 
 $this->title = 'Вход';
 $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
-$this->registerCssFile('/css/font-awesome.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
-$this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
 ?>
 <header class="header-wrap header-wrap-auth">
     <div class="header__stars1 header__stars">

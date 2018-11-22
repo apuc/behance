@@ -1,10 +1,15 @@
 <?php
 use common\models\ContactForm;
+use common\models\Callback;
 
 $contact_count = ContactForm::find()->where(['status'=>0])->count();
+$callback_count = Callback::find()->where(['status'=>0])->count();
 
 if($contact_count == 0)
     $contact_count = '';
+
+if($callback_count == 0)
+    $callback_count = '';
 
 ?>
 <aside class="main-sidebar">
@@ -34,6 +39,7 @@ if($contact_count == 0)
                     ['label' => 'Очередь', 'icon' => 'fas fa-list-ol', 'url' => ['/queue/queue']],
                     ['label' => Yii::t('balance', 'Balance'), 'icon' => 'fas fa-shopping-basket', 'url' => ['/balance/balance']],
                     ['label' => 'Заявки', 'icon' => 'fas fa-clipboard-list', 'url' => ['/orders/contact'] ,'template'=>'<a href="{url}">{icon}<span>{label}</span><span class="pull-right-container"><small class="label pull-right bg-red">'.$contact_count.'</small></span></a>'],
+                    ['label' => 'Звонки', 'icon' => 'fas fa-phone', 'url' => ['/orders/callback'] ,'template'=>'<a href="{url}">{icon}<span>{label}</span><span class="pull-right-container"><small class="label pull-right bg-red">'.$callback_count.'</small></span></a>'],
                     ['label' => Yii::t('orders', 'Orders'), 'icon' => 'fas fa-shopping-cart', 'url' => ['/orders/orders']],
                     ['label' => 'Тарифы', 'icon' => 'fas fa-suitcase', 'url' => ['/cases/cases']],
                     ['label' => Yii::t('history', 'History'), 'icon' => 'fas fa-history', 'url' => ['/history/history']],

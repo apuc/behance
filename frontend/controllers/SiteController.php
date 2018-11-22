@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Accounts;
 use common\models\Balance;
+use common\models\Callback;
 use common\models\Cases;
 use common\models\Debug;
 use common\models\Declensions;
@@ -157,7 +158,8 @@ class SiteController extends Controller
 
     public function actionCallback()
     {
-        print_r(Yii::$app->request->post()['phone']);
+        $phone = Yii::$app->request->post()['phone'];
+        Callback::create($phone);
     }
 
 
@@ -177,8 +179,13 @@ class SiteController extends Controller
                     {
                         $referer_balance = Balance::findOne(['user_id'=>$referer->id]);
                         $referer_balance->addBalance(100,0);
-                        $history = new History();
-                        $history->setHistory($referer->id,History::TRANSFER_TO_BALANCE,100,0,"Начислено 100 лайков регестрацию по реферальной ссылке");
+
+                        History::create($referer->id,
+                            History::TRANSFER_TO_BALANCE,
+                            100,
+                            0,
+                            "Начислено 100 лайков регестрацию по реферальной ссылке"
+                        );
                     }
                 }
 
@@ -186,11 +193,7 @@ class SiteController extends Controller
                 $authorRole = $auth->getRole('user');
                 $auth->assign($authorRole, $user->getId());
 
-                $balance = new Balance();
-                $balance->user_id = $user->getId();
-                $balance->views = 50;
-                $balance->likes = 50;
-                $balance->save();
+                Balance::create($user->getId(),50,200);
 
                 if (Yii::$app->getUser()->login($user))
                 {

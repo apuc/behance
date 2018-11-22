@@ -16,8 +16,7 @@ class CabinetAsset extends AssetBundle
 
 	public $css = [
         'css/style.css',
-        'css/font-awesome.min.css'
-
+         '/css/font-awesome.css'
 	];
 
 	public $js = [

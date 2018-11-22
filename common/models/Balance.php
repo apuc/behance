@@ -23,6 +23,19 @@ class Balance extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param $user
+     * @param $likes
+     * @param $views
+     */
+    public static function create($user,$likes,$views)
+    {
+        $balance = new self;
+        $balance-> user_id = $user;
+        $balance->likes = $likes;
+        $balance->views = $views;
+        $balance->save();
+    }
+    /**
      * {@inheritdoc}
      */
     public function rules()

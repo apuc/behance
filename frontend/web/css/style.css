@@ -17085,7 +17085,8 @@ footer {
       .mdc-persistent-drawer .mdc-drawer-item .mdc-drawer-link i {
         color: inherit;
         font-size:18px !important;
-        margin-top: 5px;
+        margin-right: 5px;
+        width: 20px;
       }
         .mdc-persistent-drawer .mdc-drawer-item .mdc-drawer-link i.mdc-drawer-item-icon {
           font-size: 1.25rem;

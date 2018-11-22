@@ -57,9 +57,13 @@ class BalanceController extends Controller
 
         $balanceModel->addBalance($post['likes'],$post['views']);
 
-        $historyModel = new History();
-
-        $historyModel->setHistory($post['user_id'],History::TRANSFER_TO_BALANCE,$post['likes'],$post['views'],"Счет пополнен");
+        History::create(
+            $post['user_id'],
+            History::TRANSFER_TO_BALANCE,
+            $post['likes'],
+            $post['views'],
+            "Счет пополнен"
+        );
 
         Yii::$app->session->setFlash('success','Баланс пополнен!');
         return true;

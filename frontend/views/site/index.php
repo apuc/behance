@@ -9,8 +9,6 @@ use yii\helpers\Url;
 
 $this->title = 'Behance Liker';
 $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
-$this->registerCssFile('/css/font-awesome.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
-$this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
 ?>
 
 

@@ -105,25 +105,19 @@ document.addEventListener("DOMContentLoaded", function () {
             url: "/site/callback",
             data: {"phone":phone.value},
             success: function (data) {
-                alert(data);
-                // var res = JSON.parse(data);
-                //
-                // swal({
-                //     text: res.message,
-                //     buttons: {
-                //         confirm: {
-                //             text: 'OK',
-                //             value: true,
-                //             visible: true,
-                //             className: "btn btn-pink",
-                //             closeModal: true
-                //         }
-                //     }
-                // });
-                //
-                // if (res.status == "ok") {
-                //     $(".callback__form")[0].reset();
-                // }
+                swal({
+                    text: "Ваша заявка принята! Мы вам перезвоним!",
+                    buttons: {
+                        confirm: {
+                            text: 'OK',
+                            value: true,
+                            visible: true,
+                            className: "btn btn-pink",
+                            closeModal: true
+                        }
+                    }
+                });
+                modal.classList.remove('modal-callback_active');
             }
         })
 

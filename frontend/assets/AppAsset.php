@@ -14,6 +14,8 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/bootstrap-grid.min.css',
         'css/slick.css',
+        '/css/font-awesome.css',
+        '/css/secret-styles.css'
     ];
     public $js = [
         'js/slick.min.js',

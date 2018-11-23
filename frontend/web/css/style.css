@@ -17085,7 +17085,8 @@ footer {
       .mdc-persistent-drawer .mdc-drawer-item .mdc-drawer-link i {
         color: inherit;
         font-size:18px !important;
-        margin-top: 5px;
+        margin-right: 5px;
+        width: 20px;
       }
         .mdc-persistent-drawer .mdc-drawer-item .mdc-drawer-link i.mdc-drawer-item-icon {
           font-size: 1.25rem;
@@ -17951,6 +17952,19 @@ address p {
 
 a:hover,a:focus{
   text-decoration: none !important;
+}
+
+.ref-text{
+  text-align:center;
+  font-size:20px;
+}
+
+.ref-link{
+    color:#0b93d5;
+text-align:center;
+  margin:0 auto;
+  display:block;
+  font-size:25px;
 }
 
 /*-------------------------------------------------------------------*/

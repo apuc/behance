@@ -4,9 +4,11 @@ namespace frontend\controllers;
 
 use common\models\Accounts;
 use common\models\Balance;
+use common\models\Callback;
 use common\models\Cases;
 use common\models\Debug;
 use common\models\Declensions;
+use common\models\History;
 use common\models\Reviews;
 use common\models\Works;
 use Yii;
@@ -84,10 +86,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-//      $service = BehanceService::create(new BehanceAccount());
-//      $account =$service->getAccount("https://www.behance.net/k0tya_ka83bf");
-//      $works = $service->get
-//      var_dump($works); die();
 	    $reviews = Reviews::find()->all();
 	    $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
         
@@ -150,19 +148,18 @@ class SiteController extends Controller
         if ($form->load($post) && $form->validate())
         {
             $form->save(false);
-            $response['message']='Ваша заявка принята!';
-            $response['status']='ok';
-
-        }
-        else
-        {
-            $response['message']='Ошибка! Введите корректные данные!';
-            $response['status']='error';
+            return true;
         }
 
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return false;
+    }
 
-        return json_encode($response);
+
+
+    public function actionCallback()
+    {
+        $phone = Yii::$app->request->post()['phone'];
+        Callback::create($phone);
     }
 
 
@@ -176,15 +173,27 @@ class SiteController extends Controller
             if ($user = $model->signup())
             {
 
+                if($hash = Yii::$app->request->get('ref'))
+                {
+                    if($referer = $user::findOne(['ref_hash'=>$hash]))
+                    {
+                        $referer_balance = Balance::findOne(['user_id'=>$referer->id]);
+                        $referer_balance->addBalance(100,0);
+
+                        History::create($referer->id,
+                            History::TRANSFER_TO_BALANCE,
+                            100,
+                            0,
+                            "Начислено 100 лайков регестрацию по реферальной ссылке"
+                        );
+                    }
+                }
+
                 $auth = Yii::$app->authManager;
                 $authorRole = $auth->getRole('user');
                 $auth->assign($authorRole, $user->getId());
 
-                $balance = new Balance();
-                $balance->user_id = $user->getId();
-                $balance->views = 0;
-                $balance->likes = 0;
-                $balance->save();
+                Balance::create($user->getId(),50,200);
 
                 if (Yii::$app->getUser()->login($user))
                 {

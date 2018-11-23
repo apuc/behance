@@ -8,7 +8,6 @@ use yii\helpers\Url;
 
 $this->title = 'О сервисе';
 $this->registerCssFile('/css/service.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
-
 ?>
 
 
@@ -25,7 +24,7 @@ $this->registerCssFile('/css/service.css', ['depends' => ['yii\bootstrap\Bootstr
                 <div class="header__phone">
                     <?= \frontend\widgets\BehancePhoneWidget::widget(['userIsGuest'=>Yii::$app->user->isGuest]); ?>
                     <div class="header__phone-text">
-                        <a class="btn btn-pink" href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['site/cabinet']); ?>">
+                        <a class="btn btn-pink" href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                             <span class="btn-thumb">
                                 <i class="fa fa-thumbs-up wow"></i>
                                 <span class="btn-thumb-circle wow"></span>
@@ -46,25 +45,25 @@ $this->registerCssFile('/css/service.css', ['depends' => ['yii\bootstrap\Bootstr
                         <h1 class="title-big title-big-second">О сервисе</h1>
                     </div>
                     <div class="about__main-text main-text">
-                        <p>Выйти на новый уровень дизайнеру поможет Behance — ресурс, где с хорошим портфолио и рейтинговым кол-вом лайков / просмотров предложения о сотрудничестве будут приходить сами без долгих дополнительных поисков.</p>
-                        <p>Наш сервис это не просто  «накрутка», мы делаем уникальное продвижение ваших работ по разработанному алгоритму, которое позволяет увеличить лайки аккаунта и единичной работы до 3000 и просмотры до 10000, благодаря чему Ваш проект попадает в недельный ТОП Behance и получает ряд преимуществ:</p>
+                        <p>Выйти на новый уровень дизайнеру поможет Behance — ресурс, где с хорошим портфолио и рейтинговым кол-вом лайков / просмотров, предложения о сотрудничестве будут приходить сами, без долгих дополнительных поисков.</p>
+                        <p>Наш сервис это не просто  «накрутка», мы делаем уникальное продвижение Ваших работ по разработанному алгоритму, которое позволяет увеличить лайки аккаунта и отдельной работы до 3000 и просмотры до 10000, благодаря чему Ваш проект попадает в недельный ТОП Behance и получает ряд преимуществ:</p>
                     </div>
                     <div class="about__main">
                         <div class="about__main-left">
                             <div class="about__item action__item">
                                 <div class="action__item-img"><img src="/images/icons/action1.png" alt=""/></div>
                                 <div class="action__item-main"><span class="action__item-title">Как можно больше активности </span><span class="action__item-text">от пользователей Behance (лайки, подписки и добавление работ в коллекции)
-Коментарии и адекватную критику своих работ а так же выгодно выделиться
+коментарии и адекватную критику своих работ, а так же выгодно выделиться
 на фоне новичков.</span></div>
                             </div>
                             <div class="about__item action__item">
                                 <div class="action__item-img"><img src="/images/icons/action1.png" alt=""/></div>
                                 <div class="action__item-main"><span class="action__item-title">Получте уже сейчас</span><span class="action__item-text">коммерческие заказы  / предложения долгосрочного сотрудничества
-и начните зарабатывать на своих работах не прилогая усилий</span></div>
+и начните зарабатывать на своих работах, не прилагая усилий</span></div>
                             </div>
                             <div class="about__item action__item">
                                 <div class="action__item-img"><img src="/images/icons/action1.png" alt=""/></div>
-                                <div class="action__item-main"><span class="action__item-title">вывод в топ</span><span class="action__item-text">Возможность быстрее других своих коллег попасть в ТОП, Вероятность что
+                                <div class="action__item-main"><span class="action__item-title">вывод в топ</span><span class="action__item-text">Возможность быстрее конкурентов попасть в ТОП, вероятность что
 кураторы Behance добавят Вашу работу в одну из курируемых галерей
 возрастает (behance.net/galleries)
 </span></div>
@@ -75,7 +74,7 @@ $this->registerCssFile('/css/service.css', ['depends' => ['yii\bootstrap\Bootstr
                                         <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1 wow" d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58" />
                                         <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2 wow" d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9" />
 </svg>
-                                    <a href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['site/cabinet']); ?>">
+                                    <a href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                                         <button class="btn btn-pink"><span>получить <span class="fw-extra-bold">
                                         <span class="btn-number"><?= (Yii::$app->user->isGuest) ? 50 : 100 ?></span> лайков</span></span>
                                         </button>
@@ -96,6 +95,7 @@ $this->registerCssFile('/css/service.css', ['depends' => ['yii\bootstrap\Bootstr
         </section>
         <?= $this->render('contact'); ?>
     </main>
+
     <?= $this->render('footer'); ?>
 </div>
 

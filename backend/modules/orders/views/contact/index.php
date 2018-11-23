@@ -38,7 +38,7 @@ $this->title = 'Заявки из формы контактов';
             'message:ntext',
             'dt_add',
             [
-                'attribute'=>'link',
+                'attribute'=>'status',
                 'format'=>'raw',
                 'value'=>function($data){
                      if($data->status == 0)

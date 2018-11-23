@@ -10,8 +10,6 @@ use yii\helpers\Url;
 
 $this->title = 'Вход';
 $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
-$this->registerCssFile('/css/font-awesome.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
-$this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
 ?>
 <header class="header-wrap header-wrap-auth">
     <div class="header__stars1 header__stars">
@@ -46,14 +44,14 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
                 <div class="header__phone-wrap header__phone-wrap-auth">
                     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                    <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($model, 'email')->textInput() ?>
 
                     <?= $form->field($model, 'password')->passwordInput() ?>
 
 <!--                    --><?php echo "" //$form->field($model, 'rememberMe')->checkbox() ?>
 
                     <div style="margin:1em 0; display: flex; justify-content: center">
-                         <?= Html::a('Регистрация', ['site/signup'],['style'=>'color:white;']) ?>.
+                         <?= Html::a('Регистрация', ['site/signup'],['style'=>'color:white;']) ?>
                     </div>
 
                     <div class="form-group">

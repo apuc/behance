@@ -9,8 +9,6 @@ use yii\helpers\Url;
 
 $this->title = 'Behance Liker';
 $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
-$this->registerCssFile('/css/font-awesome.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
-$this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
 ?>
 
 
@@ -47,7 +45,7 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
             <?= \frontend\widgets\BehancePhoneWidget::widget(['userIsGuest' => Yii::$app->user->isGuest]); ?>
           <div class="header__phone-text">
             <a class="btn btn-pink"
-               href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['site/cabinet']); ?>">
+               href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                         <span class="btn-thumb">
                             <i class="fa fa-thumbs-up wow"></i>
                             <span class="btn-thumb-circle wow"></span>
@@ -135,7 +133,7 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
                       d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9"/>
 </svg>
               <a
-                href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['site/cabinet']); ?>">
+                href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                 <button class="btn btn-pink"><span>получить <span class="fw-extra-bold">
                                         <span class="btn-number"><?= (Yii::$app->user->isGuest) ? 50 : 100 ?></span> лайков</span></span>
                 </button>
@@ -227,37 +225,6 @@ $this->registerCssFile('/css/secret-styles.css', ['depends' => ['yii\bootstrap\B
       <?= $this->render('contact'); ?>
   </main>
 
-  <div class="modal-callback js-modal">
-    <div class="modal-callback__backdrop js-close-modal"></div>
 
-    <div class="form__block form__main">
-      <button class="form__close js-close-modal">
-        <span></span><span></span>
-      </button>
-
-      <div class="callback callback_modal">
-        <form class="callback__form">
-          <input class="js-callBackName" placeholder="Ваше имя" name="name" required/>
-          <input class="js-callBackTel" placeholder="Ваш телефон" name="tel" required type="email"/>
-
-          <div class="btn-arrow">
-            <svg class="arrow-svg" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9"
-                 style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
-<path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow wow"
-      d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1"/>
-              <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1 wow"
-                    d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58"/>
-              <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2 wow"
-                    d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9"/>
-</svg>
-            <button disabled class="btn btn-pink js-callback">
-              <span><span class="fw-extra-bold">Заказать</span> звонок</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 
 <?= $this->render('footer'); ?>

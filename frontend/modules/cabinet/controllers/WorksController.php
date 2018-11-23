@@ -76,8 +76,13 @@ class WorksController extends Controller
         if($queue->load(['Queue'=>$post]) && $queue->save())
         {
            $user_balance->removeFromBalance($post['likes_work'],$post['views_work']);
-           $history = new History();
-           $history->setHistory($user_id,History::TRANSFER_FROM_BALANCE,$post['likes_work'],$post['views_work'],"Лайки и просмотры назначены на работу");
+
+           History::create($user_id,
+               History::TRANSFER_FROM_BALANCE,
+               $post['likes_work'],
+               $post['views_work'],
+               "Лайки и просмотры назначены на работу"
+           );
 
            return true;
         }

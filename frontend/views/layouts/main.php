@@ -22,18 +22,67 @@ AppAsset::register($this);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="msapplication-TileColor" content="#2b5797">
+  <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
 
-
-   <?php $this->registerCsrfMetaTags() ?>
+  <?php $this->registerCsrfMetaTags() ?>
   <title><?= Html::encode($this->title) ?></title>
-   <?php $this->head() ?>
+    <?php $this->head() ?>
+  <!— Global site tag (gtag.js) - Google Analytics —>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129511265-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129511265-1');
+  </script>
+
+  <!— Yandex.Metrika counter —>
+  <script type="text/javascript">
+    (function (d, w, c) {
+      (w[c] = w[c] || []).push(function () {
+        try {
+          w.yaCounter51223025 = new Ya.Metrika2({
+            id: 51223025,
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true,
+            trackHash: true
+          });
+        } catch (e) {
+        }
+      });
+
+      var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () {
+          n.parentNode.insertBefore(s, n);
+        };
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+      if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+      } else {
+        f();
+      }
+    })(document, window, "yandex_metrika_callbacks2");
+  </script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/51223025" style="position:absolute; left:-9999px;" alt=""/></div>
+  </noscript>
+  <!— /Yandex.Metrika counter —>
 </head>
 <body>
 <?php $this->beginBody() ?>

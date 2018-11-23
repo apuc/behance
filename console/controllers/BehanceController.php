@@ -15,6 +15,7 @@ use common\behance\lib\BehanceAccount;
 use common\models\Accounts;
 use common\models\Settings;
 use common\models\Queue;
+use common\models\User;
 
 
 use common\models\Works;
@@ -88,6 +89,19 @@ class BehanceController extends Controller
             }
         }
 
+    }
+
+
+    public function actionGenerateRefHash()
+    {
+        $users = User::find()->Where(['ref_hash' => null])->all();
+
+        foreach ($users as $user)
+        {
+            $user->generateRefHash();
+            $user->save();
+            $this->stdout("Сгенерирован хеш для {$user->email}!\n",Console::FG_GREEN);
+        }
     }
 
 }

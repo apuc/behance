@@ -24,8 +24,9 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
+    const STATUS_DEFAULT = 0;
+    const STATUS_ACTIVATED = 1;
+
 
 
     /**
@@ -52,16 +53,67 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'default', 'value' => self::STATUS_DEFAULT],
             [['ref_hash'], 'safe'],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVATED ,self::STATUS_DEFAULT]],
         ];
     }
 
 
+
+    public static function create($email,$password)
+    {
+        $user = new self;
+        $user->email = $email;
+        $user->username = $email;
+        $user->status = User::STATUS_DEFAULT;
+        $user->setPassword($password);
+        $user->generateAuthKey();
+        $user->generateRefHash();
+        $user->save();
+
+        return $user;
+    }
+
+
+
+    public function requestEmailConfirm($referer = false)
+    {
+        $link = "https://{$_SERVER['HTTP_HOST']}/account-confirm?key={$this->auth_key}";
+
+        if($referer)
+        {
+            $link.="&ref={$referer}";
+        }
+
+        Yii::$app->mailer->compose()
+            ->setFrom('from@domain.com')
+            ->setTo($this->email)
+            ->setSubject('Behance Liker подтверждение почты')
+            ->setHtmlBody("<p>Для подтверждения аккаунта перейдите по ссылке:</p>
+                                <p><a href='{$link}'>{$link}</a></p>")
+            ->send();
+    }
+
+
+
+    public function Activate()
+    {
+        $auth = Yii::$app->authManager;
+        $authorRole = $auth->getRole('user');
+        $auth->assign($authorRole, $this->id);
+
+        Balance::create($this->id,50,200);
+
+        $this->status = User::STATUS_ACTIVATED;
+        $this->save();
+    }
+
+
+
     public function generateRefHash()
     {
-        $this->ref_hash = md5($this->email);
+        $this->ref_hash = md5(uniqid(rand(), true));
     }
 
     /**
@@ -69,7 +121,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVATED]);
     }
 
     /**
@@ -88,7 +140,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByEmail($mail)
     {
-        return static::findOne(['email' => $mail, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['email' => $mail, 'status' => self::STATUS_ACTIVATED]);
     }
 
     /**
@@ -105,7 +157,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         return static::findOne([
             'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
+            'status' => self::STATUS_ACTIVATED,
         ]);
     }
 

@@ -10,6 +10,7 @@ use common\models\Debug;
 use common\models\Declensions;
 use common\models\History;
 use common\models\Reviews;
+use common\models\User;
 use common\models\Works;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -86,44 +87,18 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-	    $reviews = Reviews::find()->all();
+        $reviews = Reviews::find()->all();
 	    $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
         
         return $this->render('index', ['reviews' => $reviews, 'cases' => $cases]);
     }
 
-    /**
-     * Logs in a user.
-     *
-     * @return mixed
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest)
-        {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-
-        if ($model->load(Yii::$app->request->post()) && $model->login())
-        {
-            return $this->goHome();
-        }
-
-        $model->password = '';
-
-        return $this->render('login', [
-                'model' => $model,
-        ]);
-    }
 
 
     public function actionAbout()
     {
         return $this->render('about');
     }
-
     /**
      * Logs out the current user.
      *
@@ -143,7 +118,6 @@ class SiteController extends Controller
 
         $form = new ContactForm();
         $post['ContactForm'] = Yii::$app->request->post();
-        $response = array();
 
         if ($form->load($post) && $form->validate())
         {
@@ -164,47 +138,78 @@ class SiteController extends Controller
 
 
 
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login())
+        {
+            return $this->goHome();
+        }
+        $model->password = '';
+        return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+
+
     public function actionSignup()
     {
-        $model = new SignupForm();
+        $form = new SignupForm();
 
-        if ($model->load(Yii::$app->request->post()))
+        if ($form->load(Yii::$app->request->post()) && $form->validate())
         {
-            if ($user = $model->signup())
+            $user = User::create($form->email,$form->password);
+
+            if($referer = Yii::$app->request->get('ref'))
             {
-
-                if($hash = Yii::$app->request->get('ref'))
-                {
-                    if($referer = $user::findOne(['ref_hash'=>$hash]))
-                    {
-                        $referer_balance = Balance::findOne(['user_id'=>$referer->id]);
-                        $referer_balance->addBalance(100,0);
-
-                        History::create($referer->id,
-                            History::TRANSFER_TO_BALANCE,
-                            100,
-                            0,
-                            "Начислено 100 лайков регестрацию по реферальной ссылке"
-                        );
-                    }
-                }
-
-                $auth = Yii::$app->authManager;
-                $authorRole = $auth->getRole('user');
-                $auth->assign($authorRole, $user->getId());
-
-                Balance::create($user->getId(),50,200);
-
-                if (Yii::$app->getUser()->login($user))
-                {
-                    return $this->goHome();
-                }
+                $user->requestEmailConfirm($referer);
             }
+            else
+            {
+                $user->requestEmailConfirm();
+            }
+
+            Yii::$app->session->set('signup',true);
+            return $this->refresh();
         }
 
         return $this->render('signup', [
-            'model' => $model,
+            'model' => $form,
         ]);
+    }
+
+
+
+    public function actionAccountConfirm($key,$ref = null)
+    {
+        if($ref != null)
+        {
+            if($referer = User::findOne(['ref_hash'=>$ref]))
+            {
+                $referer_balance = Balance::findOne(['user_id'=>$referer->id]);
+                $referer_balance->addBalance(100,0);
+
+                History::create(
+                         $referer->id,
+                    History::TRANSFER_TO_BALANCE,
+                    100,
+                    0,
+                    "Начислено 100 лайков за регестрацию по реферальной ссылке"
+                );
+            }
+        }
+
+        if($user = User::findOne(['auth_key'=>$key]))
+        {
+           $user->Activate();
+           Yii::$app->getUser()->login($user);
+           return $this->goHome();
+        }
     }
 
 

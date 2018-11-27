@@ -184,7 +184,8 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
 					                    <?= str_replace('.00', '', $case->price) ?>
                           <span class="prices__item-ruble">₽</span>
 				                    </span>
-                        <button class="btn btn-small btn-white">Заказать</button>
+                        <a class="btn btn-small btn-white" href="<?=Url::toRoute(['/cabinet/payment'])?>">Заказать</a>
+
                       </div>
                     </div>
                   <?php endforeach; ?>

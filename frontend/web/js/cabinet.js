@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
 
+    //баланс
     var form = $("#works-grid-form");
     var errorSpan = $("#works-form-error");
     var hiddenInput = $("#work-id-input");
@@ -9,6 +10,11 @@ $(document).ready(function () {
     var balanceViews = $("#balance_views");
     var likesInput = $("#form-likes");
     var viewsInput = $("#form-views");
+
+    //оплата
+    var casesSelect = $("#cases-select")[0];
+    var sumInput = $("input[name='ik_am']");
+    var caseInput = $("input[name='ik_x_caseid']");
 
 
     $('.btn-works-grid').on('click',function () {
@@ -49,6 +55,12 @@ $(document).ready(function () {
 
         });
 
+    })
+
+    casesSelect.addEventListener('change',function () {
+        let data = $(this).val().split('|');
+        sumInput.val(data[1]);
+        caseInput.val(data[0]);
     })
 
 });//close document ready

@@ -60,4 +60,9 @@ class Cases extends \yii\db\ActiveRecord
             'term' => Yii::t('cases', 'Term'),
         ];
     }
+
+    public function __toString()
+    {
+        return "{$this->name}: {$this->likes} лайков, {$this->views} просмотров, цена - {$this->price} руб.";
+    }
 }

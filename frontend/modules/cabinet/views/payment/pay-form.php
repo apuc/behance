@@ -11,10 +11,6 @@ $this->title = 'Пополнение баланса';
 ?>
 <div class="payment-index">
 
-    <div class="fotm-group">
-        <a href="//www.free-kassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/23.png"></a>
-    </div>
-
     <div class="form-group">
         <label for="">Выберите тариф</label>
       <?= Html::dropDownList('case','',$cases,['class'=>'form-control','id'=>'cases-select']);?>

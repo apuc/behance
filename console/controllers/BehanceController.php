@@ -104,4 +104,13 @@ class BehanceController extends Controller
         }
     }
 
+
+
+    public function actionActivate()
+    {
+        User::updateAll(['status' => 1]);
+        $this->stdout("Complete\n",Console::FG_GREEN);
+    }
+
+
 }

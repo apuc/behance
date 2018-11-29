@@ -36,6 +36,14 @@ use yii\helpers\Url;
                         <span class="fz15 fw-extra-bold">info@avtouzor.ru</span>
                     </span>
         </a>
+
+          <a class="footer__btn">
+
+              <span class="footer__btn-text">
+                        <a href="//www.free-kassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/14.png"></a>
+                    </span>
+          </a>
+
       </div>
     </div>
   </div>

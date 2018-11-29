@@ -27,8 +27,7 @@ AppAsset::register($this);
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-    <meta name="interkassa-verification" content="7d5018e8cdef6184838e93caa75ae385" />
+  <meta name="theme-color" content="#ffffff"><meta name="interkassa-verification" content="7d5018e8cdef6184838e93caa75ae385" />
 
   <?php $this->registerCsrfMetaTags() ?>
   <title><?= Html::encode($this->title) ?></title>

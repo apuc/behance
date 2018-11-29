@@ -72,6 +72,13 @@ CabinetAsset::register($this);
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment']); ?>">
+                            <i class="fa fa-usd"></i>
+                            <span>Пополнить баланс</span>
+                        </a>
+                    </div>
+
+                    <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history') ?>">
                             <i class="fa fa-history" style="visibility: visible;"></i>
                             <span>История пополнений</span>

@@ -17,84 +17,103 @@ use Yii;
 
 class PaymentController extends Controller
 {
-   public function actionIndex()
-   {
+    private $secret1 = '32rfcqqv';
+    private $secret2 = '4ovny78u';
+    private $merchant_id = '107781';
+
+
+    public function actionIndex()
+    {
        $cases = Cases::findAll(['status'=>1]);
        $res = array();
        $defaultCase = $cases[0];
+
+       $order_id = uniqid('id_');
+       $form_sign = $this->generateSign($defaultCase->price,$this->secret1,$order_id);
 
        foreach ($cases as $case)
        {
           $res[$case->id."|".$case->price] = $case->__toString();
        }
 
-       return $this->render('pay-form',['cases'=>$res,'defaultCase'=>$defaultCase]);
-   }
+       return $this->render('pay-form',[
+           'cases'=>$res,
+           'defaultCase'=>$defaultCase,
+           'merchant_id'=>$this->merchant_id,
+               'form_sign'=>$form_sign,
+            'order_id'=>$order_id
+           ]
+       );
+    }
 
 
 
-   public function actionPaymentSuccess()
-   {
+    public function actionPaymentSuccess()
+    {
        return $this->render('payment-success');
-   }
+    }
 
 
 
-   public function actionPaymentFailed()
-   {
+    public function actionPaymentFailed()
+    {
        return $this->render('payment-fail');
-   }
+    }
 
 
 
-   public function actionPaymentWaiting()
-   {
+    public function actionPaymentWaiting()
+    {
        return $this->render('payment-waiting');
-   }
+    }
 
 
 
-   public function actionPaymentResults()
-   {
-       $post= Yii::$app->request->post();
+    public function actionPaymentResults()
+    {
+       $post = Yii::$app->request->post();
 
-       if($this->validateSign($post,$post['ik_sign']))
+       $sign = $this->generateSign($post['AMOUNT'],$this->secret2,$post['MERCHANT_ORDER_ID']);
+
+       if($sign == $post['SIGN'])
        {
-         $user = $post['ik_x_userid'];
+         $user = $post['us_userid'];
 
-         $case = Cases::findOne(['id'=>$post['ik_x_caseid']]);
+         $case = Cases::findOne(['id'=>$post['us_caseid']]);
 
-         $balance = Balance::findOne(['user_id'=>$user]);
-         $balance->addBalance($case->likes,$case->views);
+         if($post['AMOUNT'] == $case->price)
+         {
+             $balance = Balance::findOne(['user_id'=>$user]);
+             $balance->addBalance($case->likes,$case->views);
 
-         History::create(
-             $user,
-             History::TRANSFER_TO_BALANCE,
-             $case->likes,
-             $case->views,
-             'Баланс пополнен!'
+             History::create(
+                 $user,
+                 History::TRANSFER_TO_BALANCE,
+                 $case->likes,
+                 $case->views,
+                 'Баланс пополнен!'
              );
+         }
+
 
        }
 
-   }
+    }
 
 
 
-   private function validateSign($dataSet,$formSign)
-   {
-       unset($dataSet['ik_sign']); //удаляем из данных строку подписи
-       ksort($dataSet, SORT_STRING); // сортируем по ключам в алфавитном порядке элементы массива
-       array_push($dataSet, 'Yy1lf542PSBn8xNm'); // добавляем в конец массива "секретный ключ"
-       $signString = implode(':', $dataSet); // конкатенируем значения через символ ":"
-       $sign = base64_encode(md5($signString, true)); // берем MD5 хэш в бинарном виде по
+    public function actionGetFormSecret()
+    {
+        $id = Yii::$app->request->post('order_id');
+        $sum = Yii::$app->request->post('sum');;
+        return $this->generateSign($sum,$this->secret1,$id);
+    }
 
-       if($sign == $formSign)
-       {
-         return true;
-       }
 
-       return false;
-   }
+
+    private function generateSign($sum,$secret,$order_id)
+    {
+       return md5("{$this->merchant_id}:{$sum}:{$secret}:{$order_id}");
+    }
 
 }

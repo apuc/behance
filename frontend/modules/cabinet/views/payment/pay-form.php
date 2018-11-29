@@ -16,15 +16,14 @@ $this->title = 'Пополнение баланса';
       <?= Html::dropDownList('case','',$cases,['class'=>'form-control','id'=>'cases-select']);?>
     </div>
 
-    <form id="payment" name="payment" method="post" action="https://sci.interkassa.com/" enctype="utf-8">
-        <input type="hidden" name="ik_co_id" value="5bf411773c1eaf624a8b4568" />
-        <input type="hidden" name="ik_pm_no" value="ID_4233" />
-        <input type="hidden" name="ik_am" value="<?= $defaultCase->price ?>" />
-        <input type="hidden" name="ik_cur" value="RUB" />
-        <input type="hidden" name="ik_desc" value="Пополнение баланса" />
-        <input type="hidden" name="ik_exp" value="2018-11-28" />
-        <input type="hidden" name="ik_x_userid" value="<?= Yii::$app->user->getId() ?>" />
-        <input type="hidden" name="ik_x_caseid" value="<?= $defaultCase->id ?>" />
+    <form method='get' action='http://www.free-kassa.ru/merchant/cash.php'>
+        <input type='hidden' name='m' value='<?= $merchant_id ?>'>
+        <input type='hidden' name='oa' id="pay-sum" value='<?= $defaultCase->price ?>'>
+        <input type='hidden' name='o' id="pay-order-id" value='<?= $order_id?>'>
+        <input type='hidden' name='s' id="pay-sign" value='<?= $form_sign ?>'>
+        <input type='hidden' name='i' value='1'>
+        <input type='hidden' name='us_userid' value='<?= Yii::$app->user->getId() ?>'>
+        <input type='hidden' name='us_caseid' id="pay-case-id" value='<?= $defaultCase->id ?>'>
         <input type="submit" value="Оплатить" class="btn btn-pink">
     </form>
 

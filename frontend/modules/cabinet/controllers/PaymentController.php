@@ -61,14 +61,6 @@ class PaymentController extends Controller
     }
 
 
-
-    public function actionPaymentWaiting()
-    {
-       return $this->render('payment-waiting');
-    }
-
-
-
     public function actionPaymentResults()
     {
        $post = Yii::$app->request->post();
@@ -77,12 +69,12 @@ class PaymentController extends Controller
 
        if($sign == $post['SIGN'])
        {
-         $user = $post['us_userid'];
+          $user = $post['us_userid'];
 
-         $case = Cases::findOne(['id'=>$post['us_caseid']]);
+          $case = Cases::findOne(['id'=>$post['us_caseid']]);
 
-         if($post['AMOUNT'] == $case->price)
-         {
+          if($post['AMOUNT'] == $case->price)
+          {
              $balance = Balance::findOne(['user_id'=>$user]);
              $balance->addBalance($case->likes,$case->views);
 
@@ -93,11 +85,8 @@ class PaymentController extends Controller
                  $case->views,
                  'Баланс пополнен!'
              );
-         }
-
-
+          }
        }
-
     }
 
 

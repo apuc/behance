@@ -7,10 +7,24 @@ use common\models\Cases;
 use common\models\Balance;
 use common\models\History;
 use common\clases\FreeCassa;
+use yii\filters\VerbFilter;
 
 
 class PaymentController extends \yii\web\Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'payment-results' => ['post'],
+                ],
+            ],
+        ];
+    }
+
 
     public function beforeAction($action)
     {
@@ -21,7 +35,6 @@ class PaymentController extends \yii\web\Controller
 
     public function actionPaymentFailed()
     {
-        var_dump(Yii::$app->request->post());
         return $this->render('payment-failed');
     }
 
@@ -29,7 +42,6 @@ class PaymentController extends \yii\web\Controller
 
     public function actionPaymentSuccess()
     {
-        var_dump(Yii::$app->request->post());
         return $this->render('payment-success');
     }
 

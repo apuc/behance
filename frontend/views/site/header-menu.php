@@ -19,7 +19,7 @@ if (Yii::$app->controller->action->id == 'about') {
     <a class="header__menu-btn" href="mailto:info@avtouzor.ru">
       <span class="header__menu-btn-round">@</span>
       <span class="header__menu-btn-text">
-          <span class="fz12 fw-extra-bold">info@avtouzor.ru</span>
+          <span class="fz12 fw-extra-bold">info@behance.space</span>
       </span>
     </a>
 

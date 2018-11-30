@@ -33,7 +33,7 @@ use yii\helpers\Url;
         <a class="footer__btn" href="mailto:info@avtouzor.ru">
           <span class="footer__btn-round">@</span>
           <span class="footer__btn-text">
-                        <span class="fz15 fw-extra-bold">info@avtouzor.ru</span>
+                        <span class="fz15 fw-extra-bold">info@behance.space</span>
                     </span>
         </a>
 

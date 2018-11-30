@@ -41,7 +41,21 @@ return [
         ]
 
     ],
-    'components' => [
+    'components' =>  [
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@common/mail',
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'mail.adm.tools',
+                'username' => 'info@behance.space',
+                'password' => '123edsaqw',
+                'port' => '465',
+                'encryption' => 'ssl'
+            ],
+
+            'useFileTransport' => false, // будем отправлять реальные сообщения, а не в файл
+        ],
         'request' => [
             'baseUrl' => '/admin',
             'csrfParam' => '_csrf-backend',

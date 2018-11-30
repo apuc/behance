@@ -208,7 +208,7 @@ class SiteController extends Controller
         {
            $user->Activate();
            Yii::$app->getUser()->login($user);
-           return $this->goHome();
+           return $this->redirect('/cabinet');
         }
     }
 

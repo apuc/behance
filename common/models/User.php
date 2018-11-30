@@ -94,17 +94,11 @@ class User extends ActiveRecord implements IdentityInterface
             ->addAddress($this->email)
             ->setSubject('Behance Space подтвердите аккаунт')
             ->setBody("<p>Для подтверждения аккаунта перейдите по ссылке:</p>
-//                                <p><a href=\'{$link}\'>{$link}</a></p>")
+                                <p><a href=\'{$link}\'>{$link}</a></p>")
             ->setFrom('info@behance.space', 'BS')
+            ->isHTML()
             ->send();
 
-//        Yii::$app->mailer->compose()
-//            ->setFrom('info@behance.space')
-//            ->setTo($this->email)
-//            ->setSubject('Behance Liker подтверждение почты')
-//            ->setHtmlBody("<p>Для подтверждения аккаунта перейдите по ссылке:</p>
-//                                <p><a href='{$link}'>{$link}</a></p>")
-//            ->send();
     }
 
 

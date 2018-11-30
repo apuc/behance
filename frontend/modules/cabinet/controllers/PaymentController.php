@@ -50,14 +50,15 @@ class PaymentController extends Controller
 
     public function actionPaymentSuccess()
     {
-       return $this->render('payment-success');
+
+       var_dump(Yii::$app->request->post());//return $this->render('payment-success');
     }
 
 
 
     public function actionPaymentFailed()
     {
-       return $this->render('payment-fail');
+        var_dump(Yii::$app->request->post());//return $this->render('payment-fail');
     }
 
 

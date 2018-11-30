@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use common\clases\SendMail;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -26,8 +27,6 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DEFAULT = 0;
     const STATUS_ACTIVATED = 1;
-
-
 
     /**
      * {@inheritdoc}
@@ -86,13 +85,20 @@ class User extends ActiveRecord implements IdentityInterface
             $link.="&ref={$referer}";
         }
 
-        Yii::$app->mailer->compose()
-            ->setFrom('info@behance.space')
-            ->setTo($this->email)
-            ->setSubject('Behance Liker подтверждение почты')
-            ->setHtmlBody("<p>Для подтверждения аккаунта перейдите по ссылке:</p>
-                                <p><a href='{$link}'>{$link}</a></p>")
+        $msg = SendMail::create()->setSMTPConfig([
+            'host' => 'ssl://mail.adm.tools',
+            'port' => 465,
+            'username' => 'info@behance.space',
+            'password' => '123edsaqw',
+        ])
+            ->addAddress($this->email)
+            ->setSubject('Behance Space подтвердите аккаунт')
+            ->setBody("<p>Для подтверждения аккаунта перейдите по ссылке:</p>
+                                <p><a href=\'{$link}\'>{$link}</a></p>")
+            ->setFrom('info@behance.space', 'BS')
+            ->isHTML()
             ->send();
+
     }
 
 

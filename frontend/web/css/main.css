@@ -1562,3 +1562,10 @@ a.desc:after {
     border: 1px solid rgba(227, 44, 116, 0.48);
     height: 38px;
 }
+
+.pay-image{
+    max-width: 250px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}

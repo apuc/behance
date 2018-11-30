@@ -41,7 +41,7 @@ $this->registerCssFile('/css/service.css', ['depends' => ['yii\bootstrap\Bootstr
             <div class="container">
                 <div class="about">
                     <div class="about__title">
-                        <h2 class="title d-inline-block ml-auto"><span class="title-light mb-0">узнай больше</span><span class="title-extra-bold">и начни зарабатывыать</span></h2>
+                        <h2 class="title d-inline-block ml-auto title-light mb-0">узнай больше</h2>
                         <h1 class="title-big title-big-second">О сервисе</h1>
                     </div>
                     <div class="about__main-text main-text">

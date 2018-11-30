@@ -6,13 +6,11 @@ use Yii;
 use common\models\Cases;
 use common\models\Balance;
 use common\models\History;
+use common\clases\FreeCassa;
 
 
 class PaymentController extends \yii\web\Controller
 {
-    private $secret1 = '32rfcqqv';
-    private $secret2 = '4ovny78u';
-    private $merchant_id = '107781';
 
     public function beforeAction($action)
     {
@@ -23,14 +21,16 @@ class PaymentController extends \yii\web\Controller
 
     public function actionPaymentFailed()
     {
-        var_dump(Yii::$app->request->post());//return $this->render('payment-failed');
+        var_dump(Yii::$app->request->post());
+        return $this->render('payment-failed');
     }
 
 
 
     public function actionPaymentSuccess()
     {
-        var_dump(Yii::$app->request->post());//return $this->render('payment-success');
+        var_dump(Yii::$app->request->post());
+        return $this->render('payment-success');
     }
 
 
@@ -38,17 +38,20 @@ class PaymentController extends \yii\web\Controller
     public function actionPaymentResults()
     {
 
-        try {
+        try
+        {
             $post = Yii::$app->request->post();
 
-            $sign = $this->generateSign($post['AMOUNT'], $this->secret2, $post['MERCHANT_ORDER_ID']);
+            $sign = FreeCassa::generateSign($post['AMOUNT'],FreeCassa::SECRET_2, $post['MERCHANT_ORDER_ID']);
 
-            if ($sign == $post['SIGN']) {
+            if ($sign == $post['SIGN'])
+            {
                 $user = $post['us_userid'];
 
                 $case = Cases::findOne(['id' => $post['us_caseid']]);
 
-                if ($post['AMOUNT'] == $case->price) {
+                if ($post['AMOUNT'] == $case->price)
+                {
                     $balance = Balance::findOne(['user_id' => $user]);
                     $balance->addBalance($case->likes, $case->views);
 
@@ -59,24 +62,22 @@ class PaymentController extends \yii\web\Controller
                         $case->views,
                         "Применен пакет {$case->name}!"
                     );
-                }else{
-                    echo 'fail amount!';
                 }
-            }else{
-                echo "fail sign!";
+                else
+                {
+                    throw new \Exception("Wrong amount!");
+                }
+            }
+            else
+            {
+                throw new \Exception("Wrong sign!");
             }
 
-        }catch(\Exception $e)
+        }
+        catch(\Exception $e)
         {
             echo $e->getMessage();
         }
-    }
-
-
-
-    private function generateSign($sum,$secret,$order_id)
-    {
-        return md5("{$this->merchant_id}:{$sum}:{$secret}:{$order_id}");
     }
 
 }

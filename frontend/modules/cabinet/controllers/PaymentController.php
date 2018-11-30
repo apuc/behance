@@ -14,13 +14,11 @@ use frontend\modules\cabinet\models\Balance;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use Yii;
+use common\clases\FreeCassa;
+
 
 class PaymentController extends Controller
 {
-    private $secret1 = '32rfcqqv';
-    private $secret2 = '4ovny78u';
-    private $merchant_id = '107781';
-
 
     public function actionIndex()
     {
@@ -29,7 +27,7 @@ class PaymentController extends Controller
        $defaultCase = $cases[0];
 
        $order_id = uniqid('id_');
-       $form_sign = $this->generateSign($defaultCase->price,$this->secret1,$order_id);
+       $form_sign = FreeCassa::generateSign($defaultCase->price,FreeCassa::SECRET_1,$order_id);
 
        foreach ($cases as $case)
        {
@@ -39,7 +37,7 @@ class PaymentController extends Controller
        return $this->render('pay-form',[
            'cases'=>$res,
            'defaultCase'=>$defaultCase,
-           'merchant_id'=>$this->merchant_id,
+           'merchant_id'=>FreeCassa::SHOP_ID,
                'form_sign'=>$form_sign,
             'order_id'=>$order_id
            ]
@@ -47,63 +45,10 @@ class PaymentController extends Controller
     }
 
 
-
-    public function actionPaymentSuccess()
-    {
-
-       var_dump(Yii::$app->request->post());//return $this->render('payment-success');
-    }
-
-
-
-    public function actionPaymentFailed()
-    {
-        var_dump(Yii::$app->request->post());//return $this->render('payment-fail');
-    }
-
-
-    public function actionPaymentResults()
-    {
-       $post = Yii::$app->request->post();
-
-       $sign = $this->generateSign($post['AMOUNT'],$this->secret2,$post['MERCHANT_ORDER_ID']);
-
-       if($sign == $post['SIGN'])
-       {
-          $user = $post['us_userid'];
-
-          $case = Cases::findOne(['id'=>$post['us_caseid']]);
-
-          if($post['AMOUNT'] == $case->price)
-          {
-             $balance = Balance::findOne(['user_id'=>$user]);
-             $balance->addBalance($case->likes,$case->views);
-
-             History::create(
-                 $user,
-                 History::TRANSFER_TO_BALANCE,
-                 $case->likes,
-                 $case->views,
-                 'Баланс пополнен!'
-             );
-          }
-       }
-    }
-
-
-
     public function actionGetFormSecret()
     {
         $id = Yii::$app->request->post('order_id');
         $sum = Yii::$app->request->post('sum');;
-        return $this->generateSign($sum,$this->secret1,$id);
+        return FreeCassa::generateSign($sum,FreeCassa::SECRET_1,$id);
     }
-
-
-
-    private function generateSign($sum,$secret,$order_id)
-    {
-       return md5("{$this->merchant_id}:{$sum}:{$secret}:{$order_id}");
-    }
-
 }

@@ -177,7 +177,7 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
                         <span class="mb20">
 					                    <?= $case->views ?> просмотров
 				                    </span>
-                        <span class="mb20">делаем за
+                        <span class="mb20">
                             <?= $case->term ?>
 				                    </span>
                         <span class="prices__item-price mb20">

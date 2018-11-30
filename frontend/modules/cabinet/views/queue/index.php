@@ -67,9 +67,9 @@ $this->params['breadcrumbs'][] = $this->title;
 //                'attribute'=>'account_views',
 //                'filter'=>false
 //            ],
-            [    'class' => 'yii\grid\ActionColumn',
-                'template'=>'{update} {delete}'
-            ],
+//            [    'class' => 'yii\grid\ActionColumn',
+//                'template'=>'{update} {delete}'
+//            ],
         ],
     ]); ?>
 </div>

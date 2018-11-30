@@ -3,14 +3,14 @@
 <section class="callback-wrap">
     <div class="callback-bg">
         <div class="stars-wrap callback-stars1">
-            <div id="stars"></div>
-            <div id="stars2"></div>
-            <div id="stars3"></div><img class="callback-comet1" src="/images/comet2.png"/>
+            <div class="stars"></div>
+            <div class="stars2"></div>
+            <div class="stars3"></div><img class="callback-comet1" src="/images/comet2.png"/>
         </div>
         <div class="stars-wrap callback-stars2">
-            <div id="stars"></div>
-            <div id="stars2"></div>
-            <div id="stars3"></div><img class="callback-comet2" src="/images/comet3.png"/>
+            <div class="stars"></div>
+            <div class="stars2"></div>
+            <div class="stars3"></div><img class="callback-comet2" src="/images/comet3.png"/>
         </div><img class="callback__img-bg" src="/images/chat.png"/>
     </div>
     <div class="container">

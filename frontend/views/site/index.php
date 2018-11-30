@@ -14,29 +14,9 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
 
   <header class="header-wrap">
     <div class="header__stars1 header__stars">
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
-    </div>
-    <div class="header__stars2 header__stars">
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
-    </div>
-    <div class="header__stars3 header__stars">
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
-    </div>
-    <div class="header__stars4 header__stars">
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
-    </div>
-    <div class="header__stars5 header__stars">
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
+      <div class="stars"></div>
+      <div class="stars2"></div>
+      <div class="stars3"></div>
     </div>
     <div class="container">
       <div class="header">
@@ -145,9 +125,9 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
     </section>
     <section class="prices-wrap" id="tarif">
       <div class="stars-wrap prices-stars">
-        <div id="stars"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
         <img class="prices-comet1" src="/images/comet1.png"/>
       </div>
       <div class="container">

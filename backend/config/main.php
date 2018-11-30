@@ -47,11 +47,10 @@ return [
             'viewPath' => '@common/mail',
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'mail.adm.tools',
+                'host' => 'ssl://mail.adm.tools',
                 'username' => 'info@behance.space',
                 'password' => '123edsaqw',
-                'port' => '465',
-                'encryption' => 'ssl'
+                'port' => '25',
             ],
 
             'useFileTransport' => false, // будем отправлять реальные сообщения, а не в файл

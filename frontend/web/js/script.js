@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalError = document.querySelector('.js-modalError');
     const callBackSubmit = document.querySelector('.js-callback');
     const callBackTel = document.querySelector('.js-callBackTel');
+
     let phone = {
         value: '',
         regExp: new RegExp('^((\\+)+([0-9]){11,12})$'),
@@ -93,34 +94,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
         phone.isValid ?
             callBackSubmit.removeAttribute('disabled')
-            :
+        :
             callBackSubmit.setAttribute('disabled', '');
     });
 
 
     callBackSubmit.addEventListener('click', e => {
         e.preventDefault();
-        $.ajax({
+        if (phone.isValid) {
+          $.ajax({
             type: "POST",
             url: "/site/callback",
             data: {"phone":phone.value},
             success: function (data) {
-                swal({
-                    text: "Ваша заявка принята! Мы вам перезвоним!",
-                    buttons: {
-                        confirm: {
-                            text: 'OK',
-                            value: true,
-                            visible: true,
-                            className: "btn btn-pink",
-                            closeModal: true
-                        }
-                    }
-                });
-                modal.classList.remove('modal-callback_active');
+              swal({
+                text: "Ваша заявка принята! Мы вам перезвоним!",
+                buttons: {
+                  confirm: {
+                    text: 'OK',
+                    value: true,
+                    visible: true,
+                    className: "btn btn-pink",
+                    closeModal: true
+                  }
+                }
+              });
+              modal.classList.remove('modal-callback_active');
             }
-        })
-
+          })
+        } else {
+            alert('Введите номер телефона в международном формате.')
+        }
     });
 
     if ($('.reviews__slider').length > 0) {

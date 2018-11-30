@@ -39,8 +39,8 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
     </div>
     <div class="container auth-form-wrap">
         <div class="header">
-
-            <div class="header__phone">
+          <div class="header__phone header__phone_col">
+            <h1 class="auth-title">Вход</h1>
                 <div class="header__phone-wrap header__phone-wrap-auth">
                     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
@@ -56,7 +56,7 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
 
                     <div class="form-group">
                         <?= Html::submitButton('Войти', ['class' => 'btn btn-pink', 'name' => 'login-button',
-                            'style'=>'margin: 0 auto']) ?>
+                            'style'=>'margin: 10px auto']) ?>
                     </div>
 
                     <?php ActiveForm::end(); ?>

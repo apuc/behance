@@ -39,7 +39,7 @@ if (Yii::$app->controller->action->id == 'about') {
     </nav>
       <?php if (Yii::$app->controller->action->id == 'about'): ?>
 
-        <a class="header__nav-item" href="<?= Url::toRoute(['/site/about']); ?>">О сервисе</a>
+        <a class="header__nav-item" href="<?= Url::toRoute(['/']); ?>">Главная</a>
         <a class="header__nav-item" href="<?= Url::toRoute(['/#tarif']) ?>">Тарифы</a>
         <a class="header__nav-item " href="<?= Url::toRoute(['/#reviews']) ?>">Отзывы</a>
       <?php else: ?>

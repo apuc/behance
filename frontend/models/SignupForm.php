@@ -10,9 +10,9 @@ use common\models\User;
 class SignupForm extends Model
 {
 
-    public $title;
-    public $descr;
-    public $keywords;
+    public $email;
+    public $password;
+    public $password_repeat;
 
 
     /**
@@ -22,13 +22,13 @@ class SignupForm extends Model
     {
         return [
 
-            ['title', 'trim'],
-            ['title', 'required'],
+            ['email', 'trim'],
+            ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Email уже занят!'],
 
-            ['', 'required'],
+            ['password', 'required'],
             ['password', 'string', 'min' => 6],
 
             ['password_repeat', 'required'],

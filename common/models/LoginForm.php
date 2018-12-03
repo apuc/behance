@@ -23,7 +23,7 @@ class LoginForm extends Model
             [['email', 'password'], 'required'],
             ['email', 'email'],
             // password is validated by validatePassword()
-//            ['password', 'validatePassword'],
+            ['password', 'validatePassword'],
         ];
     }
 
@@ -38,7 +38,7 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors())
         {
-            $user = User::findByEmail();
+            $user = User::findByEmail($this->email);
 
             if (!$user || !$user->validatePassword($this->password))
             {

@@ -105,6 +105,9 @@ class SiteController extends Controller
         $seo = Settings::findOne(['key'=>'seo_about_page']);
         return $this->render('about',['seo'=>$seo]);
     }
+
+
+
     /**
      * Logs out the current user.
      *
@@ -155,12 +158,7 @@ class SiteController extends Controller
 
         if ($form->load(Yii::$app->request->post()) && $form->validate())
         {
-            if($this->authService->login($form))
-            {
-                $form->addError('password','Не верный логин или пароль!');
-                return $this->refresh();
-            }
-
+            $this->authService->login($form);
             return $this->goHome();
         }
 
@@ -179,16 +177,7 @@ class SiteController extends Controller
 
         if ($form->load(Yii::$app->request->post()) && $form->validate())
         {
-            $user = User::create($form->email,$form->password);
-
-            if($referer = Yii::$app->request->get('ref'))
-            {
-                $user->requestEmailConfirm($referer);
-            }
-            else
-            {
-                $user->requestEmailConfirm();
-            }
+            $this->authService->signup($form,Yii::$app->request->get('ref'));
 
             Yii::$app->session->set('signup',true);
             return $this->refresh();
@@ -203,6 +192,9 @@ class SiteController extends Controller
 
     public function actionAccountConfirm($key,$ref = null)
     {
+        $user = User::findByPasswordResetToken($key);
+        $this->authService->emailConfirm($user,$ref);
+
         if($ref != null)
         {
             if($referer = User::findOne(['ref_hash'=>$ref]))

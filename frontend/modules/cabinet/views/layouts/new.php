@@ -153,6 +153,17 @@ CabinetAsset::register($this);
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                 <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
 
+
+                <?php if(!empty($balance)): ?>
+                    <div class="balance-block">
+                        <span class="mdc-toolbar__menu-icon">Лайки:<span id="balance_likes"><?=$balance->likes; ?></span></span>
+                    </div>
+
+                    <div class="balance-block">
+                        <span class="mdc-toolbar__menu-icon">Просмотры:<span id="balance_views"><?=$balance->views; ?></span></span>
+                    </div>
+                <?php  endif; ?>
+
             </section>
             <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
                 <!--				<div class="mdc-menu-anchor">-->
@@ -178,15 +189,7 @@ CabinetAsset::register($this);
                 <!--					</div>-->
                 <!--				</div>-->
 
-                <?php if(!empty($balance)): ?>
-                <div class="balance-block">
-                    <span class="mdc-toolbar__menu-icon">Лайки:<span id="balance_likes"><?=$balance->likes; ?></span></span>
-                </div>
 
-                <div class="balance-block">
-                    <span class="mdc-toolbar__menu-icon">Просмотры:<span id="balance_views"><?=$balance->views; ?></span></span>
-                </div>
-                <?php  endif; ?>
 
                 <div class="mdc-menu-anchor mr-1">
                     <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="logout-menu" data-mdc-auto-init="MDCRipple">

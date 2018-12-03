@@ -1,5 +1,5 @@
 <?php
-
+$this->title = 'Партнерская программа';
 $link = "https://".$_SERVER['HTTP_HOST'].'/signup?ref='.Yii::$app->user->identity->ref_hash;
 ?>
 <p class="ref-text">

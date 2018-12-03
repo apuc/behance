@@ -15,10 +15,6 @@ $this->title = 'Заявки из формы контактов';
     <h1><?= Html::encode($this->title) ?></h1>
 
 
-<!--    <p>-->
-<!--        --><?= ""///Html::a('Create Contact Form', ['create'], ['class' => 'btn btn-success']) ?>
-<!--    </p>-->
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
@@ -32,7 +28,7 @@ $this->title = 'Заявки из формы контактов';
                 'attribute'=>'link',
                 'format'=>'raw',
                 'value'=>function($data){
-                    return Html::a('Ссылка',$data->link);
+                    return Html::a('Ссылка',$data->link,['title'=>$data->link]);
                 }
             ],
             'message:ntext',

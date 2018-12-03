@@ -8,6 +8,24 @@ use yii\helpers\Url;
  */
 
 $this->title = 'Behance Liker';
+
+if($seo)
+{
+    $meta = json_decode($seo->value);
+
+    $this->registerMetaTag([
+        'name' => 'description',
+        'content' => $meta->descr
+    ]);
+
+    $this->registerMetaTag([
+        'name' => 'keywords',
+        'content' => $meta->keywords
+    ]);
+
+    $this->title = $meta->title;
+}
+
 $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
 ?>
 

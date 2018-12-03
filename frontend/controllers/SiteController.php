@@ -10,6 +10,7 @@ use common\models\Debug;
 use common\models\Declensions;
 use common\models\History;
 use common\models\Reviews;
+use common\models\Settings;
 use common\models\User;
 use common\models\Works;
 use Yii;
@@ -88,16 +89,19 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $reviews = Reviews::find()->all();
-	    $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
+	    $seo = Settings::findOne(['key'=>'seo_main_page']);
+        $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
         
-        return $this->render('index', ['reviews' => $reviews, 'cases' => $cases]);
+        return $this->render('index', ['reviews' => $reviews, 'cases' => $cases,
+            'seo'=>$seo]);
     }
 
 
 
     public function actionAbout()
     {
-        return $this->render('about');
+        $seo = Settings::findOne(['key'=>'seo_about_page']);
+        return $this->render('about',['seo'=>$seo]);
     }
     /**
      * Logs out the current user.

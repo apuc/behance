@@ -49,7 +49,6 @@ $this->registerCssFile('/css/main.css');
                              y="0px" viewBox="0 0 136.17 183.67" style="enable-background:new 0 0 136.17 183.67;" xml:space="preserve">
 
           <g class="st0">
-
               <image style="overflow:visible;"
                      width="851"
                      height="1061"

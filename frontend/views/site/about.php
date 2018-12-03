@@ -6,7 +6,27 @@ use yii\helpers\Url;
  * @var $cases object
  */
 
+
 $this->title = 'О сервисе';
+
+if($seo)
+{
+    $meta = json_decode($seo->value);
+
+    $this->registerMetaTag([
+        'name' => 'description',
+        'content' => $meta->descr
+    ]);
+
+    $this->registerMetaTag([
+        'name' => 'keywords',
+        'content' => $meta->keywords
+    ]);
+
+    $this->title = $meta->title;
+}
+
+
 $this->registerCssFile('/css/service.css', ['depends' => ['yii\bootstrap\BootstrapAsset']]);
 ?>
 

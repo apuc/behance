@@ -12,10 +12,10 @@ $this->registerCssFile('/css/main.css');
 ?>
 <!--<div class="site-error">-->
 <!---->
-<!--    <h1>--><?=""// Html::encode($this->title) ?><!--</h1>-->
+<!--    <h1>--><?= ""// Html::encode($this->title)  ?><!--</h1>-->
 <!---->
 <!--    <div class="alert alert-danger">-->
-<!--        --><?=""// nl2br(Html::encode($message)) ?>
+<!--        --><?= ""// nl2br(Html::encode($message))  ?>
 <!--    </div>-->
 <!---->
 <!--    <p>-->
@@ -28,32 +28,32 @@ $this->registerCssFile('/css/main.css');
 <!--</div>-->
 
 <div class="root">
-    <header class="header-wrap header-wrap-auth">
-        <div class="header__stars1 header__stars">
-            <div class="stars"></div>
-            <div class="stars2"></div>
-            <div class="stars3"></div>
-        </div>
+  <header class="header-wrap header-wrap-auth">
+    <div class="header__stars1 header__stars">
+      <div class="stars"></div>
+      <div class="stars2"></div>
+      <div class="stars3"></div>
+    </div>
 
-        <div class="container auth-form-wrap">
-            <div class="not-found__head">
-
-            </div>
-
-            <div class="not-found__bot">
-                <img src="/images/4.png" alt="">
-                <div class="not-found__ufo">
-                    <img src="/images/ufo.png" class="ufo" alt="">
-                    <div class="light">
-                        <svg version="1.1" id="BACKGROUND_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                             y="0px" viewBox="0 0 136.17 183.67" style="enable-background:new 0 0 136.17 183.67;" xml:space="preserve">
+    <div class="container not-found">
+      <div class="not-found__head">
+        <img src="/images/4.png" alt="">
+        <div class="not-found__ufo">
+          <img src="/images/ufo.png" class="ufo" alt="">
+          <div class="light">
+            <svg version="1.1" id="BACKGROUND_2" xmlns="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                 y="0px" viewBox="0 0 136.17 183.67" style="enable-background:new 0 0 136.17 183.67;"
+                 xml:space="preserve">
 
           <g class="st0">
 
-              <image style="overflow:visible;"
-                     width="851"
-                     height="1061"
-                     xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA1YAAAQrCAYAAACPRz36AAAACXBIWXMAAC4jAAAuIwF4pT92AAAA
+
+            <image style="overflow:visible;"
+                   width="851"
+                   height="1061"
+                   xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA1YAAAQrCAYAAACPRz36AAAACXBIWXMAAC4jAAAuIwF4pT92AAAA
+
               GXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAColpJREFUeNrsvcuOI0mSrilqdI+I
               7qo8nYVCAYNZBTBAbnp5XsgfpR4lX+gse9NAA7kaDFBo1CW7ujLDnabTnknzUBOTq16MRroIEAh3
               Uu1COmmmn/4ivwBERERERERERERERERERERERERERERERERERERERERERERERERERETccKR4CyIi
@@ -3084,80 +3084,86 @@ $this->registerCssFile('/css/main.css');
               JwlRv9Q3OxA1MDWWAauxbBxZ47OzUWztCVwDX2MZy1juBU0SoAaiNgiqgamxGJcxFcdYjAyYErDG
               xXsDyy83dC7KztH43I1lLHe0/OlGz6vhtXtcIyP7OmMZy1jGMpaxjGUsYxnLWMYylrGMZSxjGctY
               xjKWsYxlLGMZy1jGsqvl/wkwAHY2pyalnvpqAAAAAElFTkSuQmCC" transform="matrix(0.24 0 0 0.24 -33.3913 -34.8574)">
-              </image>
+            </image>
           </g>
-                            <path class="st1" d="M130.43,165.94l-19.89-145.4c0-4.41-18.72-7.99-41.81-7.99c-22.57,0-40.96,3.42-41.78,7.69h-0.01L7.02,165.94
+              <path class="st1" d="M130.43,165.94l-19.89-145.4c0-4.41-18.72-7.99-41.81-7.99c-22.57,0-40.96,3.42-41.78,7.69h-0.01L7.02,165.94
             c-0.06,0.21-0.09,0.41-0.09,0.62c0,6.52,27.66,11.8,61.79,11.8c34.12,0,61.79-5.29,61.79-11.8
             C130.51,166.35,130.48,166.15,130.43,165.94z"/>
-                            <g>
-                                <g class="st4">
-                                    <path class="st3" d="M56.32,44.78c1.52,0,1.52-2.36,0-2.36C54.8,42.42,54.8,44.78,56.32,44.78L56.32,44.78z"/>
-                                </g>
-                                <g class="st2">
-                                    <path class="st3" d="M56.95,39.44c1.52,0,1.52-2.36,0-2.36C55.43,37.09,55.43,39.44,56.95,39.44L56.95,39.44z"/>
-                                </g>
-                                <g class="st4">
-                                    <path class="st3" d="M69.28,24.13c0,7.85,0,15.71,0,23.56c0,1.52,2.36,1.52,2.36,0c0-7.85,0-15.71,0-23.56
+              <g>
+                <g class="st4">
+                  <path class="st3"
+                        d="M56.32,44.78c1.52,0,1.52-2.36,0-2.36C54.8,42.42,54.8,44.78,56.32,44.78L56.32,44.78z"/>
+                </g>
+                <g class="st2">
+                  <path class="st3"
+                        d="M56.95,39.44c1.52,0,1.52-2.36,0-2.36C55.43,37.09,55.43,39.44,56.95,39.44L56.95,39.44z"/>
+                </g>
+                <g class="st4">
+                  <path class="st3" d="M69.28,24.13c0,7.85,0,15.71,0,23.56c0,1.52,2.36,1.52,2.36,0c0-7.85,0-15.71,0-23.56
                 C71.64,22.61,69.28,22.61,69.28,24.13L69.28,24.13z"/>
-                                </g>
-                                <g class="st6">
-                                    <path class="st3" d="M49.82,42.72c0,7.85,0,15.71,0,23.56c0,1.52,2.36,1.52,2.36,0c0-7.85,0-15.71,0-23.56
+                </g>
+                <g class="st6">
+                  <path class="st3" d="M49.82,42.72c0,7.85,0,15.71,0,23.56c0,1.52,2.36,1.52,2.36,0c0-7.85,0-15.71,0-23.56
                 C52.18,41.2,49.82,41.2,49.82,42.72L49.82,42.72z"/>
-                                </g>
-                                <g class="st4">
-                                    <path class="st3" d="M61.68,41.91c0,3.97,0,7.93,0,11.9c0,1.52,2.36,1.52,2.36,0c0-3.97,0-7.93,0-11.9
+                </g>
+                <g class="st4">
+                  <path class="st3" d="M61.68,41.91c0,3.97,0,7.93,0,11.9c0,1.52,2.36,1.52,2.36,0c0-3.97,0-7.93,0-11.9
                 C64.04,40.39,61.68,40.39,61.68,41.91L61.68,41.91z"/>
-                                </g>
-                                <g class="st6">
-                                    <path class="st3" d="M77.76,24.76c0,9.63,0,19.27,0,28.9c0,1.52,2.36,1.52,2.36,0c0-9.63,0-19.27,0-28.9
+                </g>
+                <g class="st6">
+                  <path class="st3" d="M77.76,24.76c0,9.63,0,19.27,0,28.9c0,1.52,2.36,1.52,2.36,0c0-9.63,0-19.27,0-28.9
                 C80.12,23.24,77.76,23.24,77.76,24.76L77.76,24.76z"/>
-                                </g>
-                                <g class="st4">
-                                    <path class="st3" d="M85.3,26.01c0.02,4.5,0.3,9,0.32,13.51c0.01,1.52,2.36,1.52,2.35,0c-0.02-4.5-0.29-9-0.31-13.51
+                </g>
+                <g class="st4">
+                  <path class="st3" d="M85.3,26.01c0.02,4.5,0.3,9,0.32,13.51c0.01,1.52,2.36,1.52,2.35,0c-0.02-4.5-0.29-9-0.31-13.51
                 C87.65,24.49,85.3,24.49,85.3,26.01L85.3,26.01z"/>
-                                </g>
-                                <g class="st6">
-                                    <path class="st3" d="M93.78,48.63c0,10.16,0,20.31,0,30.47c0,1.52,2.36,1.52,2.36,0c0-10.16,0-20.31,0-30.47
+                </g>
+                <g class="st6">
+                  <path class="st3" d="M93.78,48.63c0,10.16,0,20.31,0,30.47c0,1.52,2.36,1.52,2.36,0c0-10.16,0-20.31,0-30.47
                 C96.14,47.11,93.78,47.11,93.78,48.63L93.78,48.63z"/>
-                                </g>
-                                <g class="st5">
-                                    <path class="st3" d="M90.33,78.16c0,7.75,0,15.5,0,23.24c0,1.52,2.36,1.52,2.36,0c0-7.75,0-15.5,0-23.24
+                </g>
+                <g class="st5">
+                  <path class="st3" d="M90.33,78.16c0,7.75,0,15.5,0,23.24c0,1.52,2.36,1.52,2.36,0c0-7.75,0-15.5,0-23.24
                 C92.68,76.64,90.33,76.64,90.33,78.16L90.33,78.16z"/>
-                                </g>
-                                <g class="st6">
-                                    <path class="st3" d="M83.42,75.33c0,8.8,0,17.59,0,26.39c0,1.52,2.36,1.52,2.36,0c0-8.79,0-17.59,0-26.39
+                </g>
+                <g class="st6">
+                  <path class="st3" d="M83.42,75.33c0,8.8,0,17.59,0,26.39c0,1.52,2.36,1.52,2.36,0c0-8.79,0-17.59,0-26.39
                 C85.77,73.81,83.42,73.81,83.42,75.33L83.42,75.33z"/>
-                                </g>
-                                <g class="st5">
-                                    <path class="st3" d="M41.78,26.09c0,7.33,0,14.66,0,21.99c0,1.52,2.36,1.52,2.36,0c0-7.33,0-14.66,0-21.99
+                </g>
+                <g class="st5">
+                  <path class="st3" d="M41.78,26.09c0,7.33,0,14.66,0,21.99c0,1.52,2.36,1.52,2.36,0c0-7.33,0-14.66,0-21.99
                 C44.13,24.57,41.78,24.57,41.78,26.09L41.78,26.09z"/>
-                                </g>
-                                <g class="st2">
-                                    <path class="st3" d="M33.92,52.92c0,7.33,0,27.81,0,35.14c0,1.52,2.36,1.52,2.36,0c0-7.33,0-27.81,0-35.14
+                </g>
+                <g class="st2">
+                  <path class="st3" d="M33.92,52.92c0,7.33,0,27.81,0,35.14c0,1.52,2.36,1.52,2.36,0c0-7.33,0-27.81,0-35.14
                 C36.28,51.4,33.92,51.4,33.92,52.92L33.92,52.92z"/>
-                                </g>
-                                <g class="st5">
-                                    <path class="st3" d="M109.43,62.84c0,7.33,0,27.81,0,35.14c0,1.52,2.36,1.52,2.36,0c0-7.33,0-27.81,0-35.14
+                </g>
+                <g class="st5">
+                  <path class="st3" d="M109.43,62.84c0,7.33,0,27.81,0,35.14c0,1.52,2.36,1.52,2.36,0c0-7.33,0-27.81,0-35.14
                 C111.79,61.32,109.43,61.32,109.43,62.84L109.43,62.84z"/>
-                                </g>
-                                <g class="st2">
-                                    <path class="st3" d="M49.18,92.3c0,3.66,0,7.33,0,10.99c0,1.52,2.36,1.52,2.36,0c0-3.67,0-7.33,0-10.99
+                </g>
+                <g class="st2">
+                  <path class="st3" d="M49.18,92.3c0,3.66,0,7.33,0,10.99c0,1.52,2.36,1.52,2.36,0c0-3.67,0-7.33,0-10.99
                 C51.53,90.77,49.18,90.77,49.18,92.3L49.18,92.3z"/>
-                                </g>
-                                <g class="st5">
-                                    <path class="st3" d="M58.29,81.61c0,6.18,0,12.36,0,18.53c0,1.52,2.36,1.52,2.36,0c0-6.18,0-12.36,0-18.53
+                </g>
+                <g class="st5">
+                  <path class="st3" d="M58.29,81.61c0,6.18,0,12.36,0,18.53c0,1.52,2.36,1.52,2.36,0c0-6.18,0-12.36,0-18.53
                 C60.64,80.09,58.29,80.09,58.29,81.61L58.29,81.61z"/>
-                                </g>
-                            </g>
+                </g>
+              </g>
           </svg>
 
-                    </div>
-                    <img src="/images/cow.png" class="cow" alt="">
-                    <img src="/images/0.png" class="zero" alt="">
-                </div>
-                <img src="/images/4.png" alt="">
-            </div>
+          </div>
+          <img src="/images/cow.png" class="cow" alt="">
+          <img src="/images/0.png" class="zero" alt="">
         </div>
-    </header>
+        <img src="/images/4.png" alt="">
+      </div>
+
+      <div class="not-found__bot">
+        <a href="/" class="btn btn-pink">На главную</a>
+      </div>
+    </div>
+  </header>
 </div>
 

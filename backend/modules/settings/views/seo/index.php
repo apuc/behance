@@ -32,6 +32,14 @@ $this->title = "Настройки SEO";
                 }
             ],
 
+            [
+                'label'=>'Заголовок',
+                'attribute'=>'key',
+                'value'=> function($model){
+                    return json_decode($model->value)->title;
+                }
+            ],
+
 
             ['class' => 'yii\grid\ActionColumn',],
         ],

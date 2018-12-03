@@ -6,13 +6,12 @@ use common\models\Accounts;
 use common\models\Balance;
 use common\models\Callback;
 use common\models\Cases;
-use common\models\Debug;
-use common\models\Declensions;
 use common\models\History;
 use common\models\Reviews;
 use common\models\Settings;
 use common\models\User;
-use common\models\Works;
+
+use common\services\AuthService;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -24,19 +23,15 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use \common\models\ContactForm;
-use common\models\Proxy;
-use common\behance\lib\BehanceAccount;
-use common\behance\BehanceService;
+
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+    private $authService;
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -79,6 +74,13 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+
+    public function __construct($id,$module,array $config = [],AuthService $authService)
+    {
+        $this->authService = $authService;
+        parent::__construct($id, $module, $config);
     }
 
     /**
@@ -148,14 +150,24 @@ class SiteController extends Controller
         {
             return $this->goHome();
         }
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login())
+
+        $form = new LoginForm();
+
+        if ($form->load(Yii::$app->request->post()) && $form->validate())
         {
+            if($this->authService->login($form))
+            {
+                $form->addError('password','Не верный логин или пароль!');
+                return $this->refresh();
+            }
+
             return $this->goHome();
         }
-        $model->password = '';
+
+        $form->password = '';
+
         return $this->render('login', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

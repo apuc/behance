@@ -12,11 +12,6 @@ class LoginForm extends Model
 
     public $password;
     public $email;
-    public $username;
-    public $rememberMe = true;
-
-    private $_user;
-
 
     /**
      * {@inheritdoc}
@@ -26,11 +21,9 @@ class LoginForm extends Model
         return [
             // username and password are both required
             [['email', 'password'], 'required'],
-            // rememberMe must be a boolean value
-            ['rememberMe', 'boolean'],
             ['email', 'email'],
             // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+//            ['password', 'validatePassword'],
         ];
     }
 
@@ -43,42 +36,18 @@ class LoginForm extends Model
      */
     public function validatePassword($attribute, $params)
     {
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+        if (!$this->hasErrors())
+        {
+            $user = User::findByEmail();
+
+            if (!$user || !$user->validatePassword($this->password))
+            {
+                $this->addError($attribute,'Неверный логин лил пароль!');
             }
         }
     }
 
-    /**
-     * Logs in a user using the provided username and password.
-     *
-     * @return bool whether the user is logged in successfully
-     */
-    public function login()
-    {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
-        }
-        
-        return false;
-    }
 
-    /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
-     */
-    protected function getUser()
-    {
-        if ($this->_user === null) {
-            $this->_user = User::findByEmail($this->email);
-        }
-
-        return $this->_user;
-    }
-	
 	public function attributeLabels() {
 		return [
 			'username' => 'E-mail',

@@ -35,7 +35,7 @@ CabinetAsset::register($this);
             <div class="mdc-persistent-drawer__toolbar-spacer">
                 <?= Html::img('/images/account.png',['width'=>'32','height'=>'32']) ?>
                 <span class="brand-logo">
-                   <?= Yii::$app->user->identity->username; ?>
+                   <?= Yii::$app->user->identity->email; ?>
                 </span>
             </div>
             <div class="mdc-list-group">

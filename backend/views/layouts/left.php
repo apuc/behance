@@ -22,7 +22,7 @@ if($callback_count == 0)
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p><?= Yii::$app->user->identity->username?></p>
+                <p><?= Yii::$app->user->identity->email?></p>
 
                 <a href="/">Перейти на главную</a>
             </div>

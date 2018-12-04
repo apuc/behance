@@ -6,13 +6,12 @@ use common\models\Accounts;
 use common\models\Balance;
 use common\models\Callback;
 use common\models\Cases;
-use common\models\Debug;
-use common\models\Declensions;
 use common\models\History;
 use common\models\Reviews;
 use common\models\Settings;
 use common\models\User;
-use common\models\Works;
+
+use common\services\AuthService;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -24,28 +23,24 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use \common\models\ContactForm;
-use common\models\Proxy;
-use common\behance\lib\BehanceAccount;
-use common\behance\BehanceService;
+
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+    private $authService;
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup','login','account-confirm'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup','login','account-confirm'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -74,11 +69,14 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
         ];
+    }
+
+
+    public function __construct($id,$module,array $config = [],AuthService $authService)
+    {
+        $this->authService = $authService;
+        parent::__construct($id, $module, $config);
     }
 
     /**
@@ -97,12 +95,19 @@ class SiteController extends Controller
     }
 
 
-
+    /**
+     * Displays aboutpage.
+     *
+     * @return mixed
+     */
     public function actionAbout()
     {
         $seo = Settings::findOne(['key'=>'seo_about_page']);
         return $this->render('about',['seo'=>$seo]);
     }
+
+
+
     /**
      * Logs out the current user.
      *
@@ -116,10 +121,12 @@ class SiteController extends Controller
     }
 
 
-
+    /**
+     * обработка контактно формы
+     * @return bool
+     */
     public function actionContact()
     {
-
         $form = new ContactForm();
         $post['ContactForm'] = Yii::$app->request->post();
 
@@ -133,7 +140,9 @@ class SiteController extends Controller
     }
 
 
-
+    /**
+     * обработка формы обратного звонка
+     */
     public function actionCallback()
     {
         $phone = Yii::$app->request->post()['phone'];
@@ -144,18 +153,18 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest)
+        $form = new LoginForm();
+
+        if ($form->load(Yii::$app->request->post()) && $form->validate())
         {
+            $this->authService->login($form->email);
             return $this->goHome();
         }
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login())
-        {
-            return $this->goHome();
-        }
-        $model->password = '';
+
+        $form->password = '';
+
         return $this->render('login', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 
@@ -167,16 +176,7 @@ class SiteController extends Controller
 
         if ($form->load(Yii::$app->request->post()) && $form->validate())
         {
-            $user = User::create($form->email,$form->password);
-
-            if($referer = Yii::$app->request->get('ref'))
-            {
-                $user->requestEmailConfirm($referer);
-            }
-            else
-            {
-                $user->requestEmailConfirm();
-            }
+            $this->authService->signup($form,Yii::$app->request->get('ref'));
 
             Yii::$app->session->set('signup',true);
             return $this->refresh();
@@ -191,29 +191,17 @@ class SiteController extends Controller
 
     public function actionAccountConfirm($key,$ref = null)
     {
-        if($ref != null)
-        {
-            if($referer = User::findOne(['ref_hash'=>$ref]))
-            {
-                $referer_balance = Balance::findOne(['user_id'=>$referer->id]);
-                $referer_balance->addBalance(100,0);
+        $user = User::findByAuthKey($key);
 
-                History::create(
-                         $referer->id,
-                    History::TRANSFER_TO_BALANCE,
-                    100,
-                    0,
-                    "Начислено 100 лайков за регестрацию по реферальной ссылке"
-                );
-            }
+        if(!$user)
+        {
+            return $this->redirect("/error");
         }
 
-        if($user = User::findOne(['auth_key'=>$key]))
-        {
-           $user->Activate();
-           Yii::$app->getUser()->login($user);
-           return $this->redirect('/cabinet');
-        }
+        $this->authService->emailConfirm($user,$ref);
+        $this->authService->login($user->email);
+
+        return $this->redirect('/cabinet');
     }
 
 

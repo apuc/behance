@@ -192,32 +192,15 @@ class SiteController extends Controller
 
     public function actionAccountConfirm($key,$ref = null)
     {
-        $user = User::findByPasswordResetToken($key);
+        $user = User::findByAuthKey($key);
+
+        if(!$user)
+        {
+            return $this->render('error');
+        }
+
         $this->authService->emailConfirm($user,$ref);
 
-        if($ref != null)
-        {
-            if($referer = User::findOne(['ref_hash'=>$ref]))
-            {
-                $referer_balance = Balance::findOne(['user_id'=>$referer->id]);
-                $referer_balance->addBalance(100,0);
-
-                History::create(
-                         $referer->id,
-                    History::TRANSFER_TO_BALANCE,
-                    100,
-                    0,
-                    "Начислено 100 лайков за регестрацию по реферальной ссылке"
-                );
-            }
-        }
-
-        if($user = User::findOne(['auth_key'=>$key]))
-        {
-           $user->Activate();
-           Yii::$app->getUser()->login($user);
-           return $this->redirect('/cabinet');
-        }
     }
 
 

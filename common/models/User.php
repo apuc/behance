@@ -90,6 +90,13 @@ class User extends ActiveRecord implements IdentityInterface
 
 
 
+    public static function findByRefHash($hash)
+    {
+        return static::findOne(['ref_hash' => $hash]);
+    }
+
+
+
     public function Activate()
     {
         $auth = Yii::$app->authManager;

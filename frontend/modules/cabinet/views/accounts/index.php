@@ -7,8 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\modules\cabinet\models\AccountsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Accounts';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Аккаунты';
 ?>
 
 

@@ -22,7 +22,7 @@ if($callback_count == 0)
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p><?= Yii::$app->user->identity->username?></p>
+                <p><?= Yii::$app->user->identity->email?></p>
 
                 <a href="/">Перейти на главную</a>
             </div>
@@ -40,10 +40,10 @@ if($callback_count == 0)
                     ['label' => Yii::t('balance', 'Balance'), 'icon' => 'fas fa-shopping-basket', 'url' => ['/balance/balance']],
                     ['label' => 'Заявки', 'icon' => 'fas fa-clipboard-list', 'url' => ['/orders/contact'] ,'template'=>'<a href="{url}">{icon}<span>{label}</span><span class="pull-right-container"><small class="label pull-right bg-red">'.$contact_count.'</small></span></a>'],
                     ['label' => 'Звонки', 'icon' => 'fas fa-phone', 'url' => ['/orders/callback'] ,'template'=>'<a href="{url}">{icon}<span>{label}</span><span class="pull-right-container"><small class="label pull-right bg-red">'.$callback_count.'</small></span></a>'],
-                    ['label' => Yii::t('orders', 'Orders'), 'icon' => 'fas fa-shopping-cart', 'url' => ['/orders/orders']],
                     ['label' => 'Тарифы', 'icon' => 'fas fa-suitcase', 'url' => ['/cases/cases']],
                     ['label' => Yii::t('history', 'History'), 'icon' => 'fas fa-history', 'url' => ['/history/history']],
                     ['label' => 'Настройки', 'icon' => 'fas fa-cogs', 'url' => ['/settings/settings']],
+                    ['label' => 'SEO', 'icon' => 'fas fa-globe', 'url' => ['/settings/seo']],
                     ['label' => Yii::t('reviews', 'Reviews'), 'icon' => 'fas fa-comments', 'url' => ['/reviews/reviews']],
                    // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                    // ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],

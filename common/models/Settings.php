@@ -43,4 +43,16 @@ class Settings extends \yii\db\ActiveRecord
             'value' => Yii::t('settings', 'Value'),
         ];
     }
+
+    public static function createSeoSetting($data)
+    {
+        $key = $data['page_name'];
+        unset($data['page_name']);
+        unset($data['_csrf-backend']);
+
+        $setting = new self();
+        $setting->key = "seo_{$key}";
+        $setting->value = json_encode($data);
+        $setting->insert(false);
+    }
 }

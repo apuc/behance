@@ -48,10 +48,12 @@ $this->registerCssFile('/css/main.css');
 
           <g class="st0">
 
+
             <image style="overflow:visible;"
                    width="851"
                    height="1061"
                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA1YAAAQrCAYAAACPRz36AAAACXBIWXMAAC4jAAAuIwF4pT92AAAA
+
               GXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAColpJREFUeNrsvcuOI0mSrilqdI+I
               7qo8nYVCAYNZBTBAbnp5XsgfpR4lX+gse9NAA7kaDFBo1CW7ujLDnabTnknzUBOTq16MRroIEAh3
               Uu1COmmmn/4ivwBERERERERERERERERERERERERERERERERERERERERERERERERERETccKR4CyIi

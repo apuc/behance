@@ -20,9 +20,9 @@ class AuthService
 {
 
 
-   public function login($form)
+   public function login($email)
    {
-       $user = User::findByEmail($form->email);
+       $user = User::findByEmail($email);
        return Yii::$app->user->login($user);
    }
 
@@ -31,7 +31,7 @@ class AuthService
    public function signup($form,$referer)
    {
        $user = User::create($form->email,$form->password);
-       $this->requestEmailConfirm($referer,$user->auth_key);
+       $this->requestEmailConfirm($referer,$user->auth_key,$user->email);
    }
 
 
@@ -80,7 +80,7 @@ class AuthService
 
 
 
-   private function requestEmailConfirm($referer,$key)
+   private function requestEmailConfirm($referer,$key,$email)
    {
        $link = "https://{$_SERVER['HTTP_HOST']}/account-confirm?key={$key}";
 
@@ -90,7 +90,7 @@ class AuthService
        }
 
        SendMail::create()->setSMTPConfig(Yii::$app->params['smtp-config'])
-           ->addAddress($this->email)
+           ->addAddress($email)
            ->setSubject('Behance Space подтвердите аккаунт')
            ->setBody("<p>Для подтверждения аккаунта перейдите по ссылке:</p>
                                 <p><a href=\'{$link}\'>{$link}</a></p>")

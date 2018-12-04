@@ -37,10 +37,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup','login','account-confirm'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup','login','account-confirm'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -69,10 +69,6 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
         ];
     }
 
@@ -99,7 +95,11 @@ class SiteController extends Controller
     }
 
 
-
+    /**
+     * Displays aboutpage.
+     *
+     * @return mixed
+     */
     public function actionAbout()
     {
         $seo = Settings::findOne(['key'=>'seo_about_page']);
@@ -121,10 +121,12 @@ class SiteController extends Controller
     }
 
 
-
+    /**
+     * обработка контактно формы
+     * @return bool
+     */
     public function actionContact()
     {
-
         $form = new ContactForm();
         $post['ContactForm'] = Yii::$app->request->post();
 
@@ -138,7 +140,9 @@ class SiteController extends Controller
     }
 
 
-
+    /**
+     * обработка формы обратного звонка
+     */
     public function actionCallback()
     {
         $phone = Yii::$app->request->post()['phone'];
@@ -149,16 +153,11 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest)
-        {
-            return $this->goHome();
-        }
-
         $form = new LoginForm();
 
         if ($form->load(Yii::$app->request->post()) && $form->validate())
         {
-            $this->authService->login($form);
+            $this->authService->login($form->email);
             return $this->goHome();
         }
 
@@ -196,11 +195,13 @@ class SiteController extends Controller
 
         if(!$user)
         {
-            return $this->render('error');
+            return $this->redirect("/error");
         }
 
         $this->authService->emailConfirm($user,$ref);
+        $this->authService->login($user->email);
 
+        return $this->redirect('/cabinet');
     }
 
 

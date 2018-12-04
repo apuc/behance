@@ -8,6 +8,10 @@
 
 namespace common\clases;
 
+use common\clases\phpmailer\PHPMailer;
+use common\clases\phpmailer\SMTP;
+use common\clases\phpmailer\Exception;
+
 
 class SendMail
 {

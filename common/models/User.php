@@ -64,11 +64,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $user = new self;
         $user->email = $email;
-        $user->username = $email;
         $user->status = User::STATUS_DEFAULT;
         $user->password_hash = Yii::$app->security->generatePasswordHash($password);
         $user->auth_key = Yii::$app->security->generateRandomString();;
-        $user->generateRefHash();
+        $user->ref_hash = md5(uniqid(rand(), true));
         $user->save(false);
 
         return $user;
@@ -97,23 +96,6 @@ class User extends ActiveRecord implements IdentityInterface
 
 
 
-    public function Activate()
-    {
-        $auth = Yii::$app->authManager;
-        $authorRole = $auth->getRole('user');
-        $auth->assign($authorRole, $this->id);
-
-        Balance::create($this->id,50,200);
-
-        $this->status = User::STATUS_ACTIVATED;
-        $this->save();
-    }
-
-    public function generateRefHash()
-    {
-        $this->ref_hash = md5(uniqid(rand(), true));
-    }
-
     public static function findByPasswordResetToken($token)
     {
         if (!static::isPasswordResetTokenValid($token)) {
@@ -126,6 +108,8 @@ class User extends ActiveRecord implements IdentityInterface
         ]);
     }
 
+
+
     public static function isPasswordResetTokenValid($token)
     {
         if (empty($token)) {
@@ -137,15 +121,20 @@ class User extends ActiveRecord implements IdentityInterface
         return $timestamp + $expire >= time();
     }
 
+
+
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
+
+
     public function generatePasswordResetToken()
     {
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
+
 
 
     public function removePasswordResetToken()

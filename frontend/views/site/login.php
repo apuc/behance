@@ -31,8 +31,9 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
 
 <!--                    --><?php echo "" //$form->field($model, 'rememberMe')->checkbox() ?>
 
-                    <div style="margin:1em 0; display: flex; justify-content: center">
+                    <div style="margin:1em 0; display: flex; justify-content: space-between">
                          <?= Html::a('Регистрация', ['site/signup'],['style'=>'color:white;']) ?>
+                         <?= Html::a('Забыли пароль?', ['/request-password-reset'],['style'=>'color:white;']) ?>
                     </div>
 
                     <div class="form-group">

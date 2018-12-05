@@ -48,6 +48,35 @@ class AuthService
 
 
 
+   public function requestPasswordReset($email)
+   {
+       $user = User::findByEmail($email);
+       $user->generatePasswordResetToken();
+       $user->save();
+
+       $link = "https://{$_SERVER['HTTP_HOST']}/reset-password?token={$user->password_reset_token}";
+
+       SendMail::create()->setSMTPConfig(Yii::$app->params['smtp-config'])
+           ->addAddress($email)
+           ->setSubject('Behance Space восстановление пароля')
+           ->setBody("<p>Для восстановление пароля перейдите по ссылке:</p>
+                                <p><a href=\'{$link}\'>{$link}</a></p>")
+           ->setFrom('info@behance.space', 'BS')
+           ->isHTML()
+           ->send();
+   }
+
+
+
+   public function resetPassword($user,$password)
+   {
+       $user = User::findByPasswordResetToken($user->password_reset_token);
+       $user->password_hash = Yii::$app->security->generatePasswordHash($password);
+       $user->save();
+   }
+
+
+
    private function handleReferalLink($refHash)
    {
        if($referer = User::findByRefHash($refHash))

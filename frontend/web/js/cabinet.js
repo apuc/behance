@@ -45,9 +45,23 @@ $(document).ready(function () {
                     if(newViews)
                     balanceViews.html(newViews);
 
-                    $("#works-grid-form")[0].reset();
-
                     $("#exampleModal").modal("hide");
+
+                    swal({
+                        text: "Работа добавленна в лайкер! Теперь вы станете на " +likesInput.val()+
+                            " лйков и "+ viewsInput.val() +" просмотров популярнее!",
+                        buttons: {
+                            confirm: {
+                                text: 'OK',
+                                value: true,
+                                visible: true,
+                                className: "btn btn-pink",
+                                closeModal: true
+                            }
+                        }
+                    });
+
+                    $("#works-grid-form")[0].reset();
                 }
                 else
                 {

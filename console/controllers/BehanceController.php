@@ -42,6 +42,13 @@ class BehanceController extends Controller
 
         foreach ($queue as $q)
         {
+            if($q->likes_work == 0 && $q->views_work == 0)
+            {
+                $q->delete();
+                $this->stdout("Работа {$q->work['name']} вышла из очереди!\n",Console::FG_RED);
+                continue;
+            }
+
             $workAccount = Accounts::findOne($q->work['account_id']);
 
             $service->importAccount($workAccount);
@@ -55,11 +62,11 @@ class BehanceController extends Controller
                {
                  $q->refreshLikes(1,1);
                  $this->stdout("Сценарий успешно применен!\n",Console::FG_GREEN);
+                 continue;
                }
-               else
-               {
-                   $this->stdout("Ошибка!\n",Console::FG_RED);
-               }
+
+               $this->stdout("Ошибка!\n",Console::FG_RED);
+                continue;
             }
 
             if($q->likes_work > 0 && $q->views_work == 0)
@@ -68,11 +75,11 @@ class BehanceController extends Controller
                 {
                     $q->refreshLikes(1,0);
                     $this->stdout("Сценарий успешно применен!\n",Console::FG_GREEN);
+                    continue;
                 }
-                else
-                {
-                    $this->stdout("Ошибка!\n",Console::FG_RED);
-                }
+
+                $this->stdout("Ошибка!\n",Console::FG_RED);
+                continue;
             }
 
             if($q->likes_work == 0 && $q->views_work > 0)
@@ -81,36 +88,14 @@ class BehanceController extends Controller
                 {
                     $q->refreshLikes(0,1);
                     $this->stdout("Сценарий успешно применен!\n",Console::FG_GREEN);
+                    continue;
                 }
-                else
-                {
-                    $this->stdout("Ошибка!\n",Console::FG_RED);
-                }
+
+                $this->stdout("Ошибка!\n",Console::FG_RED);
+                continue;
             }
         }
 
     }
-
-
-    public function actionGenerateRefHash()
-    {
-        $users = User::find()->Where(['ref_hash' => null])->all();
-
-        foreach ($users as $user)
-        {
-            $user->generateRefHash();
-            $user->save();
-            $this->stdout("Сгенерирован хеш для {$user->email}!\n",Console::FG_GREEN);
-        }
-    }
-
-
-
-    public function actionActivate()
-    {
-        User::updateAll(['status' => 1]);
-        $this->stdout("Complete\n",Console::FG_GREEN);
-    }
-
 
 }

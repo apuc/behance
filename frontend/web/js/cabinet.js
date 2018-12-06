@@ -47,9 +47,11 @@ $(document).ready(function () {
 
                     $("#exampleModal").modal("hide");
 
+
                     swal({
                         text: "Работа добавленна в лайкер! Теперь вы станете на " +likesInput.val()+
                             " лйков и "+ viewsInput.val() +" просмотров популярнее!",
+                        content:creafteLink(),
                         buttons: {
                             confirm: {
                                 text: 'OK',
@@ -91,3 +93,14 @@ $(document).ready(function () {
 });//close document ready
 
 
+function creafteLink()
+{
+    let link = document.createElement('a');
+    link.textContent = "Посмотреть";
+    link.setAttribute('href','/cabinet/queue');
+    link.style.display = "block";
+    link.style.width = '100%';
+    link.style.textAlign = 'left';
+
+    return link;
+}

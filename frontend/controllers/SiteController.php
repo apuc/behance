@@ -19,7 +19,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
+use frontend\models\ResetPasswordRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use \common\models\ContactForm;
@@ -37,10 +37,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup','login','account-confirm'],
+                'only' => ['logout', 'signup','login','account-confirm','reset-password','request-password-reset'],
                 'rules' => [
                     [
-                        'actions' => ['signup','login','account-confirm'],
+                        'actions' => ['signup','login','account-confirm','reset-password','request-password-reset'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -208,24 +208,16 @@ class SiteController extends Controller
 
     public function actionRequestPasswordReset()
     {
-        $model = new PasswordResetRequestForm();
+        $form = new ResetPasswordRequestForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        if ($form->load(Yii::$app->request->post()) && $form->validate())
         {
-            if ($model->sendEmail())
-            {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-
-                return $this->goHome();
-            }
-            else
-            {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
-            }
+           $this->authService->requestPasswordReset($form->email);
+           Yii::$app->session->setFlash('reset-password',true);
         }
 
-        return $this->render('requestPasswordResetToken', [
-            'model' => $model,
+        return $this->render('request-password-reset', [
+            'model' => $form,
         ]);
     }
 
@@ -233,24 +225,22 @@ class SiteController extends Controller
 
     public function actionResetPassword($token)
     {
-        try
+        if(!$user = User::findByPasswordResetToken($token))
         {
-            $model = new ResetPasswordForm($token);
-        }
-        catch (InvalidArgumentException $e)
-        {
-            throw new BadRequestHttpException($e->getMessage());
+            return $this->redirect("/error");
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword())
-        {
-            Yii::$app->session->setFlash('success', 'New password saved.');
+        $form = new ResetPasswordForm();
 
-            return $this->goHome();
+        if ($form->load(Yii::$app->request->post()) && $form->validate())
+        {
+            $this->authService->resetPassword($user,$form->password);
+            $this->authService->login($user->email);
+            return $this->redirect("/cabinet");
         }
 
-        return $this->render('resetPassword', [
-            'model' => $model,
+        return $this->render('reset-password', [
+            'model' => $form,
         ]);
     }
 }

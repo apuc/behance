@@ -55,11 +55,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-//	            '/cabinet/<slug>' => '/cabinet/cabinet/single-cabinet',
 	            'cabinet' => '/cabinet/cabinet',
 	            'signup' => '/site/signup',
+	            'reset-password' => '/site/reset-password',
+	            'request-password-reset' => '/site/request-password-reset',
 	            'account-confirm' => '/site/account-confirm',
-
             ],
         ],
 

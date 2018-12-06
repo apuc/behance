@@ -15,7 +15,7 @@ class CabinetAsset extends AssetBundle
     public $baseUrl = '@web';
 
 	public $css = [
-        'css/style.css',
+        'css/cabinet.css',
          '/css/font-awesome.css'
 	];
 
@@ -25,6 +25,7 @@ class CabinetAsset extends AssetBundle
 		'js/misc.js',
 		'js/material.js',
 		'js/dashboard.js',
+        'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
 	];
 
 	public $depends = [

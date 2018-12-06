@@ -78,34 +78,6 @@ body{
     font-size: initial !important;
 }
 
-.btn-pink {
-
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 13px 17px;
-  color: #ffffff;
-outline: none !important;
-  text-decoration: none;
-
-  font-family: "Muller", sans-serif;
-  letter-spacing: 0.7px;
-  border: none;
-  border-radius: 30px;
-  -webkit-box-shadow: -1px 5px 13px rgba(19, 19, 19, 0.34);
-  box-shadow: -1px 5px 13px rgba(19, 19, 19, 0.34);
-  cursor: pointer;
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  background-color: #e32c74; }
-.btn-pink:hover {
-  background-color: #cb1b60;
-  color:white;}
-.btn-pink:focus{
-    color:white;
-}
-
 .balance-block span{
   color:white;
   font-size:15px;
@@ -17967,6 +17939,35 @@ text-align:center;
   font-size:25px;
 }
 
+
+
+.btn-pink {
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 13px 17px;
+  color: #ffffff;
+  outline: none !important;
+  text-decoration: none;
+
+  font-family: "Muller", sans-serif;
+  letter-spacing: 0.7px;
+  border: none;
+  border-radius: 30px;
+  -webkit-box-shadow: -1px 5px 13px rgba(19, 19, 19, 0.34);
+  box-shadow: -1px 5px 13px rgba(19, 19, 19, 0.34);
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  background-color: #e32c74; }
+.btn-pink:hover {
+  background-color: #cb1b60 !important;
+  color:white; !important;}
+.btn-pink:focus{
+  color:white;
+}
 /*-------------------------------------------------------------------*/
 
 /*# sourceMappingURL=maps/style.css.map */

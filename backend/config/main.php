@@ -12,6 +12,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+            'users' => [
+                'class' => 'backend\modules\users\User',
+            ],
         'accounts' => [
             'class' => 'backend\modules\accounts\Accounts',
         ],

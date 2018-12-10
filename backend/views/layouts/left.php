@@ -34,6 +34,7 @@ if($callback_count == 0)
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
+                    ['label' => 'Пользователи', 'icon' => 'fas fa-user', 'url' => ['/users/users']],
                     ['label' => 'Аккаунты', 'icon' => 'fas fa-user-circle', 'url' => ['/accounts/accounts']],
                     ['label' => 'Работы', 'icon' => 'fas fa-briefcase', 'url' => ['/works/works']],
                     ['label' => 'Очередь', 'icon' => 'fas fa-list-ol', 'url' => ['/queue/queue']],

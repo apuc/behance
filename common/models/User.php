@@ -59,6 +59,20 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
+    public function attributeLabels()
+    {
+        return [
+            'status' => 'Статус',
+            'created_at' => 'Дата регистрации',
+            'updated_at' => 'Дата изменения',
+            'password_hash' => 'Хеш пароля',
+            'password_reset_token' => 'Токен восстановления пароя',
+            'ref_hash' => 'Хеш реферальной ссылки',
+            'auth_key' => 'Ключ',
+        ];
+    }
+
+
 
     public static function create($email,$password)
     {

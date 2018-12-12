@@ -50,7 +50,9 @@ $this->title = 'Пользователи';
             [
               'label'=>'Роль',
               'value'=>function($m){
-                  return array_keys(Yii::$app->authManager->getRolesByUser($m->id))[0];
+                   $roles = array_keys(Yii::$app->authManager->getRolesByUser($m->id));
+                  if($roles)
+                      return $roles[0];
               }
             ],
 

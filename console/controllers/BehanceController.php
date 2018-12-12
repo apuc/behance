@@ -11,13 +11,10 @@ namespace console\controllers;
 
 use common\behance\BehanceService;
 use common\behance\lib\BehanceAccount;
-
 use common\models\Accounts;
 use common\models\Settings;
 use common\models\Queue;
 use common\models\User;
-
-
 use common\models\Works;
 use Yii;
 use yii\console\Controller;

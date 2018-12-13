@@ -8,6 +8,7 @@ use backend\modules\orders\models\ContactSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\clases\SendMail;
 
 /**
  * ContactController implements the CRUD actions for ContactForm model.
@@ -43,6 +44,30 @@ class ContactController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+
+
+    public function actionReplay($email)
+    {
+        if(Yii::$app->request->post())
+        {
+            $post = Yii::$app->request->post();
+
+            SendMail::create()->setSMTPConfig(Yii::$app->params['smtp-config'])
+                ->addAddress($post['email'])
+                ->setSubject('Behance Space')
+                ->setBody("<p>{$post['message']}</p>")
+                ->setFrom('info@behance.space', 'BS')
+                ->isHTML()
+                ->send();
+
+            Yii::$app->session->setFlash('success','Ответ отправлен!');
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('replay',['email'=>$email]);
+    }
+
 
     public function  actionMarkAsRead($id)
     {

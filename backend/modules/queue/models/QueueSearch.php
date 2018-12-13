@@ -38,7 +38,7 @@ class QueueSearch extends Queue
      */
     public function search($params)
     {
-        $query = Queue::find()->orderBy("id desc");
+        $query = Queue::find()->with('work.account.user')->orderBy("id desc");
 
         // add conditions that should always apply here
 

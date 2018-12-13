@@ -40,7 +40,7 @@ class HistorySearch extends History
      */
     public function search($params)
     {
-        $query = History::find();
+        $query = History::find()->with('user')->orderBy("id desc");
 
         // add conditions that should always apply here
 

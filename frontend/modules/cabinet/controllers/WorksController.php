@@ -29,7 +29,7 @@ class WorksController extends Controller
         $searchModel = new WorksSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $works = Works::find()->where($dataProvider->query->where)->all();
+        $works = Works::find()->with('account')->where($dataProvider->query->where)->all();
         $works_names = ArrayHelper::map($works,'name','name');
         $account_names = array();
 

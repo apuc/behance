@@ -57,7 +57,7 @@ class QueueSearch extends Queue
         if(empty($works_id))
             $works_id = 0;
 
-        $query = Queue::find()->where("work_id IN({$works_id})")->orderBy("id desc");
+        $query = Queue::find()->with('work')->where("work_id IN({$works_id})")->orderBy("id desc");
 
         // add conditions that should always apply here
 

@@ -39,7 +39,7 @@ class WorksSearch extends Works
      */
     public function search($params)
     {
-        $query = Works::find();
+        $query = Works::find()->with('account')->orderBy("id desc");
 
         // add conditions that should always apply here
 

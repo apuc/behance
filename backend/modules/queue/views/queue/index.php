@@ -46,6 +46,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
             ],
             [
+               'label'=> 'Аккаунт',
+               'value'=>function($m){
+                    return $m->work->account->user['email'];
+               }
+            ],
+            [
                'attribute'=>'likes_work',
                'filter'=>false
             ],

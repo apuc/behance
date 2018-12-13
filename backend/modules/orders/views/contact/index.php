@@ -32,7 +32,10 @@ $this->title = 'Заявки из формы контактов';
                     return Html::a('Ссылка',$data->link,['title'=>$data->link]);
                 }
             ],
-            'message:ntext',
+            [
+                    'attribute'=>'message',
+                'contentOptions' => ['class' => 'grid-view-text-fix'],
+            ],
             'dt_add',
             [
                 'attribute'=>'status',

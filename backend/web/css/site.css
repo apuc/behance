@@ -119,7 +119,7 @@ a.desc:after {
     outline: none;
 }
 
-.grid-view td {
+.grid-view-text-fix {
     white-space: normal !important;
-    word-break: normal !important;
+    word-break: break-all !important;
 }

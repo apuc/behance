@@ -40,7 +40,7 @@ class AccountsSearch extends Accounts
      */
     public function search($params)
     {
-        $query = Accounts::find();
+        $query = Accounts::find()->with('user')->orderBy("id desc");
 
         // add conditions that should always apply here
 

@@ -10,10 +10,11 @@ use common\models\History;
 use common\models\Reviews;
 use common\models\Settings;
 use common\models\User;
-
+use common\clases\SendMail;
 use common\services\AuthService;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -133,6 +134,18 @@ class SiteController extends Controller
         if ($form->load($post) && $form->validate())
         {
             $form->save(false);
+
+            SendMail::create()->setSMTPConfig(Yii::$app->params['smtp-config'])
+                ->addAddress('apuc06@mail.ru')
+                ->setSubject('Новая заявка на Behance Space')
+                ->setBody("<p>Имя:{$form->name}</p>
+                                <p>Email:{$form->email}</p>
+                                <p>Ссылка:<a href='{$form->link}'>{$form->link}</a></p>
+                                <p>Сообщение:{$form->message}</p>")
+                ->setFrom('info@behance.space', 'BS')
+                ->isHTML()
+                ->send();
+
             return true;
         }
 
@@ -147,6 +160,17 @@ class SiteController extends Controller
     {
         $phone = Yii::$app->request->post()['phone'];
         Callback::create($phone);
+
+        $link = Url::home(true)."admin/orders/callback";
+
+        SendMail::create()->setSMTPConfig(Yii::$app->params['smtp-config'])
+            ->addAddress('apuc06@mail.ru')
+            ->setSubject('Новый звонок на Behance Space')
+            ->setBody("<p>Телефон:{$phone}</p>
+                                <p><a href=\'{$link}\'>{$link}</a></p>")
+            ->setFrom('info@behance.space', 'BS')
+            ->isHTML()
+            ->send();
     }
 
 

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\orders\models\ContactSearch */
@@ -41,6 +42,15 @@ $this->title = 'Заявки из формы контактов';
                        return Html::a('Прочитанно','/admin/orders/contact/mark-as-read?id='.$data->id,['class'=>'btn btn-success']);
 
                      return "";
+                }
+            ],
+            [
+
+
+                'format'=>'raw',
+                'value'=>function($data){
+
+                    return Html::a('Ответить',Url::toRoute(['replay','email'=>$data->email]),['class'=>'btn btn-primary']);
                 }
             ],
 

@@ -38,7 +38,7 @@ class BalanceSearch extends Balance
      */
     public function search($params)
     {
-        $query = Balance::find();
+        $query = Balance::find()->with('user');
 
         // add conditions that should always apply here
 

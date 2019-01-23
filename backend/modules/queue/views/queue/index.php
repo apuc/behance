@@ -48,7 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                'label'=> 'Аккаунт',
                'value'=>function($m){
-                    return $m->work->account->user['email'];
+                    if(!empty($m->work))
+                        return $m->work->account->user['email'];
                }
             ],
             [

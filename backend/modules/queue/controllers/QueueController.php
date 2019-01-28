@@ -134,6 +134,10 @@ class QueueController extends Controller
             $worksQueue = ArrayHelper::getColumn($worksQueue,'work_id');
             $worksQueue = implode(',',$worksQueue);
 
+            if(empty($worksQueue)){
+                $worksQueue = 0;
+            }
+
             $works = Works::find()->where("id NOT IN({$worksQueue})")->all();
             $works = ArrayHelper::map($works,'id','name');
 

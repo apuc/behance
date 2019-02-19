@@ -29,7 +29,7 @@ if (Yii::$app->controller->action->id == 'about') {
       </div>
 
       <div class="header__menu-btn-text">
-        <a class="header__btn fz12 fw-extra-bold" href="tel:+8 812 319-36-02">+8 812 319-36-02</a>
+        <a class="header__btn fz12 fw-extra-bold" href="tel:+8 812 319-36-02">+7 928 770 19 79</a>
         <button class="header__btn fz10 fw-medium js-backCall" type="button">Заказать обратный звонок</button>
       </div>
     </div>

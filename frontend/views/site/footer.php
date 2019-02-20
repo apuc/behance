@@ -44,6 +44,19 @@ use yii\helpers\Url;
                     </span>
           </a>
 
+          <a class="footer__btn">
+
+              <script type="text/javascript" src="https://vk.com/js/api/openapi.js?160"></script>
+
+              <!— VK Widget —>
+              <div id="vk_community_messages"></div>
+              <script type="text/javascript">
+                  VK.Widgets.CommunityMessages("vk_community_messages", 174651711, {expandTimeout: "15000",tooltipButtonText: "Есть вопрос?"});
+              </script>
+          </a>
+
+
+
       </div>
     </div>
   </div>

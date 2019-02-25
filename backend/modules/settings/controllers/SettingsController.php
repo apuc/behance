@@ -9,7 +9,7 @@ use common\models\Proxy;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use common\clases\ProxyApi;
 
 /**
  * SettingsController implements the CRUD actions for Settings model.
@@ -58,6 +58,24 @@ class SettingsController extends Controller
         Yii::$app->session->setFlash("success","Адресса proxy добавленны!");
         return $this->redirect(['index']);
 
+    }
+
+
+    public  function actionLoadProxyFromApi()
+    {
+       $res = ProxyApi::run()->parse()->all();
+
+       $data = array();
+
+       foreach ($res as $r){
+           $data[] = [$r->ip.':'.$r->port];
+       }
+
+       $model = new Proxy();
+       $model->Fill($data);
+
+        Yii::$app->session->setFlash("success","Адресса proxy добавленны!");
+        return $this->redirect(['index']);
     }
 
     /**

@@ -34,6 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
    </div>
 
     <p>
+        <?= Html::a('загрузить через API','/admin/settings/settings/load-proxy-from-api',['class'=>'btn btn-success'])?>
+    </p>
+
+    <p>
         <?= Html::a(Yii::t('settings', 'Create Settings'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 

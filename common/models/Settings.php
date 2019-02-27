@@ -55,4 +55,10 @@ class Settings extends \yii\db\ActiveRecord
         $setting->value = json_encode($data);
         $setting->insert(false);
     }
+
+    public static function getSetting($key)
+    {
+       $setting = Settings::find()->where("settings.key='{$key}'")->limit(1)->one();
+       return $setting->value;
+    }
 }

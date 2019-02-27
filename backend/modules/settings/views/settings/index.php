@@ -15,27 +15,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-   <div style="margin: 30px 0px">
-       <?php $form = ActiveForm::begin(["action"=>"/admin/settings/settings/fill-proxy",'options' => array(
-           'enctype' => 'multipart/form-data',
-       ),]); ?>
+   <div class="box box-solid">
+      <div class="box-body">
+          <?php $form = ActiveForm::begin(["action"=>"/admin/settings/settings/fill-proxy",'options' => array(
+              'enctype' => 'multipart/form-data',
+          ),]); ?>
 
-       <div class="form-group">
-           <?= Html::label("Загрузить адресса proxy серверов") ?>
-           <?php echo Html::fileInput("ipfile",'',['required'=>'true'])?>
-       </div>
+          <div class="form-group">
+              <?= Html::label("Загрузить адресса proxy серверов") ?>
+              <?php echo Html::fileInput("ipfile",'',['required'=>'true'])?>
+          </div>
 
 
-       <div class="form-group">
-           <?= Html::submitButton('Загрузить', ['class' => 'btn btn-success']) ?>
-       </div>
+          <div class="form-group">
+              <?= Html::submitButton('Загрузить', ['class' => 'btn btn-success']) ?>
+          </div>
 
-       <?php ActiveForm::end(); ?>
+          <?php ActiveForm::end(); ?>
+
+          <p>
+              <?= Html::a('загрузить через API','/admin/settings/settings/load-proxy-from-api',['class'=>'btn btn-success'])?>
+          </p>
+
+          <p>
+
+          </p>
+
+      </div>
    </div>
 
-    <p>
-        <?= Html::a('загрузить через API','/admin/settings/settings/load-proxy-from-api',['class'=>'btn btn-success'])?>
-    </p>
+
 
     <p>
         <?= Html::a(Yii::t('settings', 'Create Settings'), ['create'], ['class' => 'btn btn-success']) ?>
@@ -60,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
               'attribute'=>'value',
+                'contentOptions' => ['class' => 'grid-view-text-fix'],
                 'filter'=>false,
 
             ],

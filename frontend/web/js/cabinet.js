@@ -50,7 +50,7 @@ $(document).ready(function () {
 
                     swal({
                         text: "Работа добавленна в лайкер! Теперь вы станете на " +likesInput.val()+
-                            " лйков и "+ viewsInput.val() +" просмотров популярнее!",
+                            " лайков и "+ viewsInput.val() +" просмотров популярнее!",
                         content:creafteLink(),
                         buttons: {
                             confirm: {

@@ -50,15 +50,17 @@ if (Yii::$app->controller->action->id == 'about') {
 
     <!--                    <a class="header__nav-item" href="#">Блог</a>-->
       <?php if (Yii::$app->user->isGuest): ?>
-        <a class="header__icon" href="<?= Url::toRoute(['/site/login']); ?>">
-          <img src="<?= $enterIcon ?>"/>
-        </a>
+          <a href="<?= Url::toRoute(['/site/login']); ?>" class="btn btn-pink">Вход</a>
+<!--        <a class="header__icon" href="--><?//= Url::toRoute(['/site/login']); ?><!--">-->
+<!--          <img src="--><?//= $enterIcon ?><!--"/>-->
+<!--        </a>-->
       <?php endif; ?>
 
       <?php if (!Yii::$app->user->isGuest): ?>
-        <a class="header__icon" href="<?= Url::toRoute(['/cabinet']); ?>">
-          <img src="<?= $cabinetIcon ?>"/>
-        </a>
+          <a href="<?= Url::toRoute(['/cabinet']); ?>" class="btn btn-pink">Кабинет</a>
+<!--        <a class="header__icon" href="--><?//= Url::toRoute(['/cabinet']); ?><!--">-->
+<!--          <img src="--><?//= $cabinetIcon ?><!--"/>-->
+<!--        </a>-->
       <?php endif; ?>
   </div>
 </div>

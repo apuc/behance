@@ -14,6 +14,8 @@ use yii\helpers\ArrayHelper;
  * @property int $account_id
  * @property int $start_views
  * @property int $start_likes
+ * @property int $current_likes
+ * @property int $current_views
  * @property string $behance_id
  * @property string $url
  * @property string $name
@@ -36,7 +38,7 @@ class Works extends \yii\db\ActiveRecord
     {
         return [
             [['account_id'], 'integer'],
-	        [['behance_id', 'url', 'name', 'image','start_views','start_likes'], 'safe'],
+            [['behance_id', 'url', 'name', 'image', 'start_views', 'start_likes'], 'safe'],
             [['behance_id', 'url', 'name', 'image'], 'string', 'max' => 255],
         ];
     }
@@ -59,122 +61,98 @@ class Works extends \yii\db\ActiveRecord
     }
 
 
-    public function parseWorks(BehanceService $service,$isUpdate = false)
+    /**Парсит и сохраняет работы аккаунта
+     * @param BehanceService $service
+     * @param bool $isUpdate
+     * @return int
+     * @throws \common\behance\lib\BehanceApiException
+     */
+    public function parseWorks(BehanceService $service, $isUpdate = false)
     {
-            $works = $service->getWorks();
+        $works = $service->getWorks();
 
-            if($works)
-            {
-                $id = Accounts::find()->where(['behance_id'=>$service->account->behanceId])->all();
-                $id = $id[0]->id;
-
-                $works_aded = 0;
-                $works_in_db = array();
-
-                if($isUpdate)
-                {
-                    $works_in_db = Works::find()->where(['account_id'=>$id])->select('behance_id')->all();
-                    $works_in_db = ArrayHelper::getColumn($works_in_db,'behance_id');
-                }
-
-
-                foreach ($works as  $val)
-                {
-
-                    if(in_array($val->behanceId,$works_in_db))
-                    {
-                        continue;
-                    }
-
-                    $work_bd = new Works();
-                    $work_bd->behance_id = (string)$val->behanceId;
-                    $work_bd->image = (string)$val->image;
-                    $work_bd->account_id = (integer)$id;
-                    $work_bd->url = (string)$val->url;
-                    $work_bd->name = (string)$val->name;
-                    $work_bd->start_likes = (string)$val->startViews;
-                    $work_bd->start_views = (string)$val->startLikes;
-                    $work_bd->save();
-                    $works_aded++;
-
-                }
-
-                return $works_aded;
-            }
-
-            throw new \Exception("Не удалось получить работы!");
-
-    }
-
-
-
-    public static function updateWorks($url)
-    {
-        $service = BehanceService::create(new BehanceAccount());
-        $account =$service->getAccount($url);
-
-        if($account)
+        if ($works)
         {
-            $works = $service->getWorks();
+            $id = Accounts::find()->where(['behance_id' => $service->account->behanceId])->all();
+            $id = $id[0]->id;
 
-            if($works)
-            {
-                $id = Accounts::find()->where(['behance_id'=>$account->behanceId])->all();
-                $id = $id[0]->id;
+            $works_aded = 0;
+            $works_in_db = array();
 
-                $works_in_db = Works::find()->where(['account_id'=>$id])->select('behance_id')->all();
-                $works_in_db = ArrayHelper::getColumn($works_in_db,'behance_id');
-
-                $works_aded = 0;
-
-                foreach ($works as  $val)
-                {
-                    if(!in_array($val->behanceId,$works_in_db))
-                    {
-                        $work_bd = new Works();
-                        $work_bd->behance_id = (string)$val->behanceId;
-                        $work_bd->image = (string)$val->image;
-                        $work_bd->account_id = (integer)$id;
-                        $work_bd->url = (string)$val->url;
-                        $work_bd->name = (string)$val->name;
-                        $work_bd->start_likes = (string)$val->startViews;
-                        $work_bd->start_views = (string)$val->startLikes;
-                        $work_bd->save();
-                        $works_aded++;
-                    }
-                }
-
-                return $works_aded;
+            if ($isUpdate) {
+                $works_in_db = Works::find()->where(['account_id' => $id])->select('behance_id')->all();
+                $works_in_db = ArrayHelper::getColumn($works_in_db, 'behance_id');
             }
 
-            return 'Не удалось получить работы!';
+
+            foreach ($works as $val) {
+
+                if (in_array($val->behanceId, $works_in_db)) {
+                    continue;
+                }
+
+                $work_bd = new Works();
+                $work_bd->behance_id = (string)$val->behanceId;
+                $work_bd->image = (string)$val->image;
+                $work_bd->account_id = (integer)$id;
+                $work_bd->url = (string)$val->url;
+                $work_bd->name = (string)$val->name;
+                $work_bd->start_likes = (string)$val->startViews;
+                $work_bd->start_views = (string)$val->startLikes;
+                $work_bd->save();
+                $works_aded++;
+
+            }
+
+            return $works_aded;
         }
+
+        throw new \Exception("Не удалось получить работы!");
+
     }
 
 
-
-    public  static function getRandomWorks($account_id,$count)
+    /** Случайные работы для виджета телефона
+     * @param $account_id
+     * @param $count
+     * @return array|bool|\yii\db\ActiveRecord[]
+     */
+    public static function getRandomWorks($account_id, $count)
     {
-        $works_ids = Works::find()->where(['account_id'=>$account_id])->select('id')->all();
+        $works_ids = Works::find()->where(['account_id' => $account_id])->select('id')->all();
 
-        if(empty($works_ids))
-        {
+        if (empty($works_ids)) {
             return false;
         }
 
         $rand_ids = array();
 
-        for($i = 0; $i< $count; $i++)
-        {
-          $rand_ids[] = $works_ids[rand(0,count($works_ids)-1)]->id;
+        for ($i = 0; $i < $count; $i++) {
+            $rand_ids[] = $works_ids[rand(0, count($works_ids) - 1)]->id;
         }
 
-        $rand_ids=implode(',',$rand_ids);
+        $rand_ids = implode(',', $rand_ids);
         return Works::find()->where("id IN({$rand_ids})")->all();
     }
 
 
+    /**
+     * Получает текущее кол-во лайков и просмотров работы
+     */
+    public function getCurrentStats()
+    {
+       $service = new BehanceService(new BehanceAccount());
+       $url = "http://www.behance.net/v2/projects/{$this->behance_id}?api_key={$service->account->token}";
+       $res = $service->account->behanceApiRequest($url);
 
+       $this->current_likes = $res->project->stats->appreciations;
+       $this->current_views = $res->project->stats->views;
+    }
+
+
+    /**связь с аккаунтом
+     * @return \yii\db\ActiveQuery
+     */
     public function getAccount()
     {
         return $this->hasOne(Accounts::className(),['id'=>'account_id']);

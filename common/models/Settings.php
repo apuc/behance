@@ -56,6 +56,10 @@ class Settings extends \yii\db\ActiveRecord
         $setting->insert(false);
     }
 
+    /**Получает значение настройки по ключу
+     * @param $key
+     * @return mixed
+     */
     public static function getSetting($key)
     {
        $setting = Settings::find()->where("settings.key='{$key}'")->limit(1)->one();

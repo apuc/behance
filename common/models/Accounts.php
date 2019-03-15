@@ -60,10 +60,13 @@ class Accounts extends \yii\db\ActiveRecord
     }
 
 
-
+    /**Парсит и сохраняет аккаунт
+     * @param BehanceService $service
+     * @param null $user_id
+     * @throws \Exception
+     */
     public function parseAccount(BehanceService $service,$user_id = null)
     {
-
         $account = $service->account;
 
         if($account)
@@ -85,7 +88,9 @@ class Accounts extends \yii\db\ActiveRecord
     }
 
 
-
+    /**Случайный аккаунт для виджета телефона
+     * @return array|bool|\yii\db\ActiveRecord|null
+     */
     public static function getRandomAccount()
     {
         $accounts_ids = Accounts::find()->where(['user_id'=>Yii::$app->user->identity->id])->select('id')->all();
@@ -100,6 +105,9 @@ class Accounts extends \yii\db\ActiveRecord
     }
 
 
+    /**Связь с пользователем
+     * @return \yii\db\ActiveQuery
+     */
     public function getUser()
     {
         return $this->hasOne(User::className(),['id'=>'user_id']);

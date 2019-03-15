@@ -31,7 +31,6 @@ class BehanceController extends Controller
         $isForce = Settings::getSetting('is_force_enabled');
         $forceMax = Settings::getSetting('force_max');
 
-
         $queue = Queue::find()->orderBy("id desc")->limit($takeFfromQueue)->all();
 
         if(empty($queue)){
@@ -60,9 +59,14 @@ class BehanceController extends Controller
         {
             if($q->likes_work == 0 && $q->views_work == 0)
             {
-                $q->delete();
-                $this->stdout("Работа {$q->work['name']} вышла из очереди!\n",Console::FG_RED);
-                continue;
+                if($q->checkStats()){
+                    $q->delete();
+                    $this->stdout("Работа {$q->work['name']} вышла из очереди!\n",Console::FG_RED);
+                    continue;
+                }
+
+                $q->returnToLiker();
+                $this->stdout("Работа {$q->work['name']} вернулась в очередь!\n",Console::FG_YELLOW);
             }
 
             $workAccount = Accounts::findOne($q->work['account_id']);

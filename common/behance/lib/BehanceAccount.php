@@ -27,7 +27,8 @@ class BehanceAccount implements AccountInterface
     public $url;
     public $image;
     public $works = [];
-    private $token;
+
+    public $token;
 
 
     /**

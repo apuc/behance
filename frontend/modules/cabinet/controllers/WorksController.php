@@ -48,7 +48,9 @@ class WorksController extends Controller
     }
 
 
-
+    /**Добавление в очередь
+     * @return bool|string
+     */
     public function actionAssignBalance()
     {
         $post = Yii::$app->request->post();
@@ -76,6 +78,10 @@ class WorksController extends Controller
         if($queue->load(['Queue'=>$post]) && $queue->save())
         {
            $user_balance->removeFromBalance($post['likes_work'],$post['views_work']);
+
+           $work = Works::findOne($post['work_id']);
+           $work->getCurrentStats();
+           $work->save();
 
            History::create($user_id,
                History::TRANSFER_FROM_BALANCE,

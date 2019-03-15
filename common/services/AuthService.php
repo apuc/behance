@@ -82,7 +82,7 @@ class AuthService
        if($referer = User::findByRefHash($refHash))
        {
            $refererBalance = Balance::findOne(['user_id'=>$referer->id]);
-           $refererBalance->addBalance(100,0);
+           $refererBalance->addBalance(50,100);
 
            History::create(
                $referer->id,

@@ -55,9 +55,9 @@ class BehanceWork implements  WorkInterface
      * @param $userAgent
      * @return bool
      */
-    public function viewOnce($proxy,$userAgent)
+    public function viewOnce($proxy,$userAgent,$referer)
     {
-        return $this->_view_($this->url,$proxy,$userAgent);
+        return $this->_view_($this->url,$proxy,$userAgent,$referer);
     }
 
 }

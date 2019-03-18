@@ -12,5 +12,5 @@ namespace common\behance\interfaces;
 interface WorkInterface
 {
   public function likeOnce($proxy,$userAgent);
-  public function viewOnce($proxy,$userAgent);
+  public function viewOnce($proxy,$userAgent,$referer);
 }

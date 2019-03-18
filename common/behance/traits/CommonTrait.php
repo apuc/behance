@@ -87,10 +87,14 @@ trait CommonTrait
      * @param $userAgent
      * @return bool
      */
-    public function _view_($url,$proxy,$userAgent)
+    public function _view_($url,$proxy,$userAgent,$referer=null)
     {
 
         $curl = curl_init();
+
+        if($referer){
+            curl_setopt($curl, CURLOPT_REFERER, $referer);
+        }
 
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);

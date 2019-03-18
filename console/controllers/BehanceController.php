@@ -59,14 +59,16 @@ class BehanceController extends Controller
         {
             if($q->likes_work == 0 && $q->views_work == 0)
             {
-                if($q->checkStats()){
-                    $q->delete();
-                    $this->stdout("Работа {$q->work['name']} вышла из очереди!\n",Console::FG_RED);
-                    continue;
-                }
+                $q->delete();
+                $this->stdout("Работа {$q->work['name']} вышла из очереди!\n",Console::FG_RED);
+                continue;
 
-                $q->returnToLiker();
-                $this->stdout("Работа {$q->work['name']} вернулась в очередь!\n",Console::FG_YELLOW);
+//                if($q->checkStats()){
+//
+//                }
+//
+//                $q->returnToLiker();
+//                $this->stdout("Работа {$q->work['name']} вернулась в очередь!\n",Console::FG_YELLOW);
             }
 
             $workAccount = Accounts::findOne($q->work['account_id']);

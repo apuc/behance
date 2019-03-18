@@ -106,7 +106,7 @@ class BehanceAccount implements AccountInterface
      */
     public function viewWork($workBehanceId,$proxy,$userAgent)
     {
-        return $this->works[$workBehanceId]->viewOnce($proxy,$userAgent);
+        return $this->works[$workBehanceId]->viewOnce($proxy,$userAgent,$this->url);
     }
 
 

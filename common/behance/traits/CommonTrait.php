@@ -61,6 +61,7 @@ trait CommonTrait
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_URL,$url);
         curl_setopt($curl,  CURLOPT_PROXY, $proxy);
+        curl_setopt($curl, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS4);
         curl_setopt($curl,CURLOPT_USERAGENT, $userAgent);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -100,6 +101,7 @@ trait CommonTrait
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl, CURLOPT_HEADER, true);
         curl_setopt($curl, CURLOPT_PROXY, $proxy);
+        curl_setopt($curl, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS4);
         curl_setopt($curl, CURLOPT_USERAGENT, $userAgent);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 30);

@@ -30,7 +30,7 @@ $(document).ready(function () {
 
         $.ajax({
             type:"POST",
-            url:"works/assign-balance",
+            url:"/cabinet/works/assign-balance",
             data:data,
             success:function (response) {
 
@@ -75,20 +75,24 @@ $(document).ready(function () {
 
     })
 
-    casesSelect.addEventListener('change',function () {
+    if(casesSelect != undefined)
+    {
+        casesSelect.addEventListener('change',function () {
 
-        let data = $(this).val().split('|');
-        let orderId = orderInput.val();
+            let data = $(this).val().split('|');
+            let orderId = orderInput.val();
 
-        $.post( "/cabinet/payment/get-form-secret",{"order_id":orderId,"sum":data[1]}).then(
-            function(res) {
-                sumInput.val(data[1]);
-                caseInput.val(data[0]);
-                secretInput.val(res);
-            }
-        );
+            $.post( "/cabinet/payment/get-form-secret",{"order_id":orderId,"sum":data[1]}).then(
+                function(res) {
+                    sumInput.val(data[1]);
+                    caseInput.val(data[0]);
+                    secretInput.val(res);
+                }
+            );
 
-    })
+        })
+    }
+
 
 });//close document ready
 

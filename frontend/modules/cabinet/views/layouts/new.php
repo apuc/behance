@@ -44,7 +44,7 @@ CabinetAsset::register($this);
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/']); ?>">
                             <i class="fa fa-home" style="visibility: visible;"></i>
-                            <span>На гавную</span>
+                            <span>На главную</span>
                         </a>
                     </div>
 

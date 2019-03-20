@@ -23,7 +23,7 @@ AppAsset::register($this);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property=og:title content=“<?= Html::encode($this->title) ?>”>
+    <meta property=og:title content=“<?php echo $this->title; ?>”>
     <meta property=og:site_name content=“behance.space”>
     <meta property=og:type content=“site”>
     <meta property=og:url content=“<?=Url::current([], true)?>”>

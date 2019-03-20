@@ -82,13 +82,13 @@ class AuthService
        if($referer = User::findByRefHash($refHash))
        {
            $refererBalance = Balance::findOne(['user_id'=>$referer->id]);
-           $refererBalance->addBalance(50,100);
+           $refererBalance->addBalance(Yii::$app->params['referal_likes'],Yii::$app->params['referal_views']);
 
            History::create(
                $referer->id,
                History::TRANSFER_TO_BALANCE,
-               50,
-               100,
+               Yii::$app->params['referal_likes'],
+               Yii::$app->params['referal_views'],
                "Начислено 50 лайков и 100 просмотров за регестрацию по реферальной ссылке"
            );
        }

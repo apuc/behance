@@ -23,10 +23,11 @@ AppAsset::register($this);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property=og:title content=“<?php echo $this->title; ?>”>
-    <meta property=og:site_name content=“behance.space”>
-    <meta property=og:type content=“site”>
-    <meta property=og:url content=“<?=Url::current([], true)?>”>
+    <meta property=og:title content="<?php echo $this->title; ?>">
+    <meta property=og:site_name content="behance.space">
+    <meta property=og:type content="site">
+    <meta property=og:url content="<?=Url::current([], true)?>">
+    <meta property="og:description" content="Мы предлагаем быстрое продвижение вашего Behance аккаунта. Без ботов и блокировки.">
     <meta property="og:image" content="https://behance.space/images/og-image.png" />
     <meta property="og:image:secure_url" content="https://behance.space/images/og-image.png" />
     <meta property="og:image:type" content="image/png" />

@@ -11,15 +11,10 @@ use Yii;
  * @property int $work_id
  * @property int $likes_work
  * @property int $views_work
- * @property int $views
- * @property int $likes
  * @property int $account_views
  */
 class Queue extends \yii\db\ActiveRecord
 {
-
-    private $likesDiff;
-    private $viewsDiff;
     /**
      * {@inheritdoc}
      */
@@ -31,11 +26,6 @@ class Queue extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        if($this->isNewRecord){
-            $this->likes = $this->likes_work;
-            $this->views = $this->views_work;
-        }
-
         (empty($this->likes_work)) ? $this->likes_work = 0 : "";
         (empty($this->views_work)) ? $this->views_work = 0 : "";
         (empty($this->account_views)) ? $this->account_views = 0 : "";
@@ -51,6 +41,23 @@ class Queue extends \yii\db\ActiveRecord
         return [
             [['work_id', 'likes_work', 'views_work', 'account_views'], 'integer'],
         ];
+    }
+
+    /**
+     * Создает запись в очереди
+     * @param $work
+     * @param $likes
+     * @param $views
+     * @return bool
+     */
+    public static function create($work,$likes,$views)
+    {
+        $que = new self;
+        $que->likes_work = $likes;
+        $que->views_work = $views;
+        $que->work_id = $work;
+
+        return $que->save();
     }
 
     /**
@@ -82,45 +89,6 @@ class Queue extends \yii\db\ActiveRecord
 
         $this->save();
     }
-
-
-    /**Проверяет что указанное кол-во лайкоа и просмотров реально применилось к работе
-     * @return bool
-     */
-    public function checkStats()
-    {
-        $work = $this->work;
-        $likesBeforeLiker = $work->current_likes;
-        $viewsBeforeLiker = $work->current_views;
-        $work->getCurrentStats();
-
-        if($this->likes > 0 && $this->views > 0){
-            $this->likesDiff = $work->current_likes - $likesBeforeLiker;
-            $this->viewsDiff = $work->current_views - $viewsBeforeLiker;
-            return ($this->likesDiff >= $this->likes &&  $this->viewsDiff >= $this->views);
-        }
-
-        if($this->likes > 0){
-            $this->likesDiff = $work->current_likes - $likesBeforeLiker;
-            return ($this->likesDiff >= $this->likes);
-        }
-
-        if($this->views > 0){
-            $this->viewsDiff = $work->current_views - $viewsBeforeLiker;
-            return ($this->viewsDiff >= $this->views);
-        }
-    }
-
-    /**
-     *
-     */
-    public function returnToLiker()
-    {
-        $this->likes_work = $this->likes - $this->likesDiff;
-        $this->views_work = $this->views - $this->viewsDiff;
-        $this->save();
-    }
-
 
     /**Связь с работой
      * @return \yii\db\ActiveQuery

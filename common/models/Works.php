@@ -14,8 +14,6 @@ use yii\helpers\ArrayHelper;
  * @property int $account_id
  * @property int $start_views
  * @property int $start_likes
- * @property int $current_likes
- * @property int $current_views
  * @property string $behance_id
  * @property string $url
  * @property string $name
@@ -134,21 +132,6 @@ class Works extends \yii\db\ActiveRecord
         $rand_ids = implode(',', $rand_ids);
         return Works::find()->where("id IN({$rand_ids})")->all();
     }
-
-
-    /**
-     * Получает текущее кол-во лайков и просмотров работы
-     */
-    public function getCurrentStats()
-    {
-       $service = new BehanceService(new BehanceAccount());
-       $url = "http://www.behance.net/v2/projects/{$this->behance_id}?api_key={$service->account->token}";
-       $res = $service->account->behanceApiRequest($url);
-
-       $this->current_likes = $res->project->stats->appreciations;
-       $this->current_views = $res->project->stats->views;
-    }
-
 
     /**связь с аккаунтом
      * @return \yii\db\ActiveQuery

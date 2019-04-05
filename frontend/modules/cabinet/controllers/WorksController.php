@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
  */
 class WorksController extends Controller
 {
-
+    CONST VIEWS = 150;
     /**
      * Lists all Works models.
      * @return mixed
@@ -48,7 +48,8 @@ class WorksController extends Controller
     }
 
 
-    /**Добавление в очередь
+    /**
+     * Добавление в очередь
      * @return bool|string
      */
     public function actionAssignBalance()
@@ -73,26 +74,35 @@ class WorksController extends Controller
             return "Не достаточно просмотров на балансе!";
         }
 
-        $queue = new Queue();
+        $count = intdiv($post['views_work'],self::VIEWS);
+        $last = $post['views_work'] % self::VIEWS;
 
-        if($queue->load(['Queue'=>$post]) && $queue->save())
-        {
-           $user_balance->removeFromBalance($post['likes_work'],$post['views_work']);
-
-           $work = Works::findOne($post['work_id']);
-           $work->getCurrentStats();
-           $work->save();
-
-           History::create($user_id,
-               History::TRANSFER_FROM_BALANCE,
-               $post['likes_work'],
-               $post['views_work'],
-               "Лайки и просмотры назначены на работу"
-           );
-
-           return true;
+        if($count == 0){
+            $count =1;
+            $last = 0;
         }
 
+        for($i = 0; $i < $count; $i++)
+        {
+            $views = ($post['views_work']>self::VIEWS) ? self::VIEWS : $post['views_work'];
+            $likes = ($i == 0) ? $post['likes_work'] : 0;
+            Queue::create($post['work_id'],$likes,$views);
+        }
+
+        if($last != 0){
+            Queue::create($post['work_id'],0,$last);
+        }
+
+        $user_balance->removeFromBalance($post['likes_work'],$post['views_work']);
+
+        History::create($user_id,
+            History::TRANSFER_FROM_BALANCE,
+            $post['likes_work'],
+            $post['views_work'],
+            "Лайки и просмотры назначены на работу"
+        );
+
+        return true;
     }
 
 

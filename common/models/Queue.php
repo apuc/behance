@@ -16,6 +16,11 @@ use Yii;
 class Queue extends \yii\db\ActiveRecord
 {
     /**
+     * максимум просмотров в очереди
+     */
+    const MAX_VIEWS = 150;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()

@@ -75,15 +75,12 @@ class PaymentController extends \yii\web\Controller
                         "Применен пакет {$case->name}!"
                     );
                 }
-                else
-                {
-                    throw new \Exception("Wrong amount!");
-                }
+
+                throw new \Exception("Wrong amount!");
+
             }
-            else
-            {
-                throw new \Exception("Wrong sign!");
-            }
+
+            throw new \Exception("Wrong sign!");
 
         }
         catch(\Exception $e)

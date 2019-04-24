@@ -4,6 +4,7 @@ namespace frontend\modules\cabinet\controllers;
 
 use common\models\History;
 use common\models\Queue;
+use common\models\forms\AssignBalanceForm;
 use frontend\modules\cabinet\models\Balance;
 use Yii;
 use frontend\modules\cabinet\models\Works;
@@ -19,7 +20,6 @@ use yii\helpers\ArrayHelper;
  */
 class WorksController extends Controller
 {
-
     /**
      * Lists all Works models.
      * @return mixed
@@ -47,55 +47,50 @@ class WorksController extends Controller
         ]);
     }
 
-
-    /**Добавление в очередь
+    /**
+     * Добавление в очередь
      * @return bool|string
      */
     public function actionAssignBalance()
     {
-        $post = Yii::$app->request->post();
+        $form = new AssignBalanceForm(Yii::$app->request->post());
+        $userId = Yii::$app->user->getId();
 
-        if(empty($post['likes_work']) && empty($post['views_work']))
-        {
-            return "Введите количество лайков или просмотров!";
+        if(!$form->validate()){
+            return $form->getFirstErrors()['error'];
         }
 
-        $user_id = Yii::$app->user->getId();
-        $user_balance = Balance::findOne(['user_id'=>$user_id]);
+        $count = intdiv($form->views,Queue::MAX_VIEWS);
+        $leftViews = $form->views % Queue::MAX_VIEWS;
 
-        if($post['likes_work'] > $user_balance->likes)
-        {
-            return "Не достаточно лайков на балансе!";
+        if($count == 0){
+            $count =1;
+            $leftViews = 0;
         }
 
-        if($post['views_work'] > $user_balance->views)
+        for($i = 0; $i < $count; $i++)
         {
-            return "Не достаточно просмотров на балансе!";
+            $views = ($form->views > Queue::MAX_VIEWS) ? Queue::MAX_VIEWS : $form->views;
+            $likes = ($i == 0) ? $form->likes : 0;
+            Queue::create($form->workId,$likes,$views);
         }
 
-        $queue = new Queue();
-
-        if($queue->load(['Queue'=>$post]) && $queue->save())
-        {
-           $user_balance->removeFromBalance($post['likes_work'],$post['views_work']);
-
-           $work = Works::findOne($post['work_id']);
-           $work->getCurrentStats();
-           $work->save();
-
-           History::create($user_id,
-               History::TRANSFER_FROM_BALANCE,
-               $post['likes_work'],
-               $post['views_work'],
-               "Лайки и просмотры назначены на работу"
-           );
-
-           return true;
+        if($leftViews != 0){
+            Queue::create($form->workId,0,$leftViews);
         }
 
+        $userBalance = Balance::findOne(['user_id'=>$userId]);
+        $userBalance->removeFromBalance($form->likes,$form->views);
+
+        History::create($userId,
+            History::TRANSFER_FROM_BALANCE,
+            $form->likes,
+            $form->views,
+            "Лайки и просмотры назначены на работу"
+        );
+
+        return true;
     }
-
-
 
     /**
      * Displays a single Works model.
@@ -150,10 +145,11 @@ class WorksController extends Controller
 
     /**
      * Deletes an existing Works model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

@@ -60,10 +60,6 @@ class QueueController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save())
         {
-            $work = Works::findOne($model->work_id);
-            $work->getCurrentStats();
-            $work->save();
-
             Yii::$app->session->setFlash('success','Работа добавлена');
             return $this->redirect(['index']);
         }

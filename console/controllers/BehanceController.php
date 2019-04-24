@@ -62,13 +62,6 @@ class BehanceController extends Controller
                 $q->delete();
                 $this->stdout("Работа {$q->work['name']} вышла из очереди!\n",Console::FG_RED);
                 continue;
-
-//                if($q->checkStats()){
-//
-//                }
-//
-//                $q->returnToLiker();
-//                $this->stdout("Работа {$q->work['name']} вернулась в очередь!\n",Console::FG_YELLOW);
             }
 
             $workAccount = Accounts::findOne($q->work['account_id']);

@@ -51,8 +51,9 @@ use yii\helpers\Url;
               <!— VK Widget —>
               <div id="vk_community_messages"></div>
               <script type="text/javascript">
-                  VK.Widgets.CommunityMessages("vk_community_messages", 174651711, {expandTimeout: "15000",tooltipButtonText: "Есть вопрос?"});
+                  VK.Widgets.CommunityMessages("vk_community_messages", 174651711, {expandTimeout: "10000",tooltipButtonText: "Есть вопрос?"});
               </script>
+
           </a>
 
 

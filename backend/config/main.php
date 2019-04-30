@@ -51,7 +51,7 @@ return [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'ssl://mail.adm.tools',
-                'username' => 'info@behance.space',
+                'username' => 'info@betop.space',
                 'password' => '123edsaqw',
                 'port' => '25',
             ],

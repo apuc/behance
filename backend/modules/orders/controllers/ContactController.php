@@ -57,7 +57,7 @@ class ContactController extends Controller
                 ->addAddress($post['email'])
                 ->setSubject('Behance Space')
                 ->setBody("<p>{$post['message']}</p>")
-                ->setFrom('info@behance.space', 'BS')
+                ->setFrom(Yii::$app->params['smtp-config']['username'], 'BS')
                 ->isHTML()
                 ->send();
 

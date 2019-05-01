@@ -61,7 +61,7 @@ class AuthService
            ->setSubject('Behance Space восстановление пароля')
            ->setBody("<p>Для восстановление пароля перейдите по ссылке:</p>
                                 <p><a href=\'{$link}\'>{$link}</a></p>")
-           ->setFrom('info@behance.space', 'BS')
+           ->setFrom(Yii::$app->params['smtp-config']['username'], 'BS')
            ->isHTML()
            ->send();
    }
@@ -123,7 +123,7 @@ class AuthService
            ->setSubject('Behance Space подтвердите аккаунт')
            ->setBody("<p>Для подтверждения аккаунта перейдите по ссылке:</p>
                                 <p><a href=\'{$link}\'>{$link}</a></p>")
-           ->setFrom('info@behance.space', 'BS')
+           ->setFrom(Yii::$app->params['smtp-config']['username'], 'BS')
            ->isHTML()
            ->send();
    }

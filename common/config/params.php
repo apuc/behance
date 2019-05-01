@@ -8,7 +8,7 @@ return [
     'smtp-config'=>[
         'host' => 'ssl://mail.adm.tools',
         'port' => 465,
-        'username' => 'info@behance.space',
+        'username' => 'info@betop.space',
         'password' => '123edsaqw',
     ]
 ];

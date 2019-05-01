@@ -142,7 +142,7 @@ class SiteController extends Controller
                                 <p>Email:{$form->email}</p>
                                 <p>Ссылка:<a href='{$form->link}'>{$form->link}</a></p>
                                 <p>Сообщение:{$form->message}</p>")
-                ->setFrom('info@behance.space', 'BS')
+                ->setFrom(Yii::$app->params['smtp-config']['username'], 'BS')
                 ->isHTML()
                 ->send();
 
@@ -168,7 +168,7 @@ class SiteController extends Controller
             ->setSubject('Новый звонок на Behance Space')
             ->setBody("<p>Телефон:{$phone}</p>
                                 <p><a href=\'{$link}\'>{$link}</a></p>")
-            ->setFrom('info@behance.space', 'BS')
+            ->setFrom(Yii::$app->params['smtp-config']['username'], 'BS')
             ->isHTML()
             ->send();
     }

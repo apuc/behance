@@ -416,7 +416,50 @@ textarea {
 
 .mb20 {
     margin-bottom: 20px; }
-
+.commentBackground{
+    position: relative;
+    display: block;
+    margin-top: 0.5em;
+    padding-top: 1.2em;
+    padding-right: 2em;
+    padding-left: 2em;
+    padding-bottom: 0.9em;
+    font-size: 0.8em;
+    background-color: #90cbf9;
+    border-radius: 10% 0 10% 0 / 42% 0 42% 0;
+}
+.comBacground__pink{
+    background: #fff;
+    color: #e32c74;
+}
+.commentBackground::before{
+    content: "Новинка";
+    position: absolute;
+    top: -12px;
+    width: 84px;
+    margin-left: 13px;
+    padding: 0.4em;
+    text-align: center;
+    letter-spacing: 1px;
+    background: #4bb033;
+    border-radius: 4px;
+    color: #ffffffff;
+}
+.commentBackground::after{
+    content: "";
+    width: 11px;
+    height: 39px;
+    position: absolute;
+    right: 68%;
+    top: calc(54% - 12px);
+    border-right: 7px solid transparent;
+    border-top: 9px solid #4bb033;
+    border-left: 7px solid transparent;
+}
+.prices__items .prices__item-wrap:hover{
+    transform: scale(1.1, 1.1);
+    transition: all ease .3s;
+}
 body {
     margin: 0;
     line-height: 1.2; }

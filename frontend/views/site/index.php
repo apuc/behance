@@ -160,6 +160,7 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
             <img class="prices__img-drop" src="/images/drop.png" alt="" role="presentation"/>
               <?php if (isset($cases)): ?>
                   <?php $i = 0;
+                        $namberOfKoment = 2;
                   foreach ($cases as $case): $i++; ?>
                     <div class="prices__item-wrap">
                       <div class="prices__item <?= ($i == count($cases)) ? 'prices__item-pink' : '' ?>">
@@ -178,6 +179,9 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
                         <span class="mb20">
                             <?= $case->term ?>
 				                    </span>
+				         <span class="mb20 commentBackground <?= ($i == count($cases)) ? ' comBacground__pink' : '' ?>">
+                             2 живых коментария
+				         </span>
                         <span class="prices__item-price mb20">
 					                    <?= str_replace('.00', '', $case->price) ?>
                           <span class="prices__item-ruble">₽</span>

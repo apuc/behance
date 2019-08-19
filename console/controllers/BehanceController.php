@@ -57,8 +57,7 @@ class BehanceController extends Controller
     {
         foreach ($queue as $q)
         {
-            if($q->likes_work == 0 && $q->views_work == 0)
-            {
+            if($q->likes_work == 0 && $q->views_work == 0) {
                 $q->delete();
                 $this->stdout("Работа {$q->work['name']} вышла из очереди!\n",Console::FG_RED);
                 continue;
@@ -71,10 +70,10 @@ class BehanceController extends Controller
 
             $this->stdout("Применяем сценарий к работе {$q->work['name']} !\n",Console::FG_GREEN);
 
-            if($q->likes_work > 0 && $q->views_work > 0)
-            {
-                if($service->standardScenario($q->work['behance_id']))
-                {
+            //СТАНДАРТНЫЙ
+            if($q->likes_work > 0 && $q->views_work > 0) {
+
+                if($service->standardScenario($q->work['behance_id'])) {
                     $q->refreshLikes(1,1);
                     $this->stdout("Сценарий успешно применен!\n",Console::FG_GREEN);
                     continue;
@@ -84,10 +83,10 @@ class BehanceController extends Controller
                 continue;
             }
 
-            if($q->likes_work > 0 && $q->views_work == 0)
-            {
-                if($service->onlyLikeScenario($q->work['behance_id']))
-                {
+            //ТОЛЬКО ЛАЙК
+            if($q->likes_work > 0 && $q->views_work == 0) {
+
+                if($service->onlyLikeScenario($q->work['behance_id'])) {
                     $q->refreshLikes(1,0);
                     $this->stdout("Сценарий успешно применен!\n",Console::FG_GREEN);
                     continue;
@@ -97,10 +96,10 @@ class BehanceController extends Controller
                 continue;
             }
 
-            if($q->likes_work == 0 && $q->views_work > 0)
-            {
-                if($service->onlyViewScenario($q->work['behance_id']))
-                {
+            //ТОЛЬКО ПРОСМОТР
+            if($q->likes_work == 0 && $q->views_work > 0) {
+
+                if($service->onlyViewScenario($q->work['behance_id'])) {
                     $q->refreshLikes(0,1);
                     $this->stdout("Сценарий успешно применен!\n",Console::FG_GREEN);
                     continue;

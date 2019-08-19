@@ -82,16 +82,11 @@ class BehanceService
         $userAgent = $this->getRandomUserAgent();
         $proxy = $this->getRandomProxy();
 
-        $accountViewSuccess = $this->account->view($proxy,$userAgent);
+       // $accountViewSuccess = $this->account->view($proxy,$userAgent);
         $workViewSuccess = $this->account->viewWork($workBehanceId,$proxy,$userAgent);
         $workLikeSuccess =$this->account->likeWork($workBehanceId,$proxy,$userAgent);
 
-        if($accountViewSuccess && $workViewSuccess && $workLikeSuccess)
-        {
-           return true;
-        }
-
-        return false;
+        return $workViewSuccess && $workLikeSuccess;
     }
 
 
@@ -104,15 +99,8 @@ class BehanceService
         $userAgent = $this->getRandomUserAgent();
         $proxy = $this->getRandomProxy();
 
-        $accountViewSuccess = $this->account->view($proxy,$userAgent);
-        $workViewSuccess =$this->account->viewWork($workBehanceId,$proxy,$userAgent);
-
-        if($accountViewSuccess && $workViewSuccess)
-        {
-            return true;
-        }
-
-        return false;
+        //$accountViewSuccess = $this->account->view($proxy,$userAgent);
+        return $this->account->viewWork($workBehanceId,$proxy,$userAgent);
     }
 
 
@@ -125,15 +113,8 @@ class BehanceService
         $userAgent = $this->getRandomUserAgent();
         $proxy = $this->getRandomProxy();
 
-        $accountViewSuccess = $this->account->view($proxy,$userAgent);
-        $workLikeSuccess = $this->account->likeWork($workBehanceId,$proxy,$userAgent);
-
-        if($accountViewSuccess  && $workLikeSuccess)
-        {
-            return true;
-        }
-
-        return false;
+        //$accountViewSuccess = $this->account->view($proxy,$userAgent);
+        return $this->account->likeWork($workBehanceId,$proxy,$userAgent);
     }
 
 }

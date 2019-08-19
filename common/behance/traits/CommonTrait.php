@@ -90,32 +90,8 @@ trait CommonTrait
      */
     public function _view_($url,$proxy,$userAgent,$referer=null)
     {
-
-        $curl = curl_init();
-
-        if($referer){
-            curl_setopt($curl, CURLOPT_REFERER, $referer);
-        }
-
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curl, CURLOPT_HEADER, true);
-        curl_setopt($curl, CURLOPT_PROXY, $proxy);
-        curl_setopt($curl, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS4);
-        curl_setopt($curl, CURLOPT_USERAGENT, $userAgent);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
-        curl_exec($curl);
-
-        $error = curl_error($curl);
-        curl_close($curl);
-
-        if(empty($error))
-        {
-            return true;
-        }
-
-        return false;
+      $command =  'python3 '.__DIR__.'/../../../scripts/run.py '.$proxy.' '.$url;
+      $result = exec($command);
+      return $result == 1;
     }
 }

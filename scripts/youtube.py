@@ -34,7 +34,7 @@ async def main():
             "--disable-setuid-sandbox",
             "--force-device-scale-factor",
             "--ignore-certificate-errors",
-            "--no-sandbox",
+            #"--no-sandbox",
             # "--blink-settings=imagesEnabled=false",
             # '--proxy-server=socks4://' + hostPort
             '--proxy-server=socks4://' + hostPort

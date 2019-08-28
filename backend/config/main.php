@@ -41,6 +41,9 @@ return [
         ],
         'history' => [
 	        'class' => 'backend\modules\history\History',
+        ],
+        'youtube' => [
+            'class' => 'backend\modules\youtube\Youtube',
         ]
 
     ],

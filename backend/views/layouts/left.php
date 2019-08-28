@@ -38,6 +38,7 @@ if($callback_count == 0)
                     ['label' => 'Аккаунты', 'icon' => 'fas fa-user-circle', 'url' => ['/accounts/accounts']],
                     ['label' => 'Работы', 'icon' => 'fas fa-briefcase', 'url' => ['/works/works']],
                     ['label' => 'Очередь', 'icon' => 'fas fa-list-ol', 'url' => ['/queue/queue']],
+                    ['label' => 'Youtube очередь', 'icon' => 'fas fa-list-ol', 'url' => ['/youtube/youtube']],
                     ['label' => Yii::t('balance', 'Balance'), 'icon' => 'fas fa-shopping-basket', 'url' => ['/balance/balance']],
                     ['label' => 'Заявки', 'icon' => 'fas fa-clipboard-list', 'url' => ['/orders/contact'] ,'template'=>'<a href="{url}">{icon}<span>{label}</span><span class="pull-right-container"><small class="label pull-right bg-red">'.$contact_count.'</small></span></a>'],
                     ['label' => 'Звонки', 'icon' => 'fas fa-phone', 'url' => ['/orders/callback'] ,'template'=>'<a href="{url}">{icon}<span>{label}</span><span class="pull-right-container"><small class="label pull-right bg-red">'.$callback_count.'</small></span></a>'],

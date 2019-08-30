@@ -64,4 +64,16 @@ class YoutubeQueue extends \yii\db\ActiveRecord
     {
         return self::find()->asArray()->one();
     }
+
+    public static function getQueues($count)
+    {
+        return self::find()->limit($count)->all();
+    }
+
+    public static function decrementQueue($id)
+    {
+        $views = self::findOne($id);
+        --$views->views;
+        return $views->save();
+    }
 }

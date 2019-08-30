@@ -4,6 +4,7 @@ namespace frontend\modules\api\controllers;
 
 use common\behance\traits\RepoTrait;
 use common\models\YoutubeQueue;
+use frontend\components\Youtube;
 
 class YoutubeController extends \yii\web\Controller
 {
@@ -22,4 +23,20 @@ class YoutubeController extends \yii\web\Controller
         return $res;
     }
 
+    public function actionGetQueues($count)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $res = YoutubeQueue::getQueues($count);
+        return $res;
+    }
+
+    public function actionDecrementQueue($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (YoutubeQueue::decrementQueue($id)) {
+
+            return "Success";
+        }
+        return "Error";
+    }
 }

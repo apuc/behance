@@ -62,7 +62,7 @@ return [
             'useFileTransport' => false, // будем отправлять реальные сообщения, а не в файл
         ],
         'request' => [
-            'baseUrl' => '/secure',
+            'baseUrl' => '/admin',
             'csrfParam' => '_csrf-backend',
             'cookieValidationKey' => $params['cookieValidationKey'],
         ],

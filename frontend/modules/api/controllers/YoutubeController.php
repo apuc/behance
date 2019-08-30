@@ -4,6 +4,7 @@ namespace frontend\modules\api\controllers;
 
 use common\behance\traits\RepoTrait;
 use common\models\YoutubeQueue;
+use frontend\components\Youtube;
 
 class YoutubeController extends \yii\web\Controller
 {
@@ -37,5 +38,11 @@ class YoutubeController extends \yii\web\Controller
             return "Success";
         }
         return "Error";
+    }
+
+    public function actionCheck($url)
+    {
+//        $youtube = new Youtube();
+        echo Youtube::getDuration($url);
     }
 }

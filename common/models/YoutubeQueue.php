@@ -9,10 +9,12 @@ use Yii;
  *
  * @property int $id
  * @property string $url
+ * @property string $proxy
  * @property int $views
  */
 class YoutubeQueue extends \yii\db\ActiveRecord
 {
+    public $proxy;
     /**
      * {@inheritdoc}
      */
@@ -30,6 +32,7 @@ class YoutubeQueue extends \yii\db\ActiveRecord
             [['url', 'views'], 'required'],
             [['views'], 'integer'],
             [['url'], 'string', 'max' => 255],
+            [['proxy'], 'safe']
         ];
     }
 
@@ -42,6 +45,7 @@ class YoutubeQueue extends \yii\db\ActiveRecord
             'id' => 'ID',
             'url' => 'Url',
             'views' => 'Views',
+            'proxy' => 'Proxy'
         ];
     }
 
@@ -51,5 +55,13 @@ class YoutubeQueue extends \yii\db\ActiveRecord
     public static function getNext()
     {
         return self::find()->one();
+    }
+
+    /**
+     * @return array|null
+     */
+    public static function getNextArray()
+    {
+        return self::find()->asArray()->one();
     }
 }

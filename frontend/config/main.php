@@ -16,7 +16,12 @@ return [
 		    'layout' => 'new',
 
 	    ],
-
+        'api' => [
+            'class' => 'frontend\modules\api\Api',
+        ],
+        'queue' => [
+            'class' => 'frontend\modules\queue\Queue',
+        ],
     ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [

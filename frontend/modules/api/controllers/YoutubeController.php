@@ -39,10 +39,4 @@ class YoutubeController extends \yii\web\Controller
         }
         return "Error";
     }
-
-    public function actionCheck($url)
-    {
-//        $youtube = new Youtube();
-        echo Youtube::getDuration($url);
-    }
 }

@@ -11,6 +11,25 @@ class Youtube extends Component
 {
     private $apiKey = 'AIzaSyBBmSdK4ycKsr8ZUM_UYf6ZYt88dUDJLq0';
 
+    public function getVideoName($id)
+    {
+        $json_result = file_get_contents("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" . $id . "&key=" . $this->apiKey);
+        $obj = json_decode($json_result);
+
+        return $obj->items[0]->snippet->title;
+    }
+
+    public function getLikeDislikeViews($id)
+    {
+        $json_result = file_get_contents("https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" . $id . "&key=" . $this->apiKey);
+        $obj = json_decode($json_result);
+        $like = $obj->items[0]->statistics->likeCount;
+        $dislike = $obj->items[0]->statistics->dislikeCount;
+        $views = $obj->items[0]->statistics->viewCount;
+
+        return compact('like', 'dislike', 'views');
+    }
+
     public function getDuration($id)
     {
         $json_result = file_get_contents("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=" . $id . "&key=" . $this->apiKey);

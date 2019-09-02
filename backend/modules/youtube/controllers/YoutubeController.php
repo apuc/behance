@@ -75,8 +75,13 @@ class YoutubeController extends Controller
                 $model->duration = $youtube->getDuration($video_id);
             }
             $model->img = $youtube->createImgLink($video_id);
-
+            $res = $youtube->getLikeDislikeViews($video_id);
+            $model->count_views = $res['views'];
+            $model->dislike = $res['dislike'];
+            $model->like = $res['like'];
+            $model->name = $youtube->getVideoName($video_id);
             $model->save();
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

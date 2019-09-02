@@ -30,10 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'url:url',
                 'views',
                 'duration',
-                'dislike',
-                'like',
+                [
+                    'label' => 'Лайки/Дизлайки/Просмотры',
+                    'value' => function ($model) {
+                        return $model->like . '/' . $model->dislike . '/' . $model->count_views;
+                    }
+                ],
                 'name',
-                'count_views',
                 [
                     'attribute' => 'img',
                     'format' => 'raw',

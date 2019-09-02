@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\classes\Debug;
 use Yii;
 
 /**
@@ -75,7 +76,7 @@ class YoutubeQueue extends \yii\db\ActiveRecord
     {
         $queue = self::findOne($id);
         if ($queue->views == 0) {
-            $queue->delete();
+            YoutubeQueue::deleteAll(['id' => $id]);
         } else {
             --$queue->views;
         }

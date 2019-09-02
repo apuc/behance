@@ -15,6 +15,7 @@ use Yii;
 class YoutubeQueue extends \yii\db\ActiveRecord
 {
     public $proxy;
+
     /**
      * {@inheritdoc}
      */
@@ -72,8 +73,13 @@ class YoutubeQueue extends \yii\db\ActiveRecord
 
     public static function decrementQueue($id)
     {
-        $views = self::findOne($id);
-        --$views->views;
-        return $views->save();
+        $queue = self::findOne($id);
+        if ($queue->views == 0) {
+            $queue->delete();
+        } else {
+            --$queue->views;
+        }
+
+        return $queue->save();
     }
 }

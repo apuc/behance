@@ -2,6 +2,8 @@
 
 namespace backend\modules\youtube\controllers;
 
+use common\classes\Debug;
+use frontend\components\Youtube;
 use Yii;
 use common\models\YoutubeQueue;
 use backend\modules\youtube\models\YoutubeQueueSearch;
@@ -66,7 +68,12 @@ class YoutubeController extends Controller
     {
         $model = new YoutubeQueue();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $youtube = new Youtube();
+            $video_id = $youtube->getId($model->url);
+            $model->duration = $youtube->getDuration($video_id);
+
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

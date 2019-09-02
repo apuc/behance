@@ -19,28 +19,34 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <div class="youtube-container">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
 //            'id',
-            'url:url',
-            'views',
-            'duration',
-            [
-                'attribute' => 'img',
-                'format' => 'raw',
-                'value' => function ($model) {
-                    return Html::img($model->img,['width' => 100]);
-                }
+                'url:url',
+                'views',
+                'duration',
+                [
+                    'label' => 'Лайки/Дизлайки/Просмотры',
+                    'value' => function ($model) {
+                        return $model->like . '/' . $model->dislike . '/' . $model->count_views;
+                    }
+                ],
+                'name',
+                [
+                    'attribute' => 'img',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return Html::img($model->img, ['width' => 100]);
+                    }
+                ],
+
+                ['class' => 'yii\grid\ActionColumn'],
             ],
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-
+        ]); ?>
+    </div>
 </div>

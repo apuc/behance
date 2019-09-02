@@ -13,6 +13,10 @@ use Yii;
  * @property string $img
  * @property int $views
  * @property int $duration
+ * @property string $name
+ * @property int $like
+ * @property int $dislike
+ * @property int $count_views
  */
 class YoutubeQueue extends \yii\db\ActiveRecord
 {
@@ -33,8 +37,8 @@ class YoutubeQueue extends \yii\db\ActiveRecord
     {
         return [
             [['url', 'views'], 'required'],
-            [['views', 'duration'], 'integer'],
-            [['url', 'img'], 'string', 'max' => 255],
+            [['views', 'duration', 'count_views', 'like', 'dislike'], 'integer'],
+            [['url', 'img', 'name'], 'string', 'max' => 255],
             [['proxy'], 'safe']
         ];
     }
@@ -51,6 +55,10 @@ class YoutubeQueue extends \yii\db\ActiveRecord
             'proxy' => 'Proxy',
             'duration' => 'Продолжительность, (с)',
             'img' => 'Ссылка на изображение',
+            'name' => 'Название видео',
+            'like' => 'Количестов лайков',
+            'dislike' => 'Количество дизлайков',
+            'count_views' => 'Количество просмотров'
         ];
     }
 

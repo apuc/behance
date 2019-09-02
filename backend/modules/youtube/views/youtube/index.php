@@ -30,6 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'url:url',
             'views',
             'duration',
+            [
+                'attribute' => 'img',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::img($model->img,['width' => 100]);
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

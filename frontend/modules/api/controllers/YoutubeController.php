@@ -49,4 +49,11 @@ class YoutubeController extends \yii\web\Controller
 
         return ["status" => "Error"];
     }
+
+    public function actionCheck($id)
+    {
+//        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $youtube = new Youtube();
+        echo $youtube->getDuration($id);
+    }
 }

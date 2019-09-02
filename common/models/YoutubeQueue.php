@@ -12,6 +12,7 @@ use Yii;
  * @property string $url
  * @property string $proxy
  * @property int $views
+ * @property int $duration
  */
 class YoutubeQueue extends \yii\db\ActiveRecord
 {
@@ -32,7 +33,7 @@ class YoutubeQueue extends \yii\db\ActiveRecord
     {
         return [
             [['url', 'views'], 'required'],
-            [['views'], 'integer'],
+            [['views','duration'], 'integer'],
             [['url'], 'string', 'max' => 255],
             [['proxy'], 'safe']
         ];
@@ -47,7 +48,8 @@ class YoutubeQueue extends \yii\db\ActiveRecord
             'id' => 'ID',
             'url' => 'Url',
             'views' => 'Views',
-            'proxy' => 'Proxy'
+            'proxy' => 'Proxy',
+            'duration' => 'Продолжительность, (с)'
         ];
     }
 

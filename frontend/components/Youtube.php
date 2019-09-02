@@ -44,4 +44,9 @@ class Youtube extends Component
 
         return $new_id[0];
     }
+
+    public function createImgLink($id)
+    {
+        return 'https://img.youtube.com/vi/' . $id . '/0.jpg';
+    }
 }

@@ -74,6 +74,7 @@ class YoutubeController extends Controller
             if (empty($model->duration)) {
                 $model->duration = $youtube->getDuration($video_id);
             }
+            $model->img = $youtube->createImgLink($video_id);
 
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);

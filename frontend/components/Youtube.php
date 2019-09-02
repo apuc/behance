@@ -19,11 +19,11 @@ class Youtube extends Component
 
         $second = 0;
         preg_match("/[0-9]{1,2}[H]/", $duration, $hours);
-
         if (!empty($hours)) {
             $hours = substr($hours[0], 0, -1);
             $second += $hours * 60 * 60;
         }
+
         preg_match("/[0-9]{1,2}[M]/", $duration, $minutes);
         if (!empty($minutes)) {
             $minutes = substr($minutes[0], 0, -1);

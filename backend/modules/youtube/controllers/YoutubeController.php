@@ -71,7 +71,9 @@ class YoutubeController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $youtube = new Youtube();
             $video_id = $youtube->getId($model->url);
-            $model->duration = $youtube->getDuration($video_id);
+            if (empty($model->duration)) {
+                $model->duration = $youtube->getDuration($video_id);
+            }
 
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);

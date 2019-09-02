@@ -123,3 +123,7 @@ a.desc:after {
     white-space: normal !important;
     word-break: break-all !important;
 }
+
+.youtube-container {
+    overflow-x: auto;
+}

@@ -89,7 +89,8 @@ class AuthService
                History::TRANSFER_TO_BALANCE,
                Yii::$app->params['referal_likes'],
                Yii::$app->params['referal_views'],
-               "Начислено 50 лайков и 100 просмотров за регестрацию по реферальной ссылке"
+               "Начислено ".Yii::$app->params['referal_likes']
+               ." лайков и ".Yii::$app->params['referal_views']." просмотров за регестрацию по реферальной ссылке"
            );
        }
    }

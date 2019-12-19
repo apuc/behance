@@ -114,7 +114,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary" onclick="ga('send', 'event', 'form', 'order'); yaCounter53666866.reachGoal('order'); return true;" id="works-form-send">Сохранить</button>
+                    <button type="button" class="btn btn-primary" onclick="ga('send', 'event', 'form', 'order'); yaCounter51223025.reachGoal('order'); return true;" id="works-form-send">Сохранить</button>
                 </div>
             </div>
         </div>

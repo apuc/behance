@@ -23,7 +23,7 @@ $this->title = 'Пополнение баланса';
         <input type='hidden' name='s' id="pay-sign" value='<?= $form_sign ?>'>
         <input type='hidden' name='us_userid' value='<?= Yii::$app->user->getId() ?>'>
         <input type='hidden' name='us_caseid' id="pay-case-id" value='<?= $defaultCase->id ?>'>
-        <input type="submit" onsubmit="ga ('send', 'event', 'form', 'payment'); yaCounter53666866.reachGoal('payment'); return true;" value="Оплатить" class="btn btn-pink">
+        <input type="submit" onsubmit="ga ('send', 'event', 'form', 'payment'); yaCounter51223025.reachGoal('payment'); return true;" value="Оплатить" class="btn btn-pink">
     </form>
 
 </div>

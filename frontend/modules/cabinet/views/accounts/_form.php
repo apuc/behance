@@ -15,7 +15,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Добавить', ['class' => 'btn btn-pink']) ?>
+        <?= Html::submitButton('Добавить', [
+                'class' => 'btn btn-pink',
+                'onsubmit' => "ga ('send', 'event', 'form', 'account'); yaCounter53666866.reachGoal('account'); return true;"
+        ]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

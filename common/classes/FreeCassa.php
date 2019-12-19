@@ -6,7 +6,7 @@
  * Time: 14:22
  */
 
-namespace common\clases;
+namespace common\classes;
 
 class FreeCassa
 {

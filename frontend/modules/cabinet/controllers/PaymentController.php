@@ -14,7 +14,7 @@ use frontend\modules\cabinet\models\Balance;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use Yii;
-use common\clases\FreeCassa;
+use common\classes\FreeCassa;
 
 
 class PaymentController extends Controller

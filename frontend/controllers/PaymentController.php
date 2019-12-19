@@ -6,7 +6,7 @@ use Yii;
 use common\models\Cases;
 use common\models\Balance;
 use common\models\History;
-use common\clases\FreeCassa;
+use common\classes\FreeCassa;
 use yii\filters\VerbFilter;
 
 

@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
     <div class="form-group">
         <?= Html::submitButton('Добавить', [
                 'class' => 'btn btn-pink',
-                'onsubmit' => "ga ('send', 'event', 'form', 'account'); yaCounter51223025.reachGoal('account'); return true;"
+                'onsubmit' => "gtag('event', 'account', { 'event_category': 'form', 'event_action': 'account', }); yaCounter51223025.reachGoal('account'); return true;"
         ]) ?>
     </div>
 

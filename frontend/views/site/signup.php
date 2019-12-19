@@ -36,7 +36,7 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
                                 'class' => 'btn btn-pink',
                                 'name' => 'signup-button',
                                 'style' => 'margin: 0 auto',
-                                'onsubmit' => "gtag('event', 'register', { 'event_category': 'form', 'event_action': 'register', }); yaCounter51223025.reachGoal('register'); return true;"
+                                'onclick' => "gtag('event', 'register', { 'event_category': 'form', 'event_action': 'register', }); yaCounter51223025.reachGoal('register'); return true;"
                             ]) ?>
                         </div>
 

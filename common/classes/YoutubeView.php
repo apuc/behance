@@ -1,7 +1,7 @@
 <?php
 
 
-namespace common\clases;
+namespace common\classes;
 
 
 use common\behance\traits\RepoTrait;

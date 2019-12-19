@@ -6,7 +6,7 @@
  * Time: 10:11
  */
 
-namespace common\clases;
+namespace common\classes;
 
 
 class ProxyApi

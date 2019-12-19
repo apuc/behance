@@ -10,7 +10,7 @@ namespace common\services;
 
 use common\models\User;
 use Yii;
-use common\clases\SendMail;
+use common\classes\SendMail;
 use common\models\History;
 use common\models\Balance;
 use yii\db\Exception;

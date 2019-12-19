@@ -6,11 +6,11 @@
  * Time: 18:18
  */
 
-namespace common\clases;
+namespace common\classes;
 
-use common\clases\phpmailer\PHPMailer;
-use common\clases\phpmailer\SMTP;
-use common\clases\phpmailer\Exception;
+use common\classes\phpmailer\PHPMailer;
+use common\classes\phpmailer\SMTP;
+use common\classes\phpmailer\Exception;
 
 
 class SendMail

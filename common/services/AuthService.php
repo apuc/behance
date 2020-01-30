@@ -13,6 +13,7 @@ use Yii;
 use common\classes\SendMail;
 use common\models\History;
 use common\models\Balance;
+use common\models\BalanceCash;
 use yii\db\Exception;
 
 
@@ -104,6 +105,7 @@ class AuthService
        $auth->assign($authorRole, $user->id);
 
        Balance::create($user->id,50,200);
+       BalanceCash::create($user->id, 0);
 
        User::updateAll(['status'=>User::STATUS_ACTIVATED],['id'=>$user->id]);
    }

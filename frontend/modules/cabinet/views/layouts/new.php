@@ -7,10 +7,12 @@ use frontend\assets\CabinetAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use common\models\Balance;
+use common\models\BalanceCash;
 
 
 
 $balance = Balance::find()->where(['user_id'=>Yii::$app->user->getId()])->one();
+$balance_cash = BalanceCash::find()->where(['user_id'=>Yii::$app->user->getId()])->one();
 
 CabinetAsset::register($this);
 ?>
@@ -109,6 +111,13 @@ CabinetAsset::register($this);
                             <i class="fa fa-history" style="visibility: visible;"></i>
                             <span>История пополнений</span>
                         </a>
+                    </div>
+
+                    <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history-cash') ?>">
+                        <i class="fa fa-history" style="visibility: visible;"></i>
+                        <span>История пополнений денег</span>
+                    </a>
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">

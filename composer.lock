@@ -115,7 +115,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -358,12 +358,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/apuc/vipipru_client.git",
-                "reference": "1304386ced84fb7b590d28d415ed3346321bbbb6"
+                "reference": "5675c59a496b8a3e610747a5d9047e9e4e9614e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/apuc/vipipru_client/zipball/1304386ced84fb7b590d28d415ed3346321bbbb6",
-                "reference": "1304386ced84fb7b590d28d415ed3346321bbbb6",
+                "url": "https://api.github.com/repos/apuc/vipipru_client/zipball/5675c59a496b8a3e610747a5d9047e9e4e9614e5",
+                "reference": "5675c59a496b8a3e610747a5d9047e9e4e9614e5",
                 "shasum": ""
             },
             "require": {
@@ -387,7 +387,7 @@
                 "vipip",
                 "wrapper"
             ],
-            "time": "2020-01-29T14:59:22+00:00"
+            "time": "2020-01-31T11:53:45+00:00"
         },
         {
             "name": "dmstr/yii2-adminlte-asset",

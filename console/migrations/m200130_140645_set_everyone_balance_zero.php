@@ -1,7 +1,8 @@
 <?php
 
 use yii\db\Migration;
-
+use common\models\User;
+use common\models\BalanceCash;
 /**
  * Class m200130_140645_set_everyone_balance_zero
  */
@@ -12,7 +13,11 @@ class m200130_140645_set_everyone_balance_zero extends Migration
      */
     public function safeUp()
     {
-        // todo:"st everyone's balance to 0
+        // set everyone's balance to 0
+        $users = User::find()->orderBy("id")->all();
+        foreach ($users as $user) {
+            BalanceCash::create($user->id, 0);
+        }
     }
 
     /**

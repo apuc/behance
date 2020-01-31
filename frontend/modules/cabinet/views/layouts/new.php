@@ -187,18 +187,20 @@ CabinetAsset::register($this);
         <div class="mdc-toolbar__row">
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                 <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
-
-
                 <?php if(!empty($balance)): ?>
                     <div class="balance-block">
-                        <span class="mdc-toolbar__menu-icon">Лайки:<span id="balance_likes"><?=$balance->likes; ?></span></span>
+                        <span class="mdc-toolbar__menu-icon">Лайки:&nbsp;<span id="balance_likes"><?=$balance->likes; ?></span></span>
                     </div>
 
                     <div class="balance-block">
-                        <span class="mdc-toolbar__menu-icon">Просмотры:<span id="balance_views"><?=$balance->views; ?></span></span>
+                        <span class="mdc-toolbar__menu-icon">Просмотры:&nbsp;<span id="balance_views"><?=$balance->views; ?></span></span>
                     </div>
                 <?php  endif; ?>
-
+                <?php if(!empty($balance_cash)): ?>
+                <div class="balance-block">
+                    <span class="mdc-toolbar__menu-icon">Баланс, руб.:&nbsp;<span id="balance_views"><?=$balance_cash->amount; ?></span></span>
+                </div>
+                <?php  endif; ?>
             </section>
             <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
                 <!--				<div class="mdc-menu-anchor">-->

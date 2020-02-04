@@ -25,6 +25,7 @@ class CabinetAsset extends AssetBundle
 		'js/misc.js',
 		'js/material.js',
 		'js/dashboard.js',
+        'js/social-queue.js',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
 	];
 

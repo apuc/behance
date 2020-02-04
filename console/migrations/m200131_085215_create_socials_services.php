@@ -31,7 +31,7 @@ class m200131_085215_create_socials_services extends Migration
             'title' => $this->string(50),
             'title_short' => $this->string(50),
             'desc' => $this->string(50),
-            'price' => $this->bigInteger()->comment('dollars per 1000')
+            'price' => $this->bigInteger()->comment('dollars*10^6 per 1000')
         ]);
 
         $request = new Request();
@@ -46,7 +46,7 @@ class m200131_085215_create_socials_services extends Migration
                 'title' => $social->title,
                 'title_short' => $social->titleshort,
                 'desc' => $social->desc,
-                'price' => $social->priceadv
+                'price' => $social->priceadv * 1000000
             ]);
         }
     }

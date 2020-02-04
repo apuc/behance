@@ -17968,6 +17968,10 @@ text-align:center;
 .btn-pink:focus{
   color:white;
 }
+
+#div_age, #div_balance, #div_answer, #div_friends, #div_link, #div_msg, #div_gender, #div_price {
+  display: none;
+}
 /*-------------------------------------------------------------------*/
 
 /*# sourceMappingURL=maps/style.css.map */

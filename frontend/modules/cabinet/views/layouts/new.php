@@ -27,6 +27,9 @@ CabinetAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <!— Global site tag (gtag.js) - Google Analytics —>
+    <script>
+        var balance_cash = Number(<?= $balance_cash->amount ?>);
+    </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138968129-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -189,16 +192,16 @@ CabinetAsset::register($this);
                 <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
                 <?php if(!empty($balance)): ?>
                     <div class="balance-block">
-                        <span class="mdc-toolbar__menu-icon">Лайки:&nbsp;<span id="balance_likes"><?=$balance->likes; ?></span></span>
+                        <span class="mdc-toolbar__menu-icon">Лайки:&nbsp;<span id="balance_likes"><?=$balance->likes ?></span></span>
                     </div>
 
                     <div class="balance-block">
-                        <span class="mdc-toolbar__menu-icon">Просмотры:&nbsp;<span id="balance_views"><?=$balance->views; ?></span></span>
+                        <span class="mdc-toolbar__menu-icon">Просмотры:&nbsp;<span id="balance_views"><?=$balance->views ?></span></span>
                     </div>
                 <?php  endif; ?>
                 <?php if(!empty($balance_cash)): ?>
                 <div class="balance-block">
-                    <span class="mdc-toolbar__menu-icon">Баланс, руб.:&nbsp;<span id="balance_views"><?=$balance_cash->amount; ?></span></span>
+                    <span class="mdc-toolbar__menu-icon">Баланс, $:&nbsp;<span id="balance_cash"><?=$balance_cash->amount / 1000000 ?></span></span>
                 </div>
                 <?php  endif; ?>
             </section>

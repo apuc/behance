@@ -25,7 +25,8 @@
         "mihaildev/yii2-elfinder": "*",
         "xtarantulz/yii2-input-img-preview": "dev-master",
         "mihaildev/yii2-ckeditor": "*",
-        "craft-group/vipipru_client": "dev-master"
+        "craft-group/vipipru_client": "dev-master",
+      "ext-json": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

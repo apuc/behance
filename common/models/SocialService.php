@@ -16,6 +16,8 @@ use yii\helpers\ArrayHelper;
  * @property string $title_short
  * @property string $desc
  * @property int $price
+ * @property boolean $status
+ * @property string $inputs
  * @property \common\models\Social $social
  */
 class SocialService extends \yii\db\ActiveRecord
@@ -39,6 +41,7 @@ class SocialService extends \yii\db\ActiveRecord
             [['id', 'id_soc', 'type_id', 'price'], 'integer'],
             [['title', 'title_short', 'desc'], 'safe'],
             [['title', 'title_short', 'desc'], 'string', 'max' => 50],
+            [['status'], 'boolean']
         ];
     }
 

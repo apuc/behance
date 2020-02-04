@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Class m200131_110945_create_social_work
+ * Class m200131_110945_create_social_works
  */
-class m200131_110945_create_social_work extends Migration
+class m200131_110945_create_social_works extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('social_work', [
+        $this->createTable('social_queue', [
             'id' => $this->primaryKey()->unsigned(),
             'user_id' => $this->integer()->unsigned(),
             'link_id' => $this->integer()->unsigned(),
@@ -27,7 +27,7 @@ class m200131_110945_create_social_work extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('social_work');
+        $this->dropTable('social_queue');
     }
 
     /*
@@ -39,7 +39,7 @@ class m200131_110945_create_social_work extends Migration
 
     public function down()
     {
-        echo "m200131_110945_create_social_work cannot be reverted.\n";
+        echo "m200131_110945_create_social_works cannot be reverted.\n";
 
         return false;
     }

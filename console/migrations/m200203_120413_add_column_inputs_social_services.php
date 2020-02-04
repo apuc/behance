@@ -20,12 +20,12 @@ class m200203_120413_add_column_inputs_social_services extends Migration
         );
         $this->update(
             'socials_services',
-            ['inputs' => 'link;sex;age;friends;answer'],
+            ['inputs' => 'link;gender;age;friends;answer'],
             ['id' => 24]
         );
         $this->update(
             'socials_services',
-            ['inputs' => 'msg;sex;age;friends'],
+            ['inputs' => 'msg;gender;age;friends'],
             ['id' => 16]
         );
         $this->update(
@@ -40,12 +40,12 @@ class m200203_120413_add_column_inputs_social_services extends Migration
         );
         $this->update(
             'socials_services',
-            ['inputs' => 'link;sex;age;friends'],
+            ['inputs' => 'link;gender;age;friends'],
             ['id' => [1, 2, 3, 7, 17, 22, 23, 13, 14, 20, 21]]
         );
         $this->update(
             'socials_services',
-            ['inputs' => 'link;sex;friends'],
+            ['inputs' => 'link;gender;friends'],
             ['id' => [6, 32, 33, 34, 35]]
         );
 

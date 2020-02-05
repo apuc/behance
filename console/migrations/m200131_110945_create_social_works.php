@@ -17,8 +17,10 @@ class m200131_110945_create_social_works extends Migration
             'user_id' => $this->integer()->unsigned(),
             'link_id' => $this->integer()->unsigned(),
             'type_id' => $this->integer()->unsigned(),
+            'url' => $this->string(),
+            'balance' => $this->integer()->unsigned(),
             'dt_add' => $this->dateTime(),
-            'status' => $this->boolean()
+            'status' => $this->boolean(),
         ]);
     }
 

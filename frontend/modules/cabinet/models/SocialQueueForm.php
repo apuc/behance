@@ -19,6 +19,7 @@ use Yii;
  * @property int|null $friends_id
  * @property int|null $age_min
  * @property int|null $age_max
+ * @property int $price
  */
 class SocialQueueForm extends \common\models\SocialQueue
 {
@@ -31,6 +32,7 @@ class SocialQueueForm extends \common\models\SocialQueue
     public $age_min;
     public $age_max;
     public $gender;
+    public $price;
 
     /**
      * {@inheritdoc}
@@ -43,7 +45,7 @@ class SocialQueueForm extends \common\models\SocialQueue
                 return empty($model->type_id);
             }, 'message' => 'Тип услуги обязательно должен быть выбран'
         ];
-        $rules[] = [['social', 'answer_id', 'age_min', 'age_max', 'balance', 'friends_id'], 'integer'];
+        $rules[] = [['social', 'answer_id', 'age_min', 'age_max', 'balance', 'friends_id', 'price'], 'integer'];
         $rules[] = [
             ['balance'], 'required', 'when' => function($model) {
                 return empty($model->balance);

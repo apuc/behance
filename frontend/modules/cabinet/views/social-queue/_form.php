@@ -11,16 +11,22 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $friends_options array */
 /* @var $friends_prices array */
+/* @var $errors string */
+/* @var $coeff string */
 
-// look into social-query.js for usage of friend_prices
+// look into social-query.js for usage of friend_prices and price_coeff
 ?>
 <script>
    var friend_prices = [];
    <?php foreach ($friends_prices as $friends_price) { ?>
        friend_prices.push(<?= $friends_price ?>);
    <?php } ?>
+   var price_coeff = <?= $coeff ?>;
 </script>
 <!-- socialqueue-*var name* -->
+<?php if ($errors != null) { ?>
+    <div class="alert alert-danger display-error" style="display: block"><?= $errors ?></div>
+<?php } ?>
 <div class="social-queue-form">
 
     <?php $form = ActiveForm::begin([
@@ -121,12 +127,13 @@ use yii\widgets\ActiveForm;
     </div>
     <div class="form-group" id="div_price">
         <h3 class='font-italic' id="price_text"></h3>
+        <?= $form->field($model, 'price')->hiddenInput()->label(false); ?>
     </div>
 
     <!-- TODO: mb add streamtimer, collapsible geography and calendar -->
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success', 'id' => 'success_button', 'disabled' => true]) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success', 'id' => 'success_button', 'disabled' => true]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

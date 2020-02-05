@@ -23,8 +23,9 @@ class SocialQueueSearch extends SocialQueue
     public function rules()
     {
         return [
-            [['id', 'user_id', 'link_id', 'type_id', 'status'], 'integer'],
+            [['user_id', 'link_id', 'type_id', 'status', 'balance'], 'integer'],
             [['dt_add'], 'safe'],
+            [['url'], 'string'],
         ];
     }
 
@@ -46,34 +47,31 @@ class SocialQueueSearch extends SocialQueue
      */
     public function search($params)
     {
-        $query = SocialQueue::find();
+       $query = SocialQueue::find();
+       // add conditions that should always apply here
+       $dataProvider = new ActiveDataProvider([
+           'query' => $query,
+           'sort'=> ['defaultOrder' => ['id'=>SORT_DESC]],
+       ]);
+       $this->load($params);
+       if (!$this->validate()) {
+           // uncomment the following line if you do not want to return any records when validation fails
+           // $query->where('0=1');
+           return $dataProvider;
+       }
+       // grid filtering conditions
 
-        // add conditions that should always apply here
+       $query->andFilterWhere([
+           'id' => $this->id,
+           'user_id' => $this->user_id,
+           'link_id' => $this->link_id,
+           'type_id' => $this->type_id,
+           'dt_add' => $this->dt_add,
+           'status' => $this->status,
+           'url' => $this->url,
+           'balance' => $this->balance
+       ]);
+       return $dataProvider;
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
-
-        // grid filtering conditions
-        $i = $this->user_id;
-
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'link_id' => $this->link_id,
-            'type_id' => $this->type_id,
-            'dt_add' => $this->dt_add,
-            'status' => $this->status,
-        ]);
-
-        return $dataProvider;
     }
 }

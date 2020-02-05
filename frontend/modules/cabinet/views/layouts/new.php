@@ -117,6 +117,13 @@ CabinetAsset::register($this);
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue']); ?>">
+                            <i class="fa fa-heart" style="visibility: visible;"></i>
+                            <span>Накрутка соц. сетей</span>
+                        </a>
+                    </div>
+
+                    <div class="mdc-list-item mdc-drawer-item">
                     <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history-cash') ?>">
                         <i class="fa fa-history" style="visibility: visible;"></i>
                         <span>История пополнений денег</span>

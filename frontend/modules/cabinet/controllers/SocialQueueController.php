@@ -3,9 +3,13 @@
 namespace frontend\modules\cabinet\controllers;
 
 use common\models\BalanceCash;
+use common\models\HistoryCash;
+use common\models\Settings;
 use common\models\Social;
 use common\models\SocialService;
 use frontend\modules\cabinet\models\SocialQueueForm;
+use VipIpRuClient\Enum\BalanceType;
+use VipIpRuClient\Enum\StatusType;
 use VipIpRuClient\SocialWrapper;
 use VipIpRuClient\VkWrapper;
 use Yii;
@@ -45,9 +49,16 @@ class SocialQueueController extends Controller
         $params[$searchModel->formName()]['user_id'] = Yii::$app->user->id;
         $dataProvider = $searchModel->search($params);
 
+        $services_obj = SocialService::find()->orderBy(['id_soc' => SORT_ASC])->all();
+        $services = [];
+        foreach ($services_obj as $service) {
+            $services[$service->type_id] = $service->title;
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'services' => $services
         ]);
     }
 
@@ -59,79 +70,105 @@ class SocialQueueController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        //return $this->render('view', [
+        //    'model' => $this->findModel($id),
+        //]);
+        $this->redirect('index');
     }
 
     /**
      * Creates a new SocialQueue model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param null|SocialQueueForm $model
      * @return mixed
      */
     public function actionCreate()
     {
-        // TODO: add error banner to view
         $model = new SocialQueueForm();
-
+        $coeff = Settings::findOne(['key' => 'add_coeff'])->value;
+        if ($model->gender == null) $model->gender = '-';
+        if ($model->age_min == null) $model->age_min = 0;
+        if ($model->age_max == null) $model->age_max = 0;
+        if ($model->friends_id == null) $model->friends_id = 0;
+        if ($model->balance == null) $model->balance = 1;
+        if ($model->price == null) $model->price = 0;
+        $error = null;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
-                // TODO: saving proper
-                // TODO: empty fields validation
-                $balance_cash = BalanceCash::find()->where(['user_id'=>Yii::$app->user->getId()])->one();
+                $balance_cash = BalanceCash::findOne(['user_id'=>Yii::$app->user->getId()]);
+                $balance_cash->amount = intval($balance_cash->amount);
+                $model->price = intval($model->price);
+
                 $actual_model = new SocialQueue();
                 $wrapper = new SocialWrapper(Yii::$app->params['access_token']);
                 $session = Yii::$app->session;
+                $error = "Произошла ошибка при создании задачи, пожалуйста введите параметры ещё раз<br>Введенная в прошлый раз вами ссылка - $model->link";
                 if (isset($session['inputs']) && isset($session['price'])) {
                     $inputs = $session['inputs'];
-                    $price = $session['price'];
 
-                    $result = $this->setParamsWrapper($inputs, $model);
+                    // TODO: add more checks? like balance > 0 and etc
+                    if ($model->price > $balance_cash->amount) {
+                        $error = "Недостаточно денег на счету для создания задачи накрутки<br>Введенная в прошлый раз вами ссылка - $model->link";
+                    } else {
+                        $result = $this->setParamsWrapper($inputs, $model);
 
-                    if($result['all_good']) {
-                        $user = Yii::$app->user->id;
-                        $date = date('d-m-Y');
-                        $status = $wrapper->createJob('Job - user-'.$user.'-'.$date, $model->type_id, $result['params']);
-                        if ($status == 1) {
-                            // TODO: actual saving
-                            $this->redirect(['index']);
-                        } else {
-                            // TODO: redirect with error to create
+                        if($result['all_good']) {
+                            $user = Yii::$app->user->id;
+                            $date = date('Y-m-d h-i-s');
+
+                            $status = $wrapper->createJob('Job - user-'.$user.' - '.$date, $model->type_id, $result['params']);
+                            if ($status == 1) {
+                                $status = $wrapper->setJobBalance($model->balance, BalanceType::VIEWS()->getValue());
+                                if ($status == 1) {
+                                    // TODO: rewrite mb to never account error from set job status when there is no money
+                                    $status = $wrapper->setJobStatus(StatusType::ENABLED()->getValue());
+                                    if ($status == 1) {
+                                        $actual_model->status = 1;
+                                    }
+                                    else {
+                                        //$wrapper->deleteCurrentJob();
+                                        //and error
+                                        $actual_model->status = 0;
+                                    }
+                                    $actual_model->link_id = $wrapper->getLinkId();
+                                    $actual_model->user_id = $user;
+                                    $actual_model->dt_add = $date;
+                                    $actual_model->type_id = $model->type_id;
+                                    $actual_model->url = $model->link;
+                                    $actual_model->balance = $model->balance;
+                                    $status = $actual_model->save();
+                                    HistoryCash::create(
+                                        $user,
+                                        HistoryCash::TRANSFER_FROM_BALANCE,
+                                        $model->price,
+                                        'Снятие денег за услуг накрутки №'.$actual_model->id);
+                                    $balance_cash->amount -= $model->price;
+                                    $this->redirect(['index']);
+                                } else {
+                                    $wrapper->deleteCurrentJob();
+                                }
+                            }
+                        }
+                        else {
+                            $error = 'Возникли следующие ошибки:<br>'.$result['error'];
                         }
                     }
                 } else {
-                    // TODO: redirect with error to create
+                    $error = "Произошла неизвестная ошибка, пожалуйста введите параметры ещё раз<br>Введенная в прошлый раз вами ссылка - $model->link";
                 }
             }
         }
-        $socials = [];
-        foreach (Social::find()->all() as $social)
-        {
-            $socials[$social->id] = $social->name;
-        }
-
-        $friends_options = [];
-        $friends_prices = [];
-        foreach (SocialWrapper::getSocialOptions()->friends as $option)
-        {
-            $key = $option->friends;
-            $value = $option->title;
-            $price = $option->pricecoeff;
-            $friends_options[$key] = $value;
-            $friends_prices[$key] = $price;
-        }
-
-        $model->gender = '-';
-        $model->age_min = 0;
-        $model->age_max = 0;
-        $model->friends_id = 0;
-        $model->balance = 1;
-
+        $model->social = null;
+        $model->type_id = null;
+        $socials = $this->getSocials();
+        $options = $this->getFriendsOptions();
         return $this->render('create', [
             'model' => $model,
             'socials' => $socials,
-            'friends_options' => $friends_options,
-            'friends_prices' => $friends_prices
+            'friends_options' => $options['friends_options'],
+            'friends_prices' => $options['friends_prices'],
+            'errors' => $error,
+            'coeff' => $coeff
         ]);
     }
 
@@ -146,7 +183,7 @@ class SocialQueueController extends Controller
         if (in_array('link', $inputs)) {
             if (empty($model->link)) {
                 $all_good = false;
-                $error .= 'Ссылка пуста';
+                $error .= 'Ссылка пуста<br>';
             }
             else {
                 $link = $model->link;
@@ -155,7 +192,7 @@ class SocialQueueController extends Controller
         if (in_array('msg', $inputs)) {
             if (empty($model->msg)) {
                 $all_good = false;
-                $error .= 'Текст поста пуст';
+                $error .= 'Текст поста пуст<br>';
             }
             else {
                 $msg = $model->msg;
@@ -175,6 +212,11 @@ class SocialQueueController extends Controller
         if (in_array('age', $inputs)) {
             $age_min = empty($model->age_min) ? 0 : $model->age_min;
             $age_max = empty($model->age_max) ? 0 : $model->age_max;
+            if ($age_min > $age_max) {
+                $temp = $age_max;
+                $age_max = $age_min;
+                $age_min = $temp;
+            }
         }
         if (in_array('friends', $inputs)) {
             if (empty($model->friends)) {
@@ -186,7 +228,7 @@ class SocialQueueController extends Controller
         if (in_array('answer', $inputs)) {
             if (empty($model->answer_id)) {
                 $all_good = false;
-                $error .= 'Ответ к голосванию не был предоставлен';
+                $error .= 'Ответ к голосванию не был предоставлен<br>';
             } else {
                 $answer = $model->answer_id;
             }
@@ -202,8 +244,34 @@ class SocialQueueController extends Controller
                 'age_max' => isset($age_max) ? $age_max : null,
                 'friends' => isset($friends) ? $friends : null,
                 'answerid' => isset($answer) ? $answer : null,
+                'balance' => $model->balance
             ],
         ];
+    }
+
+    private function getSocials()
+    {
+        $socials = [];
+        foreach (Social::find()->all() as $social)
+        {
+            $socials[$social->id] = $social->name;
+        }
+        return $socials;
+    }
+
+    private function getFriendsOptions()
+    {
+        $friends_options = [];
+        $friends_prices = [];
+        foreach (SocialWrapper::getSocialOptions()->friends as $option)
+        {
+            $key = $option->friends;
+            $value = $option->title;
+            $price = $option->pricecoeff;
+            $friends_options[$key] = $value;
+            $friends_prices[$key] = $price;
+        }
+        return ['friends_options' => $friends_options, 'friends_prices' => $friends_prices];
     }
 
     /**
@@ -215,15 +283,16 @@ class SocialQueueController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        //$model = $this->findModel($id);
+//
+        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //    return $this->redirect(['view', 'id' => $model->id]);
+        //}
+//
+        //return $this->render('update', [
+        //    'model' => $model,
+        //]);
+        $this->redirect('index');
     }
 
     /**
@@ -237,9 +306,10 @@ class SocialQueueController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        //$this->findModel($id)->delete();
+//
+        //return $this->redirect(['index']);
+        $this->redirect('index');
     }
 
     /**
@@ -336,5 +406,25 @@ class SocialQueueController extends Controller
             'code' => 100,
             'msg' => 'Неправильный запрос'
         ];
+    }
+
+    // PJAX for change status
+    public function actionChangeStatus($id)
+    {
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $model = $this->findModel($id);
+            $model->status = $model->status ? 0 : 1;
+            $wrapper = new SocialWrapper(Yii::$app->params['access_token']);
+            $status = $wrapper->getJob($model->link_id);
+            if ($status == 1) {
+                $set_status = $model->status == 1 ? StatusType::ENABLED()->getValue() : StatusType::DISABLED()->getValue();
+                $status = $wrapper->setJobStatus($set_status);
+                if ($status == 1) {
+                    $model->save();
+                    return ['success' => true];
+                }
+            }
+        }
     }
 }

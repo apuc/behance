@@ -25,7 +25,20 @@ function ajaxChangeData($)
                     }
                 );
                 $("#socialqueueform-type_id")[0].selectedIndex = 0;
-                $("#socialqueueform-type_id").trigger('change');
+                $("#socialqueueform-type_id").trigger('change.select2');
+                if (data['data'].length == 0) {
+                    $('#div_age').css('display', 'none');
+                    $('#div_answer').css('display', 'none');
+                    $('#div_friends').css('display', 'none');
+                    $('#div_link').css('display', 'none');
+                    $('#socialqueueform-link').val(null);
+                    $('#div_msg').css('display', 'none');
+                    $('#socialqueueform-msg').val(null);
+                    $('#div_gender').css('display', 'none');
+                    $('#success_button').attr('disabled', 'disabled');
+                    $('#div_balance').css('display', 'none');
+                    $('#div_price').css('display', 'none');
+                }
             }
         }
     });
@@ -74,8 +87,9 @@ function calculatePrice($)
 {
     let index = $('#socialqueueform-friends_id')[0].selectedIndex - 1;
     let count = $('#socialqueueform-balance').val();
-    let current_price = Math.round((price * friend_prices[index] * count + Number.EPSILON) * 10000) / 10000;
+    let current_price = Math.round((price * friend_prices[index] * count * parseFloat(price_coeff) + Number.EPSILON) * 1000000) / 1000000;
     $('#price_text').text('Стоимость услуги - ' + current_price + '$');
+    $('#socialqueueform-price').val(current_price * 1000000);
     if (balance_cash >= Math.round(current_price * 1000000)) {
         $('#success_button').removeAttr('disabled');
     } else {

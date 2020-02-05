@@ -12,7 +12,6 @@ use yii\widgets\ActiveForm;
 /* @var $friends_options array */
 /* @var $friends_prices array */
 /* @var $errors string */
-/* @var $coeff string */
 
 // look into social-query.js for usage of friend_prices and price_coeff
 ?>
@@ -21,7 +20,6 @@ use yii\widgets\ActiveForm;
    <?php foreach ($friends_prices as $friends_price) { ?>
        friend_prices.push(<?= $friends_price ?>);
    <?php } ?>
-   var price_coeff = <?= $coeff ?>;
 </script>
 <!-- socialqueue-*var name* -->
 <?php if ($errors != null) { ?>

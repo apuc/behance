@@ -9,7 +9,6 @@ use yii\helpers\Html;
 /* @var $friends_options array */
 /* @var $friends_prices array */
 /* @var $errors string */
-/* @var $coeff string */
 
 $this->title = 'Создание задачи';
 $this->params['breadcrumbs'][] = ['label' => 'Social Queue', 'url' => ['index']];
@@ -25,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'friends_options' => $friends_options,
         'friends_prices' => $friends_prices,
         'errors' => $errors,
-        'coeff' => $coeff
     ]) ?>
 
 </div>

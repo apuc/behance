@@ -85,7 +85,6 @@ class SocialQueueController extends Controller
     public function actionCreate()
     {
         $model = new SocialQueueForm();
-        $coeff = Settings::findOne(['key' => 'add_coeff'])->value;
         if ($model->gender == null) $model->gender = '-';
         if ($model->age_min == null) $model->age_min = 0;
         if ($model->age_max == null) $model->age_max = 0;
@@ -168,7 +167,6 @@ class SocialQueueController extends Controller
             'friends_options' => $options['friends_options'],
             'friends_prices' => $options['friends_prices'],
             'errors' => $error,
-            'coeff' => $coeff
         ]);
     }
 
@@ -357,7 +355,8 @@ class SocialQueueController extends Controller
             $service = SocialService::findOne(['type_id' => $data['type_id']]);
             if ($service) {
                 $inputs = explode(';', $service->inputs);
-                $price = strval(round($service->price / (1000000 * 1000), 4));
+                $coeff = Settings::findOne(['key' => 'add_coeff'])->value;
+                $price = strval(round(($service->price * floatval($coeff)) / (1000000 * 1000), 4));
                 $session = Yii::$app->session;
                 $session['inputs'] = $inputs;
                 $session['price'] = $service->price;

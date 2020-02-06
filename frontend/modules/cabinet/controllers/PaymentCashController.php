@@ -10,6 +10,7 @@ namespace frontend\modules\cabinet\controllers;
 
 use common\models\Cases;
 use common\models\History;
+use common\models\OrdersCash;
 use common\models\Settings;
 use frontend\modules\cabinet\models\Balance;
 use yii\helpers\ArrayHelper;
@@ -26,11 +27,11 @@ class PaymentCashController extends Controller
        //$cases = Cases::findAll(['status'=>1]);
        //$res = array();
        //$defaultCase = $cases[0];
-       $default_sum = 300.00;
+       $default_sum = 150;
        $exchange_rate = Settings::getSetting('exchange_rate_usd');
        $default_usd = round($default_sum / floatval($exchange_rate), 6);
 
-       $order_id = uniqid('id_');
+       $order_id = uniqid('id_', true).'_'.Yii::$app->user->id;
        $form_sign = FreeCassa::generateSign($default_sum.'.00',FreeCassa::SECRET_1,$order_id);
 
        //foreach ($cases as $case)
@@ -39,7 +40,7 @@ class PaymentCashController extends Controller
        //}
 
        return $this->render('pay-form',[
-           'default_sum' => $default_sum.'.00',
+           'default_sum' => $default_sum,
            'merchant_id' => FreeCassa::SHOP_ID,
            'form_sign' => $form_sign,
            'order_id' => $order_id,
@@ -48,11 +49,45 @@ class PaymentCashController extends Controller
        ]);
     }
 
+    public function actionPutOrder()
+    {
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $data = Yii::$app->request->post();
+            if (isset($data['order_id']) && isset($data['usd']) && isset($data['amount'])) {
+                $model = new OrdersCash();
+                $model->user_id = Yii::$app->user->id;
+                $model->order_id = $data['order_id'];
+                $model->usd = $data['usd'];
+                $model->amount = $data['amount'];
+                $model->date = date('Y-m-d H-i-s');
+                $model->is_paid = 0;
+                if($model->save()) {
+                    return [
+                        'code' => 200,
+                    ];
+                } else {
+                    return [
+                        'code' => 100,
+                    ];
+                }
+            }
+        }
+        return 100;
+    }
 
     public function actionGetFormSecret()
     {
-        $id = Yii::$app->request->post('order_id');
-        $sum = Yii::$app->request->post('sum');;
-        return FreeCassa::generateSign($sum,FreeCassa::SECRET_1,$id);
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $order_id = uniqid('id_', true) . '_' . Yii::$app->user->id;
+            $sum = Yii::$app->request->post('sum');;
+            return [
+                'sign' => FreeCassa::generateSign($sum, FreeCassa::SECRET_1, $order_id),
+                'code' => 200,
+                'order_id' => $order_id,
+            ];
+        }
+        return 100;
     }
 }

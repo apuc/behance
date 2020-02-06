@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Settings;
 use yii\db\Migration;
 use VipIpRuClient\Request\Request;
 
@@ -36,7 +37,7 @@ class m200131_085215_create_socials_services extends Migration
 
         $request = new Request();
         $request->setLink("https://api.vipip.ru/v0.1/social/tarifflist");
-        $request->setParam('access_token', Yii::$app->params['access_token']);
+        $request->setParam('access_token', Settings::getSetting('access_token'));
         $socials = $request->get();
 
         foreach($socials as $social) {

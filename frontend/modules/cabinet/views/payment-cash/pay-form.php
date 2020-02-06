@@ -23,22 +23,23 @@ $exponent = intval(Settings::getSetting('balance_exponent'));
 <div class="payment-index">
 
     <div class="form-group">
-        <label for="sum">Введите сумму</label><BR>
+        <label for="sum">Введите сумму в рублях</label>
         <?= Html::input('string', 'sum', $default_sum, ['class' => 'form-control', 'id' => 'sum']) ?>
     </div>
     <div class="form-group" id="info_div">
         <h3 class='font-italic'>Курс - 1&#36; = <span id="exchange_text"><?= $exchange_rate ?></span> руб.; к зачислению - <span id="usd_text"><?= $default_usd ?></span>&#36;</h3>
     </div>
     <div class="alert alert-danger display-error" id="error_div" style="display: none"></div>
+    <div class="alert alert-success display-success" id="success_div" style="display: none"></div>
 
     <form method='get' action='http://www.free-kassa.ru/merchant/cash.php'>
         <input type='hidden' name='m' value='<?= $merchant_id ?>'>
-        <input type='hidden' name='oa' id="pay-sum" value='<?= $default_sum ?>'>
+        <input type='hidden' name='oa' id="pay-sum" value='<?= $default_sum.'.00' ?>'>
         <input type='hidden' name='o' id="pay-order-id" value='<?= $order_id ?>'>
         <input type='hidden' name='s' id="pay-sign" value='<?= $form_sign ?>'>
         <input type='hidden' name='us_userid' value='<?= Yii::$app->user->getId() ?>'>
         <input type='hidden' name='us_usd' id="pay-usd" value='<?= $default_usd ?>'>
-        <input type="submit" id="submit-fc" onclick="gtag('event', 'payment', { 'event_category': 'form', 'event_action': 'payment', }); yaCounter51223025.reachGoal('payment'); return true;" value="Оплатить" class="btn btn-pink">
+        <input type="submit" id="submit-fc" value="Оплатить" class="btn btn-pink">
     </form>
 
 </div>

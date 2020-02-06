@@ -81,8 +81,6 @@ CabinetAsset::register($this);
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
-
-
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
                             <i class="fa fa-user" style="visibility: visible;"></i>
                             <span>Аккаунты</span>
@@ -132,10 +130,10 @@ CabinetAsset::register($this);
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">
-                    <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history-cash') ?>">
-                        <i class="fa fa-history" style="visibility: visible;"></i>
-                        <span>История пополнений $</span>
-                    </a>
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history-cash') ?>">
+                            <i class="fa fa-history" style="visibility: visible;"></i>
+                            <span>История пополнений $</span>
+                        </a>
                     </div>
 
                     <div class="mdc-list-item mdc-drawer-item">

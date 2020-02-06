@@ -2,6 +2,7 @@
 
 namespace frontend\modules\cabinet\controllers;
 
+use common\classes\SendMail;
 use common\models\BalanceCash;
 use common\models\HistoryCash;
 use common\models\Settings;
@@ -55,6 +56,8 @@ class SocialQueueController extends Controller
             $services[$service->type_id] = $service->title;
         }
 
+        $queue = SocialQueue::find()->all();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -99,7 +102,7 @@ class SocialQueueController extends Controller
                 $model->price = intval($model->price);
 
                 $actual_model = new SocialQueue();
-                $wrapper = new SocialWrapper(Yii::$app->params['access_token']);
+                $wrapper = new SocialWrapper(Settings::getSetting('access_token'));
                 $session = Yii::$app->session;
                 $error = "Произошла ошибка при создании задачи, пожалуйста введите параметры ещё раз<br>Введенная в прошлый раз вами ссылка - $model->link";
                 if (isset($session['inputs']) && isset($session['price'])) {
@@ -113,7 +116,7 @@ class SocialQueueController extends Controller
 
                         if($result['all_good']) {
                             $user = Yii::$app->user->id;
-                            $date = date('Y-m-d h-i-s');
+                            $date = date('Y-m-d H-i-s');
 
                             $status = $wrapper->createJob('Job - user-'.$user.' - '.$date, $model->type_id, $result['params']);
                             if ($status == 1) {
@@ -145,8 +148,12 @@ class SocialQueueController extends Controller
                                     $this->redirect(['index']);
                                 } else {
                                     $wrapper->deleteCurrentJob();
+                                    // default error will be used if Job couldn't be created
+                                    // will pretty much be spammin 'till someone adds funds
+                                    $this->sendBalanceEmail(Settings::getSetting('balance_handler_email'));
                                 }
                             }
+                            // default error will be used if Job couldn't be created
                         }
                         else {
                             $error = 'Возникли следующие ошибки:<br>'.$result['error'];
@@ -168,6 +175,16 @@ class SocialQueueController extends Controller
             'friends_prices' => $options['friends_prices'],
             'errors' => $error,
         ]);
+    }
+
+    private function sendBalanceEmail($email) {
+        SendMail::create()->setSMTPConfig(Yii::$app->params['smtp-config'])
+            ->addAddress($email)
+            ->setSubject('Behance Space - проблема с балансом на VipIP')
+            ->setBody("<p>Не хватает средств на привязаном к Behance Space VipIP-аккаунте. Срочно пополните баланс</p>")
+            ->setFrom(Yii::$app->params['smtp-config']['username'], 'BS')
+            ->isHTML()
+            ->send();
     }
 
     /**
@@ -414,7 +431,7 @@ class SocialQueueController extends Controller
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $model = $this->findModel($id);
             $model->status = $model->status ? 0 : 1;
-            $wrapper = new SocialWrapper(Yii::$app->params['access_token']);
+            $wrapper = new SocialWrapper(Settings::getSetting('access_token'));
             $status = $wrapper->getJob($model->link_id);
             if ($status == 1) {
                 $set_status = $model->status == 1 ? StatusType::ENABLED()->getValue() : StatusType::DISABLED()->getValue();

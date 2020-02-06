@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\BalanceCash;
 use common\models\HistoryCash;
+use common\models\OrdersCash;
 use common\models\Settings;
 use Yii;
 use common\models\Cases;
@@ -80,17 +81,33 @@ class PaymentController extends \yii\web\Controller
                         throw new \Exception("Wrong amount!");
                     }
                 } elseif (isset($post['us_usd'])) {
-                    $balance = BalanceCash::findOne(['user_id' => $user]);
-                    $exponent = intval(Settings::getSetting('balance_exponent'));
-                    $amount = $post['us_usd'] * $exponent;
-                    $balance->addBalance($amount);
-
-                    HistoryCash::create(
-                        $user,
-                        HistoryCash::TRANSFER_TO_BALANCE,
-                        $amount,
-                        "Добавлены ".$post['us_usd'].'$'
-                    );
+                    $order = OrdersCash::findOne(['order_id' => $post['MERCHANT_ORDER_ID'], 'is_paid' => 0]);
+                    if ($order) {
+                        $is_correct_amount = $order->amount == $post['AMOUNT'];
+                        $is_correct_usd = strcmp(strval($order->usd), $post['us_usd']);
+                        if ($is_correct_amount) {
+                            if ($is_correct_usd) {
+                                $balance = BalanceCash::findOne(['user_id' => $user]);
+                                $exponent = intval(Settings::getSetting('balance_exponent'));
+                                $amount = $post['us_usd'] * $exponent;
+                                $balance->addBalance($amount);
+                                $order->is_paid = 1;
+                                $order->save();
+                                HistoryCash::create(
+                                    $user,
+                                    HistoryCash::TRANSFER_TO_BALANCE,
+                                    $amount,
+                                    "Пополнено на " . $post['us_usd'] . '$'
+                                );
+                            } else {
+                                throw new \Exception("Incorrect usd amount!");
+                            }
+                        } else {
+                            throw new \Exception("Incorrect rub amount!");
+                        }
+                    } else {
+                        throw new \Exception("Non-existing order!");
+                    }
                 } else {
                     throw new \Exception("Wrong parameters!");
                 }

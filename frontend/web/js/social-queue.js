@@ -87,10 +87,10 @@ function calculatePrice($)
 {
     let index = $('#socialqueueform-friends_id')[0].selectedIndex - 1;
     let count = $('#socialqueueform-balance').val();
-    let current_price = Math.round((price * friend_prices[index] * count + Number.EPSILON) * 1000000) / 1000000;
+    let current_price = Math.round((price * friend_prices[index] * count + Number.EPSILON) * exponent) / exponent;
     $('#price_text').text('Стоимость услуги - ' + current_price + '$');
-    $('#socialqueueform-price').val(current_price * 1000000);
-    if (balance_cash >= Math.round(current_price * 1000000)) {
+    $('#socialqueueform-price').val(current_price * exponent);
+    if (balance_cash >= Math.round(current_price * exponent)) {
         $('#success_button').removeAttr('disabled');
     } else {
         $('#success_button').attr('disabled', 'disabled');

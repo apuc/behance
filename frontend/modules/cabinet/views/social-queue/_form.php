@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Settings;
 use frontend\modules\cabinet\models\SocialQueueForm;
 use kartik\select2\Select2;
 use yii\helpers\Html;
@@ -12,7 +13,7 @@ use yii\widgets\ActiveForm;
 /* @var $friends_options array */
 /* @var $friends_prices array */
 /* @var $errors string */
-
+$exponent = intval(Settings::getSetting('balance_exponent'));
 // look into social-query.js for usage of friend_prices and price_coeff
 ?>
 <script>
@@ -20,6 +21,7 @@ use yii\widgets\ActiveForm;
    <?php foreach ($friends_prices as $friends_price) { ?>
        friend_prices.push(<?= $friends_price ?>);
    <?php } ?>
+   var exponent = <?= $exponent ?>;
 </script>
 <!-- socialqueue-*var name* -->
 <?php if ($errors != null) { ?>

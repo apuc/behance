@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
 
+    const moneyRegex  = /^\d+(?:\.\d{0,2})$/;
     //баланс
     const form = $("#works-grid-form");
     const errorSpan = $("#works-form-error");
@@ -13,10 +14,17 @@ $(document).ready(function () {
 
     //оплата
     const casesSelect = $("#cases-select")[0];
+    const sumField = $("#sum");
     const sumInput = $("#pay-sum");
+    const usdInput = $("#pay-usd");
     const caseInput = $("#pay-case-id");
     const secretInput = $("#pay-sign");
     const orderInput = $("#pay-order-id");
+    const submitButton = $("#submit-fc");
+    const exchangeSpan = $("#exchange_text");
+    const usdSpan = $("#usd_text");
+    const infoDiv = $("#info_div");
+    const errorDiv = $("#error_div");
 
 
     $('.btn-works-grid').on('click',function () {
@@ -75,7 +83,7 @@ $(document).ready(function () {
 
     })
 
-    if(casesSelect != undefined)
+    if(casesSelect !== undefined)
     {
         casesSelect.addEventListener('change',function () {
 
@@ -91,6 +99,35 @@ $(document).ready(function () {
             );
 
         })
+    }
+    if (sumField !== undefined)
+    {
+        let f = function() {
+            let data = $(this).val();
+            if (moneyRegex.test(data)) {
+                submitButton.removeAttr('disabled');
+                infoDiv.css('display', 'block');
+                errorDiv.css('display', 'none');
+                let rub = parseFloat(sumField.val());
+                let exchange = parseFloat(exchangeSpan.text());
+                let usd = Math.round((rub/exchange + Number.EPSILON) * exponent) / exponent;
+                usdSpan.text(usd);
+                let orderId = orderInput.val();
+                $.post( "/cabinet/payment/get-form-secret",{"order_id":orderId,"sum":rub}).then(
+                    function(res) {
+                        sumInput.val(rub);
+                        secretInput.val(res);
+                        usdInput.val(usd);
+                    }
+                );
+            } else {
+                submitButton.attr('disabled', 'disabled');
+                infoDiv.css('display', 'none');
+                errorDiv.css('display', 'block');
+                errorDiv.text('Введённый текст не является корректным значнеим. Примеры корректных значений - 200. , 200.0, 200.1, 200.11')
+            }
+        };
+        sumField.keyup(f);
     }
 
 

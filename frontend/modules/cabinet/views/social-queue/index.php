@@ -69,6 +69,7 @@ $this->registerJs($js);
                 },
                 'filter' => [ 0=>"Завершено", 1=>"Работает"]
             ],
+            'dt_add',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{change-status}',

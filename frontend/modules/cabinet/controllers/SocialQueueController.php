@@ -119,7 +119,7 @@ class SocialQueueController extends Controller
                             if ($status == 1) {
                                 $status = $wrapper->setJobBalance($model->balance, BalanceType::VIEWS()->getValue());
                                 if ($status == 1) {
-                                    // TODO: rewrite mb to never account error from set job status when there is no money
+                                    // TODO: rewrite mb to never account error from set job status when there is no money in api account
                                     $status = $wrapper->setJobStatus(StatusType::ENABLED()->getValue());
                                     if ($status == 1) {
                                         $actual_model->status = 1;
@@ -141,7 +141,7 @@ class SocialQueueController extends Controller
                                         HistoryCash::TRANSFER_FROM_BALANCE,
                                         $model->price,
                                         'Снятие денег за услуг накрутки №'.$actual_model->id);
-                                    $balance_cash->amount -= $model->price;
+                                    $balance_cash->removeFromBalance($model->price);
                                     $this->redirect(['index']);
                                 } else {
                                     $wrapper->deleteCurrentJob();

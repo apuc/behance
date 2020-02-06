@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\models\BalanceCash;
+use common\models\HistoryCash;
+use common\models\Settings;
 use Yii;
 use common\models\Cases;
 use common\models\Balance;
@@ -60,27 +63,40 @@ class PaymentController extends \yii\web\Controller
             {
                 $user = $post['us_userid'];
 
-                $case = Cases::findOne(['id' => $post['us_caseid']]);
+                if (isset($post['us_caseid'])) {
+                    $case = Cases::findOne(['id' => $post['us_caseid']]);
+                    if ($post['AMOUNT'] == $case->price) {
+                        $balance = Balance::findOne(['user_id' => $user]);
+                        $balance->addBalance($case->likes, $case->views);
 
-                if ($post['AMOUNT'] == $case->price)
-                {
-                    $balance = Balance::findOne(['user_id' => $user]);
-                    $balance->addBalance($case->likes, $case->views);
+                        History::create(
+                            $user,
+                            History::TRANSFER_TO_BALANCE,
+                            $case->likes,
+                            $case->views,
+                            "Применен пакет {$case->name}!"
+                        );
+                    } else {
+                        throw new \Exception("Wrong amount!");
+                    }
+                } elseif (isset($post['us_usd'])) {
+                    $balance = BalanceCash::findOne(['user_id' => $user]);
+                    $exponent = intval(Settings::getSetting('balance_exponent'));
+                    $amount = $post['us_usd'] * $exponent;
+                    $balance->addBalance($amount);
 
-                    History::create(
+                    HistoryCash::create(
                         $user,
-                        History::TRANSFER_TO_BALANCE,
-                        $case->likes,
-                        $case->views,
-                        "Применен пакет {$case->name}!"
+                        HistoryCash::TRANSFER_TO_BALANCE,
+                        $amount,
+                        "Добавлены ".$post['us_usd'].'$'
                     );
+                } else {
+                    throw new \Exception("Wrong parameters!");
                 }
-
-                throw new \Exception("Wrong amount!");
-
+            } else {
+                throw new \Exception("Wrong sign!");
             }
-
-            throw new \Exception("Wrong sign!");
 
         }
         catch(\Exception $e)

@@ -66,11 +66,11 @@ class SocialQueueSearch extends SocialQueue
            'user_id' => $this->user_id,
            'link_id' => $this->link_id,
            'type_id' => $this->type_id,
-           'dt_add' => $this->dt_add,
            'status' => $this->status,
-           'url' => $this->url,
-           'balance' => $this->balance
+           'balance' => $this->balance,
        ]);
+       $query->andFilterWhere(['like', 'url', $this->url]);
+       $query->andFilterWhere(['like', 'dt_add', $this->dt_add,]);
        return $dataProvider;
 
     }

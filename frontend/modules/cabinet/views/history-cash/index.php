@@ -22,6 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
               'attribute'=>'amount',
               'filter'=>false,
+              'value' => function ($data) {
+                return $data->amount / \common\models\Settings::getSetting('balance_exponent');
+              }
             ],
             [
                'attribute'=>'type',

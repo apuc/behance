@@ -114,7 +114,7 @@ CabinetAsset::register($this);
                             <span>История пополнений</span>
                         </a>
                     </div>
-
+                    <!--
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue']); ?>">
                             <i class="fa fa-heart" style="visibility: visible;"></i>
@@ -135,7 +135,7 @@ CabinetAsset::register($this);
                             <span>История пополнений $</span>
                         </a>
                     </div>
-
+                    -->
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/cabinet/referal') ?>">
                             <i class="fa fa-users"></i>

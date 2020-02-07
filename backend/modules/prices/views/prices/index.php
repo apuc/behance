@@ -20,10 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
 
-            'key',
+            [
+                'attribute' => 'key',
+                'label' => 'Ключ'
+            ],
             [
               'attribute'=>'value',
                 'contentOptions' => ['class' => 'grid-view-text-fix'],
+                'label' => 'Цена',
                 'filter'=>false,
                 'value' =>
                     function ($data) {

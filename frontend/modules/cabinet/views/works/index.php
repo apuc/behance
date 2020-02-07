@@ -11,6 +11,9 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\modules\works\controllers\WorksSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $exponent integer */
+/* @var $price_likes integer */
+/* @var $price_views integer */
 
 $this->title = Yii::t('frontend', 'Работы');
 $this->params['breadcrumbs'][] = $this->title;
@@ -99,11 +102,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="modal-body">
                     <form id="works-grid-form">
                         <div class="form-group">
-                            <labe>Добавить лайков:</labe>
+                            <label for="form-likes">Добавить лайков (<?= round($price_likes / ($exponent * 1.0), 6) ?>$):</label>
                             <input type="number" name="likes_work"  id="form-likes" class="form-control" value="0" min="0">
                         </div>
                         <div class="form-group">
-                            <labe>Добавить просмотров:</labe>
+                            <label for="form-views">Добавить просмотров (<?= round($price_views / ($exponent * 1.0), 6) ?>$):</label>
                             <input type="number" name="views_work" id="form-views" class="form-control" value="0" min="0">
                         </div>
                         <div class="form-group">

@@ -2,9 +2,13 @@
 
 namespace frontend\modules\cabinet\controllers;
 
+use common\models\BalanceCash;
+use common\models\BehancePrice;
 use common\models\History;
+use common\models\HistoryCash;
 use common\models\Queue;
 use common\models\forms\AssignBalanceForm;
+use common\models\Settings;
 use frontend\modules\cabinet\models\Balance;
 use Yii;
 use frontend\modules\cabinet\models\Works;
@@ -38,12 +42,18 @@ class WorksController extends Controller
             $account_names[$w->account_id] = $w->account['display_name'];
         }
 
+        $exponent = Settings::getSetting('balance_exponent');
+        $price_likes = BehancePrice::findOne(['service' => 'likes'])->price;
+        $price_views = BehancePrice::findOne(['service' => 'views'])->price;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'works_names'=>$works_names,
-            'account_names'=>$account_names
+            'account_names'=>$account_names,
+            'exponent' => $exponent,
+            'price_likes' => $price_likes,
+            'price_views' => $price_views
         ]);
     }
 
@@ -56,7 +66,14 @@ class WorksController extends Controller
         $form = new AssignBalanceForm(Yii::$app->request->post());
         $userId = Yii::$app->user->getId();
 
+        $balance = BalanceCash::findOne(['user_id'=> Yii::$app->user->getId()]);
+        $price_likes = BehancePrice::findOne(['service' => 'likes'])->price;
+        $price_views = BehancePrice::findOne(['service' => 'views'])->price;
+
         if(!$form->validate()){
+            return $form->getFirstErrors()['error'];
+        }
+        if(!$form->checkBalance($balance, $price_likes, $price_views)){
             return $form->getFirstErrors()['error'];
         }
 
@@ -79,14 +96,17 @@ class WorksController extends Controller
             Queue::create($form->workId,0,$leftViews);
         }
 
-        $userBalance = Balance::findOne(['user_id'=>$userId]);
-        $userBalance->removeFromBalance($form->likes,$form->views);
+        //$userBalance = Balance::findOne(['user_id'=>$userId]);
+        //$userBalance->removeFromBalance($form->likes,$form->views);
 
-        History::create($userId,
-            History::TRANSFER_FROM_BALANCE,
-            $form->likes,
-            $form->views,
-            "Лайки и просмотры назначены на работу"
+        $amount = ($form->likes * $price_likes) + ($form->views * $price_views);
+        $balance->removeFromBalance($amount);
+        $balance->save();
+
+        HistoryCash::create($userId,
+            HistoryCash::TRANSFER_FROM_BALANCE,
+            $amount,
+            "Лайки {$form->likes} и просмотры {$form->views} назначены на работу"
         );
 
         return true;

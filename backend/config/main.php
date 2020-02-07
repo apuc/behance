@@ -27,6 +27,9 @@ return [
         'settings' => [
             'class' => 'backend\modules\settings\Settings',
         ],
+        'prices' => [
+            'class' => 'backend\modules\prices\Prices',
+        ],
         'balance' => [
 	        'class' => 'backend\modules\balance\Balance',
         ],

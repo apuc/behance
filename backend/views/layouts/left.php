@@ -45,6 +45,7 @@ if($callback_count == 0)
                     ['label' => 'Тарифы', 'icon' => 'fas fa-suitcase', 'url' => ['/cases/cases']],
                     ['label' => Yii::t('history', 'History'), 'icon' => 'fas fa-history', 'url' => ['/history/history']],
                     ['label' => 'Настройки', 'icon' => 'fas fa-cogs', 'url' => ['/settings/settings']],
+                    ['label' => 'Настройки цены', 'icon' => 'fas fa-cogs', 'url' => ['/prices/prices']],
                     ['label' => 'SEO', 'icon' => 'fas fa-globe', 'url' => ['/settings/seo']],
                     ['label' => Yii::t('reviews', 'Reviews'), 'icon' => 'fas fa-comments', 'url' => ['/reviews/reviews']],
                    // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],

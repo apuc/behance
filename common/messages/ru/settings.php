@@ -13,6 +13,7 @@ return [
 	'Save' => 'Сохранить',
 	'Update' => 'Обновить',
 	'Settings' => 'Настройки',
+	'Settings Price' => 'Настройки цен',
 	'Delete' => 'Удалить',
 	'Are you sure you want to delete this item?' => 'Вы серьезно хотите удалить эту запись?',
 ];

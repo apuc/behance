@@ -212,13 +212,11 @@ CabinetAsset::register($this);
                         <span class="mdc-toolbar__menu-icon">Просмотры:&nbsp;<span id="balance_views"><?=$balance->views ?></span></span>
                     </div>
                 <?php  endif; ?>
-                <!--
                 <?php if(!empty($balance_cash)): ?>
                 <div class="balance-block">
                     <span class="mdc-toolbar__menu-icon">Баланс, $:&nbsp;<span id="balance_cash"><?=$balance_cash->amount / $exponent ?></span></span>
                 </div>
                 <?php  endif; ?>
-                -->
             </section>
             <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
                 <!--				<div class="mdc-menu-anchor">-->

@@ -56,7 +56,7 @@ class PaymentCashController extends Controller
             $data = Yii::$app->request->post();
             if (isset($data['order_id']) && isset($data['usd']) && isset($data['amount'])) {
                 $exchange_rate = floatval(Settings::getSetting('exchange_rate_usd'));
-                $usd = round($data['amount'] * $exchange_rate, 6);
+                $usd = strval(round($data['amount'] / $exchange_rate, 6));
 
                 $model = new OrdersCash();
                 $model->user_id = Yii::$app->user->id;

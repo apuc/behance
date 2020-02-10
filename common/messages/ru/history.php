@@ -24,6 +24,6 @@ return [
 	'Look' => 'Посмотреть',
 	'Likes' => 'Лайки',
 	'Views' => 'Просмотры',
-    'Amount' => "Баланс, руб.",
+    'Amount' => "Баланс, $.",
 	'Are you sure you want to delete this item?' => 'Вы серьезно хотите удалить эту запись?',
 ];

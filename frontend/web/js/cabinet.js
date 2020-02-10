@@ -123,6 +123,7 @@ $(document).ready(function () {
                     if (data.code == 200) {
                         submitButton.attr('disabled', 'disabled');
                         errorDiv.css('display', 'none');
+                        usdInput.val(data.usd);
                         gtag('event', 'payment', { 'event_category': 'form', 'event_action': 'payment', });
                         yaCounter51223025.reachGoal('payment');
                         return true;

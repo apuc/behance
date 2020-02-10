@@ -18,6 +18,7 @@ class m200206_100507_add_settings_to_settings extends Migration
         // TODO: swap token to real one
         $this->insert('settings', ['key' => 'access_token', 'value' => '2188616.uChUhinkq4dP9JZZgQtQs6ffGpm4am4d']);
         $this->insert('settings', ['key' => 'balance_handler_email', 'value' => 'danteneros@live.ru']);
+        $this->insert('settings', ['key' => 'expiration_days', 'value' => '1']);
     }
 
     /**

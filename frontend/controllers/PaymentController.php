@@ -56,8 +56,8 @@ class PaymentController extends \yii\web\Controller
 
         try
         {
+            $curr_date = new \DateTime(date("Y-m-d H-i-s"));
             $post = Yii::$app->request->post();
-
             $sign = FreeCassa::generateSign($post['AMOUNT'],FreeCassa::SECRET_2, $post['MERCHANT_ORDER_ID']);
 
             if ($sign == $post['SIGN'])
@@ -85,20 +85,27 @@ class PaymentController extends \yii\web\Controller
                     if ($order) {
                         $is_correct_amount = $order->amount == $post['AMOUNT'];
                         $is_correct_usd = strcmp(strval($order->usd), $post['us_usd']);
+                        $order_date = new \DateTime($order->date);
+                        $expire_days = intval(Settings::getSetting('expiration_days'));
+                        $is_still_valid = $curr_date->diff($order_date)->days < $expire_days;
                         if ($is_correct_amount) {
                             if ($is_correct_usd) {
-                                $balance = BalanceCash::findOne(['user_id' => $user]);
-                                $exponent = intval(Settings::getSetting('balance_exponent'));
-                                $amount = $post['us_usd'] * $exponent;
-                                $balance->addBalance($amount);
-                                $order->is_paid = 1;
-                                $order->save();
-                                HistoryCash::create(
-                                    $user,
-                                    HistoryCash::TRANSFER_TO_BALANCE,
-                                    $amount,
-                                    "Пополнено на " . $post['us_usd'] . '$'
-                                );
+                                if ($is_still_valid) {
+                                    $balance = BalanceCash::findOne(['user_id' => $user]);
+                                    $exponent = intval(Settings::getSetting('balance_exponent'));
+                                    $amount = $post['us_usd'] * $exponent;
+                                    $balance->addBalance($amount);
+                                    $order->is_paid = 1;
+                                    $order->save();
+                                    HistoryCash::create(
+                                        $user,
+                                        HistoryCash::TRANSFER_TO_BALANCE,
+                                        $amount,
+                                        "Пополнено на " . $post['us_usd'] . '$'
+                                    );
+                                } else {
+                                    throw new \Exception("Order has expired!");
+                                }
                             } else {
                                 throw new \Exception("Incorrect usd amount!");
                             }

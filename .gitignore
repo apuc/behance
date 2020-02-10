@@ -45,3 +45,4 @@ phpunit.phar
 /frontend/web/.htaccess
 frontend/web/uploads
 .htaccess
+/.vscode/

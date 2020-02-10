@@ -17019,7 +17019,7 @@ footer {
       padding: 25px 0 200px 0;
       position: relative;
       overflow: hidden;
-      max-height: 500px; }
+      max-height: 600px; }
   .mdc-persistent-drawer__drawer {
     border-right: 0; }
   .mdc-persistent-drawer__toolbar-spacer {
@@ -17967,6 +17967,10 @@ text-align:center;
   color:white; !important;}
 .btn-pink:focus{
   color:white;
+}
+
+#div_age, #div_balance, #div_answer, #div_friends, #div_link, #div_msg, #div_gender, #div_price {
+  display: none;
 }
 /*-------------------------------------------------------------------*/
 

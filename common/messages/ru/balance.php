@@ -18,5 +18,6 @@ return [
 	'Balances' => 'Баланс',
 	'History' => 'История',
 	'Look' => 'Посмотреть',
+    'Amount' => 'Баланс, руб.',
 	'Are you sure you want to delete this item?' => 'Вы серьезно хотите удалить эту запись?',
 ];

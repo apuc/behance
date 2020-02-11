@@ -92,8 +92,11 @@ function calculatePrice($)
     $('#socialqueueform-price').val(current_price * exponent);
     if (balance_cash >= Math.round(current_price * exponent)) {
         $('#success_button').removeAttr('disabled');
+        $('#errors').css('display', 'none');
     } else {
         $('#success_button').attr('disabled', 'disabled');
+        $('#errors').text("Недостаточно средств на балансе для создания задачи");
+        $('#errors').css('display', 'block');
     }
 }
 

@@ -6,6 +6,7 @@ use common\models\BalanceCash;
 use common\models\HistoryCash;
 use common\models\OrdersCash;
 use common\models\Settings;
+use DateTime;
 use Yii;
 use common\models\Cases;
 use common\models\Balance;
@@ -56,7 +57,12 @@ class PaymentController extends \yii\web\Controller
 
         try
         {
-            $curr_date = new \DateTime(date("Y-m-d H-i-s"));
+            $curr_date = new DateTime(date("Y-m-d H:i:s"));
+
+            $parameters =[':date'=> $curr_date, ':log_text' => ''];
+            $sql = 'INSERT INTO log(date, log_text) VALUES (:date, :log_text)';
+            $cmnd = Yii::$app->db->createCommand($sql);
+
             $post = Yii::$app->request->post();
             $sign = FreeCassa::generateSign($post['AMOUNT'],FreeCassa::SECRET_2, $post['MERCHANT_ORDER_ID']);
 
@@ -83,6 +89,10 @@ class PaymentController extends \yii\web\Controller
                 } elseif (isset($post['us_usd'])) {
                     $order = OrdersCash::findOne(['order_id' => $post['MERCHANT_ORDER_ID'], 'is_paid' => 0]);
                     if ($order) {
+                        $parameters[':log_text'] = "Entered us_usd";
+                        $cmnd->bindParam(':date', $parameters[':date']);
+                        $cmnd->bindParam(':log_text', $parameters[':log_text']);
+                        $cmnd->execute();
                         $is_correct_amount = $order->amount == $post['AMOUNT'];
                         $is_correct_usd = strcmp(strval($order->usd), $post['us_usd']);
                         $order_date = new \DateTime($order->date);
@@ -91,6 +101,10 @@ class PaymentController extends \yii\web\Controller
                         if ($is_correct_amount) {
                             if ($is_correct_usd) {
                                 if ($is_still_valid) {
+                                    $parameters[':log_text'] = "Should be fine";
+                                    $cmnd->bindParam(':date', $parameters[':date']);
+                                    $cmnd->bindParam(':log_text', $parameters[':log_text']);
+                                    $cmnd->execute();
                                     $balance = BalanceCash::findOne(['user_id' => $user]);
                                     $exponent = intval(Settings::getSetting('balance_exponent'));
                                     $amount = $post['us_usd'] * $exponent;
@@ -104,21 +118,46 @@ class PaymentController extends \yii\web\Controller
                                         "Пополнено на " . $post['us_usd'] . '$'
                                     );
                                 } else {
+                                    $parameters[':log_text'] = "Order has expired!";
+                                    $cmnd->bindParam(':date', $parameters[':date']);
+                                    $cmnd->bindParam(':log_text', $parameters[':log_text']);
+                                    $cmnd->execute();
                                     throw new \Exception("Order has expired!");
                                 }
                             } else {
+                                $parameters[':log_text'] = "Incorrect usd amount! {$post['us_usd']}";
+                                $cmnd->bindParam(':date', $parameters[':date']);
+                                $cmnd->bindParam(':log_text', $parameters[':log_text']);
+                                $cmnd->execute();
                                 throw new \Exception("Incorrect usd amount!");
                             }
                         } else {
-                            throw new \Exception("Incorrect rub amount!");
+                            $parameters[':log_text'] = "Incorrect rub amount! {$post['AMOUNT']}";
+                            $cmnd->bindParam(':date', $parameters[':date']);
+                            $cmnd->bindParam(':log_text', $parameters[':log_text']);
+                            $cmnd->execute();
+                            throw new \Exception("Order has expired!");
                         }
                     } else {
+                        $parameters[':log_text'] = "Non-existing order! {$post['MERCHANT_ORDER_ID']}";
+                        $cmnd->bindParam(':date', $parameters[':date']);
+                        $cmnd->bindParam(':log_text', $parameters[':log_text']);
+                        $cmnd->execute();
                         throw new \Exception("Non-existing order!");
                     }
                 } else {
+                    $parameters[':log_text'] = "Wrong parameters!";
+                    $cmnd->bindParam(':date', $parameters[':date']);
+                    $cmnd->bindParam(':log_text', $parameters[':log_text']);
+                    $cmnd->execute();
+                    throw new \Exception("Order has expired!");
                     throw new \Exception("Wrong parameters!");
                 }
             } else {
+                $parameters[':log_text'] = "Wrong sign! {$post['SIGN']}" ;
+                $cmnd->bindParam(':date', $parameters[':date']);
+                $cmnd->bindParam(':log_text', $parameters[':log_text']);
+                $cmnd->execute();
                 throw new \Exception("Wrong sign!");
             }
 

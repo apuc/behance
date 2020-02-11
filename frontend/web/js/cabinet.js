@@ -113,7 +113,7 @@ $(document).ready(function () {
             let rub = parseFloat(sumField.val());
             let usd = parseFloat(usdInput.val());
             let is_ok = false;
-            if (moneyRegex.test(data) && data >= 10) {
+            if (moneyRegex.test(rub) && rub >= 5) {
                 $.ajax({
                     url: url,
                     type: 'POST',

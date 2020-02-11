@@ -86,7 +86,12 @@ class PaymentController extends \yii\web\Controller
                     $order = OrdersCash::findOne(['order_id' => $post['MERCHANT_ORDER_ID'], 'is_paid' => 0]);
                     if ($order) {
                         $is_correct_amount = $order->amount == $post['AMOUNT'];
-                        $is_correct_usd = strcmp(strval($order->usd), $post['us_usd']);
+
+                        $exponent = intval(Settings::getSetting('balance_exponent'));
+                        $order_usd = intval(round(floatval($order->usd), 6) * $exponent);
+                        $post_usd = intval(round(floatval($post['us_usd']), 6) * $exponent);
+                        $is_correct_usd = $order_usd == $post_usd;
+
                         $order_date = new DateTime($order->date);
                         $expire_days = intval(Settings::getSetting('expiration_days'));
                         $is_still_valid = $curr_date->diff($order_date)->days < $expire_days;
@@ -94,7 +99,6 @@ class PaymentController extends \yii\web\Controller
                             if ($is_correct_usd) {
                                 if ($is_still_valid) {
                                     $balance = BalanceCash::findOne(['user_id' => $user]);
-                                    $exponent = intval(Settings::getSetting('balance_exponent'));
                                     $amount = $post['us_usd'] * $exponent;
                                     $balance->addBalance($amount);
                                     $order->is_paid = 1;

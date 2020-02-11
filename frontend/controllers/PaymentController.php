@@ -109,7 +109,7 @@ class PaymentController extends \yii\web\Controller
                                     throw new \Exception("Order has expired!");
                                 }
                             } else {
-                                throw new \Exception("Incorrect usd amount!");
+                                throw new \Exception("Incorrect usd amount! {$order->usd} - {$post['us_usd']}");
                             }
                         } else {
                             throw new \Exception("Order has expired!");

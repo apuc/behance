@@ -158,7 +158,7 @@ $(document).ready(function () {
             submitButton.attr('disabled', 'disabled');
             successDiv.css('display', 'none');
             let data = parseFloat(sumField.val());
-            if (moneyRegex.test(data) && data >= 10) {
+            if (moneyRegex.test(data) && data >= 5) {
                 infoDiv.css('display', 'block');
                 successDiv.css('display', 'block');
                 successDiv.text('Пожалуйста, подождите...');

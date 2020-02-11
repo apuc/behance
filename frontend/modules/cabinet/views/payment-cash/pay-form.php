@@ -32,7 +32,7 @@ $exponent = intval(Settings::getSetting('balance_exponent'));
     <div class="alert alert-danger display-error" id="error_div" style="display: none"></div>
     <div class="alert alert-success display-success" id="success_div" style="display: none"></div>
 
-    <form method='get' action='https://www.free-kassa.ru/merchant/cash.php'>
+    <form method='get' id="pay-form" action='https://www.free-kassa.ru/merchant/cash.php'>
         <input type='hidden' name='m' value='<?= $merchant_id ?>'>
         <input type='hidden' name='oa' id="pay-sum" value='<?= $default_sum.'.00' ?>'>
         <input type='hidden' name='o' id="pay-order-id" value='<?= $order_id ?>'>

@@ -15,6 +15,7 @@ $(document).ready(function () {
     //оплата
     const casesSelect = $("#cases-select")[0];
     const sumField = $("#sum");
+    const payForm = $("#pay-form");
     const sumInput = $("#pay-sum");
     const usdInput = $("#pay-usd");
     const caseInput = $("#pay-case-id");
@@ -102,14 +103,15 @@ $(document).ready(function () {
         })
     }
 
-    if (submitButton !== undefined)
+    if (payForm !== undefined)
     {
-        submitButton.click(function (e) {
+        payForm.submit(function (e) {
             let url = window.location.origin + '/cabinet/payment-cash/put-order';
             let csrf = $('meta[name=csrf-token]').attr("content");
             let order_id = orderInput.val();
             let rub = parseFloat(sumField.val());
             let usd = parseFloat(usdInput.val());
+            let is_ok = false;
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -124,12 +126,8 @@ $(document).ready(function () {
                         submitButton.attr('disabled', 'disabled');
                         errorDiv.css('display', 'none');
                         usdInput.val(data.usd);
-                        gtag('event', 'payment', { 'event_category': 'form', 'event_action': 'payment', });
-                        yaCounter51223025.reachGoal('payment');
-                        return true;
-
+                        is_ok = true;
                     } else {
-                        e.preventDefault();
                         errorDiv.css('display', 'block');
                         errorDiv.text('Произошла ошибка при формировании платежа. Введите сумму заново или перезагрузите страницу, а затем попробуйте снова.');
                         submitButton.attr('disabled', 'disabled');
@@ -137,6 +135,10 @@ $(document).ready(function () {
                 },
                 async: false
             });
+            if (!is_ok) e.preventDefault();
+            gtag('event', 'payment', { 'event_category': 'form', 'event_action': 'payment', });
+            yaCounter51223025.reachGoal('payment');
+            return is_ok;
         });
     }
     if (sumField !== undefined)

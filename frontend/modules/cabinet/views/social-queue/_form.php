@@ -26,7 +26,8 @@ $exponent = intval(Settings::getSetting('balance_exponent'));
 <!-- socialqueue-*var name* -->
 <?php if ($errors != null) { ?>
     <div class="alert alert-danger display-error" style="display: block"><?= $errors ?></div>
-<?php } ?>
+<?php }
+// TODO: output errors like with 0 balance ?>
 <div class="social-queue-form">
 
     <?php $form = ActiveForm::begin([

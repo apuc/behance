@@ -6,6 +6,7 @@ use common\models\BalanceCash;
 use common\models\HistoryCash;
 use common\models\OrdersCash;
 use common\models\Settings;
+use DateTime;
 use Yii;
 use common\models\Cases;
 use common\models\Balance;
@@ -56,7 +57,8 @@ class PaymentController extends \yii\web\Controller
 
         try
         {
-            $curr_date = new \DateTime(date("Y-m-d H-i-s"));
+            $curr_date = new DateTime(date("Y-m-d H:i:s"));
+
             $post = Yii::$app->request->post();
             $sign = FreeCassa::generateSign($post['AMOUNT'],FreeCassa::SECRET_2, $post['MERCHANT_ORDER_ID']);
 
@@ -84,15 +86,19 @@ class PaymentController extends \yii\web\Controller
                     $order = OrdersCash::findOne(['order_id' => $post['MERCHANT_ORDER_ID'], 'is_paid' => 0]);
                     if ($order) {
                         $is_correct_amount = $order->amount == $post['AMOUNT'];
-                        $is_correct_usd = strcmp(strval($order->usd), $post['us_usd']);
-                        $order_date = new \DateTime($order->date);
+
+                        $exponent = intval(Settings::getSetting('balance_exponent'));
+                        $order_usd = intval(round(floatval($order->usd), 6) * $exponent);
+                        $post_usd = intval(round(floatval($post['us_usd']), 6) * $exponent);
+                        $is_correct_usd = $order_usd == $post_usd;
+
+                        $order_date = new DateTime($order->date);
                         $expire_days = intval(Settings::getSetting('expiration_days'));
                         $is_still_valid = $curr_date->diff($order_date)->days < $expire_days;
                         if ($is_correct_amount) {
                             if ($is_correct_usd) {
                                 if ($is_still_valid) {
                                     $balance = BalanceCash::findOne(['user_id' => $user]);
-                                    $exponent = intval(Settings::getSetting('balance_exponent'));
                                     $amount = $post['us_usd'] * $exponent;
                                     $balance->addBalance($amount);
                                     $order->is_paid = 1;
@@ -107,10 +113,10 @@ class PaymentController extends \yii\web\Controller
                                     throw new \Exception("Order has expired!");
                                 }
                             } else {
-                                throw new \Exception("Incorrect usd amount!");
+                                throw new \Exception("Incorrect usd amount! {$order->usd} - {$post['us_usd']}");
                             }
                         } else {
-                            throw new \Exception("Incorrect rub amount!");
+                            throw new \Exception("Order has expired!");
                         }
                     } else {
                         throw new \Exception("Non-existing order!");

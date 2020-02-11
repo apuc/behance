@@ -28,6 +28,7 @@ $(document).ready(function () {
     const errorDiv = $("#error_div");
     const successDiv = $("#success_div");
     const calculateBtn = $("#calculate-btn");
+    const limit = 150;
 
 
     $('.btn-works-grid').on('click',function () {
@@ -113,7 +114,7 @@ $(document).ready(function () {
             let rub = parseFloat(sumField.val());
             let usd = parseFloat(usdInput.val());
             let is_ok = false;
-            if (moneyRegex.test(data) && data >= 10) {
+            if (moneyRegex.test(data) && data >= limit) {
                 $.ajax({
                     url: url,
                     type: 'POST',
@@ -158,7 +159,7 @@ $(document).ready(function () {
             submitButton.attr('disabled', 'disabled');
             successDiv.css('display', 'none');
             let data = parseFloat(sumField.val());
-            if (moneyRegex.test(data) && data >= 10) {
+            if (moneyRegex.test(data) && data >= limit) {
                 infoDiv.css('display', 'block');
                 successDiv.css('display', 'block');
                 successDiv.text('Пожалуйста, подождите...');

@@ -6,6 +6,7 @@ use common\models\BalanceCash;
 use common\models\HistoryCash;
 use common\models\OrdersCash;
 use common\models\Settings;
+use DateTime;
 use Yii;
 use common\models\Cases;
 use common\models\Balance;
@@ -56,7 +57,7 @@ class PaymentController extends \yii\web\Controller
 
         try
         {
-            $curr_date = new \DateTime(date("Y-m-d H-i-s"));
+            $curr_date = new DateTime(date("Y-m-d H:i:s"));
 
             $parameters =[':date'=> $curr_date, ':log_text' => ''];
             $sql = 'INSERT INTO log(date, log_text) VALUES (:date, :log_text)';

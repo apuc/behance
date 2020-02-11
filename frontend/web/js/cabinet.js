@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-    const moneyRegex  = /^\d{3,}$/;
+    const moneyRegex  = /^\d+$/;
     //баланс
     const form = $("#works-grid-form");
     const errorSpan = $("#works-form-error");
@@ -27,6 +27,7 @@ $(document).ready(function () {
     const infoDiv = $("#info_div");
     const errorDiv = $("#error_div");
     const successDiv = $("#success_div");
+    const calculateBtn = $("#calculate-btn");
 
 
     $('.btn-works-grid').on('click',function () {
@@ -112,33 +113,43 @@ $(document).ready(function () {
             let rub = parseFloat(sumField.val());
             let usd = parseFloat(usdInput.val());
             let is_ok = false;
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {
-                    amount:  rub,
-                    order_id: order_id,
-                    usd: usd,
-                    _csrf : csrf
-                },
-                success: function (data) {
-                    if (data.code == 200) {
-                        submitButton.attr('disabled', 'disabled');
-                        errorDiv.css('display', 'none');
-                        usdInput.val(data.usd);
-                        is_ok = true;
-                    } else {
-                        errorDiv.css('display', 'block');
-                        errorDiv.text('Произошла ошибка при формировании платежа. Введите сумму заново или перезагрузите страницу, а затем попробуйте снова.');
-                        submitButton.attr('disabled', 'disabled');
-                    }
-                },
-                async: false
-            });
-            if (!is_ok) e.preventDefault();
-            gtag('event', 'payment', { 'event_category': 'form', 'event_action': 'payment', });
-            yaCounter51223025.reachGoal('payment');
-            return is_ok;
+            if (moneyRegex.test(data) && data >= 10) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        amount: rub,
+                        order_id: order_id,
+                        usd: usd,
+                        _csrf: csrf
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            submitButton.attr('disabled', 'disabled');
+                            errorDiv.css('display', 'none');
+                            usdInput.val(data.usd);
+                            is_ok = true;
+                        } else {
+                            errorDiv.css('display', 'block');
+                            errorDiv.text('Произошла ошибка при формировании платежа. Введите сумму заново или перезагрузите страницу, а затем попробуйте снова.');
+                            submitButton.attr('disabled', 'disabled');
+                        }
+                    },
+                    async: false
+                });
+                if (!is_ok) {
+                    e.preventDefault();
+                }
+                gtag('event', 'payment', {'event_category': 'form', 'event_action': 'payment',});
+                yaCounter51223025.reachGoal('payment');
+                return is_ok;
+            } else {
+                successDiv.css('display', 'none');
+                submitButton.attr('disabled', 'disabled');
+                infoDiv.css('display', 'none');
+                errorDiv.css('display', 'block');
+                errorDiv.text('Сумма должна быть не меньше 10 руб. и без копеек');
+            }
         });
     }
     if (sumField !== undefined)
@@ -146,8 +157,8 @@ $(document).ready(function () {
         let f = function() {
             submitButton.attr('disabled', 'disabled');
             successDiv.css('display', 'none');
-            let data = $(this).val();
-            if (moneyRegex.test(data) && data >= 150) {
+            let data = parseFloat(sumField.val());
+            if (moneyRegex.test(data) && data >= 10) {
                 infoDiv.css('display', 'block');
                 successDiv.css('display', 'block');
                 successDiv.text('Пожалуйста, подождите...');
@@ -181,15 +192,14 @@ $(document).ready(function () {
                 submitButton.attr('disabled', 'disabled');
                 infoDiv.css('display', 'none');
                 errorDiv.css('display', 'block');
-                errorDiv.text('Сумма не должна быть меньше 150 руб. и без копеек');
+                errorDiv.text('Сумма должна быть не меньше 10 руб. и без копеек');
             }
         };
         sumField.keydown(function () {
-            successDiv.css('display', 'block');
-            successDiv.text('Нажмите Enter для проверки введённой суммы');
+            successDiv.css('display', 'none');
             submitButton.attr('disabled', 'disabled');
         });
-        sumField.change(f);
+        calculateBtn.click(f);
     }
 
 

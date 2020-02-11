@@ -59,7 +59,7 @@ class PaymentController extends \yii\web\Controller
         {
             $curr_date = new DateTime(date("Y-m-d H:i:s"));
 
-            $parameters =[':date'=> $curr_date, ':log_text' => ''];
+            $parameters =[':date'=> $curr_date->format("Y-m-d H:i:s"), ':log_text' => ''];
             $sql = 'INSERT INTO log(date, log_text) VALUES (:date, :log_text)';
             $cmnd = Yii::$app->db->createCommand($sql);
 
@@ -95,7 +95,7 @@ class PaymentController extends \yii\web\Controller
                         $cmnd->execute();
                         $is_correct_amount = $order->amount == $post['AMOUNT'];
                         $is_correct_usd = strcmp(strval($order->usd), $post['us_usd']);
-                        $order_date = new \DateTime($order->date);
+                        $order_date = new DateTime($order->date);
                         $expire_days = intval(Settings::getSetting('expiration_days'));
                         $is_still_valid = $curr_date->diff($order_date)->days < $expire_days;
                         if ($is_correct_amount) {
@@ -150,7 +150,6 @@ class PaymentController extends \yii\web\Controller
                     $cmnd->bindParam(':date', $parameters[':date']);
                     $cmnd->bindParam(':log_text', $parameters[':log_text']);
                     $cmnd->execute();
-                    throw new \Exception("Order has expired!");
                     throw new \Exception("Wrong parameters!");
                 }
             } else {

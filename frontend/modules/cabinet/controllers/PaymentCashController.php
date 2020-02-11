@@ -68,7 +68,7 @@ class PaymentCashController extends Controller
                 if($model->save()) {
                     return [
                         'code' => 200,
-                        'usd' => $usd
+                        'usd' => $usd,
                     ];
                 } else {
                     return [

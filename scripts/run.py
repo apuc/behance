@@ -35,7 +35,7 @@ async def main():
             "--force-device-scale-factor",
             "--ignore-certificate-errors",
             "--no-sandbox",
-            '--proxy-server=socks4://' + hostPort
+            '--proxy-server=http://' + hostPort
         ],
     })
     page = await browser.newPage()

@@ -13,7 +13,7 @@ class ProxyArtcraft
 {
     public static function getRandom()
     {
-        $proxy = file_get_contents('https://proxy.craft-group.xyz/one-proxy');
+        $proxy = file_get_contents('https://proxy.craft-group.xyz/one-proxy?type=HTTP');
         $proxy = json_decode($proxy);
         return "{$proxy->host}:{$proxy->port}";
     }

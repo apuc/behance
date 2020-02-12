@@ -15,7 +15,7 @@ class Config
   {
       return [
         'apiKey'=>'H4Va0PDSnn8UhDxdqtkYNOkFJC8lbcYU',
-        'proxyDriver' => 'common\behance\repositories\ProxyArtcraft.php',
+        'proxyDriver' => 'common\behance\repositories\ProxyArtcraft',
         'userAgentDriver' => 'common\behance\repositories\UserAgentArray'
       ];
   }

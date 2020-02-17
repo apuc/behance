@@ -74,6 +74,9 @@ function enableDisableFields($)
                         $('#div_' + index).css('display', 'block');
                     });
                 $('#div_balance').css('display', 'block');
+                $('.required-fields').css('display', 'block');
+                $('.non-required-fields').css('display', 'block');
+                $('.required-label').css('display', 'block');
                 $('#div_answer').css('display', 'none');
                 is_answer = inputs.includes('answer');
                 $('#div_price').css('display', 'block');

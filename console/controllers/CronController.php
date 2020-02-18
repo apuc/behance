@@ -45,7 +45,7 @@ class CronController extends Controller
                 }
             }
             $transaction->commit();
-        } catch (Exception $e) {
+        } catch (ErrorException $e) {
             $is_done = false;
             $transaction->rollBack();
         }

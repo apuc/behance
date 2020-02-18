@@ -17972,6 +17972,50 @@ text-align:center;
 #div_age, #div_balance, #div_answer, #div_friends, #div_link, #div_msg, #div_gender, #div_price {
   display: none;
 }
+
+#div_age_min, #div_age_max {
+  display: block;
+}
+
+#div_price {
+  margin-top: 10px;
+}
+
+.required-fields {
+  max-width:99%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px dashed grey;
+  display: none;
+  border-radius: 20px;
+}
+
+.non-required-fields {
+  max-width:99%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px dashed grey;
+  display: none;
+  border-radius: 20px;
+}
+
+.required-label {
+  max-width:99%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  padding: 10px;
+  display: none;
+}
+
+.non-required-label {
+  max-width:99%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  padding: 10px;
+  display: none;
+}
 /*-------------------------------------------------------------------*/
 
 /*# sourceMappingURL=maps/style.css.map */

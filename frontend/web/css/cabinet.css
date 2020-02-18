@@ -18008,6 +18008,14 @@ text-align:center;
   padding: 10px;
   display: none;
 }
+
+.non-required-label {
+  max-width:99%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  padding: 10px;
+  display: none;
+}
 /*-------------------------------------------------------------------*/
 
 /*# sourceMappingURL=maps/style.css.map */

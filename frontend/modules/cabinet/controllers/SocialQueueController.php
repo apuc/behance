@@ -19,6 +19,7 @@ use frontend\modules\cabinet\models\SocialQueueSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * SocialQueueController implements the CRUD actions for SocialQueue model.
@@ -345,7 +346,7 @@ class SocialQueueController extends Controller
 
     public function actionCreateGetServices()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        \Yii::$app->response->format = Response::FORMAT_JSON;
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $selected_services = SocialService::find()->where(['id_soc' => $data['id_soc'], 'status' => 1])->all();
@@ -366,7 +367,7 @@ class SocialQueueController extends Controller
 
     public function actionCreateGetFields()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        \Yii::$app->response->format = Response::FORMAT_JSON;
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $service = SocialService::findOne(['type_id' => $data['type_id']]);
@@ -391,7 +392,7 @@ class SocialQueueController extends Controller
 
     public function actionCreateGetAnswers()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        \Yii::$app->response->format = Response::FORMAT_JSON;
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             if (filter_var($data['link'],FILTER_VALIDATE_URL)) {
@@ -424,22 +425,95 @@ class SocialQueueController extends Controller
         ];
     }
 
-    // PJAX for change status
-    public function actionChangeStatus($id)
+    /**
+     * @param $id
+     * @return SocialWrapper
+     */
+    private function getWrapper($id) {
+        $type = SocialService::findOne(['type_id' => $id]);
+        $social = Social::findOne(['id' => $type->id_soc]);
+        $class = "VipIpRuClient\\".ucfirst($social->soc_code).'Wrapper';
+        return new $class(Settings::getSetting('access_token'));
+    }
+
+    // PJAX for refresh
+    public function actionRefresh($id)
     {
         if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            $model = $this->findModel($id);
-            $model->status = $model->status ? 0 : 1;
-            $wrapper = new SocialWrapper(Settings::getSetting('access_token'));
-            $status = $wrapper->getJob($model->link_id);
-            if ($status == 1) {
-                $set_status = $model->status == 1 ? StatusType::ENABLED()->getValue() : StatusType::DISABLED()->getValue();
-                $status = $wrapper->setJobStatus($set_status);
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            try {
+                $model = $this->findModel($id);
+                $wrapper = $this->getWrapper($model->type_id);
+                $status = $wrapper->getJob($model->link_id);
                 if ($status == 1) {
-                    $model->save();
-                    return ['success' => true];
+                    $model->status = $wrapper->getJobStatus()->getValue() == StatusType::ENABLED()->getValue() ? 1 : 0;
+                    $model->balance = $wrapper->getJobBalance();
+                    if ($model->save()) {
+                        return ['success' => true];
+                    }
+                    return ['success' => false, 'error' => 'Не получилось обновить статус, попробуйте повторить позднее'];
                 }
+                return ['success' => false, 'error' => 'Не получилось обновить статус, попробуйте повторить позднее'];
+            }
+            catch (NotFoundHttpException $e) {
+
+            }
+        }
+    }
+
+    // PJAX for turn on
+    public function actionTurnOn($id)
+    {
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            try {
+                $model = $this->findModel($id);
+                $wrapper = $this->getWrapper($model->type_id);
+                $status = $wrapper->getJob($model->link_id);
+                if ($status == 1) {
+                    if ($wrapper->getJobBalance() > 0) {
+                        $model->status = 1;
+                        $status = $wrapper->setJobStatus(StatusType::ENABLED()->getValue());
+                        if ($status == 1 && $model->save()) {
+                            return ['success' => true];
+                        }
+                    } else {
+                        $model->status = $wrapper->getJobStatus()->getValue() == StatusType::ENABLED()->getValue() ? 1 : 0;
+                        $model->balance = $wrapper->getJobBalance();
+                        if ($model->save()) {
+                            return ['success' => true];
+                        }
+                    }
+                    return ['success' => false, 'error' => 'Не получилось изменить статус, попробуйте повторить позднее'];
+                }
+            }
+            catch (NotFoundHttpException $e) {
+
+            }
+        }
+    }
+
+    // PJAX for turn on
+    public function actionTurnOff($id)
+    {
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            try {
+                $model = $this->findModel($id);
+                $wrapper = $this->getWrapper($model->type_id);
+                $status = $wrapper->getJob($model->link_id);
+                if ($status == 1) {
+                    $model->status = 0;
+                    $model->balance = $wrapper->getJobBalance();
+                    $status = $wrapper->setJobStatus(StatusType::DISABLED()->getValue());
+                    if ($status == 1 && $model->save()) {
+                        return ['success' => true];
+                    }
+                    return ['success' => false, 'error' => 'Не получилось изменить статус, попробуйте повторить позднее'];
+                }
+            }
+            catch (NotFoundHttpException $e) {
+
             }
         }
     }

@@ -73,7 +73,7 @@ class SocialQueueForm extends \common\models\SocialQueue
         return $labels;
     }
 
-    private function swapAge() {
+    public function swapAge() {
         if ($this->age_min > $this->age_max) {
             $buff = $this->age_min;
             $this->age_min = $this->age_max;

@@ -69,7 +69,7 @@ $exponent = intval(Settings::getSetting('balance_exponent'));
     </div>
     <div class="required-fields">
         <div class="form-group" id="div_balance">
-            <?= $form->field($model, 'balance')->textInput(['type' => 'number'])->label('Количество просмотров') ?>
+            <?= $form->field($model, 'balance')->textInput(['type' => 'number'])->label('Количество') ?>
         </div>
         <div class="form-group" id="div_link">
             <?= $form->field($model, 'link')->textInput(['placeholder' => 'Введите ссылку на нужный ресурс']) ?>

@@ -105,12 +105,12 @@ $this->registerJs($js);
         'dt_add',
         [
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{turn-on}{turn-off}{refresh}',
+            'template' => '{turn-on} {turn-off} {refresh}',
             'header' => 'Действия',
             'buttons' => [
                 'turn-on' => function ($url, $model) {
                     if ($model->balance > 0 && $model->status == 0) {
-                        return Html::a('<span class="glyphicon glyphicon-play-circle"></span>', false, [
+                        return Html::a('<span class="glyphicon glyphicon-play-circle fa-lg"></span>', false, [
                             'class' => 'pjax-turn-on',
                             'turn-on-url' => $url,
                             'pjax-container' => 'my_pjax',
@@ -122,7 +122,7 @@ $this->registerJs($js);
                 },
                 'turn-off' => function ($url, $model) {
                     if ($model->balance > 0 && $model->status == 1) {
-                        return Html::a('<span class="glyphicon glyphicon-off"></span>', false, [
+                        return Html::a('<span class="glyphicon glyphicon-off fa-lg"></span>', false, [
                             'class' => 'pjax-turn-off',
                             'turn-off-url' => $url,
                             'pjax-container' => 'my_pjax',
@@ -134,7 +134,7 @@ $this->registerJs($js);
                 },
                 'refresh' => function ($url, $model) {
                     if ($model->balance > 0) {
-                        return Html::a('<span class="glyphicon glyphicon-refresh"></span>', false, [
+                        return Html::a('<span class="glyphicon glyphicon-refresh fa-lg"></span>', false, [
                             'class' => 'pjax-refresh',
                             'refresh-url' => $url,
                             'pjax-container' => 'my_pjax',

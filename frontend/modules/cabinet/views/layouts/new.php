@@ -214,7 +214,7 @@ CabinetAsset::register($this);
                 <?php  endif; ?>
                 <?php if(!empty($balance_cash)): ?>
                 <div class="balance-block">
-                    <span class="mdc-toolbar__menu-icon">Баланс, $:&nbsp;<span id="balance_cash"><?=$balance_cash->amount / $exponent ?></span></span>
+                    <span class="mdc-toolbar__menu-icon">Баланс:&nbsp;<span id="balance_cash"><?=$balance_cash->amount / $exponent ?></span>$</span>
                 </div>
                 <?php  endif; ?>
             </section>

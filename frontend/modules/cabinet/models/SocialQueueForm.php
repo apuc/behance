@@ -51,6 +51,7 @@ class SocialQueueForm extends \common\models\SocialQueue
                 return empty($model->balance);
             }, 'message' => 'Не должен быть пустым или содержать что-то кроме цифр'
         ];
+        $rules[] = [['age_min'], 'swapAge'];
         $rules[] = [['link'], 'url'];
         $rules[] = [['msg'], 'string', 'max' => 140];
         $rules[] = [['gender'], 'string', 'max' => 1];
@@ -70,5 +71,13 @@ class SocialQueueForm extends \common\models\SocialQueue
         $labels['age_max'] = Yii::t('social', 'age_max');
         $labels['gender'] = Yii::t('social', 'gender');
         return $labels;
+    }
+
+    private function swapAge() {
+        if ($this->age_min > $this->age_max) {
+            $buff = $this->age_min;
+            $this->age_min = $this->age_max;
+            $this->age_max = $buff;
+        }
     }
 }

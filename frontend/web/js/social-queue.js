@@ -3,6 +3,17 @@
 var price = 0;
 var is_answer = false;
 
+function disableHideFields() {
+    $('#div_age').css('display', 'none');
+    $('#div_answer').css('display', 'none');
+    $('#div_friends').css('display', 'none');
+    $('#div_link').css('display', 'none');
+    $('#socialqueueform-link').val(null);
+    $('#div_msg').css('display', 'none');
+    $('#socialqueueform-msg').val(null);
+    $('#div_gender').css('display', 'none');
+}
+
 function ajaxChangeData($)
 {
     let url = window.location.origin + '/cabinet/social-queue/create-get-services';
@@ -27,14 +38,7 @@ function ajaxChangeData($)
                 $("#socialqueueform-type_id")[0].selectedIndex = 0;
                 $("#socialqueueform-type_id").trigger('change.select2');
                 if (data['data'].length == 0) {
-                    $('#div_age').css('display', 'none');
-                    $('#div_answer').css('display', 'none');
-                    $('#div_friends').css('display', 'none');
-                    $('#div_link').css('display', 'none');
-                    $('#socialqueueform-link').val(null);
-                    $('#div_msg').css('display', 'none');
-                    $('#socialqueueform-msg').val(null);
-                    $('#div_gender').css('display', 'none');
+                    disableHideFields();
                     $('#success_button').attr('disabled', 'disabled');
                     $('#div_balance').css('display', 'none');
                     $('#div_price').css('display', 'none');
@@ -61,23 +65,23 @@ function enableDisableFields($)
             if (data.code == 200) {
                 let inputs = data.inputs;
                 price = data.price;
-                $('#div_age').css('display', 'none');
-                $('#div_answer').css('display', 'none');
-                $('#div_friends').css('display', 'none');
-                $('#div_link').css('display', 'none');
-                $('#socialqueueform-link').val(null);
-                $('#div_msg').css('display', 'none');
-                $('#socialqueueform-msg').val(null);
-                $('#div_gender').css('display', 'none');
+                disableHideFields();
                 $.each(inputs,
                     function (item, index) {
                         $('#div_' + index).css('display', 'block');
                     });
-                $('#div_balance').css('display', 'block');
+                $('.required-label').css('display', 'block');
                 $('.required-fields').css('display', 'block');
                 $('.non-required-fields').css('display', 'block');
-                $('.required-label').css('display', 'block');
-                $('#div_answer').css('display', 'none');
+                $('.non-required-label').css('display', 'block');
+                if (inputs.length === 1) {
+                    $('.non-required-fields').css('display', 'none');
+                    $('.non-required-label').css('display', 'none');
+                } else {
+
+                }
+                $('#div_balance').css('display', 'block');
+
                 is_answer = inputs.includes('answer');
                 $('#div_price').css('display', 'block');
                 calculatePrice($);

@@ -91,7 +91,7 @@ $exponent = intval(Settings::getSetting('balance_exponent'));
         </div>
     </div>
 
-    <div class="form-group required-label">
+    <div class="form-group non-required-label">
         <h3 class='font-italic' id="not_required_text">Необязательные поля</h3>
     </div>
     <div class="non-required-fields">

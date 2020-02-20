@@ -35,6 +35,8 @@ class m200131_085215_create_socials_services extends Migration
             'price' => $this->bigInteger()->comment('dollars*(10^6) per 1000')
         ]);
 
+        $this->insert('settings', ['key' => 'access_token', 'value' => '2146559.UQmvLamzbPGFUqKsuhEZSwO2v9BKcbuv']);
+
         $request = new Request();
         $request->setLink("https://api.vipip.ru/v0.1/social/tarifflist");
         $request->setParam('access_token', Settings::getSetting('access_token'));

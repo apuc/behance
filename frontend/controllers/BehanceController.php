@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use yii;
 use common\models\Settings;
 use common\models\Works;
 use yii\db\StaleObjectException;
@@ -46,5 +47,42 @@ class BehanceController extends Controller
             return json_encode(1);
         }
         return json_encode(-1);
+    }
+
+    public function actionMerge($api_key)
+    {
+        $rows = (new \yii\db\Query())
+            ->select(['queue.id', 'work_id', 'sum(likes_work) as likes_work', 'sum(views_work) as views_work', 'url'])
+            ->from('queue')
+            ->join('INNER JOIN', 'works', 'works.id = queue.work_id')
+            ->groupBy('work_id')
+            ->orderBy('id')
+            ->all();
+        $transaction = Yii::$app->db->getTransaction();
+        if ($transaction !== null) {
+            $transaction = null;
+        }
+        else {
+            $transaction = Yii::$app->db->beginTransaction();
+        }
+        foreach ($rows as $row) {
+            $queue = Queue::find()->where("work_id = {$row['work_id']}")->all();
+            foreach ($queue as $item) {
+                /** @var $item Queue **/
+                if ($item->id == $row['id']) {
+                    $item->likes_work = $row['likes_work'];
+                    $item->views_work = $row['views_work'];
+                    $item->save();
+                } else {
+                    try {
+                        $item->delete();
+                    } catch (StaleObjectException $e) {
+                    } catch (\Throwable $e) {
+                        $transaction->rollback();
+                    }
+                }
+            }
+        }
+        $transaction->commit();
     }
 }

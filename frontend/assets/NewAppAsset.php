@@ -7,20 +7,21 @@ use yii\web\AssetBundle;
 /**
  * Main frontend application asset bundle.
  */
-class AppAsset extends AssetBundle
+class NewAppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        '/css/bootstrap-grid.min.css',
-        '/css/slick.css',
-        '/css/font-awesome.css',
-        '/css/secret-styles.css'
+        'css/bootstrap-grid.min.css',
+        'css/service.css',
+        'css/font-awesome.css',
+        'css/secret-styles.css',
+        'css/styles.css'
     ];
     public $js = [
-        '/js/slick.min.js',
-        '/js/wow.min.js',
-        '/js/script.js',
+        'js/slick.min.js',
+        'js/wow.min.js',
+        'js/script.js',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
     ];
     public $depends = [

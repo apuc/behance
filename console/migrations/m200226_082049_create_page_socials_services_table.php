@@ -17,9 +17,9 @@ class m200226_082049_create_page_socials_services_table extends Migration
             'id_social' => $this->integer()->unsigned(),
             'service_title' => $this->string(),
             'service_description' => $this->text(), // mb html-formatted?
-            'service_seo' => $this->string(),
-            'service_page_link' => $this->string(),
-            'service_order_link' => $this->string()
+            'service_seo' => $this->text(),
+            'service_page_link' => $this->string()->unique(),
+            'service_order_link' => $this->text()
         ]);
         $this->addForeignKey('fk_socials_services_socials', 'page_socials_services', 'id_social',
                                                                 'page_socials', 'id', 'CASCADE', 'CASCADE');

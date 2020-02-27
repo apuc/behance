@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3eb6f8c2998b649c60a4c94b200515c4",
+    "content-hash": "f114319abc2a19fbf42c065cb863c15d",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -60,8 +60,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/twbs/bootstrap/zipball/68b0d231a13201eb14acd3dc84e51543d16e5f7e",
-                "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e",
-                "shasum": null
+                "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "require": {
                 "bower-asset/jquery": ">=1.9.1,<4.0"
@@ -82,8 +81,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/fancyapps/fancyBox/zipball/780d933e4ecd696233135081c6ad663cac220467",
-                "reference": "780d933e4ecd696233135081c6ad663cac220467",
-                "shasum": null
+                "reference": "780d933e4ecd696233135081c6ad663cac220467"
             },
             "require": {
                 "bower-asset/jquery": ">=1.10",
@@ -92,23 +90,24 @@
             "type": "bower-asset",
             "license": [
                 "GPLv3"
-            ]
+            ],
+            "time": "2017-11-27T13:15:23+00:00"
         },
         {
             "name": "bower-asset/font-awesome",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "d8db3d032d22e7a5e21f3b40905b7867be19bb02"
+                "url": "git@github.com:FortAwesome/Font-Awesome.git",
+                "reference": "0d1f27efb836eb2ab994ba37221849ed64a73e5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/d8db3d032d22e7a5e21f3b40905b7867be19bb02",
-                "reference": "d8db3d032d22e7a5e21f3b40905b7867be19bb02",
-                "shasum": null
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/0d1f27efb836eb2ab994ba37221849ed64a73e5c",
+                "reference": "0d1f27efb836eb2ab994ba37221849ed64a73e5c"
             },
-            "type": "bower-asset"
+            "type": "bower-asset",
+            "time": "2020-02-05T14:36:40+00:00"
         },
         {
             "name": "bower-asset/inputmask",
@@ -121,8 +120,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/5e670ad62f50c738388d4dcec78d2888505ad77b",
-                "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b",
-                "shasum": null
+                "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "require": {
                 "bower-asset/jquery": ">=1.7"
@@ -137,14 +135,13 @@
             "version": "3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jquery/jquery-dist.git",
+                "url": "https://github.com/jquery/jquery-dist.git",
                 "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
-                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
-                "shasum": null
+                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
             },
             "type": "bower-asset",
             "license": [
@@ -162,13 +159,13 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/jquery/jquery-mousewheel/zipball/c559933f485ae34fed561b042e87abd245858c24",
-                "reference": "c559933f485ae34fed561b042e87abd245858c24",
-                "shasum": null
+                "reference": "c559933f485ae34fed561b042e87abd245858c24"
             },
             "require": {
                 "bower-asset/jquery": ">=1.2.2"
             },
-            "type": "bower-asset"
+            "type": "bower-asset",
+            "time": "2014-09-06T14:29:29+00:00"
         },
         {
             "name": "bower-asset/jquery-ui",
@@ -181,8 +178,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/components/jqueryui/zipball/44ecf3794cc56b65954cc19737234a3119d036cc",
-                "reference": "44ecf3794cc56b65954cc19737234a3119d036cc",
-                "shasum": null
+                "reference": "44ecf3794cc56b65954cc19737234a3119d036cc"
             },
             "require": {
                 "bower-asset/jquery": ">=1.6"
@@ -197,14 +193,13 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bestiejs/punycode.js.git",
+                "url": "git@github.com:bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "shasum": null
+                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "type": "bower-asset"
         },
@@ -219,8 +214,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/t4t5/sweetalert/zipball/3b9d8eb90268e0b1f8f58b2eba240631df0ad18f",
-                "reference": "3b9d8eb90268e0b1f8f58b2eba240631df0ad18f",
-                "shasum": null
+                "reference": "3b9d8eb90268e0b1f8f58b2eba240631df0ad18f"
             },
             "type": "bower-asset",
             "license": [
@@ -238,8 +232,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/aef7b953107264f00234902a3880eb50dafc48be",
-                "reference": "aef7b953107264f00234902a3880eb50dafc48be",
-                "shasum": null
+                "reference": "aef7b953107264f00234902a3880eb50dafc48be"
             },
             "require": {
                 "bower-asset/jquery": ">=1.8"
@@ -255,12 +248,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "eeb1bf622e80f337479e00a5db94c56e7cf1326b"
+                "reference": "2b2461bed9e15305486319ee552bafca75d1cdaa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/eeb1bf622e80f337479e00a5db94c56e7cf1326b",
-                "reference": "eeb1bf622e80f337479e00a5db94c56e7cf1326b",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/2b2461bed9e15305486319ee552bafca75d1cdaa",
+                "reference": "2b2461bed9e15305486319ee552bafca75d1cdaa",
                 "shasum": ""
             },
             "require": {
@@ -307,7 +300,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2018-12-10T09:41:35+00:00"
+            "time": "2020-02-26T01:55:18+00:00"
         },
         {
             "name": "cebe/yii2-gravatar",
@@ -455,19 +448,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "db47018871229c8287a31d1520c62ce400ddcae8"
+                "reference": "ec953a1b157db060fc9576a6f6b6b1865a09aac9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/db47018871229c8287a31d1520c62ce400ddcae8",
-                "reference": "db47018871229c8287a31d1520c62ce400ddcae8",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/ec953a1b157db060fc9576a6f6b6b1865a09aac9",
+                "reference": "ec953a1b157db060fc9576a6f6b6b1865a09aac9",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^6.0",
+                "doctrine/coding-standard": "^7.0.2",
                 "phpstan/phpstan": "^0.11.8",
                 "phpunit/phpunit": "^8.2"
             },
@@ -509,7 +502,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-01-18T11:58:20+00:00"
+            "time": "2020-02-06T21:05:57+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -517,12 +510,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "e834eea5306d85d67de5a05db5882911d5b29357"
+                "reference": "ade6887fd9bd74177769645ab5c474824f8a418a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/e834eea5306d85d67de5a05db5882911d5b29357",
-                "reference": "e834eea5306d85d67de5a05db5882911d5b29357",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ade6887fd9bd74177769645ab5c474824f8a418a",
+                "reference": "ade6887fd9bd74177769645ab5c474824f8a418a",
                 "shasum": ""
             },
             "require": {
@@ -567,7 +560,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2020-01-20T21:40:59+00:00"
+            "time": "2020-02-13T22:36:52+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -868,16 +861,16 @@
         },
         {
             "name": "myclabs/php-enum",
-            "version": "1.7.2",
+            "version": "1.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/php-enum.git",
-                "reference": "45f01adf6922df6082bcda36619deb466e826acf"
+                "reference": "5f36467c7a87e20fbdc51e524fd8f9d1de80187c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/45f01adf6922df6082bcda36619deb466e826acf",
-                "reference": "45f01adf6922df6082bcda36619deb466e826acf",
+                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/5f36467c7a87e20fbdc51e524fd8f9d1de80187c",
+                "reference": "5f36467c7a87e20fbdc51e524fd8f9d1de80187c",
                 "shasum": ""
             },
             "require": {
@@ -885,8 +878,9 @@
                 "php": ">=7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
-                "squizlabs/php_codesniffer": "1.*"
+                "phpunit/phpunit": "^7",
+                "squizlabs/php_codesniffer": "1.*",
+                "vimeo/psalm": "^3.8"
             },
             "type": "library",
             "autoload": {
@@ -909,7 +903,7 @@
             "keywords": [
                 "enum"
             ],
-            "time": "2019-08-19T13:53:00+00:00"
+            "time": "2020-02-14T08:15:52+00:00"
         },
         {
             "name": "phpfastcache/phpfastcache",
@@ -1202,12 +1196,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "c8a8e91d962e071477f9ca9d9bfdbc10811244f0"
+                "reference": "178a064fa5a0faad694bc50b45773345ddf9d260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/c8a8e91d962e071477f9ca9d9bfdbc10811244f0",
-                "reference": "c8a8e91d962e071477f9ca9d9bfdbc10811244f0",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/178a064fa5a0faad694bc50b45773345ddf9d260",
+                "reference": "178a064fa5a0faad694bc50b45773345ddf9d260",
                 "shasum": ""
             },
             "require": {
@@ -1252,20 +1246,20 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2020-02-02T05:19:27+00:00"
+            "time": "2020-02-26T09:11:02+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "dev-master",
+            "version": "v6.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "6484964bfa7ce98cb3683726963e4dee0ac62aac"
+                "reference": "149cfdf118b169f7840bbe3ef0d4bc795d1780c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/6484964bfa7ce98cb3683726963e4dee0ac62aac",
-                "reference": "6484964bfa7ce98cb3683726963e4dee0ac62aac",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/149cfdf118b169f7840bbe3ef0d4bc795d1780c9",
+                "reference": "149cfdf118b169f7840bbe3ef0d4bc795d1780c9",
                 "shasum": ""
             },
             "require": {
@@ -1280,7 +1274,8 @@
                 "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
             },
             "suggest": {
-                "ext-intl": "Needed to support internationalized email addresses"
+                "ext-intl": "Needed to support internationalized email addresses",
+                "true/punycode": "Needed to support internationalized email addresses, if ext-intl is not installed"
             },
             "type": "library",
             "extra": {
@@ -1313,7 +1308,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2020-01-01T17:13:06+00:00"
+            "time": "2019-11-12T09:31:26+00:00"
         },
         {
             "name": "symfony/polyfill-iconv",
@@ -1646,12 +1641,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "75cd7c7db9d70c8208f6a021e9f2f48ddf2aec9c"
+                "reference": "1a55ad10e7ed30956437c86a4a23eb30e5167168"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/75cd7c7db9d70c8208f6a021e9f2f48ddf2aec9c",
-                "reference": "75cd7c7db9d70c8208f6a021e9f2f48ddf2aec9c",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/1a55ad10e7ed30956437c86a4a23eb30e5167168",
+                "reference": "1a55ad10e7ed30956437c86a4a23eb30e5167168",
                 "shasum": ""
             },
             "require": {
@@ -1738,7 +1733,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2020-02-04T08:56:35+00:00"
+            "time": "2020-02-23T13:02:27+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -2121,6 +2116,7 @@
                 "functional testing",
                 "unit testing"
             ],
+            "abandoned": true,
             "time": "2019-04-24T11:36:34+00:00"
         },
         {
@@ -2351,12 +2347,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "e193ff330a0f28b5e5f65ed3d804f5e2a89376e3"
+                "reference": "c73b502efd02beb2602500aa36793fb405e383ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/e193ff330a0f28b5e5f65ed3d804f5e2a89376e3",
-                "reference": "e193ff330a0f28b5e5f65ed3d804f5e2a89376e3",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/c73b502efd02beb2602500aa36793fb405e383ac",
+                "reference": "c73b502efd02beb2602500aa36793fb405e383ac",
                 "shasum": ""
             },
             "require": {
@@ -2372,7 +2368,7 @@
                 "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
             },
             "suggest": {
-                "zendframework/zend-httphandlerrunner": "Emit PSR-7 responses"
+                "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
             "type": "library",
             "extra": {
@@ -2414,7 +2410,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2020-02-04T14:54:51+00:00"
+            "time": "2020-02-12T23:13:46+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2685,12 +2681,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "da71602ae92163cfa94f5e5dbdd969629e060a05"
+                "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/da71602ae92163cfa94f5e5dbdd969629e060a05",
-                "reference": "da71602ae92163cfa94f5e5dbdd969629e060a05",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
+                "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
                 "shasum": ""
             },
             "require": {
@@ -2730,7 +2726,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2020-02-02T19:24:25+00:00"
+            "time": "2020-02-22T12:28:44+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -2738,12 +2734,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "0708a5714a03b5b27a65786543503d9d3ee50e07"
+                "reference": "7462d5f123dfc080dfdf26897032a6513644fc95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/0708a5714a03b5b27a65786543503d9d3ee50e07",
-                "reference": "0708a5714a03b5b27a65786543503d9d3ee50e07",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/7462d5f123dfc080dfdf26897032a6513644fc95",
+                "reference": "7462d5f123dfc080dfdf26897032a6513644fc95",
                 "shasum": ""
             },
             "require": {
@@ -2776,7 +2772,7 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
-            "time": "2020-02-02T19:26:52+00:00"
+            "time": "2020-02-18T18:59:58+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -3976,12 +3972,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "6a0e9977e6b4b46747808283a33e70fc4c34718f"
+                "reference": "090ce406505149d6852a7c03b0346dec3b8cf612"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/6a0e9977e6b4b46747808283a33e70fc4c34718f",
-                "reference": "6a0e9977e6b4b46747808283a33e70fc4c34718f",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/090ce406505149d6852a7c03b0346dec3b8cf612",
+                "reference": "090ce406505149d6852a7c03b0346dec3b8cf612",
                 "shasum": ""
             },
             "require": {
@@ -4027,7 +4023,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2020-02-04T09:32:40+00:00"
+            "time": "2020-02-23T10:00:59+00:00"
         },
         {
             "name": "symfony/console",
@@ -4035,12 +4031,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "54e1cf9d79b3f65f36c68dec504e2af358446342"
+                "reference": "4fa15ae7be74e53f6ec8c83ed403b97e23b665e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/54e1cf9d79b3f65f36c68dec504e2af358446342",
-                "reference": "54e1cf9d79b3f65f36c68dec504e2af358446342",
+                "url": "https://api.github.com/repos/symfony/console/zipball/4fa15ae7be74e53f6ec8c83ed403b97e23b665e9",
+                "reference": "4fa15ae7be74e53f6ec8c83ed403b97e23b665e9",
                 "shasum": ""
             },
             "require": {
@@ -4103,7 +4099,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2020-02-04T09:32:40+00:00"
+            "time": "2020-02-24T13:10:00+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -4353,12 +4349,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "d026b07e279342e6233620864927869e3d2b462c"
+                "reference": "ea69c129aed9fdeca781d4b77eb20b62cf5d5357"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/d026b07e279342e6233620864927869e3d2b462c",
-                "reference": "d026b07e279342e6233620864927869e3d2b462c",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/ea69c129aed9fdeca781d4b77eb20b62cf5d5357",
+                "reference": "ea69c129aed9fdeca781d4b77eb20b62cf5d5357",
                 "shasum": ""
             },
             "require": {
@@ -4394,7 +4390,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2020-02-04T09:32:40+00:00"
+            "time": "2020-02-14T07:42:58+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -4671,16 +4667,16 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "573381c0a64f155a0d9a23f4b0c797194805b925"
+                "reference": "aed98a490f9a8f78468232db345ab9cf606cf598"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/573381c0a64f155a0d9a23f4b0c797194805b925",
-                "reference": "573381c0a64f155a0d9a23f4b0c797194805b925",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/aed98a490f9a8f78468232db345ab9cf606cf598",
+                "reference": "aed98a490f9a8f78468232db345ab9cf606cf598",
                 "shasum": ""
             },
             "require": {
@@ -4715,7 +4711,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2019-11-24T13:36:37+00:00"
+            "time": "2020-02-14T12:15:55+00:00"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -4831,12 +4827,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "d6b455fc34f35d17f5f0be26d0c64c87d0d68cb8"
+                "reference": "e5d741a66a8255042074d1286581b88558b5d510"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/d6b455fc34f35d17f5f0be26d0c64c87d0d68cb8",
-                "reference": "d6b455fc34f35d17f5f0be26d0c64c87d0d68cb8",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/e5d741a66a8255042074d1286581b88558b5d510",
+                "reference": "e5d741a66a8255042074d1286581b88558b5d510",
                 "shasum": ""
             },
             "require": {
@@ -4874,7 +4870,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2020-01-17T13:33:55+00:00"
+            "time": "2020-02-22T14:08:57+00:00"
         }
     ],
     "aliases": [],
@@ -4883,6 +4879,7 @@
         "bower-asset/font-awesome": 20,
         "kartik-v/yii2-widget-select2": 20,
         "xtarantulz/yii2-input-img-preview": 20,
+        "mihaildev/yii2-ckeditor": 20,
         "craft-group/vipipru_client": 20
     },
     "prefer-stable": false,

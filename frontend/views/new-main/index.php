@@ -63,7 +63,6 @@ if($seo)
                   </div>
 
                   <div class="about__main-items">
-                      <!-- TODO: proper insert from DB -->
                       <?php
                         foreach ($socials as $social) { ?>
                             <div class="item">

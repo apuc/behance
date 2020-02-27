@@ -11,6 +11,7 @@ use Yii;
  * @property string|null $social_title
  * @property string|null $social_icon
  * @property string|null $social_css
+ * @property int|null $enabled
  *
  * @property PageSocialsServices[] $pageSocialsServices
  */
@@ -30,7 +31,9 @@ class PageSocials extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['social_title', 'social_icon', 'social_css'], 'string', 'max' => 255],
+            [['social_icon', 'social_css'], 'string'],
+            [['social_title'], 'string', 'max' => 255],
+            [['enabled'], 'integer']
         ];
     }
 
@@ -40,10 +43,11 @@ class PageSocials extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'social_title' => 'Social Title',
-            'social_icon' => 'Social Icon',
-            'social_css' => 'Social Css',
+            'id' => Yii::t('pagesocials','ID'),
+            'social_title' => Yii::t('pagesocials','Social Title'),
+            'social_icon' => Yii::t('pagesocials','Social Icon'),
+            'social_css' => Yii::t('pagesocials','Social Css'),
+            'enabled' => Yii::t('pagesocials','Enabled'),
         ];
     }
 
@@ -54,6 +58,6 @@ class PageSocials extends \yii\db\ActiveRecord
      */
     public function getPageSocialsServices()
     {
-        return $this->hasMany(PageSocialsServices::className(), ['id_social' => 'id']);
+        return $this->hasMany(PageSocialsServices::className(), ['id_social' => 'id'])->where(['enabled' => 1]);
     }
 }

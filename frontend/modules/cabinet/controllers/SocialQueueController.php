@@ -57,8 +57,6 @@ class SocialQueueController extends Controller
             $services[$service->type_id] = $service->title;
         }
 
-        $queue = SocialQueue::find()->all();
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

@@ -14,9 +14,6 @@ use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 use common\widgets\Alert;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 NewAppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

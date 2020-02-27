@@ -97,7 +97,7 @@ class NewMainController extends Controller
         $seo = Settings::findOne(['key'=>'seo_main_page']);
         $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
 
-        $page_socials = PageSocials::find()->all();
+        $page_socials = PageSocials::find()->where(['enabled' => 1])->all();
 
         return $this->render('index', ['reviews' => $reviews, 'cases' => $cases,
             'seo'=>$seo, 'socials' => $page_socials]);

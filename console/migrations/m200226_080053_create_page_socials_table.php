@@ -15,8 +15,8 @@ class m200226_080053_create_page_socials_table extends Migration
         $this->createTable('{{%page_socials}}', [
             'id' => $this->primaryKey()->unsigned(),
             'social_title' => $this->string(),
-            'social_icon' => $this->string(),
-            'social_css' => $this->string(),
+            'social_icon' => $this->text(),
+            'social_css' => $this->text(),
         ]);
     }
 

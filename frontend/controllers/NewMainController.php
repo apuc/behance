@@ -8,8 +8,10 @@ use common\models\Callback;
 use common\models\Cases;
 use common\models\History;
 use common\models\PageSocials;
+use common\models\PageSocialsServices;
 use common\models\Reviews;
 use common\models\Settings;
+use common\models\Social;
 use common\models\User;
 use common\clases\SendMail;
 use common\services\AuthService;
@@ -101,6 +103,19 @@ class NewMainController extends Controller
 
         return $this->render('index', ['reviews' => $reviews, 'cases' => $cases,
             'seo'=>$seo, 'socials' => $page_socials]);
+    }
+
+    public function actionSocial($slug = null) {
+        /** @var $page_service PageSocialsServices */
+        $page_service = PageSocialsServices::find()->where(['service_page_link' => $slug])->one();
+        if (!$page_service) {
+            throw new \yii\web\NotFoundHttpException('404');
+        }
+        $social = Social::find()->where(['id' => $page_service->id_social])->one();
+        return $this->render('page-social-service', [
+            "service" => $page_service,
+            "social" => $social
+        ]);
     }
 
 

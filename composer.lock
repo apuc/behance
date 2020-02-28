@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f114319abc2a19fbf42c065cb863c15d",
+    "content-hash": "39dc7f9eaf245ba727a8708d5e65a604",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -4878,6 +4878,7 @@
     "stability-flags": {
         "bower-asset/font-awesome": 20,
         "kartik-v/yii2-widget-select2": 20,
+        "mihaildev/yii2-elfinder": 20,
         "xtarantulz/yii2-input-img-preview": 20,
         "mihaildev/yii2-ckeditor": 20,
         "craft-group/vipipru_client": 20

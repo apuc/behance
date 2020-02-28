@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model common\models\PageSocialsServices */
 /* @var $socials common\models\PageSocials[] */
 
-$this->title = 'Create Page Socials Services';
-$this->params['breadcrumbs'][] = ['label' => 'Page Socials Services', 'url' => ['index']];
+$this->title = 'Создать услугу соц. сети';
+$this->params['breadcrumbs'][] = ['label' => 'Услуги соц. сетей', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-socials-services-create">

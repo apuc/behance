@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\PageSocials */
 
-$this->title = 'Update Page Socials: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Page Socials', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Обновить соц.сеть: ' . $model->social_title;
+$this->params['breadcrumbs'][] = ['label' => 'Соц. сети', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->social_title, 'url' => ['view', 'id' => $model->social_title]];
+$this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="page-socials-update">
 

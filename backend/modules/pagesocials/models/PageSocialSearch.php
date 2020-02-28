@@ -18,7 +18,7 @@ class PageSocialSearch extends PageSocials
     {
         return [
             [['id', 'enabled'], 'integer'],
-            [['social_title', 'social_icon', 'social_css'], 'safe'],
+            [['social_title', 'social_css'], 'safe'],
         ];
     }
 

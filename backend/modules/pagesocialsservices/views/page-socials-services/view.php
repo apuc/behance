@@ -5,9 +5,10 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\PageSocialsServices */
+/* @var $social common\models\PageSocials */
 
 $this->title = $model->service_title;
-$this->params['breadcrumbs'][] = ['label' => 'Page Socials Services', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Просмотр услуги', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Точно хотите удалить?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,8 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'id_social',
+            [
+                'attribute' => 'id_social',
+                'value' => function ($data) use ($social) {
+                    return $social->social_title;
+                }
+            ],
             'service_title',
             'service_description:ntext',
             'service_seo',

@@ -3,6 +3,18 @@
 var price = 0;
 var is_answer = false;
 
+$(document).ready(async function ($) {
+    let id_soc = $('#socialqueueform-social').val();
+    let type_id = $('#socialqueueform-type_id').val();
+    if (id_soc != "") {
+        ajaxChangeData($, false);
+        if (type_id != "") {
+            $("#socialqueueform-type_id").val(type_id);
+            enableDisableFields($);
+        }
+    }
+});
+
 function disableHideFields() {
     $('#div_age').css('display', 'none');
     $('#div_answer').css('display', 'none');
@@ -14,7 +26,7 @@ function disableHideFields() {
     $('#div_gender').css('display', 'none');
 }
 
-function ajaxChangeData($)
+function ajaxChangeData($, sync=true)
 {
     let url = window.location.origin + '/cabinet/social-queue/create-get-services';
     let csrf = $('meta[name=csrf-token]').attr("content");
@@ -36,7 +48,7 @@ function ajaxChangeData($)
                     }
                 );
                 $("#socialqueueform-type_id")[0].selectedIndex = 0;
-                $("#socialqueueform-type_id").trigger('change.select2');
+                enableDisableFields($);
                 if (data['data'].length == 0) {
                     disableHideFields();
                     $('#success_button').attr('disabled', 'disabled');
@@ -44,7 +56,8 @@ function ajaxChangeData($)
                     $('#div_price').css('display', 'none');
                 }
             }
-        }
+        },
+        async: sync
     });
 }
 

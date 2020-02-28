@@ -1,7 +1,10 @@
 <?php
 
+use mihaildev\elfinder\InputFile;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use mihaildev\elfinder\ElFinder;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\PageSocials */
@@ -14,16 +17,26 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'social_title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'social_icon')->textInput() ?>
+    <?= $form->field($model, 'social_icon')->widget(InputFile::className(), [
+        'language'      => 'ru',
+        'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder,
+        'filter'        => 'image',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
+        'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
+        'options'       => ['class' => 'form-control'],
+        'buttonOptions' => ['class' => 'btn btn-default'],
+        'multiple'      => false       // возможность выбора нескольких файлов
+    ]) ?>
 
     <?= $form->field($model, 'social_css')->textInput() ?>
 
     <?= $form->field($model, 'enabled')->checkbox() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+
+    <?= var_dump(Yii::$aliases) ?>
 
 </div>

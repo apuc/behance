@@ -55,8 +55,11 @@ class PageSocialsServicesController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $social = PageSocials::find()->where(['id' => $model->id_social])->one();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'social' => $social,
         ]);
     }
 
@@ -121,8 +124,10 @@ class PageSocialsServicesController extends Controller
             $model->service_seo_descr = $seo->descr;
             $model->service_seo_keywords = $seo->keywords;
         }
+        $socials = $this->getPageSocials();
         return $this->render('update', [
             'model' => $model,
+            'socials' => $socials
         ]);
     }
 

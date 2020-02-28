@@ -4,6 +4,7 @@ use kartik\select2\Select2;
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use mihaildev\elfinder\ElFinder;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\PageSocialsServices */
@@ -26,7 +27,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'service_title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'service_description')->widget(CKEditor::className(),['editorOptions' => ['preset' => 'full', 'inline' => false,]]); ?>
+    <?= $form->field($model, 'service_description')->widget(CKEditor::className(),
+        ['editorOptions' => ElFinder::ckeditorOptions('elfinder', ['preset' => 'full', 'inline' => false,])]) ?>
 
     <?= $form->field($model, 'service_seo_title')->textInput()->label('SEO название') ?>
     <?= $form->field($model, 'service_seo_descr')->textInput()->label('SEO описание') ?>

@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $socials PageSocialsServices[] */
 
-$this->title = 'Page Socials Services';
+$this->title = 'Услуги соц. сетей';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-socials-services-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Page Socials Services', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать услугу соц. сети', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id',
             [
                 'attribute' => 'id_social',
                 'value' => function ($data) use ($socials) {
@@ -36,8 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => $socials,
             ],
             'service_title',
-            'service_description:ntext',
-            'service_seo',
             [
                 'attribute' => 'enabled',
                 'value' => function ($data) {

@@ -22,7 +22,7 @@
         "bower-asset/font-awesome": "dev-master",
         "kartik-v/yii2-widget-select2": "^2.1@dev",
         "yii2mod/yii2-sweet-alert": "*",
-        "mihaildev/yii2-elfinder": "*",
+        "mihaildev/yii2-elfinder": "dev-master",
         "xtarantulz/yii2-input-img-preview": "dev-master",
         "mihaildev/yii2-ckeditor": "dev-master",
         "craft-group/vipipru_client": "dev-master",

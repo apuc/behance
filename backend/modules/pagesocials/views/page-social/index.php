@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\modules\pagesocials\models\PageSocialSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Page Socials';
+$this->title = 'Соц. сети';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-socials-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Page Socials', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать соц. сеть', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,10 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'social_title',
-            'social_icon',
+            [
+                'attribute'=>'social_icon',
+                'format'=>'raw',
+                'value'=>function($data){
+                    return Html::img($data->social_icon,['width'=>'150','height'=>'150']);
+                }
+            ],
             'social_css',
             [
                 'attribute' => 'enabled',

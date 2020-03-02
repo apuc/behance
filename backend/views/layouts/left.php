@@ -49,6 +49,7 @@ if($callback_count == 0)
                     ['label' => Yii::t('reviews', 'Reviews'), 'icon' => 'fas fa-comments', 'url' => ['/reviews/reviews']],
                     ['label' => 'Соц. сети', 'icon' => 'fas fa-share-square', 'url' => ['/page-socials/page-social']],
                     ['label' => 'Услуги в соц. сети', 'icon' => 'fas fa-share-square', 'url' => ['/page-socials-services/page-socials-services']],
+                    ['label' => 'Услуги VipIp', 'icon' => 'fas fa-share-alt', 'url' => ['/vipip-socials']],
                    // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                    // ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
 //                    [

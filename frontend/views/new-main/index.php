@@ -74,7 +74,7 @@ if($seo)
                                 <div class="item-description">
                                     <?php
                                     foreach ($social->pageSocialsServices as $service) { ?>
-                                        <p><a href="<?= Url::to(['new-main/social'.$service->service_page_link]) ?>"><?= $service->service_title ?></a></p>
+                                        <p><a href="<?= Url::to(['new-main/social/'.$service->service_page_link]) ?>"><?= $service->service_title ?></a></p>
                                     <?php } ?>
                                 </div>
                             </div>

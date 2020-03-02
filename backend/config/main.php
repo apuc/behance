@@ -51,6 +51,9 @@ return [
         'page-socials-services' => [
             'class' => 'backend\modules\pagesocialsservices\PageSocialsServices',
         ],
+        'vipip-socials' => [
+            'class' => 'backend\modules\vipipsocials\VipipSocials',
+        ],
     ],
     'components' =>  [
         'mailer' => [

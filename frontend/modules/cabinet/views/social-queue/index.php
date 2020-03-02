@@ -88,8 +88,8 @@ $this->registerJs($js);
         ['class' => 'yii\grid\SerialColumn'],
         [
             'attribute' => 'type_id',
-            'value' => function ($data) {
-                return \common\models\SocialService::findOne(['type_id' => $data->type_id])->title;
+            'value' => function ($data) use ($services) {
+                return $services[$data->type_id];
             },
             'filter' => $services,
         ],

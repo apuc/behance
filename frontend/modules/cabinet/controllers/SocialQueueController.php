@@ -77,7 +77,8 @@ class SocialQueueController extends Controller
     /**
      * Creates a new SocialQueue model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @param null|SocialQueueForm $model
+     * @param null $social
+     * @param null $service
      * @return mixed
      */
     public function actionCreate($social = null, $service = null)

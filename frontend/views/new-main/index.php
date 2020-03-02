@@ -51,15 +51,15 @@ if($seo)
           <div class="container">
               <div class="about">
                   <div class="about__title">
-                      <h1 class="title-big title-big-second">Услуги накрутки
-                          <span class="title-big-second__under-descr">от Betop.space</span>
-                      </h1>
                       <h2 class="title title-light mb-0">
                           <img src="/images/icons/icon-info.png" class="icon-info" alt="">
                           <span>
                                 Здесь работают только реальные пользователи с реальными IP адресами и действующими аккаунтами соц сетей.
-                            </span>
+                          </span>
                       </h2>
+                      <h1 class="title-big title-big-second">Услуги накрутки
+                          <span class="title-big-second__under-descr">от Betop.space</span>
+                      </h1>
                   </div>
 
                   <div class="about__main-items">
@@ -74,7 +74,7 @@ if($seo)
                                 <div class="item-description">
                                     <?php
                                     foreach ($social->pageSocialsServices as $service) { ?>
-                                        <p><a href="<?= $service->service_page_link ?>"><?= $service->service_title ?></a></p>
+                                        <p><a href="<?= Url::to(['new-main/social'.$service->service_page_link]) ?>"><?= $service->service_title ?></a></p>
                                     <?php } ?>
                                 </div>
                             </div>

@@ -111,7 +111,7 @@ class NewMainController extends Controller
         if (!$page_service) {
             throw new \yii\web\NotFoundHttpException('404');
         }
-        $social = Social::find()->where(['id' => $page_service->id_social])->one();
+        $social = PageSocials::find()->where(['id' => $page_service->id_social])->one();
         return $this->render('page-social-service', [
             "service" => $page_service,
             "social" => $social

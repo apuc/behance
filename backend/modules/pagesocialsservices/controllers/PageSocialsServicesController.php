@@ -75,6 +75,7 @@ class PageSocialsServicesController extends Controller
         $model->service_seo_descr = "";
         $model->service_seo_keywords = "";
         $socials = $this->getPageSocials();
+        $errors = null;
 
         $data = Yii::$app->request->post();
         if ($model->load($data)) {
@@ -87,12 +88,15 @@ class PageSocialsServicesController extends Controller
             );
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                $errors = $model->errors;
             }
         }
 
         return $this->render('create', [
             'model' => $model,
-            'socials' => $socials
+            'socials' => $socials,
+            'errors' => $errors
         ]);
     }
 

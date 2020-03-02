@@ -3,6 +3,7 @@
 use kartik\select2\Select2;
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use mihaildev\elfinder\ElFinder;
 
@@ -35,7 +36,7 @@ use mihaildev\elfinder\ElFinder;
     <?= $form->field($model, 'service_seo_keywords')->textInput()->label('SEO ключевые слова') ?>
 
     <?= $form->field($model, 'service_order_link')->textInput() ?>
-
+    <p>* - формат ссылки &quot;<i>cabinet/social-queue/create?social=&lt;код соц. сети&gt;&amp;service=&lt;код услуги&gt;</i>&quot;, коды <a href="<?= Url::to(['admin/vipip-socials']) ?>">тут</a></p>
     <?= $form->field($model, 'enabled')->checkbox() ?>
 
     <div class="form-group">

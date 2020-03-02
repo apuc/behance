@@ -37,6 +37,4 @@ use yii\web\JsExpression;
 
     <?php ActiveForm::end(); ?>
 
-    <?= var_dump(Yii::$aliases) ?>
-
 </div>

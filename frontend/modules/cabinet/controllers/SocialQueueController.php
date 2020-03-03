@@ -51,13 +51,7 @@ class SocialQueueController extends Controller
         $params[$searchModel->formName()]['user_id'] = Yii::$app->user->id;
         $dataProvider = $searchModel->search($params);
 
-        $services_obj = SocialService::find()->orderBy(['id_soc' => SORT_ASC])->all();
-        $services = [];
-        foreach ($services_obj as $service) {
-            $services[$service->type_id] = $service->title;
-        }
-
-        $queue = SocialQueue::find()->all();
+        $services = $this->getSocialServices();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -83,10 +77,11 @@ class SocialQueueController extends Controller
     /**
      * Creates a new SocialQueue model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @param null|SocialQueueForm $model
+     * @param null $social
+     * @param null $service
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($social = null, $service = null)
     {
         $model = new SocialQueueForm();
         if ($model->gender == null) $model->gender = '-';
@@ -169,6 +164,13 @@ class SocialQueueController extends Controller
         $model->type_id = null;
         $socials = $this->getSocials();
         $options = $this->getFriendsOptions();
+        $services = $this->getSocialServices();
+        if (isset($socials[$social])) {
+            $model->social = $social;
+            if (isset($services[$service])) {
+                $model->type_id = $service;
+            }
+        }
         return $this->render('create', [
             'model' => $model,
             'socials' => $socials,
@@ -273,6 +275,15 @@ class SocialQueueController extends Controller
             $socials[$social->id] = $social->name;
         }
         return $socials;
+    }
+
+    private function getSocialServices() {
+        $services_obj = SocialService::find()->orderBy(['id_soc' => SORT_ASC])->all();
+        $services = [];
+        foreach ($services_obj as $service) {
+            $services[$service->type_id] = $service->title;
+        }
+        return $services;
     }
 
     private function getFriendsOptions()

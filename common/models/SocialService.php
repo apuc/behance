@@ -23,7 +23,6 @@ use yii\helpers\ArrayHelper;
 class SocialService extends \yii\db\ActiveRecord
 {
     private $_social;
-
     /**
      * {@inheritdoc}
      */

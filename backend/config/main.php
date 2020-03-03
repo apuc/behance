@@ -44,8 +44,16 @@ return [
         ],
         'youtube' => [
             'class' => 'backend\modules\youtube\Youtube',
-        ]
-
+        ],
+        'page-socials' => [
+            'class' => 'backend\modules\pagesocials\PageSocials',
+        ],
+        'page-socials-services' => [
+            'class' => 'backend\modules\pagesocialsservices\PageSocialsServices',
+        ],
+        'vipip-socials' => [
+            'class' => 'backend\modules\vipipsocials\VipipSocials',
+        ],
     ],
     'components' =>  [
         'mailer' => [
@@ -114,5 +122,4 @@ return [
 
     ],
     'params' => $params,
-
 ];

@@ -60,6 +60,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'new-main/social/<slug>' => 'new-main/social',
 	            'cabinet' => '/cabinet/cabinet',
 	            'signup' => '/site/signup',
 	            'reset-password' => '/site/reset-password',

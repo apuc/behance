@@ -42,28 +42,18 @@ return [
         ],
     ],
     'controllerMap' => [
-	    'elfinder' => [
-		    'class' => 'mihaildev\elfinder\PathController',
-		    'access' => ['@'],
-		    'root' => [
-			    'baseUrl' => '',
-			    'basePath' => '@frontend/web',
-			    'path' => 'uploads/global',
-			    'name' => 'Global'
-		    ],
-		    'connectOptions' => [
-			    'bind' => array(
-				    'upload.presave' => array(
-					    'Plugin.CompressingImage.onUpLoadPreSave'
-				    )
-			    ),
-			    'plugin' => [
-				    'CompressingImage' => [
-					    'quality' => 85
-				    ]
-			
-			    ],
-		    ],
-	    ]
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'access' => ['@'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
+            'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
+            'roots' => [
+                [
+                    'baseUrl'=>'',
+                    'basePath'=>'@frontend'.'/web',
+                    'path' => '/images/uploaded',
+                    'name' => 'images_uploaded',
+                ],
+            ],
+        ]
     ],
 ];

@@ -75,7 +75,6 @@ class PageSocialsServicesController extends Controller
         $model->service_seo_descr = "";
         $model->service_seo_keywords = "";
         $socials = $this->getPageSocials();
-        $errors = null;
 
         $data = Yii::$app->request->post();
         if ($model->load($data)) {

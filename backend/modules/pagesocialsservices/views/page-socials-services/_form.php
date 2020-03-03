@@ -10,6 +10,10 @@ use mihaildev\elfinder\ElFinder;
 /* @var $model common\models\PageSocialsServices */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $socials common\models\PageSocials[] */
+
+if ($model->errors) {
+    print_r($model->errors);
+}
 ?>
 
 <div class="page-socials-services-form">

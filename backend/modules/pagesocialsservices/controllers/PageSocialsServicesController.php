@@ -3,6 +3,7 @@
 namespace backend\modules\pagesocialsservices\controllers;
 
 use common\models\PageSocials;
+use common\models\SocialService;
 use Yii;
 use common\models\PageSocialsServices;
 use backend\modules\pagesocialsservices\models\PageSocialsServicesSearch;
@@ -75,6 +76,7 @@ class PageSocialsServicesController extends Controller
         $model->service_seo_descr = "";
         $model->service_seo_keywords = "";
         $socials = $this->getPageSocials();
+        $links = $this->getLinks();
 
         $data = Yii::$app->request->post();
         if ($model->load($data)) {
@@ -92,7 +94,8 @@ class PageSocialsServicesController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'socials' => $socials
+            'socials' => $socials,
+            'links' => array_flip($links)
         ]);
     }
 
@@ -125,9 +128,11 @@ class PageSocialsServicesController extends Controller
             $model->service_seo_keywords = $seo->keywords;
         }
         $socials = $this->getPageSocials();
+        $links = $this->getLinks();
         return $this->render('update', [
             'model' => $model,
-            'socials' => $socials
+            'socials' => $socials,
+            'links' => array_flip($links)
         ]);
     }
 
@@ -171,5 +176,21 @@ class PageSocialsServicesController extends Controller
             $socials[$social->id] = $social->social_title;
         }
         return $socials;
+    }
+
+    private function getSocialServicesList()
+    {
+        return SocialService::find()->all();
+    }
+
+    private function getLinks()
+    {
+        $socialServices = $this->getSocialServicesList();
+        $links = [];
+        foreach($socialServices as $item) {
+            $links[$item->title] = "cabinet/social-queue/create?social={$item->id_soc}&service={$item->type_id}";
+        }
+
+        return $links;
     }
 }

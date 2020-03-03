@@ -11,6 +11,7 @@ use mihaildev\elfinder\ElFinder;
 /* @var $model common\models\PageSocialsServices */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $socials common\models\PageSocials[] */
+/* @var $links array */
 ?>
 
 <div class="page-socials-services-form">
@@ -35,7 +36,7 @@ use mihaildev\elfinder\ElFinder;
     <?= $form->field($model, 'service_seo_descr')->textInput()->label('SEO описание') ?>
     <?= $form->field($model, 'service_seo_keywords')->textInput()->label('SEO ключевые слова') ?>
 
-    <?= $form->field($model, 'service_order_link')->textInput() ?>
+    <?= $form->field($model, 'service_order_link')->dropDownList($links) ?>
     <p>* - формат ссылки &quot;<i>cabinet/social-queue/create?social=&lt;код соц. сети&gt;&amp;service=&lt;код услуги&gt;</i>&quot;, коды <a href="<?= Url::to(['admin/vipip-socials']) ?>">тут</a></p>
     <?= $form->field($model, 'enabled')->checkbox() ?>
 

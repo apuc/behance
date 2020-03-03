@@ -5,6 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\PageSocialsServices */
 /* @var $socials common\models\PageSocials[] */
+/* @var $links array */
 
 $this->title = 'Обновить услугу: ' . $model->service_title;
 $this->params['breadcrumbs'][] = ['label' => 'Page Socials Services', 'url' => ['index']];
@@ -17,7 +18,8 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
-        'socials' => $socials
+        'socials' => $socials,
+        'links' => $links
     ]) ?>
 
 </div>

@@ -40,10 +40,10 @@ class PageSocialsServices extends \yii\db\ActiveRecord
     {
         return [
             [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'service_title',
-                'slugAttribute' => 'service_page_link',
-                'ensureUnique' => true,
+                'class' => 'common\behaviors\Slug',
+                'in_attribute' => 'service_title',
+                'out_attribute' => 'service_page_link',
+                'translit' => true
             ],
         ];
     }

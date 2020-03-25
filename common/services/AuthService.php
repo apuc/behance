@@ -8,6 +8,7 @@
 
 namespace common\services;
 
+use common\models\Settings;
 use common\models\User;
 use Yii;
 use common\classes\SendMail;
@@ -83,15 +84,15 @@ class AuthService
        if($referer = User::findByRefHash($refHash))
        {
            $refererBalance = Balance::findOne(['user_id'=>$referer->id]);
-           $refererBalance->addBalance(Yii::$app->params['referal_likes'],Yii::$app->params['referal_views']);
+           $refererBalance->addBalance(Settings::getSetting('referal_likes'),Settings::getSetting('referal_views'));
 
            History::create(
                $referer->id,
                History::TRANSFER_TO_BALANCE,
-               Yii::$app->params['referal_likes'],
-               Yii::$app->params['referal_views'],
-               "Начислено ".Yii::$app->params['referal_likes']
-               ." лайков и ".Yii::$app->params['referal_views']." просмотров за регестрацию по реферальной ссылке"
+               Settings::getSetting('referal_likes'),
+               Settings::getSetting('referal_views'),
+               "Начислено ".Settings::getSetting('referal_likes')
+               ." лайков и ".Settings::getSetting('referal_views')." просмотров за регестрацию по реферальной ссылке"
            );
        }
    }

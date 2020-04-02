@@ -27,7 +27,8 @@
         "mihaildev/yii2-ckeditor": "dev-master",
         "craft-group/vipipru_client": "dev-master",
       "ext-json": "*",
-        "2amigos/yii2-transliterator-helper": "*"
+        "2amigos/yii2-transliterator-helper": "*",
+        "himiklab/yii2-sitemap-module": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -24,6 +24,7 @@ $cabinetIcon = "/images/icons/ico-user-blue.png";
         <!--<a class="header__nav-item " href="<?= Url::toRoute(['/#reviews']) ?>">Отзывы</a>-->
         <a class="header__nav-item" href="<?= Url::toRoute(['/blog']) ?>">Блог</a>
       <?php else: ?>
+          <a class="header__nav-item" href="<?= Url::toRoute(['/']); ?>">Главная</a>
         <a class="header__nav-item" href="<?= Url::toRoute(['/site/about']); ?>">О сервисе</a>
           <!--<a class="footer__nav-item footer__nav-item-scroll" href="#tarif">Тарифы</a>-->
           <!--<a class="header__nav-item " href="<?= Url::toRoute(['/#reviews']) ?>">Отзывы</a>-->
@@ -32,7 +33,7 @@ $cabinetIcon = "/images/icons/ico-user-blue.png";
 
     <!--                    <a class="header__nav-item" href="#">Блог</a>-->
       <?php if (Yii::$app->user->isGuest): ?>
-          <a href="<?= Url::toRoute(['/site/login']); ?>" class="header__icon"><img src="<?= $enterIcon ?>"/></a>
+          <a href="<?= Url::toRoute(['/site/login']); ?>" class="btn btn-pink">Вход</a>
 <!--        <a class="header__icon" href="--><?//= Url::toRoute(['/site/login']); ?><!--">-->
 <!--          <img src="--><?//= $enterIcon ?><!--"/>-->
 <!--        </a>-->

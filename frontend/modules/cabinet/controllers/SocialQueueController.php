@@ -265,6 +265,7 @@ class SocialQueueController extends Controller
                 'balance' => $model->balance
             ],
         ];
+
     }
 
     private function getSocials()
@@ -364,7 +365,13 @@ class SocialQueueController extends Controller
             $response = [];
             foreach ($selected_services as $service)
             {
-                $response["$service->type_id"] = $service->title;
+                if ($service->system_title !== NULL){
+                    $response["$service->type_id"] = $service->system_title;
+                }
+                else{
+                    $response["$service->type_id"] = $service->title;
+                }
+
             }
             return [
                 'code' => 200,

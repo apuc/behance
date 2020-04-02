@@ -39,8 +39,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => "Код услуги",
             ],
             'title',
+            'system_title',
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{update}']
         ],
     ]); ?>
-
 
 </div>

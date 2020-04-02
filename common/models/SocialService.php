@@ -38,8 +38,8 @@ class SocialService extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'id_soc', 'type_id', 'price'], 'integer'],
-            [['title', 'title_short', 'desc'], 'safe'],
-            [['title', 'title_short', 'desc'], 'string', 'max' => 50],
+            [['title', 'title_short', 'desc', 'system_title'], 'safe'],
+            [['title', 'title_short', 'desc', 'system_title'], 'string', 'max' => 50],
             [['status'], 'boolean']
         ];
     }
@@ -66,6 +66,7 @@ class SocialService extends \yii\db\ActiveRecord
             'title_short' => Yii::t('social', 'Title Short'),
             'desc' => Yii::t('social', 'Description'),
             'price' => Yii::t('social', 'Price'),
+            'system_title' => Yii::t('social', 'System_title'),
         ];
     }
 }

@@ -114,14 +114,14 @@ CabinetAsset::register($this);
                             <span>История пополнений</span>
                         </a>
                     </div>
-                    <!--
+
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue']); ?>">
                             <i class="fa fa-heart" style="visibility: visible;"></i>
                             <span>Накрутка соц. сетей</span>
                         </a>
                     </div>
-
+                    <!--
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment-cash']); ?>">
                             <i class="fa fa-usd"></i>

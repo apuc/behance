@@ -122,6 +122,7 @@ CabinetAsset::register($this);
                         </a>
                     </div>
                     <!--
+
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment-cash']); ?>">
                             <i class="fa fa-usd"></i>

@@ -365,7 +365,7 @@ class SocialQueueController extends Controller
             $response = [];
             foreach ($selected_services as $service)
             {
-                if ($service->system_title !== NULL){
+                if ($service->system_title != NULL){
                     $response["$service->type_id"] = $service->system_title;
                 }
                 else{

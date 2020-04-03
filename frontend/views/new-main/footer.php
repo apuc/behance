@@ -10,14 +10,14 @@ use yii\helpers\Url;
       <div class="footer__nav">
           <?php if (Yii::$app->controller->action->id == 'about'): ?>
               <!--<a class="footer__nav-item" href="<?= Url::toRoute(['/#tarif']) ?>">Тарифы</a>-->
-            <a class="footer__nav-item" href="<?= Url::toRoute(['site/about']) ?>">О сервисе</a>
+            <a class="footer__nav-item" href="<?= Url::toRoute(['/about']) ?>">О сервисе</a>
               <!--<a class="header__nav-item " href="<?= Url::toRoute(['/#reviews']) ?>">Отзывы</a>-->
-              <a class="footer__nav-item" href="<?= Url::toRoute(['/blog']) ?>">Блог</a>
+              <!--<a class="footer__nav-item" href="<?= Url::toRoute(['/blog']) ?>">Блог</a>-->
           <?php else: ?>
               <!--<a class="footer__nav-item footer__nav-item-scroll" href="#tarif">Тарифы</a>-->
-            <a class="footer__nav-item" href="<?= Url::toRoute(['site/about']) ?>">О сервисе</a>
+            <a class="footer__nav-item" href="<?= Url::toRoute(['/about']) ?>">О сервисе</a>
               <!--<a class="header__nav-item " href="<?= Url::toRoute(['/#reviews']) ?>">Отзывы</a>-->
-              <a class="footer__nav-item" href="<?= Url::toRoute(['/blog']) ?>">Блог</a>
+              <!--<a class="footer__nav-item" href="<?= Url::toRoute(['/blog']) ?>">Блог</a>-->
           <?php endif; ?>
       </div>
       <div class="d-flex flex-wrap align-items-center justify-content-center">

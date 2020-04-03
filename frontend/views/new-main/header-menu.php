@@ -22,13 +22,13 @@ $cabinetIcon = "/images/icons/ico-user-blue.png";
         <a class="header__nav-item" href="<?= Url::toRoute(['/']); ?>">Главная</a>
           <!--<a class="footer__nav-item footer__nav-item-scroll" href="#tarif">Тарифы</a>-->
         <!--<a class="header__nav-item " href="<?= Url::toRoute(['/#reviews']) ?>">Отзывы</a>-->
-        <a class="header__nav-item" href="<?= Url::toRoute(['/blog']) ?>">Блог</a>
+        <!--<a class="header__nav-item" href="<?= Url::toRoute(['/blog']) ?>">Блог</a>-->
       <?php else: ?>
           <a class="header__nav-item" href="<?= Url::toRoute(['/']); ?>">Главная</a>
-        <a class="header__nav-item" href="<?= Url::toRoute(['/site/about']); ?>">О сервисе</a>
+        <a class="header__nav-item" href="<?= Url::toRoute(['/about']); ?>">О сервисе</a>
           <!--<a class="footer__nav-item footer__nav-item-scroll" href="#tarif">Тарифы</a>-->
           <!--<a class="header__nav-item " href="<?= Url::toRoute(['/#reviews']) ?>">Отзывы</a>-->
-          <a class="header__nav-item" href="<?= Url::toRoute(['/blog']) ?>">Блог</a>
+          <!--<a class="header__nav-item" href="<?= Url::toRoute(['/blog']) ?>">Блог</a>-->
       <?php endif; ?>
 
     <!--                    <a class="header__nav-item" href="#">Блог</a>-->

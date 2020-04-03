@@ -61,8 +61,20 @@ if($seo)
                           <span class="title-big-second__under-descr">от Betop.space</span>
                       </h1>
                   </div>
-
                   <div class="about__main-items">
+                      <div class="item">
+                          <div class="item-header">
+                              <img src="/images/uploaded/be.png" alt="">
+                              <p class="item-title behance">Behance</p>
+                          </div>
+
+                          <div class="item-description">
+                                  <p><a href="<?= Url::to(['/behance']) ?>">Накрутка лайков Behance</a></p>
+                          </div>
+                          <div class="item-description">
+                              <p><a href="<?= Url::to(['/behance']) ?>">Накрутка просмотров Behance</a></p>
+                          </div>
+                      </div>
                       <?php
                         foreach ($socials as $social) { ?>
                             <div class="item">
@@ -74,7 +86,7 @@ if($seo)
                                 <div class="item-description">
                                     <?php
                                     foreach ($social->pageSocialsServices as $service) { ?>
-                                        <p><a href="<?= Url::to(['new-main/social/'.$service->service_page_link]) ?>"><?= $service->service_title ?></a></p>
+                                        <p><a href="<?= Url::to(['/social/'.$service->service_page_link]) ?>"><?= $service->service_title ?></a></p>
                                     <?php } ?>
                                 </div>
                             </div>

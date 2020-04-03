@@ -88,7 +88,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $reviews = Reviews::find()->all();
-	    $seo = Settings::findOne(['key'=>'seo_main_page']);
+	    $seo = Settings::findOne(['key'=>'seo_behance_page']);
         $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
         
         return $this->render('index', ['reviews' => $reviews, 'cases' => $cases,

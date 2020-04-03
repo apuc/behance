@@ -60,12 +60,15 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'new-main/social/<slug>' => 'new-main/social',
+                '' => 'new-main/index',
+                '/social/<slug>' => 'new-main/social',
 	            'cabinet' => '/cabinet/cabinet',
 	            'signup' => '/site/signup',
 	            'reset-password' => '/site/reset-password',
 	            'request-password-reset' => '/site/request-password-reset',
 	            'account-confirm' => '/site/account-confirm',
+                'behance' => '/site/index',
+                'about' => 'new-main/about'
             ],
         ],
 

@@ -6,6 +6,7 @@
             <div class="stars2"></div>
             <div class="stars3"></div><img class="callback-comet1" src="/images/comet2.png" alt="">
         </div>
+        <?php if (Yii::$app->request->url == '/'): ?>
         <div class="stars-wrap callback-stars2">
             <div class="stars"></div>
             <div class="stars2"></div>
@@ -53,5 +54,6 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 </section>

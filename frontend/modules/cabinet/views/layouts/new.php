@@ -131,6 +131,13 @@ CabinetAsset::register($this);
                                             <i class="fa fa-usd" style="font-size: 16px;"></i>
                                             Пополнить лайкер</a>
                                     </li>
+                                    <li class="mdc-list-item" role="menuitem" tabindex="0">
+
+                                        <a style="text-decoration: none; font-size: 14px;"
+                                           href="<?= Url::toRoute(['/cabinet/cabinet/referal']); ?>">
+                                            <i class="fa fa-user" style="font-size: 16px;"></i>
+                                            Партнерская программа</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -178,15 +185,15 @@ CabinetAsset::register($this);
                                 <span>Накрутка соц. сетей</span>
                             </a>
                         </div>
-                        <!--
+
 
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment-cash']); ?>">
                             <i class="fa fa-usd"></i>
-                            <span>Пополнить баланс $</span>
+                            <span>Пополнить баланс</span>
                         </a>
                     </div>
-
+                    <!--
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history-cash') ?>">
                             <i class="fa fa-history" style="visibility: visible;"></i>
@@ -194,13 +201,14 @@ CabinetAsset::register($this);
                         </a>
                     </div>
                     -->
+                    <!--
                         <div class="mdc-list-item mdc-drawer-item">
                             <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/cabinet/referal') ?>">
                                 <i class="fa fa-users"></i>
                                 <span>Партнерская программа</span>
                             </a>
                         </div>
-
+-->
 
                         <!--                    					<div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="sample-page-submenu">-->
                         <!--                    						<a class="mdc-drawer-link" href="#">-->

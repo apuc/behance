@@ -131,7 +131,6 @@ class NewMainController extends Controller
     }
 
 
-
     /**
      * Logs out the current user.
      *

@@ -17,7 +17,7 @@ class NewAppAsset extends AssetBundle
         'css/font-awesome.css',
         'css/secret-styles.css',
         'css/styles.css',
-        'css/currect_main.css'
+        'css/correct_main.css'
     ];
     public $js = [
         'js/slick.min.js',

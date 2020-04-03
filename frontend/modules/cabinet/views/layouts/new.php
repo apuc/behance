@@ -274,19 +274,19 @@ CabinetAsset::register($this);
                     Yii::$app->request->url == '/cabinet/payment'): ?>
                     <?php if (!empty($balance)): ?>
                         <div class="balance-block">
-                        <span class="mdc-toolbar__menu-icon">Лайки:&nbsp;<span
+                        <span class="mdc-toolbar__icon">Лайки:&nbsp;<span
                                     id="balance_likes"><?= $balance->likes ?></span></span>
                         </div>
 
                         <div class="balance-block">
-                        <span class="mdc-toolbar__menu-icon">Просмотры:&nbsp;<span
+                        <span class="mdc-toolbar__icon">Просмотры:&nbsp;<span
                                     id="balance_views"><?= $balance->views ?></span></span>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
                 <?php if (!empty($balance_cash)): ?>
                     <div class="balance-block">
-                        <span class="mdc-toolbar__menu-icon">Баланс:&nbsp;<span
+                        <span class="mdc-toolbar__icon">Баланс:&nbsp;<span
                                     id="balance_cash"><?= $balance_cash->amount / $exponent ?></span>$</span>
                     </div>
                 <?php endif; ?>

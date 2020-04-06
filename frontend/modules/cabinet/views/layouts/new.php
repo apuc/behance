@@ -4,12 +4,12 @@
 
 /* @var $content string */
 
+use common\models\Balance;
+use common\models\BalanceCash;
 use common\models\Settings;
 use frontend\assets\CabinetAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use common\models\Balance;
-use common\models\BalanceCash;
 
 
 $balance = Balance::find()->where(['user_id' => Yii::$app->user->getId()])->one();
@@ -97,7 +97,7 @@ CabinetAsset::register($this);
                                 <span>Накрутка Behance</span>
                                 <i class="material-icons">keyboard_arrow_down</i>
                             </a>
-                            <div class="mdc-simple-menu mdc-simple-menu" tabindex="-1" id="menu">
+                            <!-- <div class="mdc-simple-menu mdc-simple-menu" tabindex="-1" id="menu">
                                 <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
 
                                     <li class="mdc-list-item" role="menuitem" tabindex="0">
@@ -138,11 +138,57 @@ CabinetAsset::register($this);
                                             <i class="fa fa-user" style="font-size: 16px;"></i>
                                             Партнерская программа</a>
                                     </li>
+
+                                </ul>
+                            </div> -->
+                            <div class="mdc-simple-menu mdc-simple-menu" tabindex="-1" id="menu">
+                                <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/accounts']); ?>'">
+                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                            <a style="text-decoration: none; font-size: 14px;"
+                                               href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
+                                                <i class="fa fa-user" style="font-size: 16px;"></i>
+                                                Аккаунты</a>
+                                        </li>
+                                    </div>
+                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/works']); ?>'">
+                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                            <a style="text-decoration: none; font-size: 14px;"
+                                               href="<?= Url::toRoute(['/cabinet/works']); ?>">
+                                                <i class="fa fa-suitcase" style="font-size: 16px;"></i>
+                                                Работы</a>
+                                        </li>
+                                    </div>
+                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/queue']); ?>'">
+                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                            <a style="text-decoration: none; font-size: 14px;"
+                                               href="<?= Url::toRoute(['/cabinet/queue']); ?>">
+                                                <i class="fa fa-heart" style="font-size: 16px;"></i>
+                                                Работы в лайкере</a>
+                                        </li>
+                                    </div>
+                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/payment']); ?>'">
+                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                            <a style="text-decoration: none; font-size: 14px;"
+                                               href="<?= Url::toRoute(['/cabinet/payment']); ?>">
+                                                <i class="fa fa-usd" style="font-size: 16px;"></i>
+                                                Пополнить лайкер</a>
+                                        </li>
+                                    </div>
+                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/cabinet/referal']); ?>'">
+                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                            <a style="text-decoration: none; font-size: 14px;"
+                                               href="<?= Url::toRoute(['/cabinet/cabinet/referal']); ?>">
+                                                <i class="fa fa-user" style="font-size: 16px;"></i>
+                                                Партнерская программа</a>
+                                        </li>
+                                    </div>
+
                                 </ul>
                             </div>
                         </div>
                     </div>
-                        <!--
+                    <!--
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
                             <i class="fa fa-user" style="visibility: visible;"></i>
@@ -171,26 +217,46 @@ CabinetAsset::register($this);
                         </a>
                     </div>
                     -->
-
+                    <!--
                         <div class="mdc-list-item mdc-drawer-item">
                             <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history') ?>">
                                 <i class="fa fa-history" style="visibility: visible;"></i>
                                 <span>История пополнений</span>
                             </a>
                         </div>
+                        -->
 
+                    <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue/create']); ?>">
+                            <i class="fa fa-edit" style="visibility: visible;"></i>
+                            <span>Накрутить</span>
+                        </a>
+                    </div>
+                    <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue/']); ?>">
+                            <i class="fa fa-heart" style="visibility: visible;"></i>
+                            <span>Мои заказы</span>
+                        </a>
+                    </div>
+                    <!--
                         <div class="mdc-list-item mdc-drawer-item">
                             <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue']); ?>">
                                 <i class="fa fa-heart" style="visibility: visible;"></i>
                                 <span>Накрутка соц. сетей</span>
                             </a>
                         </div>
-
+-->
 
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment-cash']); ?>">
                             <i class="fa fa-usd"></i>
                             <span>Пополнить баланс</span>
+                        </a>
+                    </div>
+                    <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history') ?>">
+                            <i class="fa fa-history" style="visibility: visible;"></i>
+                            <span>История пополнений</span>
                         </a>
                     </div>
                     <!--
@@ -210,54 +276,54 @@ CabinetAsset::register($this);
                         </div>
 -->
 
-                        <!--                    					<div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="sample-page-submenu">-->
-                        <!--                    						<a class="mdc-drawer-link" href="#">-->
-                        <!--                    							<i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>-->
-                        <!--                    							Sample Pages-->
-                        <!--                    							<i class="mdc-drawer-arrow material-icons">arrow_drop_down</i>-->
-                        <!--                    						</a>-->
-                        <!---->
-                        <!--                    						<div class="mdc-expansion-panel" id="sample-page-submenu">-->
-                        <!--                    							<nav class="mdc-list mdc-drawer-submenu">-->
-                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/blank-page.html">-->
-                        <!--                    										Blank Page-->
-                        <!--                    									</a>-->
-                        <!--                    								</div>-->
-                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/403.html">-->
-                        <!--                    										403-->
-                        <!--                    									</a>-->
-                        <!--                    								</div>-->
-                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/404.html">-->
-                        <!--                    										404-->
-                        <!--                    									</a>-->
-                        <!--                    								</div>-->
-                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/500.html">-->
-                        <!--                    										500-->
-                        <!--                    									</a>-->
-                        <!--                    								</div>-->
-                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/505.html">-->
-                        <!--                    										505-->
-                        <!--                    									</a>-->
-                        <!--                    								</div>-->
-                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/login.html">-->
-                        <!--                    										Login-->
-                        <!--                    									</a>-->
-                        <!--                    								</div>-->
-                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/register.html">-->
-                        <!--                    										Register-->
-                        <!--                    									</a>-->
-                        <!--                    								</div>-->
-                        <!---->
-                        <!--                    							</nav>-->
-                        <!--                    						</div>-->
-                        <!--                    					</div>-->
+                    <!--                    					<div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="sample-page-submenu">-->
+                    <!--                    						<a class="mdc-drawer-link" href="#">-->
+                    <!--                    							<i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>-->
+                    <!--                    							Sample Pages-->
+                    <!--                    							<i class="mdc-drawer-arrow material-icons">arrow_drop_down</i>-->
+                    <!--                    						</a>-->
+                    <!---->
+                    <!--                    						<div class="mdc-expansion-panel" id="sample-page-submenu">-->
+                    <!--                    							<nav class="mdc-list mdc-drawer-submenu">-->
+                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/blank-page.html">-->
+                    <!--                    										Blank Page-->
+                    <!--                    									</a>-->
+                    <!--                    								</div>-->
+                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/403.html">-->
+                    <!--                    										403-->
+                    <!--                    									</a>-->
+                    <!--                    								</div>-->
+                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/404.html">-->
+                    <!--                    										404-->
+                    <!--                    									</a>-->
+                    <!--                    								</div>-->
+                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/500.html">-->
+                    <!--                    										500-->
+                    <!--                    									</a>-->
+                    <!--                    								</div>-->
+                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/505.html">-->
+                    <!--                    										505-->
+                    <!--                    									</a>-->
+                    <!--                    								</div>-->
+                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/login.html">-->
+                    <!--                    										Login-->
+                    <!--                    									</a>-->
+                    <!--                    								</div>-->
+                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/register.html">-->
+                    <!--                    										Register-->
+                    <!--                    									</a>-->
+                    <!--                    								</div>-->
+                    <!---->
+                    <!--                    							</nav>-->
+                    <!--                    						</div>-->
+                    <!--                    					</div>-->
 
                 </nav>
         </nav>
@@ -321,19 +387,30 @@ CabinetAsset::register($this);
                        toggle-dropdown="logout-menu" data-mdc-auto-init="MDCRipple">
                         <i class="material-icons">more_vert</i>
                     </a>
-                    <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="logout-menu">
+
+                    <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="logout-menu"
+                         onClick="document.location='<?= Url::toRoute(['cabinet/logout']); ?>'">
                         <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
-
+                            <a style="text-decoration: none; font-size: 14px;"
+                               href="<?= Url::toRoute(['cabinet/logout']); ?>">
                             <li class="mdc-list-item" role="menuitem" tabindex="0">
-
-                                <a style="text-decoration: none; font-size: 14px;"
-                                   href="<?= Url::toRoute(['cabinet/logout']); ?>">
-                                    <i class="material-icons mdc-theme--primary mr-1" style="font-size: 16px;">power_settings_new</i>
-                                    Logout</a>
-
+                                <i class="material-icons mdc-theme--primary mr-1" style="font-size: 16px;">power_settings_new</i>
+                                Logout</a>
                             </li>
                         </ul>
                     </div>
+
+                    <!-- <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="logout-menu">
+                        <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                            <a style="text-decoration: none; font-size: 14px;"
+                               href="<?= Url::toRoute(['cabinet/logout']); ?>">
+                                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                    <i class="material-icons mdc-theme--primary mr-1" style="font-size: 16px;">power_settings_new</i>
+                                    Logout</a>
+                                </li>
+                        </ul>
+                    </div>
+                    -->
                 </div>
             </section>
         </div>

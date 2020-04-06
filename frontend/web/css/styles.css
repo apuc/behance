@@ -38,14 +38,14 @@
 
 .title-big-second{
 
-    font-size: 55px;
+    font-size: 50px;
 }
 
 .title-big-second__under-descr{
     display: table;
-    /*margin-left: auto;*/
-    /*margin-left: 170px;*/
-    margin-left: 10.56%;
+    margin-left: auto;
+    margin-left: 170px;
+    margin-left: 10.55%;
 }
 
 .title-light {

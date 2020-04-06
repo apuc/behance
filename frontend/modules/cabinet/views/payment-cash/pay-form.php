@@ -20,8 +20,8 @@ $exponent = intval(Settings::getSetting('balance_exponent'));
 <script>
     var exponent = <?= $exponent ?>;
 </script>
-<div class="payment-index">
 
+<div class="payment-index">
     <div class="form-group">
         <label for="sum">Введите сумму в рублях</label>
         <?= Html::input('string', 'sum', $default_sum, ['class' => 'form-control', 'id' => 'sum']) ?>
@@ -38,8 +38,9 @@ $exponent = intval(Settings::getSetting('balance_exponent'));
         <input type='hidden' name='s' id="pay-sign" value='<?= $form_sign ?>'>
         <input type='hidden' name='us_userid' value='<?= Yii::$app->user->getId() ?>'>
         <input type='hidden' name='us_usd' id="pay-usd" value='<?= $default_usd ?>'>
-        <input type="button" id="calculate-btn" value="Посчитать" class="btn btn-pink">
-        <input type="submit" disabled id="submit-fc" value="Оплатить" class="btn btn-pink">
+        <!--<input type="button" id="calculate-btn" value="Посчитать" class="btn btn-pink">-->
+        <input type="submit" id="submit-fc" value="Оплатить" class="btn btn-pink">
+        <img src="https://i.gifer.com/7plX.gif" style="display: none; width: 45px; height: auto;" id="loading_image">
     </form>
 
 </div>

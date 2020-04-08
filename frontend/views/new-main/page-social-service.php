@@ -73,7 +73,7 @@ $this->registerCssFile('/css/social/styles.css')
                 <header><h1><?= $service->service_title ?></h1></header>
                 <div class="container_content_info">
                     <div class="container_content_info_text">
-                        <?= $service->service_description ?>
+                        <?= $service->service_description_replace ?>
                     </div>
                     <div class="container_content_info_button">
                         <!--  <button>

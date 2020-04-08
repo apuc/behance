@@ -45,13 +45,22 @@ class SocialQueue extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('social', 'ID'),
-            'user_id' => Yii::t('social', 'user'),
-            'link_id' => Yii::t('social', 'link'),
+            'user_id' => Yii::t('history', 'User ID'),
+            'link_id' => Yii::t('social', 'VipIP_ID'),
             'type_id' => Yii::t('social', 'type'),
             'dt_add' => Yii::t('social', 'date'),
             'status' => Yii::t('social', 'status'),
-            'url' => Yii::t('social', 'url'),
+            'url' => Yii::t('social', 'URL'),
             'balance' => Yii::t('social', 'balance'),
         ];
+    }
+    public function getUser()
+    {
+        return $this->hasOne(User::className(),['id'=>'user_id']);
+    }
+
+    public function getType()
+    {
+        return $this->hasOne(SocialService::className(),['id'=>'type_id']);
     }
 }

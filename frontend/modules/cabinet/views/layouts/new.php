@@ -143,6 +143,15 @@ CabinetAsset::register($this);
                             </div> -->
                             <div class="mdc-simple-menu mdc-simple-menu" tabindex="-1" id="menu">
                                 <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/instruction']); ?>'">
+                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                            <a style="text-decoration: none; font-size: 14px;"
+                                               href="<?= Url::toRoute(['/cabinet/instruction']); ?>">
+                                                <i class="fa fa-gears" style="visibility: visible;"></i>
+                                                Инструкция
+                                            </a>
+                                        </li>
+                                    </div>
                                     <div onClick="document.location='<?= Url::toRoute(['/cabinet/accounts']); ?>'">
                                         <li class="mdc-list-item" role="menuitem" tabindex="0">
                                             <a style="text-decoration: none; font-size: 14px;"
@@ -232,6 +241,7 @@ CabinetAsset::register($this);
                             <span>Накрутить</span>
                         </a>
                     </div>
+
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue/']); ?>">
                             <i class="fa fa-heart" style="visibility: visible;"></i>
@@ -393,9 +403,10 @@ CabinetAsset::register($this);
                         <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
                             <a style="text-decoration: none; font-size: 14px;"
                                href="<?= Url::toRoute(['cabinet/logout']); ?>">
-                            <li class="mdc-list-item" role="menuitem" tabindex="0">
-                                <i class="material-icons mdc-theme--primary mr-1" style="font-size: 16px;">power_settings_new</i>
-                                Logout</a>
+                                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                    <i class="material-icons mdc-theme--primary mr-1" style="font-size: 16px;">power_settings_new</i>
+                                    Logout
+                            </a>
                             </li>
                         </ul>
                     </div>

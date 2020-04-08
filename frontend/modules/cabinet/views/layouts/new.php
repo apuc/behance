@@ -192,7 +192,14 @@ CabinetAsset::register($this);
                                                 Партнерская программа</a>
                                         </li>
                                     </div>
-
+                                    <div onClick="document.location='<?= Url::toRoute('/cabinet/history') ?>'">
+                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                            <a style="text-decoration: none; font-size: 14px;"
+                                               href="<?= Url::toRoute(['/cabinet/history']); ?>">
+                                                <i class="fa fa-history" style="visibility: visible;"></i>
+                                                История пополнений лайкера</a>
+                                        </li>
+                                    </div>
                                 </ul>
                             </div>
                         </div>
@@ -263,20 +270,20 @@ CabinetAsset::register($this);
                             <span>Пополнить баланс</span>
                         </a>
                     </div>
+                    <!--    <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="<? /*= Url::toRoute('/cabinet/history') */ ?>">
+                            <i class="fa fa-history" style="visibility: visible;"></i>
+                            <span>История пополнений</span>
+                        </a>
+                    </div>-->
+
                     <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history') ?>">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history-cash') ?>">
                             <i class="fa fa-history" style="visibility: visible;"></i>
                             <span>История пополнений</span>
                         </a>
                     </div>
-                    <!--
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history-cash') ?>">
-                            <i class="fa fa-history" style="visibility: visible;"></i>
-                            <span>История пополнений $</span>
-                        </a>
-                    </div>
-                    -->
+
                     <!--
                         <div class="mdc-list-item mdc-drawer-item">
                             <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/cabinet/referal') ?>">
@@ -362,8 +369,10 @@ CabinetAsset::register($this);
                 <?php endif; ?>
                 <?php if (!empty($balance_cash)): ?>
                     <div class="balance-block">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment-cash']); ?>">
                         <span class="mdc-toolbar__icon">Баланс:&nbsp;<span
                                     id="balance_cash"><?= $balance_cash->amount / $exponent ?></span>$</span>
+                        </a>
                     </div>
                 <?php endif; ?>
             </section>

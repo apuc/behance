@@ -101,8 +101,8 @@ class PageSocialsServices extends \yii\db\ActiveRecord
         $service = SocialService::findOne(['type_id' => $link]);
         $coeff = Settings::findOne(['key' => 'add_coeff'])->value;
         $usd = Settings::findOne(['key' => 'exchange_rate_usd'])->value;
-        $replaces[0] = strval(round(($service->price * floatval($coeff)) / (1000000 * 1000) * 1000 * $usd));
-        $replaces[1] = strval(round(($service->price * floatval($coeff)) / (1000000 * 1000) * 1000, 2));
+        $replaces[0] = strval(round(($service['price'] * floatval($coeff)) / (1000000 * 1000) * 1000 * $usd));
+        $replaces[1] = strval(round(($service['price'] * floatval($coeff)) / (1000000 * 1000) * 1000, 2));
         $this->service_description_replace = preg_replace($patterns, $replaces, $this->service_description);
     }
 }

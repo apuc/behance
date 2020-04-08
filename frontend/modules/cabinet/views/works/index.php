@@ -98,6 +98,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="modal-body">
                     <form id="works-grid-form">
+                        <div class="alert alert-success" role="alert">
+                            <labe><h3><i>Мы рекомендуем накручивать лайки и просмотры равномерно на все работы.</i></h3>
+                                <i>Накрутить по 100 просмотров на 10 работ - намного эффективнее 1000 просмотров на 1 работе.</i>
+                                <i>Если ваша цель - много просмотров на 1 работе, рекомендуем накручивать их постепенно.</i></labe>
+                        </div>
                         <div class="form-group">
                             <labe>Добавить лайков:</labe>
                             <input type="number" name="likes_work"  id="form-likes" class="form-control" value="0" min="0">
@@ -110,6 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <span style="color: red" id="works-form-error"></span>
                             <input type="hidden" name="work_id" id="work-id-input" id="form-views">
                         </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">

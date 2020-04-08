@@ -31,7 +31,7 @@ use mihaildev\elfinder\ElFinder;
 
     <?= $form->field($model, 'service_description')->widget(CKEditor::className(),
         ['editorOptions' => ElFinder::ckeditorOptions('elfinder', ['preset' => 'full', 'inline' => false,])]) ?>
-
+    <p>* - формат указание суммы за 1000 лайков <i>(priceRUB - указать в рублях) (priceUSD - указать в долларах США)</i></p>
     <?= $form->field($model, 'service_seo_title')->textInput()->label('SEO название') ?>
     <?= $form->field($model, 'service_seo_descr')->textInput()->label('SEO описание') ?>
     <?= $form->field($model, 'service_seo_keywords')->textInput()->label('SEO ключевые слова') ?>

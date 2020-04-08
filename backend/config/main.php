@@ -54,6 +54,13 @@ return [
         'vipip-socials' => [
             'class' => 'backend\modules\vipipsocials\VipipSocials',
         ],
+        'history-cash' => [
+            'class' => 'backend\modules\historycash\HistoryCash',
+        ],
+        'social-queue' => [
+            'class' => 'backend\modules\socialqueue\SocialQueue',
+        ],
+
     ],
     'components' =>  [
         'mailer' => [

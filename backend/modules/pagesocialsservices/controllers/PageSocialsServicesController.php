@@ -2,6 +2,7 @@
 
 namespace backend\modules\pagesocialsservices\controllers;
 
+use common\classes\Debug;
 use common\models\PageSocials;
 use common\models\SocialService;
 use Yii;
@@ -118,6 +119,7 @@ class PageSocialsServicesController extends Controller
                     'keywords' => $model->service_seo_keywords,
                 ]
             );
+
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }

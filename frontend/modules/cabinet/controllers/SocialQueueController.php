@@ -282,7 +282,13 @@ class SocialQueueController extends Controller
         $services_obj = SocialService::find()->orderBy(['id_soc' => SORT_ASC])->all();
         $services = [];
         foreach ($services_obj as $service) {
-            $services[$service->type_id] = $service->title;
+            if ($service->system_title != NULL){
+                $services[$service->type_id] = $service->system_title;
+            }
+            else{
+                $services[$service->type_id] = $service->title;
+            }
+
         }
         return $services;
     }

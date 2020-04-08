@@ -30,13 +30,19 @@
         }
       } else {
         //for other url
-        if ($this.attr('href').indexOf(current) !== -1 && current!='cabinet') {
-
+        if ($this.attr('href') == location.pathname  && current!='cabinet') {
           $(this).addClass('active');
           if ($(this).parents('.mdc-expansion-panel').length) {
             $(this).closest('.mdc-expansion-panel').addClass('expanded');
           }
         }
+
+        /*if ($this.attr('href').indexOf(current) !== -1 && current!='cabinet') {
+          $(this).addClass('active');
+          if ($(this).parents('.mdc-expansion-panel').length) {
+            $(this).closest('.mdc-expansion-panel').addClass('expanded');
+          }
+        }*/
       }
     })
 

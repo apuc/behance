@@ -527,7 +527,7 @@ class SocialQueueController extends Controller
                 $wrapper = $this->getWrapper($model->type_id);
                 $status = $wrapper->getJob($model->link_id);
                 if ($status == 1) {
-                    $model->status = 0;
+                    $model->status = 2;
                     $model->balance = $wrapper->getJobBalance();
                     $status = $wrapper->setJobStatus(StatusType::DISABLED()->getValue());
                     if ($status == 1 && $model->save()) {

@@ -18,6 +18,10 @@ use Yii;
  */
 class SocialQueue extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+    const STATUS_PAUSE = 2;
+
     /**
      * {@inheritdoc}
      */
@@ -54,13 +58,23 @@ class SocialQueue extends \yii\db\ActiveRecord
             'balance' => Yii::t('social', 'balance'),
         ];
     }
+
     public function getUser()
     {
-        return $this->hasOne(User::className(),['id'=>'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     public function getType()
     {
-        return $this->hasOne(SocialService::className(),['id'=>'type_id']);
+        return $this->hasOne(SocialService::className(), ['id' => 'type_id']);
+    }
+
+    public static function getStatus($id)
+    {
+        $statuses = [self::STATUS_ACTIVE => 'Работает',
+            self::STATUS_INACTIVE => 'Выполнено',
+            self::STATUS_PAUSE => 'Остановлено'];
+
+        return isset($statuses[$id]) ? $statuses[$id] : null;
     }
 }

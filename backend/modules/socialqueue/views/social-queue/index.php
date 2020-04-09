@@ -73,7 +73,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'status',
-                'filter' => false
+                'value' => function ($data) {
+                    return \common\models\SocialQueue::getStatus($data->status);
+                },
+                'contentOptions' => function ($data) {
+                    return $data->status == 0 ? ['style' => 'color: green'] : ['' => ''];
+                },
             ],
 
         ],

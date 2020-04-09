@@ -98,16 +98,10 @@ $this->registerJs($js);
         [
             'attribute' => 'status',
             'value' => function ($data) {
-        if ($data->status == 1){
-            return 'Работает';
-        }
-        elseif ($data->status == 0 ){
-            return 'Выполнено';
-        }
-        elseif ($data->status == 2){
-            return 'Остановлено';
-        }
-              //  return $data->status == 1 ? 'Работает' : 'Остановлено';
+                return \common\models\SocialQueue::getStatus($data->status);
+            },
+            'contentOptions' => function ($data) {
+                return $data->status == 0 ? ['style' => 'color: green'] : ['' => ''];
             },
             'filter' => [0 => "Выполнено", 1 => "Работает", 2 => "Остановлено"]
         ],

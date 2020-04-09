@@ -41,7 +41,7 @@ class HistoryCashSearch extends HistoryCash
      */
     public function search($params)
     {
-        $query = HistoryCash::find()->with('user')->orderBy("id desc");
+        $query = HistoryCash::find()->with('user');
 
         // add conditions that should always apply here
 

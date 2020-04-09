@@ -148,7 +148,7 @@ $exponent = intval(Settings::getSetting('balance_exponent'));
     <!-- TODO: mb add streamtimer, collapsible geography and calendar -->
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success', 'id' => 'success_button', 'disabled' => true]) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success', 'id' => 'success_button', 'disabled' => true, 'onclick' => 'ym(51223025,\'reachGoal\',\'create_order\'); return true;']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

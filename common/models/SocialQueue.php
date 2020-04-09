@@ -66,7 +66,7 @@ class SocialQueue extends \yii\db\ActiveRecord
 
     public function getType()
     {
-        return $this->hasOne(SocialService::className(), ['id' => 'type_id']);
+        return $this->hasOne(SocialService::className(), ['type_id' => 'type_id']);
     }
 
     public static function getStatus($id)

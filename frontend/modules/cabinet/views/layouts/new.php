@@ -354,7 +354,10 @@ CabinetAsset::register($this);
                 <?php if (Yii::$app->request->url == '/cabinet/accounts' or
                     Yii::$app->request->url == '/cabinet/works' or
                     Yii::$app->request->url == '/cabinet/queue' or
-                    Yii::$app->request->url == '/cabinet/payment'): ?>
+                    Yii::$app->request->url == '/cabinet/payment' or
+                    Yii::$app->request->url == '/cabinet/instruction' or
+                    Yii::$app->request->url == '/cabinet/cabinet/referal' or
+                    Yii::$app->request->url == '/cabinet/history'): ?>
                     <?php if (!empty($balance)): ?>
                         <div class="balance-block">
                         <span class="mdc-toolbar__icon">Лайки:&nbsp;<span

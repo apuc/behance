@@ -49,8 +49,7 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
                             <span class="btn-thumb-circle wow"></span>
                         </span>
               <span>получить <span class="fw-extra-bold"><span
-                    class="btn-number"><?= (Yii::$app->user->isGuest) ? 50 : 100 ?></span> лайков</span>
-                        </span>
+                    class="btn-number">Бонус</span>
             </a>
             <a class="header__more" href="<?= Url::toRoute(['/site/about']); ?>">Узнать подробнее</a>
           </div>
@@ -133,7 +132,7 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
               <a
                 href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                 <button class="btn btn-pink"><span>получить <span class="fw-extra-bold">
-                                        <span class="btn-number"><?= (Yii::$app->user->isGuest) ? 50 : 100 ?></span> лайков</span></span>
+                                        <span class="btn-number">Бонус</span>
                 </button>
               </a>
             </div>
@@ -196,9 +195,23 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
       <div class="container">
         <div class="reviews">
           <div class="d-flex justify-content-center">
-            <h2 class="title"><span class="title-light">Что говорят наши</span><span class="title-extra-bold">Довольные клиенты</span>
+            <h2 class="title"><span class="title-light">Бонус за регистрацию</span>
+                <span class="title-extra-bold" style="font-weight: 500; color: #e32c74; margin: 10px 0px 10px 243px;">Бесплатно</span>
+                <span class="title-extra-bold"><?= \common\models\Settings::getSetting('reg_bonus_likes') ?> лайков и <?= \common\models\Settings::getSetting('reg_bonus_views') ?> просмотров</span>
             </h2>
           </div>
+
+            <div class="d-flex justify-content-center">
+            <a class="btn btn-pink" style="width: 250px"
+               href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/accounts/create']); ?>">
+                        <span class="btn-thumb">
+                            <i class="fa fa-thumbs-up wow"></i>
+                            <span class="btn-thumb-circle wow"></span>
+                        </span>
+                <span>получить <span class="fw-extra-bold"><span
+                                class="btn-number">Бонус</span>
+            </a>
+            </div>
           <div class="reviews__slider">
               <?php if (isset($reviews)): ?>
                   <?php foreach ($reviews as $review): ?>

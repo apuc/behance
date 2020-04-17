@@ -105,7 +105,7 @@ class AuthService
        $authorRole = $auth->getRole('user');
        $auth->assign($authorRole, $user->id);
 
-       Balance::create($user->id,50,200);
+       Balance::create($user->id,Settings::getSetting('reg_bonus_likes'),Settings::getSetting('reg_bonus_views'));
        BalanceCash::create($user->id, 0);
 
        User::updateAll(['status'=>User::STATUS_ACTIVATED],['id'=>$user->id]);

@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use common\behance\BehanceService;
 use common\behance\lib\BehanceAccount;
+use yii\helpers\Html;
 
 
 /**
@@ -73,7 +74,7 @@ class Accounts extends \yii\db\ActiveRecord
         {
             if($this->find()->where(['behance_id' => $account->behanceId])->limit(1)->one())
             {
-                throw  new \Exception('Аккаунт уже добавленн!');
+                throw  new \Exception('Указанный профиль Behance уже был привязан к другому аккаунты, если Вы этого не делали, напишите нам: '. Html::a('написать','https://vk.com/betop.spase') );
             }
 
             $this->behance_id = (integer)$account->behanceId;

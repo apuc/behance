@@ -1,7 +1,9 @@
 <?php
+
 namespace frontend\modules\cabinet\models;
 
 use Yii;
+
 /**
  *
  * @property int $id
@@ -41,13 +43,13 @@ class SocialQueueForm extends \common\models\SocialQueue
     {
         $rules = parent::rules();
         $rules[] = [
-            ['type_id'], 'required', 'when' => function($model) {
+            ['type_id'], 'required', 'when' => function ($model) {
                 return empty($model->type_id);
             }, 'message' => 'Тип услуги обязательно должен быть выбран'
         ];
         $rules[] = [['social', 'answer_id', 'age_min', 'age_max', 'balance', 'friends_id', 'price'], 'integer'];
         $rules[] = [
-            ['balance'], 'required', 'when' => function($model) {
+            ['balance'], 'required', 'when' => function ($model) {
                 return empty($model->balance);
             }, 'message' => 'Не должен быть пустым или содержать что-то кроме цифр'
         ];
@@ -73,11 +75,20 @@ class SocialQueueForm extends \common\models\SocialQueue
         return $labels;
     }
 
-    public function swapAge() {
+    public function swapAge()
+    {
         if ($this->age_min > $this->age_max) {
             $buff = $this->age_min;
             $this->age_min = $this->age_max;
             $this->age_max = $buff;
+        }
+    }
+
+    public function beforeValidate()
+    {
+        if (parent::beforeValidate()) {
+            $this->link = trim($this->link);
+            return true;
         }
     }
 }

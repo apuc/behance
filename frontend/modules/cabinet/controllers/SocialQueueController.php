@@ -143,11 +143,15 @@ class SocialQueueController extends Controller
                                     $balance_cash->removeFromBalance($model->price);
                                     $this->redirect(['index']);
                                 } else {
+                                    $error = $wrapper->getError();
                                     $wrapper->deleteCurrentJob();
                                     // default error will be used if Job couldn't be created
                                     // will pretty much be spammin 'till someone adds funds
                                     $this->sendBalanceEmail(Settings::getSetting('balance_handler_email'));
                                 }
+                            }
+                            else {
+                                $error = $wrapper->getError();
                             }
                             // default error will be used if Job couldn't be created
                         }

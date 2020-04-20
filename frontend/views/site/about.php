@@ -51,7 +51,7 @@ $this->registerCssFile('/css/service.css', ['depends' => ['yii\bootstrap\Bootstr
                                 <span class="btn-thumb-circle wow"></span>
                             </span>
                             <span>получить <span class="fw-extra-bold"><span
-                                            class="btn-number"><?= (Yii::$app->user->isGuest) ? 50 : 100; ?></span> лайков</span></span>
+                                            class="btn-number">Бонус</span>
                         </a>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ $this->registerCssFile('/css/service.css', ['depends' => ['yii\bootstrap\Bootstr
 </svg>
                                     <a href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                                         <button class="btn btn-pink"><span>получить <span class="fw-extra-bold">
-                                        <span class="btn-number"><?= (Yii::$app->user->isGuest) ? 50 : 100 ?></span> лайков</span></span>
+                                        <span class="btn-number">Бонус</span>
                                         </button>
                                     </a>
                                 </div>

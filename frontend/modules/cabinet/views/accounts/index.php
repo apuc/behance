@@ -76,10 +76,10 @@ $this->title = 'Аккаунты';
               }
             ],
 
-            [
+            /*[
                     'class' => 'yii\grid\ActionColumn',
                 'template'=>'{delete}'
-            ],
+            ],*/
         ],
     ]); ?>
 

@@ -12,7 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true,
+        'placeholder' => 'Вставьте ссылку на свой профиль на Behance']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Добавить', [

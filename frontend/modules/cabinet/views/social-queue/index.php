@@ -98,9 +98,12 @@ $this->registerJs($js);
         [
             'attribute' => 'status',
             'value' => function ($data) {
-                return $data->status == 1 ? 'Работает' : 'Остановлено';
+                return \common\models\SocialQueue::getStatus($data->status);
             },
-            'filter' => [0 => "Остановлено", 1 => "Работает"]
+            'contentOptions' => function ($data) {
+                return $data->status == 0 ? ['style' => 'color: green'] : ['' => ''];
+            },
+            'filter' => [0 => "Выполнено", 1 => "Работает", 2 => "Остановлено"]
         ],
         'dt_add',
         [
@@ -109,7 +112,7 @@ $this->registerJs($js);
             'header' => 'Действия',
             'buttons' => [
                 'turn-on' => function ($url, $model) {
-                    if ($model->balance > 0 && $model->status == 0) {
+                    if ($model->balance > 0 && $model->status == 2) {
                         return Html::a('<span class="glyphicon glyphicon-play-circle fa-lg"></span>', false, [
                             'class' => 'pjax-turn-on',
                             'turn-on-url' => $url,

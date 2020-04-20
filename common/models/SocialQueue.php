@@ -18,6 +18,10 @@ use Yii;
  */
 class SocialQueue extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+    const STATUS_PAUSE = 2;
+
     /**
      * {@inheritdoc}
      */
@@ -45,13 +49,32 @@ class SocialQueue extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('social', 'ID'),
-            'user_id' => Yii::t('social', 'user'),
-            'link_id' => Yii::t('social', 'link'),
+            'user_id' => Yii::t('history', 'User ID'),
+            'link_id' => Yii::t('social', 'VipIP_ID'),
             'type_id' => Yii::t('social', 'type'),
             'dt_add' => Yii::t('social', 'date'),
             'status' => Yii::t('social', 'status'),
-            'url' => Yii::t('social', 'url'),
+            'url' => Yii::t('social', 'URL'),
             'balance' => Yii::t('social', 'balance'),
         ];
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getType()
+    {
+        return $this->hasOne(SocialService::className(), ['type_id' => 'type_id']);
+    }
+
+    public static function getStatus($id)
+    {
+        $statuses = [self::STATUS_ACTIVE => 'Работает',
+            self::STATUS_INACTIVE => 'Выполнено',
+            self::STATUS_PAUSE => 'Остановлено'];
+
+        return isset($statuses[$id]) ? $statuses[$id] : null;
     }
 }

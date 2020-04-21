@@ -2,6 +2,7 @@
 
 namespace frontend\modules\cabinet\controllers;
 
+use common\classes\Debug;
 use common\classes\SendMail;
 use common\models\BalanceCash;
 use common\models\HistoryCash;
@@ -134,6 +135,8 @@ class SocialQueueController extends Controller
                                     $actual_model->type_id = $model->type_id;
                                     $actual_model->url = $model->link;
                                     $actual_model->balance = $model->balance;
+                                    $actual_model->quantity = $model->balance;
+                                    $actual_model->sum = strval(round($model->price / \common\models\Settings::getSetting('balance_exponent'), 3));
                                     $status = $actual_model->save();
                                     HistoryCash::create(
                                         $user,

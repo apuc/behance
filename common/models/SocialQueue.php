@@ -15,6 +15,8 @@ use Yii;
  * @property string|null $dt_add
  * @property string|null $url
  * @property int|null $status
+ * @property int|null $quantity
+ * @property int|null $sum
  */
 class SocialQueue extends \yii\db\ActiveRecord
 {
@@ -36,7 +38,7 @@ class SocialQueue extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'link_id', 'type_id', 'status', 'balance'], 'integer'],
+            [['user_id', 'link_id', 'type_id', 'status', 'balance', 'quantity', 'sum'], 'integer'],
             [['dt_add'], 'safe'],
             [['url'], 'string'],
         ];
@@ -56,6 +58,8 @@ class SocialQueue extends \yii\db\ActiveRecord
             'status' => Yii::t('social', 'status'),
             'url' => Yii::t('social', 'URL'),
             'balance' => Yii::t('social', 'balance'),
+            'quantity' => Yii::t('social', 'Количество'),
+            'sum' => Yii::t('social', 'Сумма' . ' $'),
         ];
     }
 

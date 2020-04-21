@@ -57,9 +57,9 @@ class SocialQueue extends \yii\db\ActiveRecord
             'dt_add' => Yii::t('social', 'date'),
             'status' => Yii::t('social', 'status'),
             'url' => Yii::t('social', 'URL'),
-            'balance' => Yii::t('social', 'balance'),
+            'balance' => Yii::t('social', '...'),
             'quantity' => Yii::t('social', 'Количество'),
-            'sum' => Yii::t('social', 'Сумма' . ' $'),
+            'sum' => Yii::t('social', '$'),
         ];
     }
 

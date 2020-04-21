@@ -54,6 +54,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'amount',
+                'value' => function($data){
+                   return strval(round($data['amount'] / \common\models\Settings::getSetting('balance_exponent'), 3));
+                },
                 'filter' => false
             ],
 

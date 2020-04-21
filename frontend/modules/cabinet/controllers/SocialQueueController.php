@@ -136,7 +136,7 @@ class SocialQueueController extends Controller
                                     $actual_model->url = $model->link;
                                     $actual_model->balance = $model->balance;
                                     $actual_model->quantity = $model->balance;
-                                    $actual_model->sum = strval(round($model->price / \common\models\Settings::getSetting('balance_exponent'), 3));
+                                    $actual_model->sum =$model->price;
                                     $status = $actual_model->save();
                                     HistoryCash::create(
                                         $user,

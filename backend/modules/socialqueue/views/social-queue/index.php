@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\socialqueue\models\SocialQueueSearch */
@@ -73,12 +74,12 @@ JS;
 
 $this->registerJs($js);
 ?>
-<div class="history-index">
+<div class="social-queue-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php \yii\widgets\Pjax::begin(['id' => 'my_pjax']); ?>
+    <?php Pjax::begin(['id' => 'my_pjax']); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -201,6 +202,6 @@ $this->registerJs($js);
         ],
     ]); ?>
 
-    <?php \yii\widgets\Pjax::end(); ?>
+    <?php Pjax::end(); ?>
 
 </div>

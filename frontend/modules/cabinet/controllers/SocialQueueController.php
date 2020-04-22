@@ -475,6 +475,9 @@ class SocialQueueController extends Controller
                 if ($status == 1) {
                     $model->status = $wrapper->getJobStatus()->getValue() == StatusType::ENABLED()->getValue() ? 1 : 0;
                     $model->balance = $wrapper->getJobBalance();
+                    if ($model->status == 0 && $model->balance > 0){
+                        $model->status = 2;
+                    }
                     if ($model->save()) {
                         return ['success' => true];
                     }

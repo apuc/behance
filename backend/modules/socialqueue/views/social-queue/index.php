@@ -78,7 +78,7 @@ $this->registerJs($js);
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-
+    <?php \yii\widgets\Pjax::begin(['id' => 'my_pjax']); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -200,4 +200,7 @@ $this->registerJs($js);
 
         ],
     ]); ?>
+
+    <?php \yii\widgets\Pjax::end(); ?>
+
 </div>

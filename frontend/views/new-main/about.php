@@ -41,16 +41,18 @@ $this->registerCssFile('/css/styles.css', ['depends' => ['yii\bootstrap\Bootstra
             <div class="container">
                 <?= $this->render('header-menu'); ?>
                 <div class="header__phone">
-                    <?= \frontend\widgets\BehancePhoneWidget::widget(['userIsGuest' => Yii::$app->user->isGuest]); ?>
-                    <div class="header__phone-text">
+                    <img class="header__phone-img" src="/images/new-phone.png" alt="" role="presentation">
+                    <div class="header__phone-text" style=" left: 220px; ">
                         <a class="btn btn-pink"
                            href="<?= (Yii::$app->user->isGuest) ? Url::toRoute(['site/signup']) : Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                             <span class="btn-thumb">
                                 <i class="fa fa-thumbs-up wow"></i>
                                 <span class="btn-thumb-circle wow"></span>
                             </span>
-                            <span>получить <span class="fw-extra-bold"><span
-                                            class="btn-number"><?= (Yii::$app->user->isGuest) ? 50 : 100; ?></span> лайков</span></span>
+                            <span>получить <span class="fw-extra-bold"><!--<span
+                                            class="btn-number"><?/*= (Yii::$app->user->isGuest) ? 50 : 100; */?></span> лайков</span></span>-->
+                                    <span
+                                            class="btn-number">50</span> лайков</span></span>
                         </a>
                     </div>
                 </div>

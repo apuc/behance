@@ -122,7 +122,7 @@ $this->registerCssFile('/css/social/styles.css')
                             foreach ($social->pageSocialsServices as $serv) {
                             if ($serv->id != $service->id) { ?>
                             <li>
-                                <a href="<?= Url::to(['new-main/social/' . $serv->service_page_link]) ?>"><?= $serv->service_title ?></a>
+                                <a href="<?= Url::to(['social/' . $serv->service_page_link]) ?>"><?= $serv->service_title ?></a>
                             <li>
                                 <?php }
                                 } ?>

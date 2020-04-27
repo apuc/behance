@@ -10,11 +10,15 @@ use common\models\Settings;
 use frontend\assets\CabinetAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use common\models\SupportQuestions;
 
 
 $balance = Balance::find()->where(['user_id' => Yii::$app->user->getId()])->one();
 $balance_cash = BalanceCash::find()->where(['user_id' => Yii::$app->user->getId()])->one();
 $exponent = intval(Settings::getSetting('balance_exponent'));
+$support_count = SupportQuestions::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 2])->count();
+if ($support_count == 0)
+    $support_count = '';
 CabinetAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -284,6 +288,15 @@ CabinetAsset::register($this);
                         </a>
                     </div>
 
+                    <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/support') ?>">
+                            <i class="fa fa-headphones" style="visibility: visible;"></i>
+                            <span>Тех. Поддержка </span><!--<small class="label pull-right bg-red"> <?/*= $support_count */?></small></span>-->
+                            <b style="color:blue;"> &nbsp <?= $support_count ?></b>
+                        </a>
+
+                    </div>
+
                     <!--
                         <div class="mdc-list-item mdc-drawer-item">
                             <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/cabinet/referal') ?>">
@@ -351,25 +364,25 @@ CabinetAsset::register($this);
         <div class="mdc-toolbar__row">
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                 <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
-                <?php if (Yii::$app->request->url == '/cabinet/accounts' or
+               <!-- --><?php /*if (Yii::$app->request->url == '/cabinet/accounts' or
                     Yii::$app->request->url == '/cabinet/works' or
                     Yii::$app->request->url == '/cabinet/queue' or
                     Yii::$app->request->url == '/cabinet/payment' or
                     Yii::$app->request->url == '/cabinet/instruction' or
                     Yii::$app->request->url == '/cabinet/cabinet/referal' or
-                    Yii::$app->request->url == '/cabinet/history'): ?>
+                    Yii::$app->request->url == '/cabinet/history'): */?>
                     <?php if (!empty($balance)): ?>
                         <div class="balance-block">
-                        <span class="mdc-toolbar__icon">Лайки:&nbsp;<span
+                        <span class="mdc-toolbar__icon">Лайки behance:&nbsp;<span
                                     id="balance_likes"><?= $balance->likes ?></span></span>
                         </div>
 
                         <div class="balance-block">
-                        <span class="mdc-toolbar__icon">Просмотры:&nbsp;<span
+                        <span class="mdc-toolbar__icon">Просмотры behance:&nbsp;<span
                                     id="balance_views"><?= $balance->views ?></span></span>
                         </div>
                     <?php endif; ?>
-                <?php endif; ?>
+                <?php /*endif; */?>
                 <?php if (!empty($balance_cash)): ?>
                     <div class="balance-block">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment-cash']); ?>">

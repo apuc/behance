@@ -51,7 +51,7 @@ $this->registerCssFile('/css/main.css', ['depends' => ['yii\bootstrap\BootstrapA
               <span>получить <span class="fw-extra-bold"><span
                     class="btn-number">Бонус</span>
             </a>
-            <a class="header__more" href="<?= Url::toRoute(['/site/about']); ?>">Узнать подробнее</a>
+            <a class="header__more" href="<?= Url::toRoute(['/about']); ?>">Узнать подробнее</a>
           </div>
         </div>
       </div>

@@ -60,6 +60,9 @@ return [
         'social-queue' => [
             'class' => 'backend\modules\socialqueue\SocialQueue',
         ],
+        'support' => [
+            'class' => 'backend\modules\support\Support',
+        ],
 
     ],
     'components' =>  [

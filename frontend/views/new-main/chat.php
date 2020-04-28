@@ -139,16 +139,18 @@ use yii\helpers\Url;
                                 </div>
                                 <div class="modal-body">
                                     <img src="/images/uploaded/vk.png" style="/home/oem/Загрузки/telegram.pngwidth: 75px;" alt="">
+                                    <a class="footer__nav-item" href="https://vk.com/im?invite_chat_id=8589934592396905586&invite_hash=1zI5YfiaKPMTPw==">
                                     <button id="vk-butt">
                                         <p>Вконтакте <span></span></p>
-                                        <a class="footer__nav-item" href="#"></a>
                                     </button>
+                                    </a>
                                     <br>
                                     <img src="/images/uploaded/telegram.png" style="width: 125px" alt="">
+                                    <a class="footer__nav-item" href="#">
                                     <button id="telegram-butt" >
                                         <p>Телеграм <span></span></p>
-                                        <a class="footer__nav-item" href="#"></a>
                                     </button>
+                                    </a>
                                 </div>
                                 <div class="modal-footer">
                                     <!--<h3>Мы ждем Вас</h3>-->

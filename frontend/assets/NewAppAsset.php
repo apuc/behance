@@ -17,12 +17,15 @@ class NewAppAsset extends AssetBundle
         'css/font-awesome.css',
         'css/secret-styles.css',
         'css/styles.css',
-        'css/correct_main.css'
+        'css/correct_main.css',
+        '/css/style_chatBehance.css',
+        'css/chat.css'
     ];
     public $js = [
         'js/slick.min.js',
         'js/wow.min.js',
         'js/script.js',
+        '/js/chat.js',
         'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
     ];
     public $depends = [

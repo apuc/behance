@@ -289,4 +289,9 @@ class NewMainController extends Controller
             'model' => $form,
         ]);
     }
+
+    public function actionChat()
+    {
+        return $this->render('chat');
+    }
 }

@@ -74,6 +74,9 @@ if($seo)
                           <div class="item-description">
                               <p><a href="<?= Url::to(['/behance']) ?>">Накрутка просмотров Behance</a></p>
                           </div>
+                          <div class="item-description">
+                              <p><a href="<?= Url::to(['/behance/chat']) ?>">Накрутка комментариев Behance</a></p>
+                          </div>
                       </div>
                       <?php
                         foreach ($socials as $social) { ?>

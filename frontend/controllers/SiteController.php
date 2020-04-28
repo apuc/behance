@@ -267,4 +267,5 @@ class SiteController extends Controller
             'model' => $form,
         ]);
     }
+
 }

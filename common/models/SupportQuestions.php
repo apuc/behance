@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $description
  * @property int $status
  * @property int $user_id
+ * @property int $date_add
  */
 
 class SupportQuestions extends ActiveRecord
@@ -39,6 +40,7 @@ class SupportQuestions extends ActiveRecord
         return [
             [['id', 'status', 'user_id'], 'integer'],
             [['title', 'description'], 'string'],
+            [['date_add'], 'safe'],
         ];
     }
 
@@ -53,6 +55,7 @@ class SupportQuestions extends ActiveRecord
             'description' => Yii::t('support', 'Описание'),
             'status' => Yii::t('support', 'Статус'),
             'user_id' => Yii::t('support', 'Email'),
+            'date_add' => Yii::t('support', 'Дата'),
         ];
     }
 

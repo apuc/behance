@@ -15,9 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <p>
     <?php if ($model->status == 3): ?>
         <?= Html::a(Yii::t('support', 'Вернуться назад'), ['index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Открыть обращение',\yii\helpers\Url::toRoute('/support/support/open/?id=' . $model->id),['class'=>'btn btn-warning']) ?>
     <?php else: ?>
         <?= Html::a(Yii::t('support', 'Вернуться назад'), ['index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Закрыть обращение',\yii\helpers\Url::toRoute('/support/support/close/?id=' . $model->id),['class'=>'btn btn-warning']) ?>
+        <?= Html::a('Закрыть обращение',\yii\helpers\Url::toRoute('/support/support/close/?id=' . $model->id),['class'=>'btn btn-danger']) ?>
+
     <?php endif; ?>
 </p>
 <div class="support-view">
@@ -30,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'title',
             'description',
+            'date_add',
             //'status',
             [
                 'label' => 'Статус',

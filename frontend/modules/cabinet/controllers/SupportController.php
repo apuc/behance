@@ -72,6 +72,7 @@ class SupportController extends Controller
         $model = new SupportQuestions();
         if ($model->load(Yii::$app->request->post())) {
             $model->user_id = Yii::$app->user->identity->id;
+            $model->date_add = new \yii\db\Expression('NOW()');
             $model->status = 1;
             $model->save();
             return $this->redirect('index');

@@ -50,6 +50,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return \common\models\SupportQuestions::getStatus($data->status);
                 },
             ],
+            [
+                'attribute' => 'date_add',
+                'filter' => false
+            ],
             /*[
                 'class' => 'yii\grid\ActionColumn',
                 'template'=>'{view}'

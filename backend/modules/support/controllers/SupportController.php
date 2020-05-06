@@ -72,6 +72,14 @@ class SupportController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionOpen($id)
+    {
+        $model = $this->findModel($id);
+        $model->status = 1;
+        $model->save();
+        return $this->redirect(['index']);
+    }
+
     /**
      * @param $id
      * @return SupportQuestions|null

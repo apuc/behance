@@ -7,10 +7,11 @@
     });
 
     /* Dropdown */
-    $('[data-toggle="dropdown"]').on('click', function() {
+    $('[data-toggle="dropdown"]').on('click touchstart', function() {
       var menuEl = document.querySelector('#' + $(this).attr("toggle-dropdown"));
       var menu = new mdc.menu.MDCSimpleMenu(menuEl);
       menu.open = !menu.open;
+      return false;
     });
 
     mdc.autoInit();

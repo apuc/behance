@@ -54,10 +54,13 @@ class SocialQueueController extends Controller
 
         $services = $this->getSocialServices();
 
+        $mod = SocialQueue::findOne(Yii::$app->user->id);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'services' => $services
+            'services' => $services,
+            'mod' => $mod
         ]);
     }
 

@@ -57,7 +57,7 @@ if (Yii::$app->controller->action->id == 'about') {
       <?php endif; ?>
 
       <?php if (!Yii::$app->user->isGuest): ?>
-          <a href="<?= Url::toRoute(['/cabinet']); ?>" class="btn btn-pink">Кабинет</a>
+          <a href="<?= Url::toRoute(['/cabinet/social-queue']); ?>" class="btn btn-pink">Кабинет</a>
 <!--        <a class="header__icon" href="--><?//= Url::toRoute(['/cabinet']); ?><!--">-->
 <!--          <img src="--><?//= $cabinetIcon ?><!--"/>-->
 <!--        </a>-->

@@ -2,7 +2,9 @@
 
 use common\models\ContactForm;
 use common\models\Callback;
+use common\models\Settings;
 use common\models\SupportQuestions;
+use VipIpRuClient\Request\Request;
 
 $contact_count = ContactForm::find()->where(['status' => 0])->count();
 $callback_count = Callback::find()->where(['status' => 0])->count();
@@ -17,6 +19,10 @@ if ($callback_count == 0)
 if ($support_count == 0)
     $support_count = '';
 
+$request = new Request();
+$request->setLink('https://api.vipip.ru/v0.1/user/balance?access_token='. Settings::getSetting('access_token'));
+$balance = $request->get();
+
 ?>
 <aside class="main-sidebar">
 
@@ -29,8 +35,13 @@ if ($support_count == 0)
             </div>
             <div class="pull-left info">
                 <p><?= Yii::$app->user->identity->email ?></p>
-
                 <a href="/">Перейти на главную</a>
+                <?php foreach ($balance as $value):?>
+                <p>
+                    <?=$value = strval(round( $value, 2));?>$
+                <?php endforeach; ?>
+                <a href="" class="fa fa-refresh"></a>
+                </p>
             </div>
         </div>
 

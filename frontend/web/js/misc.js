@@ -14,6 +14,9 @@
     document.querySelector('.menu-toggler').addEventListener('click', function() {
       drawer.open = !drawer.open;
     });
+    if ($(window).width() <= 600) {
+      $(".mdc-persistent-drawer").removeClass("mdc-persistent-drawer--open");
+    }
 
     //Add active class to nav-link based on url dynamically
     //Active class can be hard coded directly in html file also as required

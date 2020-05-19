@@ -3,11 +3,13 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\modules\cabinet\models\SocialQueueSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $services array */
+/* @var $mod array */
 
 $this->title = 'Просмотр задач накрутки';
 $this->params['breadcrumbs'][] = $this->title;
@@ -75,6 +77,7 @@ JS;
 $this->registerJs($js);
 ?>
 <div class="social-works-index">
+    <?php if($mod):?>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -82,10 +85,11 @@ $this->registerJs($js);
         <?= Html::a('Создать задачу', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+
     <?php $this->render('_search', ['model' => $searchModel]); ?>
     <?php
     $columns = [
-        ['class' => 'yii\grid\SerialColumn'],
+        'id',
         [
             'attribute' => 'type_id',
             'value' => function ($data) use ($services) {
@@ -93,7 +97,12 @@ $this->registerJs($js);
             },
             'filter' => $services,
         ],
-        'url',
+        [
+            'attribute' => 'url',
+            'contentOptions' => ['class' => 'social-queue-url'],
+            'filter' => false
+        ],
+        'quantity',
         'balance',
         [
             'attribute' => 'status',
@@ -105,7 +114,13 @@ $this->registerJs($js);
             },
             'filter' => [0 => "Выполнено", 1 => "Работает", 2 => "Остановлено"]
         ],
-        'dt_add',
+        [
+            'attribute' => 'dt_add',
+            'value' => function ($data) {
+                return Yii::$app->formatter->asDate($data->dt_add, 'yy-MM-dd') . ' ' . Yii::$app->formatter->asTime($data->dt_add, 'php:H:i');
+            },
+            'filter' => false,
+        ],
         [
             'class' => 'yii\grid\ActionColumn',
             'template' => '{turn-on} {turn-off} {refresh}',
@@ -157,5 +172,18 @@ $this->registerJs($js);
         'columns' => $columns,
     ]); ?>
     <?php Pjax::end(); ?>
+
+    <?php else: ?>
+    <h1>Это ваш личный кабинет</h1>
+    <h3>Виберите что хотите сделать:</h3>
+        <div class="body">
+            <a class='btn btn-pink btn-works-grid' href="<?= Url::toRoute(['/cabinet/social-queue/create']); ?>">
+                    <h3>Создание задачи накрутки<span></span></h3>
+            </a>
+            <a class='btn btn-pink btn-works-grid' href="<?= Url::toRoute(['/cabinet/payment-cash']); ?>">
+                    <h3>Пополнить баланс<span></span></h3>
+            </a>
+        </div>
+    <?php endif; ?>
 
 </div>

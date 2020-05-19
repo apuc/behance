@@ -17006,6 +17006,11 @@ footer {
       font-size: 1rem; }
 
 /* Sidebar */
+@media screen and (max-width: 600px) {
+  .mdc-persistent-drawer--open + .mdc-toolbar{
+    width: 100%;
+  }
+}
 .mdc-persistent-drawer {
   position: fixed;
   top: 0;
@@ -18014,6 +18019,10 @@ text-align:center;
   margin-bottom: 5px;
   padding: 10px;
   display: none;
+}
+.social-queue-url {
+  width: 155px;
+  white-space: pre-line;
 }
 /*-------------------------------------------------------------------*/
 

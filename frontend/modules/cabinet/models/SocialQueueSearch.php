@@ -23,7 +23,7 @@ class SocialQueueSearch extends SocialQueue
     public function rules()
     {
         return [
-            [['user_id', 'link_id', 'type_id', 'status', 'balance'], 'integer'],
+            [['user_id', 'link_id', 'type_id', 'status', ], 'integer'],
             [['dt_add'], 'safe'],
             [['url'], 'string'],
         ];
@@ -67,7 +67,7 @@ class SocialQueueSearch extends SocialQueue
            'link_id' => $this->link_id,
            'type_id' => $this->type_id,
            'status' => $this->status,
-           'balance' => $this->balance,
+           /*'balance' => $this->balance,*/
        ]);
        $query->andFilterWhere(['like', 'url', $this->url]);
        $query->andFilterWhere(['like', 'dt_add', $this->dt_add,]);

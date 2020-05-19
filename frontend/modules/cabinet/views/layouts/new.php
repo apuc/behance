@@ -373,12 +373,12 @@ CabinetAsset::register($this);
                     Yii::$app->request->url == '/cabinet/history'): */?>
                     <?php if (!empty($balance)): ?>
                         <div class="balance-block">
-                        <span class="mdc-toolbar__icon">Лайки behance:&nbsp;<span
+                        <span class="mdc-toolbar__icon" style="width: max-content">Лайки Behance:&nbsp;<span
                                     id="balance_likes"><?= $balance->likes ?></span></span>
                         </div>
 
                         <div class="balance-block">
-                        <span class="mdc-toolbar__icon">Просмотры behance:&nbsp;<span
+                        <span class="mdc-toolbar__icon" style="width: max-content">Просмотры Behance:&nbsp;<span
                                     id="balance_views"><?= $balance->views ?></span></span>
                         </div>
                     <?php endif; ?>

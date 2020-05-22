@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="support-index-answers">
     <?php foreach ($model->answer as $value): ?>
 <b style="color:#268bd2"><?= \common\models\SupportAnswers::getStatus($value->status); ?></b>
-        <br><?= $value->text ?></br>
+       <br><?= $value->text ?></br>
         <?php $date = new DateTime($value->date_add); ?>
         <i style="color: grey;"><?= $date->format('Y-m-d H:i')?></i></br><br>
     <?php endforeach;?>

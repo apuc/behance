@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use mihaildev\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model0 common\models\SupportAnswers*/
@@ -11,7 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model0, 'text')->textInput(['maxlength' => true]) ?>
+    <?php echo $form->field($model0, 'text')->widget(CKEditor::className(), [
+        'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
+            'preset' => 'min',
+            'inline' => false,
+            'path' => 'frontend/web/media/upload',
+        ]),
+    ]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Ответить', ['class' => 'btn btn-success']) ?>

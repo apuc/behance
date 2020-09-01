@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Enter</title>
+  <link href="assets/1a4df36/css/bootstrap.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+  <link href="css/bootstrap-grid.min.css" rel="stylesheet">
+  <link href="css/slick.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/secret-styles.css" rel="stylesheet">
+</head>
+<body>
+<div class="root">
+  <header class="header-wrap header-wrap-auth">
+    <div class="header__stars1 header__stars">
+      <div class="stars"></div>
+      <div class="stars2"></div>
+      <div class="stars3"></div>
+    </div>
+
+    <div class="container auth-form-wrap">
+      <button type="button" class="btn btn-pink js-boom">BOOM</button>
+      <button type="button" class="btn btn-pink js-bam">BAM</button>
+    </div>
+  </header>
+
+  <div class="modal-callback js-modalProgress">
+    <div class="modal-callback__backdrop js-closeModalProgress"></div>
+
+    <div class="form__block form__main">
+      <div class="callback callback_modal">
+        <button class="form__close js-closeModalProgress">
+          <span></span><span></span>
+        </button>
+
+        <div class="modal-callback__container">
+          <img src="images/icons/loader.png" alt="">
+          <h3 class="modal-progress__title">Задача в работе</h3>
+
+          <p class="modal-callback__text modal-callback__text_progress">Теперь вы станете на <br> <strong>XX лайков</strong> и <strong>YYY просмотров</strong>
+            <br> популярнее.</p>
+
+            <div class="btn-arrow btn-arrow_callback">
+              <svg class="arrow-svg arrow-svg_callback" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9"
+                             style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
+              <path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow wow"
+                    d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1"/>
+                                          <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1 wow"
+                                                d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58"/>
+                                          <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2 wow"
+                                                d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9"/>
+              </svg>
+              <a href="#" class="btn btn-pink">Перейти в лайкер</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-callback js-modalRegDone">
+    <div class="modal-callback__backdrop js-closeModalRegDone"></div>
+
+    <div class="form__block form__main">
+      <div class="callback callback_modal">
+        <button class="form__close js-closeModalRegDone">
+          <span></span><span></span>
+        </button>
+
+        <div class="modal-callback__container">
+          <img src="images/icons/heart.png" alt="">
+          <h3 class="modal-progress__title">Спасибо за регистрацию</h3>
+
+          <p class="modal-callback__text modal-callback__text_progress">Вам начислено <br> <strong><?php echo common\models\Settings::getSetting('referal_likes') ?> лайков</strong> и <strong><?php echo common\models\Settings::getSetting('referal_views')?> просмотров</strong>
+            <br> БЕСПЛАТНО</p>
+
+          <div class="btn-arrow btn-arrow_callback">
+            <svg class="arrow-svg arrow-svg_callback" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9"
+                             style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
+              <path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow wow"
+                    d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1"/>
+                                          <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1 wow"
+                                                d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58"/>
+                                          <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2 wow"
+                                                d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9"/>
+              </svg>
+            <a href="#" class="btn btn-pink">Потратить лайки</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const inProgress = document.querySelector('.js-boom');
+    const regDone = document.querySelector('.js-bam');
+    const modalInProgress = document.querySelector('.js-modalProgress');
+    const closeModalInProgress = document.querySelector('.js-closeModalProgress');
+    const modalRegDone = document.querySelector('.js-modalRegDone');
+    const closeModalRegDone = document.querySelector('.js-closeModalRegDone');
+
+    inProgress.addEventListener('click', e => {
+      modalInProgress.classList.add('modal-callback_active');
+    });
+
+    closeModalInProgress.addEventListener('click', e => {
+      modalInProgress.classList.remove('modal-callback_active');
+    });
+
+    regDone.addEventListener('click', e => {
+      modalRegDone.classList.add('modal-callback_active');
+    });
+
+    closeModalRegDone.addEventListener('click', e => {
+      modalRegDone.classList.remove('modal-callback_active');
+    });
+
+  })
+</script>
+</body>
+</html>

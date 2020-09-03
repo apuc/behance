@@ -41,9 +41,10 @@ class SocialQueueController extends Controller
             ],
         ];
     }
+
     /**
-     * Lists all SocialQueue models.
-     * @return mixed
+     * @return string
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionIndex()
     {
@@ -201,8 +202,9 @@ class SocialQueueController extends Controller
     }
 
     /**
-     * @param $inputs array contains strings of needed variables
-     * @param $model SocialQueueForm form with values
+     * @param $inputs
+     * @param $model
+     * @return array
      */
     private function setParamsWrapper($inputs, $model)
     {
@@ -283,7 +285,9 @@ class SocialQueueController extends Controller
         $socials = [];
         foreach (Social::find()->all() as $social)
         {
-            $socials[$social->id] = $social->name;
+            if ($social->status !== Social::NOT_ACTIVE_SOCIAL) {
+                $socials[$social->id] = $social->name;
+            }
         }
         return $socials;
     }

@@ -1,13 +1,14 @@
 <?php
+
 namespace backend\controllers;
 
 
-use Yii;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\services\AuthService;
+use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\Controller;
 
 /**
  * Site controller
@@ -15,6 +16,13 @@ use common\services\AuthService;
 class SiteController extends Controller
 {
     private $authService;
+
+    public function __construct($id, $module, array $config = [], AuthService $authService)
+    {
+        $this->authService = $authService;
+        parent::__construct($id, $module, $config);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -61,12 +69,6 @@ class SiteController extends Controller
         ];
     }
 
-
-    public function __construct($id,$module,array $config = [],AuthService $authService)
-    {
-        $this->authService = $authService;
-        parent::__construct($id, $module, $config);
-    }
     /**
      * Displays homepage.
      *
@@ -74,7 +76,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if(Yii::$app->user->isGuest || (!Yii::$app->user->can('admin') && !Yii::$app->user->can('manager'))){
+        if (Yii::$app->user->isGuest || (!Yii::$app->user->can('admin') && !Yii::$app->user->can('manager'))) {
             return $this->redirect('error');
         }
 
@@ -90,8 +92,7 @@ class SiteController extends Controller
     {
         $form = new LoginForm();
 
-        if ($form->load(Yii::$app->request->post()) && $form->validate())
-        {
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             $this->authService->login($form->email);
             return $this->goHome();
         }

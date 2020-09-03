@@ -26,7 +26,7 @@
         "xtarantulz/yii2-input-img-preview": "dev-master",
         "mihaildev/yii2-ckeditor": "dev-master",
         "craft-group/vipipru_client": "dev-master",
-      "ext-json": "*",
+        "ext-json": "*",
         "2amigos/yii2-transliterator-helper": "*",
         "himiklab/yii2-sitemap-module": "*"
     },

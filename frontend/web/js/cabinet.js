@@ -220,10 +220,9 @@ function createLink()
 }*/
 
 
-
 $(document).ready(function () {
 
-    const moneyRegex  = /^\d+$/;
+    const moneyRegex = /^\d+$/;
     //баланс
     const form = $("#works-grid-form");
     const errorSpan = $("#works-form-error");
@@ -251,39 +250,56 @@ $(document).ready(function () {
     const calculateBtn = $("#calculate-btn");
 
 
-    $('.btn-works-grid').on('click',function () {
+    // $(".brand-logo").hover(function () {
+    //     $(this).css("text-overflow", "initial");
+    // }, function () {
+    //     $(this).css("text-overflow", "ellipsis");
+    // });
+
+    $('.mdc-persistent-drawer__toolbar-spacer').hover(function () {
+        $('.mdc-persistent-drawer__toolbar-spacer').prependTo($('.body-wrapper'));
+        $('.mdc-persistent-drawer__toolbar-spacer').addClass('mdc-persistent-drawer__toolbar-spacer--hovered');
+        $('.email-tooltip').css("visibility", "visible");
+
+    }, function () {
+        $('.mdc-persistent-drawer__toolbar-spacer').prependTo($('.mdc-persistent-drawer__toolbar-spacer-wrapper'));
+       $('.mdc-persistent-drawer__toolbar-spacer').removeClass('mdc-persistent-drawer__toolbar-spacer--hovered');
+        $('.email-tooltip').css("visibility", "hidden");
+    });
+
+
+    $('.btn-works-grid').on('click', function () {
         hiddenInput.val($(this).attr('data-id'));
     });
 
 
-    $("#works-form-send").on('click',function () {
+    $("#works-form-send").on('click', function () {
 
         let data = form.serialize();
 
         $.ajax({
-            type:"POST",
-            url:"/cabinet/works/assign-balance",
-            data:data,
-            success:function (response) {
+            type: "POST",
+            url: "/cabinet/works/assign-balance",
+            data: data,
+            success: function (response) {
 
-                if (response == true)
-                {
+                if (response == true) {
                     let newLikes = parseInt(balanceLikes.html()) - parseInt(likesInput.val());
                     let newViews = parseInt(balanceViews.html()) - parseInt(viewsInput.val());
 
-                    if(newLikes)
+                    if (newLikes)
                         balanceLikes.html(newLikes);
 
-                    if(newViews)
+                    if (newViews)
                         balanceViews.html(newViews);
 
                     $("#exampleModal").modal("hide");
 
 
                     swal({
-                        text: "Работа добавленна в лайкер! Теперь вы станете на " +likesInput.val()+
-                            " лайков и "+ viewsInput.val() +" просмотров популярнее!",
-                        content:createLink(),
+                        text: "Работа добавленна в лайкер! Теперь вы станете на " + likesInput.val() +
+                            " лайков и " + viewsInput.val() + " просмотров популярнее!",
+                        content: createLink(),
                         buttons: {
                             confirm: {
                                 text: 'OK',
@@ -296,9 +312,7 @@ $(document).ready(function () {
                     });
 
                     $("#works-grid-form")[0].reset();
-                }
-                else
-                {
+                } else {
                     errorSpan.html(response);
                 }
             }
@@ -307,15 +321,14 @@ $(document).ready(function () {
 
     })
 
-    if(casesSelect !== undefined)
-    {
-        casesSelect.addEventListener('change',function () {
+    if (casesSelect !== undefined) {
+        casesSelect.addEventListener('change', function () {
 
             let data = $(this).val().split('|');
             let orderId = orderInput.val();
 
-            $.post( "/cabinet/payment/get-form-secret",{"order_id":orderId,"sum":data[1]}).then(
-                function(res) {
+            $.post("/cabinet/payment/get-form-secret", {"order_id": orderId, "sum": data[1]}).then(
+                function (res) {
                     sumInput.val(data[1]);
                     caseInput.val(data[0]);
                     secretInput.val(res);
@@ -325,8 +338,7 @@ $(document).ready(function () {
         })
     }
 
-    if (payForm !== undefined)
-    {
+    if (payForm !== undefined) {
         payForm.submit(function (e) {
             let url = window.location.origin + '/cabinet/payment-cash/put-order';
             let csrf = $('meta[name=csrf-token]').attr("content");
@@ -363,7 +375,7 @@ $(document).ready(function () {
                     e.preventDefault();
                 }
                 gtag('event', 'payment', {'event_category': 'form', 'event_action': 'payment',});
-                ym(51223025,'reachGoal','balance')
+                ym(51223025, 'reachGoal', 'balance')
 
                 return is_ok;
 
@@ -376,9 +388,8 @@ $(document).ready(function () {
             }
         });
     }
-    if (sumField !== undefined)
-    {
-        $('#sum').bind('input', function(){
+    if (sumField !== undefined) {
+        $('#sum').bind('input', function () {
             submitButton.attr('disabled', 'disabled');
             successDiv.css('display', 'none');
             let data = parseFloat(sumField.val());
@@ -394,15 +405,15 @@ $(document).ready(function () {
                     url: url,
                     type: 'POST',
                     data: {
-                        sum:  rub + ".00",
-                        _csrf : csrf
+                        sum: rub + ".00",
+                        _csrf: csrf
                     },
                     success: function (data) {
                         if (data.code == 200) {
                             successDiv.css('display', 'none');
-                            sumInput.val(rub+".00");
+                            sumInput.val(rub + ".00");
                             let exchange = parseFloat(exchangeSpan.text());
-                            let usd = Math.round((rub/exchange + Number.EPSILON) * exponent) / exponent;
+                            let usd = Math.round((rub / exchange + Number.EPSILON) * exponent) / exponent;
                             orderInput.val(data.order_id);
                             secretInput.val(data.sign);
                             usdInput.val(usd);
@@ -431,11 +442,10 @@ $(document).ready(function () {
 });//close document ready
 
 
-function createLink()
-{
+function createLink() {
     let link = document.createElement('a');
     link.textContent = "Посмотреть";
-    link.setAttribute('href','/cabinet/queue');
+    link.setAttribute('href', '/cabinet/queue');
     link.style.display = "block";
     link.style.width = '100%';
     link.style.textAlign = 'left';

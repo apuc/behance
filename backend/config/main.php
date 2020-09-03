@@ -51,6 +51,9 @@ return [
         'page-socials' => [
             'class' => 'backend\modules\pagesocials\PageSocials',
         ],
+        'socials' => [
+            'class' => 'backend\modules\socials\Socials',
+        ],
         'page-socials-services' => [
             'class' => 'backend\modules\pagesocialsservices\PageSocialsServices',
         ],

@@ -7,10 +7,10 @@
 use common\models\Balance;
 use common\models\BalanceCash;
 use common\models\Settings;
+use common\models\SupportQuestions;
 use frontend\assets\CabinetAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use common\models\SupportQuestions;
 
 
 $balance = Balance::find()->where(['user_id' => Yii::$app->user->getId()])->one();
@@ -79,11 +79,14 @@ CabinetAsset::register($this);
     <!-- partial:partials/_sidebar.html -->
     <aside class="mdc-persistent-drawer mdc-persistent-drawer--open" style="height: 100%;">
         <nav class="mdc-persistent-drawer__drawer">
-            <div class="mdc-persistent-drawer__toolbar-spacer">
-                <?= Html::img('/images/account.png', ['width' => '32', 'height' => '32']) ?>
-                <span class="brand-logo">
+            <div class="mdc-persistent-drawer__toolbar-spacer-wrapper">
+                <div class="mdc-persistent-drawer__toolbar-spacer">
+                    <?= Html::img('/images/account.png', ['width' => '32', 'height' => '32']) ?>
+                    <span class="brand-logo">
                    <?= Yii::$app->user->identity->email; ?>
                 </span>
+                    <div class="email-tooltip"><?= Yii::$app->user->identity->email; ?></div>
+                </div>
             </div>
             <div class="mdc-list-group">
                 <nav class="mdc-list mdc-drawer-menu">
@@ -291,7 +294,8 @@ CabinetAsset::register($this);
                     <div class="mdc-list-item mdc-drawer-item">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/support') ?>">
                             <i class="fa fa-headphones" style="visibility: visible;"></i>
-                            <span>Тех. Поддержка </span><!--<small class="label pull-right bg-red"> <?/*= $support_count */?></small></span>-->
+                            <span>Тех. Поддержка </span>
+                            <!--<small class="label pull-right bg-red"> <? /*= $support_count */ ?></small></span>-->
                             <b style="color:blue;"> &nbsp <?= $support_count ?></b>
                         </a>
 
@@ -364,25 +368,25 @@ CabinetAsset::register($this);
         <div class="mdc-toolbar__row">
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                 <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
-               <!-- --><?php /*if (Yii::$app->request->url == '/cabinet/accounts' or
+                <!-- --><?php /*if (Yii::$app->request->url == '/cabinet/accounts' or
                     Yii::$app->request->url == '/cabinet/works' or
                     Yii::$app->request->url == '/cabinet/queue' or
                     Yii::$app->request->url == '/cabinet/payment' or
                     Yii::$app->request->url == '/cabinet/instruction' or
                     Yii::$app->request->url == '/cabinet/cabinet/referal' or
-                    Yii::$app->request->url == '/cabinet/history'): */?>
-                    <?php if (!empty($balance)): ?>
-                        <div class="balance-block">
+                    Yii::$app->request->url == '/cabinet/history'): */ ?>
+                <?php if (!empty($balance)): ?>
+                    <div class="balance-block">
                         <span class="mdc-toolbar__icon" style="width: max-content">Лайки Behance:&nbsp;<span
                                     id="balance_likes"><?= $balance->likes ?></span></span>
-                        </div>
+                    </div>
 
-                        <div class="balance-block">
+                    <div class="balance-block">
                         <span class="mdc-toolbar__icon" style="width: max-content">Просмотры Behance:&nbsp;<span
                                     id="balance_views"><?= $balance->views ?></span></span>
-                        </div>
-                    <?php endif; ?>
-                <?php /*endif; */?>
+                    </div>
+                <?php endif; ?>
+                <?php /*endif; */ ?>
                 <?php if (!empty($balance_cash)): ?>
                     <div class="balance-block">
                         <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment-cash']); ?>">

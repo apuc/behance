@@ -1,19 +1,18 @@
 <?php
 
-namespace backend\modules\orders\controllers;
+namespace backend\modules\socials\controllers;
 
-use backend\modules\orders\models\ContactSearch;
-use common\classes\SendMail;
-use common\models\ContactForm;
+use backend\modules\socials\models\SocialSearch;
+use common\models\Social;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * ContactController implements the CRUD actions for ContactForm model.
+ * SocialController implements the CRUD actions for Social model.
  */
-class ContactController extends Controller
+class SocialController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,12 +30,12 @@ class ContactController extends Controller
     }
 
     /**
-     * Lists all ContactForm models.
+     * Lists all Social models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ContactSearch();
+        $searchModel = new SocialSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,40 +44,8 @@ class ContactController extends Controller
         ]);
     }
 
-
-    public function actionReplay($email)
-    {
-        if (Yii::$app->request->post()) {
-            $post = Yii::$app->request->post();
-
-            SendMail::create()->setSMTPConfig(Yii::$app->params['smtp-config'])
-                ->addAddress($post['email'])
-                ->setSubject('Behance Space')
-                ->setBody("<p>{$post['message']}</p>")
-                ->setFrom(Yii::$app->params['smtp-config']['username'], 'BS')
-                ->isHTML()
-                ->send();
-
-            Yii::$app->session->setFlash('success', 'Ответ отправлен!');
-            return $this->redirect(['index']);
-        }
-
-        return $this->render('replay', ['email' => $email]);
-    }
-
-
-    public function actionMarkAsRead($id)
-    {
-        ContactForm::updateAll(
-            ['status' => '1'],
-            ['id' => $id]
-        );
-
-        return $this->redirect('/admin/orders/contact');
-    }
-
     /**
-     * Displays a single ContactForm model.
+     * Displays a single Social model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -91,15 +58,15 @@ class ContactController extends Controller
     }
 
     /**
-     * Finds the ContactForm model based on its primary key value.
+     * Finds the Social model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ContactForm the loaded model
+     * @return Social the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ContactForm::findOne($id)) !== null) {
+        if (($model = Social::findOne($id)) !== null) {
             return $model;
         }
 
@@ -107,13 +74,13 @@ class ContactController extends Controller
     }
 
     /**
-     * Creates a new ContactForm model.
+     * Creates a new Social model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ContactForm();
+        $model = new Social();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -125,7 +92,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Updates an existing ContactForm model.
+     * Updates an existing Social model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -145,11 +112,13 @@ class ContactController extends Controller
     }
 
     /**
-     * Deletes an existing ContactForm model.
+     * Deletes an existing Social model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

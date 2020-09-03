@@ -15,13 +15,13 @@ class CabinetAsset extends AssetBundle
     public $baseUrl = '@web';
 
 	public $css = [
-        'css/cabinet.css',
+        'css/cabinet.css?2',
          '/css/font-awesome.css'
 	];
 
 	public $js = [
 		'node_modules/material-components-web/dist/material-components-web.min.js',
-        'js/cabinet.js',
+        'js/cabinet.js?4',
 		'js/misc.js',
 		'js/material.js',
 		'js/dashboard.js',

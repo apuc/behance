@@ -4,8 +4,7 @@ namespace backend\modules\balancecash\controllers;
 
 use backend\modules\balancecash\models\BalanceCash;
 use backend\modules\balancecash\models\BalanceCashSearch;
-use backend\modules\historycash\models\HistoryCash;
-use common\models\History;
+use common\models\HistoryCash;
 use common\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -13,7 +12,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * Default controller for the `balancecash` module
+ * Class BalanceCashController
+ * @package backend\modules\balancecash\controllers
  */
 class BalanceCashController extends Controller
 {
@@ -58,7 +58,7 @@ class BalanceCashController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionAddBalance()
+    public function actionAddBalanceCash()
     {
         $post = Yii::$app->request->post();
         $balanceCashModel = BalanceCash::findOne(['user_id' => $post['user_id']]);
@@ -67,12 +67,13 @@ class BalanceCashController extends Controller
             return "Укажите количество средств!";
         }
 
-        $balanceCashModel->addBalance($post['amount']);
+        $amount = (int)$post['amount'];
+        $balanceCashModel->addBalance($amount);
 
         HistoryCash::create(
             $post['user_id'],
+            $amount,
             \common\models\HistoryCash::TRANSFER_TO_BALANCE,
-            $post['amount'],
             "Счет пополнен"
         );
 

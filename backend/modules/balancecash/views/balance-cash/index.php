@@ -69,20 +69,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h3 class="modal-title" id="exampleModalLabel">Пополнить баланс пользоваетеля</h3>
                 </div>
                 <div class="modal-body">
-                    <form id="balance-add-form">
+                    <form id="balance-cash-add-form">
                         <div class="form-group">
                             <labe>Добавить средств:</labe>
-                            <input type="number" name="likes" class="form-control" value="0" min="0">
+                            <input type="number" name="amount" class="form-control" value="0" min="0">
                         </div>
                         <div class="form-group">
-                            <span style="color: red" id="balance-form-error"></span>
+                            <span style="color: red" id="balance-cash-form-error"></span>
                             <input type="hidden" name="user_id" id="user-id-input">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary" id="balance-form-send">Пополнить</button>
+                    <button type="button" class="btn btn-primary" id="balance-cash-form-send">Пополнить</button>
                 </div>
             </div>
         </div>

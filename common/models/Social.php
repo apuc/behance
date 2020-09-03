@@ -16,7 +16,7 @@ class Social extends \yii\db\ActiveRecord
 {
     CONST ACTIVE_SOCIAL = 1;
     CONST NOT_ACTIVE_SOCIAL = 0;
-
+    static $status_names = [self::ACTIVE_SOCIAL => 'Активно', self::NOT_ACTIVE_SOCIAL => 'Неактивно'];
 
     /**
      * {@inheritdoc}
@@ -49,7 +49,7 @@ class Social extends \yii\db\ActiveRecord
             'id' => Yii::t('social', 'ID'),
             'name' => Yii::t('social', 'Name'),
             'soc_code' => Yii::t('social', 'SOC'),
-            'status' => Yii::t('social', 'Status'),
+            'status' => 'Статус',
         ];
     }
 }

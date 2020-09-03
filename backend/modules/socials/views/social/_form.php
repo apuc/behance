@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Social;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -16,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'soc_code')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(['Статус' => Social::$status_names]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

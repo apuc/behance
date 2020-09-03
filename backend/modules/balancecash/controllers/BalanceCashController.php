@@ -67,7 +67,7 @@ class BalanceCashController extends Controller
             return "Укажите количество средств!";
         }
 
-        $amount = (int)$post['amount'];
+        $amount = (float)$post['amount'];
         $balanceCashModel->addBalance($amount);
 
         HistoryCash::create(

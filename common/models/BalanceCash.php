@@ -60,11 +60,11 @@ class BalanceCash extends \yii\db\ActiveRecord
      */
     public function addBalance($amount)
     {
+        $exponent = intval(Settings::getSetting('balance_exponent'));
+        $this->amount += ((float)$amount * $exponent);
+        $this->save();
 
-       $this->amount += (integer)$amount;
-       $this->save();
-
-       return true;
+        return true;
     }
 
     /**

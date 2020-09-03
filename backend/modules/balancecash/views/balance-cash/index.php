@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Settings;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -21,10 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
-
-            //'id',
             [
+                'header' => 'Email',
                 'attribute' => 'user_id',
                 'value' => function ($data) {
                     return $data->user['email'];
@@ -40,7 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
             ],
             [
+                'header' => 'Баланс, долл.',
                 'attribute' => 'amount',
+                'value' => function ($data) {
+                    $exponent = intval(Settings::getSetting('balance_exponent'));
+                    return $data['amount'] / $exponent;
+                },
                 'filter' => false,
 
             ],

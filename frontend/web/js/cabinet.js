@@ -256,16 +256,18 @@ $(document).ready(function () {
     //     $(this).css("text-overflow", "ellipsis");
     // });
 
-    $('.mdc-persistent-drawer__toolbar-spacer').hover(function () {
-        $('.mdc-persistent-drawer__toolbar-spacer').prependTo($('.body-wrapper'));
+    $('.mdc-persistent-drawer__toolbar-spacer').mouseenter(function () {
+        $('.mdc-persistent-drawer__toolbar-spacer').prependTo($('.mdc-persistent-drawer__wrapper'));
         $('.mdc-persistent-drawer__toolbar-spacer').addClass('mdc-persistent-drawer__toolbar-spacer--hovered');
         $('.email-tooltip').css("visibility", "visible");
+    });
 
-    }, function () {
+    $('.mdc-persistent-drawer__toolbar-spacer').mouseleave(function () {
         $('.mdc-persistent-drawer__toolbar-spacer').prependTo($('.mdc-persistent-drawer__toolbar-spacer-wrapper'));
-       $('.mdc-persistent-drawer__toolbar-spacer').removeClass('mdc-persistent-drawer__toolbar-spacer--hovered');
+        $('.mdc-persistent-drawer__toolbar-spacer').removeClass('mdc-persistent-drawer__toolbar-spacer--hovered');
         $('.email-tooltip').css("visibility", "hidden");
     });
+
 
 
     $('.btn-works-grid').on('click', function () {

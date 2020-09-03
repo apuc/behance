@@ -15,7 +15,7 @@ class CabinetAsset extends AssetBundle
     public $baseUrl = '@web';
 
 	public $css = [
-        'css/cabinet.css?2',
+         'css/cabinet.css?2',
          '/css/font-awesome.css'
 	];
 

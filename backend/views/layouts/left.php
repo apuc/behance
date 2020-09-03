@@ -33,8 +33,8 @@ $balance = $request->get();
             <div class="pull-left image">
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
-            <div class="pull-left info">
-                <p><?= Yii::$app->user->identity->email ?></p>
+            <div class="pull-left info" style="width: calc(100% - 45px);">
+                <p class="email-user-panel"><?= Yii::$app->user->identity->email ?></p>
                 <a href="/">Перейти на главную</a>
                 <?php foreach ($balance as $value):?>
                 <p>
@@ -57,7 +57,7 @@ $balance = $request->get();
                     ['label' => 'Youtube очередь', 'icon' => 'fas fa-list-ol', 'url' => ['/youtube/youtube']],
                     ['label' => 'Социальная очередь', 'icon' => 'fas fa-list-ol', 'url' => ['/social-queue/social-queue']],
                     ['label' => Yii::t('balance', 'Balance'), 'icon' => 'fas fa-shopping-basket', 'url' => ['/balance/balance']],
-                    ['label' => 'Баланс наличных', 'icon' => 'fas fa-wallet', 'url' => ['/balancecash/balance-cash']],
+                    ['label' => 'Баланс наличных', 'icon' => 'fas fa-shopping-basket', 'url' => ['/balancecash/balance-cash']],
                     ['label' => 'Заявки', 'icon' => 'fas fa-clipboard-list', 'url' => ['/orders/contact'], 'template' => '<a href="{url}">{icon}<span>{label}</span><span class="pull-right-container"><small class="label pull-right bg-red">' . $contact_count . '</small></span></a>'],
                     ['label' => 'Звонки', 'icon' => 'fas fa-phone', 'url' => ['/orders/callback'], 'template' => '<a href="{url}">{icon}<span>{label}</span><span class="pull-right-container"><small class="label pull-right bg-red">' . $callback_count . '</small></span></a>'],
                     ['label' => 'Тарифы', 'icon' => 'fas fa-suitcase', 'url' => ['/cases/cases']],

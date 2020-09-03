@@ -77,291 +77,293 @@ CabinetAsset::register($this);
 
 <div class="body-wrapper">
     <!-- partial:partials/_sidebar.html -->
-    <aside class="mdc-persistent-drawer mdc-persistent-drawer--open" style="height: 100%;">
-        <nav class="mdc-persistent-drawer__drawer">
-            <div class="mdc-persistent-drawer__toolbar-spacer-wrapper">
-                <div class="mdc-persistent-drawer__toolbar-spacer">
-                    <?= Html::img('/images/account.png', ['width' => '32', 'height' => '32']) ?>
-                    <span class="brand-logo">
-                   <?= Yii::$app->user->identity->email; ?>
-                </span>
-                    <div class="email-tooltip"><?= Yii::$app->user->identity->email; ?></div>
-                </div>
-            </div>
-            <div class="mdc-list-group">
-                <nav class="mdc-list mdc-drawer-menu">
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/']); ?>">
-                            <i class="fa fa-home" style="visibility: visible;"></i>
-                            <span>На главную</span>
-                        </a>
+    <div class="mdc-persistent-drawer__wrapper">
+        <aside class="mdc-persistent-drawer mdc-persistent-drawer--open" style="height: 100%;">
+            <nav class="mdc-persistent-drawer__drawer">
+                <div class="mdc-persistent-drawer__toolbar-spacer-wrapper">
+                    <div class="mdc-persistent-drawer__toolbar-spacer">
+                        <?= Html::img('/images/account.png', ['width' => '32', 'height' => '32']) ?>
+                        <span class="brand-logo">
+                            <?= Yii::$app->user->identity->email; ?>
+                        </span>
+                        <div class="email-tooltip"><?= Yii::$app->user->identity->email; ?></div>
                     </div>
-                    <div class="mdc-list mdc-drawer-item">
-                        <div class="mdc-menu-anchor mr-1">
-                            <a href="#" class="mdc-drawer-link" data-toggle="dropdown"
-                               toggle-dropdown="menu" data-mdc-auto-init="MDCRipple">
-                                <i class="material-icons">view_list</i>
-                                <span>Накрутка Behance</span>
-                                <i class="material-icons">keyboard_arrow_down</i>
+                </div>
+                <div class="mdc-list-group">
+                    <nav class="mdc-list mdc-drawer-menu">
+                        <div class="mdc-list-item mdc-drawer-item">
+                            <a class="mdc-drawer-link" href="<?= Url::toRoute(['/']); ?>">
+                                <i class="fa fa-home" style="visibility: visible;"></i>
+                                <span>На главную</span>
                             </a>
-                            <!-- <div class="mdc-simple-menu mdc-simple-menu" tabindex="-1" id="menu">
-                                <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                        </div>
+                        <div class="mdc-list mdc-drawer-item">
+                            <div class="mdc-menu-anchor mr-1">
+                                <a href="#" class="mdc-drawer-link" data-toggle="dropdown"
+                                   toggle-dropdown="menu" data-mdc-auto-init="MDCRipple">
+                                    <i class="material-icons">view_list</i>
+                                    <span>Накрутка Behance</span>
+                                    <i class="material-icons">keyboard_arrow_down</i>
+                                </a>
+                                <!-- <div class="mdc-simple-menu mdc-simple-menu" tabindex="-1" id="menu">
+                                    <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
 
-                                    <li class="mdc-list-item" role="menuitem" tabindex="0">
-
-                                        <a style="text-decoration: none; font-size: 14px;"
-                                           href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
-                                            <i class="fa fa-user" style="font-size: 16px;"></i>
-                                            Аккаунты</a>
-
-                                    </li>
-                                    <li class="mdc-list-item" role="menuitem" tabindex="0">
-
-                                        <a style="text-decoration: none; font-size: 14px;"
-                                           href="<?= Url::toRoute(['/cabinet/works']); ?>">
-                                            <i class="fa fa-suitcase" style="font-size: 16px;"></i>
-                                            Работы</a>
-
-                                    </li>
-                                    <li class="mdc-list-item" role="menuitem" tabindex="0">
-
-                                        <a style="text-decoration: none; font-size: 14px;"
-                                           href="<?= Url::toRoute(['/cabinet/queue']); ?>">
-                                            <i class="fa fa-heart" style="font-size: 16px;"></i>
-                                            Работы в лайкере</a>
-
-                                    </li>
-                                    <li class="mdc-list-item" role="menuitem" tabindex="0">
-
-                                        <a style="text-decoration: none; font-size: 14px;"
-                                           href="<?= Url::toRoute(['/cabinet/payment']); ?>">
-                                            <i class="fa fa-usd" style="font-size: 16px;"></i>
-                                            Пополнить лайкер</a>
-                                    </li>
-                                    <li class="mdc-list-item" role="menuitem" tabindex="0">
-
-                                        <a style="text-decoration: none; font-size: 14px;"
-                                           href="<?= Url::toRoute(['/cabinet/cabinet/referal']); ?>">
-                                            <i class="fa fa-user" style="font-size: 16px;"></i>
-                                            Партнерская программа</a>
-                                    </li>
-
-                                </ul>
-                            </div> -->
-                            <div class="mdc-simple-menu mdc-simple-menu" tabindex="-1" id="menu">
-                                <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
-                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/instruction']); ?>'">
                                         <li class="mdc-list-item" role="menuitem" tabindex="0">
-                                            <a style="text-decoration: none; font-size: 14px;"
-                                               href="<?= Url::toRoute(['/cabinet/instruction']); ?>">
-                                                <i class="fa fa-gears" style="visibility: visible;"></i>
-                                                Инструкция
-                                            </a>
-                                        </li>
-                                    </div>
-                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/accounts']); ?>'">
-                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+
                                             <a style="text-decoration: none; font-size: 14px;"
                                                href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
                                                 <i class="fa fa-user" style="font-size: 16px;"></i>
                                                 Аккаунты</a>
+
                                         </li>
-                                    </div>
-                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/works']); ?>'">
                                         <li class="mdc-list-item" role="menuitem" tabindex="0">
+
                                             <a style="text-decoration: none; font-size: 14px;"
                                                href="<?= Url::toRoute(['/cabinet/works']); ?>">
                                                 <i class="fa fa-suitcase" style="font-size: 16px;"></i>
                                                 Работы</a>
+
                                         </li>
-                                    </div>
-                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/queue']); ?>'">
                                         <li class="mdc-list-item" role="menuitem" tabindex="0">
+
                                             <a style="text-decoration: none; font-size: 14px;"
                                                href="<?= Url::toRoute(['/cabinet/queue']); ?>">
                                                 <i class="fa fa-heart" style="font-size: 16px;"></i>
                                                 Работы в лайкере</a>
+
                                         </li>
-                                    </div>
-                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/payment']); ?>'">
                                         <li class="mdc-list-item" role="menuitem" tabindex="0">
+
                                             <a style="text-decoration: none; font-size: 14px;"
                                                href="<?= Url::toRoute(['/cabinet/payment']); ?>">
                                                 <i class="fa fa-usd" style="font-size: 16px;"></i>
                                                 Пополнить лайкер</a>
                                         </li>
-                                    </div>
-                                    <div onClick="document.location='<?= Url::toRoute(['/cabinet/cabinet/referal']); ?>'">
                                         <li class="mdc-list-item" role="menuitem" tabindex="0">
+
                                             <a style="text-decoration: none; font-size: 14px;"
                                                href="<?= Url::toRoute(['/cabinet/cabinet/referal']); ?>">
                                                 <i class="fa fa-user" style="font-size: 16px;"></i>
                                                 Партнерская программа</a>
                                         </li>
-                                    </div>
-                                    <div onClick="document.location='<?= Url::toRoute('/cabinet/history') ?>'">
-                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
-                                            <a style="text-decoration: none; font-size: 14px;"
-                                               href="<?= Url::toRoute(['/cabinet/history']); ?>">
-                                                <i class="fa fa-history" style="visibility: visible;"></i>
-                                                История пополнений лайкера</a>
-                                        </li>
-                                    </div>
-                                </ul>
+
+                                    </ul>
+                                </div> -->
+                                <div class="mdc-simple-menu mdc-simple-menu" tabindex="-1" id="menu">
+                                    <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                                        <div onClick="document.location='<?= Url::toRoute(['/cabinet/instruction']); ?>'">
+                                            <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                                <a style="text-decoration: none; font-size: 14px;"
+                                                   href="<?= Url::toRoute(['/cabinet/instruction']); ?>">
+                                                    <i class="fa fa-gears" style="visibility: visible;"></i>
+                                                    Инструкция
+                                                </a>
+                                            </li>
+                                        </div>
+                                        <div onClick="document.location='<?= Url::toRoute(['/cabinet/accounts']); ?>'">
+                                            <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                                <a style="text-decoration: none; font-size: 14px;"
+                                                   href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
+                                                    <i class="fa fa-user" style="font-size: 16px;"></i>
+                                                    Аккаунты</a>
+                                            </li>
+                                        </div>
+                                        <div onClick="document.location='<?= Url::toRoute(['/cabinet/works']); ?>'">
+                                            <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                                <a style="text-decoration: none; font-size: 14px;"
+                                                   href="<?= Url::toRoute(['/cabinet/works']); ?>">
+                                                    <i class="fa fa-suitcase" style="font-size: 16px;"></i>
+                                                    Работы</a>
+                                            </li>
+                                        </div>
+                                        <div onClick="document.location='<?= Url::toRoute(['/cabinet/queue']); ?>'">
+                                            <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                                <a style="text-decoration: none; font-size: 14px;"
+                                                   href="<?= Url::toRoute(['/cabinet/queue']); ?>">
+                                                    <i class="fa fa-heart" style="font-size: 16px;"></i>
+                                                    Работы в лайкере</a>
+                                            </li>
+                                        </div>
+                                        <div onClick="document.location='<?= Url::toRoute(['/cabinet/payment']); ?>'">
+                                            <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                                <a style="text-decoration: none; font-size: 14px;"
+                                                   href="<?= Url::toRoute(['/cabinet/payment']); ?>">
+                                                    <i class="fa fa-usd" style="font-size: 16px;"></i>
+                                                    Пополнить лайкер</a>
+                                            </li>
+                                        </div>
+                                        <div onClick="document.location='<?= Url::toRoute(['/cabinet/cabinet/referal']); ?>'">
+                                            <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                                <a style="text-decoration: none; font-size: 14px;"
+                                                   href="<?= Url::toRoute(['/cabinet/cabinet/referal']); ?>">
+                                                    <i class="fa fa-user" style="font-size: 16px;"></i>
+                                                    Партнерская программа</a>
+                                            </li>
+                                        </div>
+                                        <div onClick="document.location='<?= Url::toRoute('/cabinet/history') ?>'">
+                                            <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                                <a style="text-decoration: none; font-size: 14px;"
+                                                   href="<?= Url::toRoute(['/cabinet/history']); ?>">
+                                                    <i class="fa fa-history" style="visibility: visible;"></i>
+                                                    История пополнений лайкера</a>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!--
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
-                            <i class="fa fa-user" style="visibility: visible;"></i>
-                            <span>Аккаунты</span>
-                        </a>
-                    </div>
-
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/works']); ?>">
-                            <i class="fa fa-suitcase" style="visibility: visible;"></i>
-                            <span>Работы</span>
-                        </a>
-                    </div>
-
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/queue']); ?>">
-                            <i class="fa fa-heart" style="visibility: visible;"></i>
-                            <span>Работы в лайкере</span>
-                        </a>
-                    </div>
-
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment']); ?>">
-                            <i class="fa fa-usd"></i>
-                            <span>Пополнить лайкер</span>
-                        </a>
-                    </div>
-                    -->
-                    <!--
+                        <!--
                         <div class="mdc-list-item mdc-drawer-item">
-                            <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history') ?>">
+                            <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/accounts']); ?>">
+                                <i class="fa fa-user" style="visibility: visible;"></i>
+                                <span>Аккаунты</span>
+                            </a>
+                        </div>
+
+                        <div class="mdc-list-item mdc-drawer-item">
+                            <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/works']); ?>">
+                                <i class="fa fa-suitcase" style="visibility: visible;"></i>
+                                <span>Работы</span>
+                            </a>
+                        </div>
+
+                        <div class="mdc-list-item mdc-drawer-item">
+                            <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/queue']); ?>">
+                                <i class="fa fa-heart" style="visibility: visible;"></i>
+                                <span>Работы в лайкере</span>
+                            </a>
+                        </div>
+
+                        <div class="mdc-list-item mdc-drawer-item">
+                            <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment']); ?>">
+                                <i class="fa fa-usd"></i>
+                                <span>Пополнить лайкер</span>
+                            </a>
+                        </div>
+                        -->
+                        <!--
+                            <div class="mdc-list-item mdc-drawer-item">
+                                <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history') ?>">
+                                    <i class="fa fa-history" style="visibility: visible;"></i>
+                                    <span>История пополнений</span>
+                                </a>
+                            </div>
+                            -->
+
+                        <div class="mdc-list-item mdc-drawer-item">
+                            <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue/create']); ?>">
+                                <i class="fa fa-edit" style="visibility: visible;"></i>
+                                <span>Накрутить</span>
+                            </a>
+                        </div>
+
+                        <div class="mdc-list-item mdc-drawer-item">
+                            <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue/']); ?>">
+                                <i class="fa fa-heart" style="visibility: visible;"></i>
+                                <span>Мои заказы</span>
+                            </a>
+                        </div>
+                        <!--
+                            <div class="mdc-list-item mdc-drawer-item">
+                                <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue']); ?>">
+                                    <i class="fa fa-heart" style="visibility: visible;"></i>
+                                    <span>Накрутка соц. сетей</span>
+                                </a>
+                            </div>
+    -->
+
+                        <div class="mdc-list-item mdc-drawer-item">
+                            <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment-cash']); ?>">
+                                <i class="fa fa-usd"></i>
+                                <span>Пополнить баланс</span>
+                            </a>
+                        </div>
+                        <!--    <div class="mdc-list-item mdc-drawer-item">
+                            <a class="mdc-drawer-link" href="<? /*= Url::toRoute('/cabinet/history') */ ?>">
+                                <i class="fa fa-history" style="visibility: visible;"></i>
+                                <span>История пополнений</span>
+                            </a>
+                        </div>-->
+
+                        <div class="mdc-list-item mdc-drawer-item">
+                            <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history-cash') ?>">
                                 <i class="fa fa-history" style="visibility: visible;"></i>
                                 <span>История пополнений</span>
                             </a>
                         </div>
-                        -->
 
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue/create']); ?>">
-                            <i class="fa fa-edit" style="visibility: visible;"></i>
-                            <span>Накрутить</span>
-                        </a>
-                    </div>
-
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue/']); ?>">
-                            <i class="fa fa-heart" style="visibility: visible;"></i>
-                            <span>Мои заказы</span>
-                        </a>
-                    </div>
-                    <!--
                         <div class="mdc-list-item mdc-drawer-item">
-                            <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/social-queue']); ?>">
-                                <i class="fa fa-heart" style="visibility: visible;"></i>
-                                <span>Накрутка соц. сетей</span>
+                            <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/support') ?>">
+                                <i class="fa fa-headphones" style="visibility: visible;"></i>
+                                <span>Тех. Поддержка </span>
+                                <!--<small class="label pull-right bg-red"> <? /*= $support_count */ ?></small></span>-->
+                                <b style="color:blue;"> &nbsp <?= $support_count ?></b>
                             </a>
+
                         </div>
--->
 
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute(['/cabinet/payment-cash']); ?>">
-                            <i class="fa fa-usd"></i>
-                            <span>Пополнить баланс</span>
-                        </a>
-                    </div>
-                    <!--    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<? /*= Url::toRoute('/cabinet/history') */ ?>">
-                            <i class="fa fa-history" style="visibility: visible;"></i>
-                            <span>История пополнений</span>
-                        </a>
-                    </div>-->
+                        <!--
+                            <div class="mdc-list-item mdc-drawer-item">
+                                <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/cabinet/referal') ?>">
+                                    <i class="fa fa-users"></i>
+                                    <span>Партнерская программа</span>
+                                </a>
+                            </div>
+    -->
 
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/history-cash') ?>">
-                            <i class="fa fa-history" style="visibility: visible;"></i>
-                            <span>История пополнений</span>
-                        </a>
-                    </div>
+                        <!--                    					<div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="sample-page-submenu">-->
+                        <!--                    						<a class="mdc-drawer-link" href="#">-->
+                        <!--                    							<i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>-->
+                        <!--                    							Sample Pages-->
+                        <!--                    							<i class="mdc-drawer-arrow material-icons">arrow_drop_down</i>-->
+                        <!--                    						</a>-->
+                        <!---->
+                        <!--                    						<div class="mdc-expansion-panel" id="sample-page-submenu">-->
+                        <!--                    							<nav class="mdc-list mdc-drawer-submenu">-->
+                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/blank-page.html">-->
+                        <!--                    										Blank Page-->
+                        <!--                    									</a>-->
+                        <!--                    								</div>-->
+                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/403.html">-->
+                        <!--                    										403-->
+                        <!--                    									</a>-->
+                        <!--                    								</div>-->
+                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/404.html">-->
+                        <!--                    										404-->
+                        <!--                    									</a>-->
+                        <!--                    								</div>-->
+                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/500.html">-->
+                        <!--                    										500-->
+                        <!--                    									</a>-->
+                        <!--                    								</div>-->
+                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/505.html">-->
+                        <!--                    										505-->
+                        <!--                    									</a>-->
+                        <!--                    								</div>-->
+                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/login.html">-->
+                        <!--                    										Login-->
+                        <!--                    									</a>-->
+                        <!--                    								</div>-->
+                        <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
+                        <!--                    									<a class="mdc-drawer-link" href="pages/samples/register.html">-->
+                        <!--                    										Register-->
+                        <!--                    									</a>-->
+                        <!--                    								</div>-->
+                        <!---->
+                        <!--                    							</nav>-->
+                        <!--                    						</div>-->
+                        <!--                    					</div>-->
 
-                    <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/support') ?>">
-                            <i class="fa fa-headphones" style="visibility: visible;"></i>
-                            <span>Тех. Поддержка </span>
-                            <!--<small class="label pull-right bg-red"> <? /*= $support_count */ ?></small></span>-->
-                            <b style="color:blue;"> &nbsp <?= $support_count ?></b>
-                        </a>
-
-                    </div>
-
-                    <!--
-                        <div class="mdc-list-item mdc-drawer-item">
-                            <a class="mdc-drawer-link" href="<?= Url::toRoute('/cabinet/cabinet/referal') ?>">
-                                <i class="fa fa-users"></i>
-                                <span>Партнерская программа</span>
-                            </a>
-                        </div>
--->
-
-                    <!--                    					<div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="sample-page-submenu">-->
-                    <!--                    						<a class="mdc-drawer-link" href="#">-->
-                    <!--                    							<i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>-->
-                    <!--                    							Sample Pages-->
-                    <!--                    							<i class="mdc-drawer-arrow material-icons">arrow_drop_down</i>-->
-                    <!--                    						</a>-->
-                    <!---->
-                    <!--                    						<div class="mdc-expansion-panel" id="sample-page-submenu">-->
-                    <!--                    							<nav class="mdc-list mdc-drawer-submenu">-->
-                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/blank-page.html">-->
-                    <!--                    										Blank Page-->
-                    <!--                    									</a>-->
-                    <!--                    								</div>-->
-                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/403.html">-->
-                    <!--                    										403-->
-                    <!--                    									</a>-->
-                    <!--                    								</div>-->
-                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/404.html">-->
-                    <!--                    										404-->
-                    <!--                    									</a>-->
-                    <!--                    								</div>-->
-                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/500.html">-->
-                    <!--                    										500-->
-                    <!--                    									</a>-->
-                    <!--                    								</div>-->
-                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/505.html">-->
-                    <!--                    										505-->
-                    <!--                    									</a>-->
-                    <!--                    								</div>-->
-                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/login.html">-->
-                    <!--                    										Login-->
-                    <!--                    									</a>-->
-                    <!--                    								</div>-->
-                    <!--                    								<div class="mdc-list-item mdc-drawer-item">-->
-                    <!--                    									<a class="mdc-drawer-link" href="pages/samples/register.html">-->
-                    <!--                    										Register-->
-                    <!--                    									</a>-->
-                    <!--                    								</div>-->
-                    <!---->
-                    <!--                    							</nav>-->
-                    <!--                    						</div>-->
-                    <!--                    					</div>-->
-
-                </nav>
-        </nav>
-    </aside>
+                    </nav>
+            </nav>
+        </aside>
+    </div>
     <!-- partial -->
     <!-- partial:partials/_navbar.html -->
     <header class="mdc-toolbar mdc-elevation--z4 mdc-toolbar--fixed">

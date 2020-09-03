@@ -2,14 +2,14 @@
 
 namespace backend\modules\settings\controllers;
 
-use Yii;
 use backend\modules\settings\models\Settings;
 use backend\modules\settings\models\SettingsSearch;
+use common\classes\ProxyApi;
 use common\models\Proxy;
+use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use common\clases\ProxyApi;
 
 /**
  * SettingsController implements the CRUD actions for Settings model.
@@ -31,7 +31,7 @@ class SettingsController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $names = Settings::find()->all();
-        $names = ArrayHelper::map($names,'key','key');
+        $names = ArrayHelper::map($names, 'key', 'key');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -41,40 +41,38 @@ class SettingsController extends Controller
     }
 
 
-
     public function actionFillProxy()
     {
         $proxy = file($_FILES['ipfile']['tmp_name']);
 
         $res = array();
-        foreach ($proxy as $ip)
-        {
+        foreach ($proxy as $ip) {
             $res[] = [$ip];
         }
 
         $model = new Proxy();
         $model->Fill($res);
 
-        Yii::$app->session->setFlash("success","Адресса proxy добавленны!");
+        Yii::$app->session->setFlash("success", "Адресса proxy добавленны!");
         return $this->redirect(['index']);
 
     }
 
 
-    public  function actionLoadProxyFromApi()
+    public function actionLoadProxyFromApi()
     {
-       $res = ProxyApi::run()->parse()->all();
+        $res = ProxyApi::run()->parse()->all();
 
-       $data = array();
+        $data = array();
 
-       foreach ($res as $r){
-           $data[] = [$r->ip.':'.$r->port];
-       }
+        foreach ($res as $r) {
+            $data[] = [$r->ip . ':' . $r->port];
+        }
 
-       $model = new Proxy();
-       $model->Fill($data);
+        $model = new Proxy();
+        $model->Fill($data);
 
-        Yii::$app->session->setFlash("success","Адресса proxy добавленны!");
+        Yii::$app->session->setFlash("success", "Адресса proxy добавленны!");
         return $this->redirect(['index']);
     }
 
@@ -92,6 +90,22 @@ class SettingsController extends Controller
     }
 
     /**
+     * Finds the Settings model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Settings the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Settings::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException(Yii::t('settings', 'The requested page does not exist.'));
+    }
+
+    /**
      * Creates a new Settings model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -100,15 +114,14 @@ class SettingsController extends Controller
     {
         $model = new Settings();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-        {
-            Yii::$app->session->setFlash("success",'Настройка добавлена');
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash("success", 'Настройка добавлена');
             return $this->redirect(['index']);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'create'=>true
+            'create' => true
         ]);
     }
 
@@ -123,9 +136,8 @@ class SettingsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-        {
-            Yii::$app->session->setFlash("success",'Настройка изменена');
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash("success", 'Настройка изменена');
             return $this->redirect(['index']);
         }
 
@@ -140,27 +152,13 @@ class SettingsController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Settings model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Settings the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Settings::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException(Yii::t('settings', 'The requested page does not exist.'));
     }
 }

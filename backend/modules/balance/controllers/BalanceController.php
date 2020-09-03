@@ -3,17 +3,14 @@
 namespace backend\modules\balance\controllers;
 
 
-use common\models\History;
-use common\models\Accounts;
-use common\models\User;
-use common\models\Balance;
-use Yii;
 use backend\modules\balance\models\BalanceSearch;
-use yii\filters\AccessControl;
+use common\models\Balance;
+use common\models\History;
+use common\models\User;
+use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 
 /**
@@ -21,8 +18,9 @@ use yii\filters\VerbFilter;
  */
 class BalanceController extends Controller
 {
-	public $accounts = [];
-	public $balance;
+    public $accounts = [];
+    public $balance;
+
     /**
      * {@inheritdoc}
      */
@@ -34,7 +32,7 @@ class BalanceController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $users = User::find()->all();
-        $users = ArrayHelper::map($users,'id','email');
+        $users = ArrayHelper::map($users, 'id', 'email');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -44,18 +42,16 @@ class BalanceController extends Controller
     }
 
 
-
     public function actionAddBalance()
     {
-       $post = Yii::$app->request->post();
-       $balanceModel = Balance::findOne(['user_id'=>$post['user_id']]);
+        $post = Yii::$app->request->post();
+        $balanceModel = Balance::findOne(['user_id' => $post['user_id']]);
 
-        if(empty($post['likes']) && empty($post['views']))
-        {
+        if (empty($post['likes']) && empty($post['views'])) {
             return "Укажите количество лайков или просмотров!";
         }
 
-        $balanceModel->addBalance($post['likes'],$post['views']);
+        $balanceModel->addBalance($post['likes'], $post['views']);
 
         History::create(
             $post['user_id'],
@@ -65,10 +61,9 @@ class BalanceController extends Controller
             "Счет пополнен"
         );
 
-        Yii::$app->session->setFlash('success','Баланс пополнен!');
+        Yii::$app->session->setFlash('success', 'Баланс пополнен!');
         return true;
     }
-
 
 
     public function actionView($id)
@@ -78,7 +73,14 @@ class BalanceController extends Controller
         ]);
     }
 
+    protected function findModel($id)
+    {
+        if (($model = Balance::findOne($id)) !== null) {
+            return $model;
+        }
 
+        throw new NotFoundHttpException(Yii::t('balance', 'The requested page does not exist.'));
+    }
 
     public function actionCreate()
     {
@@ -93,8 +95,6 @@ class BalanceController extends Controller
         ]);
     }
 
-
-
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -108,26 +108,11 @@ class BalanceController extends Controller
         ]);
     }
 
-
-
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
-
-
-
-    protected function findModel($id)
-    {
-        if (($model = Balance::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException(Yii::t('balance', 'The requested page does not exist.'));
-    }
-
-
 
 
 }

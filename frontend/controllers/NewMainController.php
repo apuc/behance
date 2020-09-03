@@ -1,32 +1,27 @@
 <?php
+
 namespace frontend\controllers;
 
 
-use common\models\Accounts;
-use common\models\Balance;
+use common\clases\SendMail;
 use common\models\Callback;
 use common\models\Cases;
-use common\models\History;
+use common\models\ContactForm;
+use common\models\LoginForm;
 use common\models\PageSocials;
 use common\models\PageSocialsServices;
 use common\models\Reviews;
 use common\models\Settings;
-use common\models\Social;
 use common\models\User;
-use common\clases\SendMail;
 use common\services\AuthService;
-use Yii;
-use yii\base\InvalidArgumentException;
-use yii\helpers\Url;
-use yii\web\BadRequestHttpException;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
-use frontend\models\ResetPasswordRequestForm;
 use frontend\models\ResetPasswordForm;
+use frontend\models\ResetPasswordRequestForm;
 use frontend\models\SignupForm;
-use \common\models\ContactForm;
+use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\helpers\Url;
+use yii\web\Controller;
 
 
 /**
@@ -36,15 +31,21 @@ class NewMainController extends Controller
 {
     private $authService;
 
+    public function __construct($id, $module, array $config = [], AuthService $authService)
+    {
+        $this->authService = $authService;
+        parent::__construct($id, $module, $config);
+    }
+
     public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup','login','account-confirm','reset-password','request-password-reset'],
+                'only' => ['logout', 'signup', 'login', 'account-confirm', 'reset-password', 'request-password-reset'],
                 'rules' => [
                     [
-                        'actions' => ['signup','login','account-confirm','reset-password','request-password-reset'],
+                        'actions' => ['signup', 'login', 'account-confirm', 'reset-password', 'request-password-reset'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -82,12 +83,6 @@ class NewMainController extends Controller
         return parent::beforeAction($action);
     }
 
-    public function __construct($id,$module,array $config = [],AuthService $authService)
-    {
-        $this->authService = $authService;
-        parent::__construct($id, $module, $config);
-    }
-
     /**
      * Displays homepage.
      *
@@ -96,16 +91,17 @@ class NewMainController extends Controller
     public function actionIndex()
     {
         $reviews = Reviews::find()->all();
-        $seo = Settings::findOne(['key'=>'seo_main_page']);
+        $seo = Settings::findOne(['key' => 'seo_main_page']);
         $cases = Cases::find()->where(['!=', 'status', 0])->orderBy('price')->all();
 
         $page_socials = PageSocials::find()->where(['enabled' => 1])->all();
 
         return $this->render('index', ['reviews' => $reviews, 'cases' => $cases,
-            'seo'=>$seo, 'socials' => $page_socials]);
+            'seo' => $seo, 'socials' => $page_socials]);
     }
 
-    public function actionSocial($slug = null) {
+    public function actionSocial($slug = null)
+    {
         /** @var $page_service PageSocialsServices */
         $page_service = PageSocialsServices::find()->where(['service_page_link' => $slug])->one();
         if (!$page_service) {
@@ -126,8 +122,8 @@ class NewMainController extends Controller
      */
     public function actionAbout()
     {
-        $seo = Settings::findOne(['key'=>'seo_about_page']);
-        return $this->render('about',['seo'=>$seo]);
+        $seo = Settings::findOne(['key' => 'seo_about_page']);
+        return $this->render('about', ['seo' => $seo]);
     }
 
 
@@ -153,8 +149,7 @@ class NewMainController extends Controller
         $form = new ContactForm();
         $post['ContactForm'] = Yii::$app->request->post();
 
-        if ($form->load($post) && $form->validate())
-        {
+        if ($form->load($post) && $form->validate()) {
             $form->save(false);
 
             SendMail::create()->setSMTPConfig(Yii::$app->params['smtp-config'])
@@ -183,7 +178,7 @@ class NewMainController extends Controller
         $phone = Yii::$app->request->post()['phone'];
         Callback::create($phone);
 
-        $link = Url::home(true)."admin/orders/callback";
+        $link = Url::home(true) . "admin/orders/callback";
 
         SendMail::create()->setSMTPConfig(Yii::$app->params['smtp-config'])
             ->addAddress('apuc06@mail.ru')
@@ -196,13 +191,11 @@ class NewMainController extends Controller
     }
 
 
-
     public function actionLogin()
     {
         $form = new LoginForm();
 
-        if ($form->load(Yii::$app->request->post()) && $form->validate())
-        {
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             $this->authService->login($form->email);
             return $this->goHome();
         }
@@ -215,16 +208,14 @@ class NewMainController extends Controller
     }
 
 
-
     public function actionSignup()
     {
         $form = new SignupForm();
 
-        if ($form->load(Yii::$app->request->post()) && $form->validate())
-        {
-            $this->authService->signup($form,Yii::$app->request->get('ref'));
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            $this->authService->signup($form, Yii::$app->request->get('ref'));
 
-            Yii::$app->session->set('signup',true);
+            Yii::$app->session->set('signup', true);
             return $this->refresh();
         }
 
@@ -234,32 +225,28 @@ class NewMainController extends Controller
     }
 
 
-
-    public function actionAccountConfirm($key,$ref = null)
+    public function actionAccountConfirm($key, $ref = null)
     {
         $user = User::findByAuthKey($key);
 
-        if(!$user)
-        {
+        if (!$user) {
             return $this->redirect("/error");
         }
 
-        $this->authService->emailConfirm($user,$ref);
+        $this->authService->emailConfirm($user, $ref);
         $this->authService->login($user->email);
 
         return $this->redirect('/cabinet');
     }
 
 
-
     public function actionRequestPasswordReset()
     {
         $form = new ResetPasswordRequestForm();
 
-        if ($form->load(Yii::$app->request->post()) && $form->validate())
-        {
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             $this->authService->requestPasswordReset($form->email);
-            Yii::$app->session->setFlash('reset-password',true);
+            Yii::$app->session->setFlash('reset-password', true);
         }
 
         return $this->render('request-password-reset', [
@@ -268,19 +255,16 @@ class NewMainController extends Controller
     }
 
 
-
     public function actionResetPassword($token)
     {
-        if(!$user = User::findByPasswordResetToken($token))
-        {
+        if (!$user = User::findByPasswordResetToken($token)) {
             return $this->redirect("/error");
         }
 
         $form = new ResetPasswordForm();
 
-        if ($form->load(Yii::$app->request->post()) && $form->validate())
-        {
-            $this->authService->resetPassword($user,$form->password);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            $this->authService->resetPassword($user, $form->password);
             $this->authService->login($user->email);
             return $this->redirect("/cabinet");
         }

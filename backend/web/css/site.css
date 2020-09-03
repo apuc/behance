@@ -135,3 +135,9 @@ a.desc:after {
     overflow: auto;
 }
 
+.email-user-panel {
+    width: 90%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

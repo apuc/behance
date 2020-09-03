@@ -12,7 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-            'users' => [
+        'users' => [
                 'class' => 'backend\modules\users\User',
             ],
         'accounts' => [
@@ -29,6 +29,9 @@ return [
         ],
         'balance' => [
 	        'class' => 'backend\modules\balance\Balance',
+        ],
+        'balancecash' => [
+            'class' => 'backend\modules\balancecash\BalanceCash',
         ],
         'cases' => [
 	        'class' => 'backend\modules\cases\Cases',
@@ -47,6 +50,9 @@ return [
         ],
         'page-socials' => [
             'class' => 'backend\modules\pagesocials\PageSocials',
+        ],
+        'socials' => [
+            'class' => 'backend\modules\socials\Socials',
         ],
         'page-socials-services' => [
             'class' => 'backend\modules\pagesocialsservices\PageSocialsServices',

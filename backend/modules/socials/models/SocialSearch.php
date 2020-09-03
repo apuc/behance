@@ -1,17 +1,15 @@
 <?php
 
-namespace backend\modules\support\models;
+namespace backend\modules\socials\models;
 
-use common\models\SupportQuestions;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-
+use common\models\Social;
 
 /**
- * Class SupportSearch
- * @package backend\modules\support\models
+ * SocialSearch represents the model behind the search form of `common\models\Social`.
  */
-class SupportSearch extends SupportQuestions
+class SocialSearch extends Social
 {
     /**
      * {@inheritdoc}
@@ -20,7 +18,7 @@ class SupportSearch extends SupportQuestions
     {
         return [
             [['id', 'status'], 'integer'],
-            [['title', 'description'], 'string'],
+            [['name', 'soc_code'], 'safe'],
         ];
     }
 
@@ -42,7 +40,7 @@ class SupportSearch extends SupportQuestions
      */
     public function search($params)
     {
-        $query = SupportQuestions::find()->orderBy(['date_add' => SORT_DESC])->with('answer');
+        $query = Social::find();
 
         // add conditions that should always apply here
 
@@ -61,8 +59,11 @@ class SupportSearch extends SupportQuestions
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'status' => $this->status,
         ]);
 
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'soc_code', $this->soc_code]);
 
         return $dataProvider;
     }

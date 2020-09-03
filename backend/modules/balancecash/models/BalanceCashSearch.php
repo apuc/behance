@@ -1,17 +1,15 @@
 <?php
 
-namespace backend\modules\support\models;
+namespace backend\modules\balancecash\models;
 
-use common\models\SupportQuestions;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-
+use backend\modules\balancecash\models\BalanceCash;
 
 /**
- * Class SupportSearch
- * @package backend\modules\support\models
+ * BalanceCashSearch represents the model behind the search form of `backend\modules\balancecash\models\BalanceCash`.
  */
-class SupportSearch extends SupportQuestions
+class BalanceCashSearch extends BalanceCash
 {
     /**
      * {@inheritdoc}
@@ -19,8 +17,7 @@ class SupportSearch extends SupportQuestions
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
-            [['title', 'description'], 'string'],
+            [['id', 'user_id', 'amount'], 'integer'],
         ];
     }
 
@@ -42,7 +39,7 @@ class SupportSearch extends SupportQuestions
      */
     public function search($params)
     {
-        $query = SupportQuestions::find()->orderBy(['date_add' => SORT_DESC])->with('answer');
+        $query = BalanceCash::find()->with('user');
 
         // add conditions that should always apply here
 
@@ -61,8 +58,9 @@ class SupportSearch extends SupportQuestions
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'user_id' => $this->user_id,
+            'amount' => $this->amount,
         ]);
-
 
         return $dataProvider;
     }

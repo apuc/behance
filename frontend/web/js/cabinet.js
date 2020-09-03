@@ -377,7 +377,7 @@ $(document).ready(function () {
                     e.preventDefault();
                 }
                 gtag('event', 'payment', {'event_category': 'form', 'event_action': 'payment',});
-                ym(51223025, 'reachGoal', 'balance')
+                ym(51223025, 'reachGoal', 'balance_paymen');
 
                 return is_ok;
 

@@ -56,7 +56,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                data-target='#exampleModal'>Пополнить</button>";
                 }
             ],
-
+            [
+                'format' => 'raw',
+                'value' => function ($data) {
+                    return "<button type='button' class='btn btn-danger btn-balance-withdraw-cash-grid' 
+                               data-toggle='modal' data-id='{$data->user_id}'
+                               data-target='#withdrawModal'>Снять</button>";
+                }
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{delete}'
@@ -70,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">Пополнить баланс пользоваетеля</h3>
+                    <h3 class="modal-title" id="exampleModalLabel">Пополнить баланс пользователя</h3>
                 </div>
                 <div class="modal-body">
                     <form id="balance-cash-add-form">
@@ -87,6 +94,33 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                     <button type="button" class="btn btn-primary" id="balance-cash-form-send">Пополнить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="withdrawModal" tabindex="-1" role="dialog" aria-labelledby="withdrawModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="withdrawModalLabel">Снять средства с баланса пользователя</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="balance-withdraw-cash-add-form">
+                        <div class="form-group">
+                            <labe>Снять средства:</labe>
+                            <input type="number" name="amount" class="form-control" value="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <span style="color: red" id="balance-withdraw-cash-form-error"></span>
+                            <input type="hidden" name="user_id_withdraw" id="user-id-withdraw-input">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" id="balance-withdraw-cash-form-send">Снять</button>
                 </div>
             </div>
         </div>

@@ -16,6 +16,15 @@ use dmstr\widgets\Alert;
             </div>
         <?php endif; ?>
 
+        <?php if(Yii::$app->session->hasFlash('warning')): ?>
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong style="font-size: 15px;"><?= Yii::$app->session->getFlash('warning'); ?></strong>
+            </div>
+        <?php endif; ?>
+
         <?php if(Yii::$app->session->hasFlash('success')): ?>
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

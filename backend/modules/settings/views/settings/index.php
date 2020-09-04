@@ -67,6 +67,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'value',
+                'format' => 'html',
+                'value' => function ($data) {
+                    if (preg_match('@{".*"}@u', $data['value'])) {
+                        $json_data = json_decode($data['value']);
+                        $json_arr = get_object_vars($json_data);
+                        $output = '';
+                        foreach ($json_arr as $json_key => $json_item) {
+                            $output .= "$json_key: $json_item<br/>";
+                        }
+                        return $output;
+                    } else {
+                        return $data['value'];
+                    }
+
+                },
                 'contentOptions' => ['class' => 'grid-view-text-fix'],
                 'filter' => false,
 

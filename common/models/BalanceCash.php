@@ -68,6 +68,23 @@ class BalanceCash extends \yii\db\ActiveRecord
     }
 
     /**
+     * Снятие средств с баланса
+     * @param $amount
+     * @return bool
+     */
+    public function withdrawBalance($amount)
+    {
+        $exponent = intval(Settings::getSetting('balance_exponent'));
+        $this->amount -= ((float)$amount * $exponent);
+        if ($this->amount < 0) {
+            $this->amount = 0;
+        }
+        $this->save();
+
+        return true;
+    }
+
+    /**
      * @param $likes
      * @param $views
      * @return bool

@@ -36,7 +36,7 @@ class CallbackController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Callback::find()->orderBy('status'),
+            'query' => Callback::find()->orderBy('status')->orderBy(['dt_add' => SORT_DESC]),
         ]);
 
         return $this->render('index', [
@@ -110,6 +110,8 @@ class CallbackController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

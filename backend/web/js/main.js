@@ -11,6 +11,12 @@ $(document).ready(function () {
         $('#user-id-input').val(id);
     });
 
+    $(".btn-balance-withdraw-cash-grid").on("click", function () {
+        var id = $(this).attr('data-id');
+        console.log(id);
+        $('#user-id-withdraw-input').val(id);
+    });
+
     $("#balance-form-send").on("click", function () {
 
         var data = $("#balance-add-form").serialize();
@@ -45,6 +51,24 @@ $(document).ready(function () {
                     location.reload();
                 } else {
                     $("#balance-cash-form-error").html(response);
+                }
+            }
+        });
+    });
+
+    $("#balance-withdraw-cash-form-send").on("click", function () {
+        var data = $("#balance-withdraw-cash-add-form").serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/balancecash/balance-cash/withdraw-balance-cash",
+            data: data,
+            success: function (response) {
+
+                if (response == true) {
+                    location.reload();
+                } else {
+                    $("#balance-withdraw-cash-form-error").html(response);
                 }
             }
         });

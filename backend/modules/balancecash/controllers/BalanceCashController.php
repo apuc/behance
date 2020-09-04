@@ -80,4 +80,33 @@ class BalanceCashController extends Controller
         Yii::$app->session->setFlash('success', 'Баланс пополнен!');
         return true;
     }
+
+    /**
+     * Снятие с баланса
+     * @return bool|string
+     */
+    public function actionWithdrawBalanceCash()
+    {
+        $post = Yii::$app->request->post();
+        $balanceCashModel = BalanceCash::findOne(['user_id' => $post['user_id_withdraw']]);
+
+
+        if (empty($post['amount'])) {
+            return "Укажите количество средств!";
+        }
+
+        $amount = (float)$post['amount'];
+
+        $balanceCashModel->withdrawBalance($amount);
+
+        HistoryCash::create(
+            $post['user_id'],
+            $amount,
+            \common\models\HistoryCash::TRANSFER_FROM_BALANCE,
+            "Средства сняты со счета"
+        );
+
+        Yii::$app->session->setFlash('warning', 'Средства сняты с баланса!');
+        return true;
+    }
 }

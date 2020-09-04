@@ -100,7 +100,7 @@ class BalanceCashController extends Controller
         $balanceCashModel->withdrawBalance($amount);
 
         HistoryCash::create(
-            $post['user_id'],
+            $post['user_id_withdraw'],
             $amount,
             \common\models\HistoryCash::TRANSFER_FROM_BALANCE,
             "Средства сняты со счета"

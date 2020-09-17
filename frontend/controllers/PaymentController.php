@@ -7,6 +7,7 @@ use common\models\HistoryCash;
 use common\models\OrdersCash;
 use common\models\Settings;
 use DateTime;
+use frontend\modules\api\controllers\ApiController;
 use Yii;
 use common\models\Cases;
 use common\models\Balance;
@@ -103,6 +104,9 @@ class PaymentController extends \yii\web\Controller
                                     $balance->addBalance($amount);
                                     $order->is_paid = 1;
                                     $order->save();
+                                    ApiController::sendTelegramMessage([
+                                        'text' => "<b>Новая оплата!</b>\n<b>Сумма: </b>" . $post['us_usd'] . "\n",
+                                        'site' => Yii::$app->name]);
                                     HistoryCash::create(
                                         $user,
                                         HistoryCash::TRANSFER_TO_BALANCE,

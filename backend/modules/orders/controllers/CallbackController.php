@@ -44,8 +44,6 @@ class CallbackController extends Controller
         ]);
     }
 
-
-
     public function actionMarkAsChecked($id)
     {
         $callback = $this->findModel($id);

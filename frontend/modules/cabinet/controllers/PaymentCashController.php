@@ -12,6 +12,7 @@ use common\models\Cases;
 use common\models\History;
 use common\models\OrdersCash;
 use common\models\Settings;
+use frontend\modules\api\controllers\ApiController;
 use frontend\modules\cabinet\models\Balance;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -73,7 +74,7 @@ class PaymentCashController extends Controller
                 } else {
                     return [
                         'code' => 100,
-                        'msg' => "Не получилось сохранить ваш заказ, попробуйте пожалуйста позднее"
+                        'msg' => "Не получилось сохранить ваш заказ, попробуйте, пожалуйста, позднее"
                     ];
                 }
             }

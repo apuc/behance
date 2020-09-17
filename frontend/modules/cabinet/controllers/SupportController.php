@@ -7,6 +7,7 @@ namespace frontend\modules\cabinet\controllers;
 use common\models\Social;
 use common\models\SupportAnswers;
 use common\models\SupportQuestions;
+use frontend\modules\api\controllers\ApiController;
 use frontend\modules\cabinet\models\SupportSearch;
 use yii\web\Controller;
 use Yii;
@@ -75,12 +76,14 @@ class SupportController extends Controller
             $model->date_add = new \yii\db\Expression('NOW()');
             $model->status = 1;
             $model->save();
+            ApiController::sendTelegramMessage([
+                'text' => "<b>Новое сообщение в тех поддержку!</b>\n\n<b>Тема: </b>$model->title\n<b>Описание: </b>$model->description\n",
+                'site' => Yii::$app->name]);
             return $this->redirect('index');
         }
 
         return $this->render('create', [
             'model' => $model,
-            //'socials' => $socials,
         ]);
     }
 

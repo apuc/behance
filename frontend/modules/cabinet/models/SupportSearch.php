@@ -42,7 +42,7 @@ class SupportSearch extends SupportQuestions
      */
     public function search($params)
     {
-        $query = SupportQuestions::find()->with('user')->where(['user_id'=>\Yii::$app->user->getId()]);
+        $query = SupportQuestions::find()->with('user')->where(['user_id'=>\Yii::$app->user->getId()])->orderBy(['date_add' => SORT_DESC]);
 
         // add conditions that should always apply here
 

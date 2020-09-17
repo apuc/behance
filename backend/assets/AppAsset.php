@@ -18,7 +18,7 @@ class AppAsset extends AssetBundle
         'fonts/fontawesome-webfont.ttf'
     ];
     public $js = [
-        'js/main.js',
+        'js/main.js?4',
     ];
     public $depends = [
         'yii\web\YiiAsset',

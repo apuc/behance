@@ -28,7 +28,8 @@
         "craft-group/vipipru_client": "dev-master",
       "ext-json": "*",
         "2amigos/yii2-transliterator-helper": "*",
-        "himiklab/yii2-sitemap-module": "*"
+        "himiklab/yii2-sitemap-module": "*",
+      "ext-curl": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

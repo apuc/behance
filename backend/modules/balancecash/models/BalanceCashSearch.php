@@ -57,7 +57,9 @@ class BalanceCashSearch extends BalanceCash
         }
         // grid filtering conditions
         $exp = intval(Settings::getSetting('balance_exponent'));
-        $query->andFilterCompare('amount', '>='.(int)$params['BalanceCashSearch']['amount'] * $exp);
+        if (isset($params['BalanceCashSearch']['amount'])) {
+            $query->andFilterCompare('amount', '>='.(int)$params['BalanceCashSearch']['amount'] * $exp);
+        }
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,

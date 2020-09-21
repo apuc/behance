@@ -25,7 +25,6 @@ class PaymentCashController extends Controller
 
     public function actionIndex()
     {
-        return $this->redirect('404');
             //$cases = Cases::findAll(['status'=>1]);
        //$res = array();
        //$defaultCase = $cases[0];

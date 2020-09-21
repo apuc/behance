@@ -26,13 +26,16 @@ class BalanceCashController extends Controller
         $searchModel = new BalanceCashSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+
         $users = User::find()->all();
         $users = ArrayHelper::map($users, 'id', 'email');
+        $users_amounts = ArrayHelper::map(BalanceCash::find()->asArray()->all(), 'user_id', 'amount');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'users' => $users,
+            'users_amounts' => $users_amounts
         ]);
     }
 

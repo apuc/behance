@@ -105,7 +105,7 @@ class PaymentController extends \yii\web\Controller
                                     $order->is_paid = 1;
                                     $order->save();
                                     ApiController::sendTelegramMessage([
-                                        'text' => "<b>Новая оплата!</b>\n<b>Сумма: </b>" . $amount * $exponent . "\n",
+                                        'text' => "<b>Новая оплата!</b>\n<b>Сумма: </b>" . $amount . "\n",
                                         'site' => Yii::$app->name]);
                                     HistoryCash::create(
                                         $user,

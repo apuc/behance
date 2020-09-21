@@ -100,12 +100,12 @@ class PaymentController extends \yii\web\Controller
                             if ($is_correct_usd) {
                                 if ($is_still_valid) {
                                     $balance = BalanceCash::findOne(['user_id' => $user]);
-                                    $amount = $post['us_usd'] * $exponent;
+                                    $amount = $post['us_usd'];
                                     $balance->addBalance($amount);
                                     $order->is_paid = 1;
                                     $order->save();
                                     ApiController::sendTelegramMessage([
-                                        'text' => "<b>Новая оплата!</b>\n<b>Сумма: </b>" . $post['us_usd'] . "\n",
+                                        'text' => "<b>Новая оплата!</b>\n<b>Сумма: </b>" . $amount * $exponent . "\n",
                                         'site' => Yii::$app->name]);
                                     HistoryCash::create(
                                         $user,

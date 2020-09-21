@@ -45,8 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     $exponent = intval(Settings::getSetting('balance_exponent'));
                     return $data['amount'] / $exponent;
                 },
-                'filter' => false,
-
             ],
             [
                 'format' => 'raw',

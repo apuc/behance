@@ -2,6 +2,7 @@
 
 namespace backend\modules\balancecash\models;
 
+use backend\modules\settings\models\Settings;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\modules\balancecash\models\BalanceCash;
@@ -54,12 +55,12 @@ class BalanceCashSearch extends BalanceCash
             // $query->where('0=1');
             return $dataProvider;
         }
-
         // grid filtering conditions
+        $exp = intval(Settings::getSetting('balance_exponent'));
+        $query->andFilterCompare('amount', '>='.(int)$params['BalanceCashSearch']['amount'] * $exp);
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'amount' => $this->amount,
         ]);
 
         return $dataProvider;

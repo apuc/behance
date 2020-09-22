@@ -94,7 +94,7 @@ class SocialQueueController extends Controller
         if ($model->age_max == null) $model->age_max = 0;
         if ($model->friends_id == null) $model->friends_id = 0;
         if ($model->balance == null) $model->balance = 1;
-        if ($model->price == null) $model->price = 0;
+        if ($model->price == null) $model->price = 999999;
         $error = null;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {

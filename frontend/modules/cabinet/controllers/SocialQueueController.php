@@ -95,9 +95,14 @@ class SocialQueueController extends Controller
         if ($model->friends_id == null) $model->friends_id = 0;
         if ($model->balance == null) $model->balance = 1;
         if ($model->price == null) $model->price = 999999;
+
         $error = null;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
+                $checkPrice = SocialService::getPriceByType($model->type_id);
+                $checkPrice = $checkPrice * pow(10, 6);
+                $checkPrice = $checkPrice * (int)$model->balance;
+
                 $balance_cash = BalanceCash::findOne(['user_id'=>Yii::$app->user->getId()]);
                 $balance_cash->amount = intval($balance_cash->amount);
                 $model->price = intval($model->price);
@@ -106,68 +111,73 @@ class SocialQueueController extends Controller
                 $wrapper = new SocialWrapper(Settings::getSetting('access_token'));
                 $session = Yii::$app->session;
                 $error = "Произошла ошибка при создании задачи, пожалуйста введите параметры ещё раз<br>Введенная в прошлый раз вами ссылка - $model->link";
-                if (isset($session['inputs']) && isset($session['price'])) {
-                    $inputs = $session['inputs'];
+                if($checkPrice != $model->price){
+                    $error = "Ошибка контрольной суммы<br>Введенная в прошлый раз вами ссылка - $model->link";
+                }
+                else {
+                    if (isset($session['inputs']) && isset($session['price'])) {
+                        $inputs = $session['inputs'];
 
-                    // TODO: add more checks? like balance > 0 and etc
-                    if ($model->price > $balance_cash->amount) {
-                        $error = "Недостаточно денег на счету для создания задачи накрутки<br>Введенная в прошлый раз вами ссылка - $model->link";
-                    } else {
-                        $result = $this->setParamsWrapper($inputs, $model);
+                        // TODO: add more checks? like balance > 0 and etc
+                        if ($model->price > $balance_cash->amount) {
+                            $error = "Недостаточно денег на счету для создания задачи накрутки<br>Введенная в прошлый раз вами ссылка - $model->link";
+                        } else {
+                            $result = $this->setParamsWrapper($inputs, $model);
 
-                        if($result['all_good']) {
-                            $user = Yii::$app->user->id;
-                            $date = date('Y-m-d H-i-s');
+                            if($result['all_good']) {
+                                $user = Yii::$app->user->id;
+                                $date = date('Y-m-d H-i-s');
 
-                            $status = $wrapper->createJob('Job - user-'.$user.' - '.$date, $model->type_id, $result['params']);
-                            if ($status == 1) {
-                                $status = $wrapper->setJobBalance($model->balance, BalanceType::VIEWS()->getValue());
+                                $status = $wrapper->createJob('Job - user-'.$user.' - '.$date, $model->type_id, $result['params']);
                                 if ($status == 1) {
-                                    // TODO: rewrite mb to never account error from set job status when there is no money in api account
-                                    $status = $wrapper->setJobStatus(StatusType::ENABLED()->getValue());
+                                    $status = $wrapper->setJobBalance($model->balance, BalanceType::VIEWS()->getValue());
                                     if ($status == 1) {
-                                        $actual_model->status = 1;
+                                        // TODO: rewrite mb to never account error from set job status when there is no money in api account
+                                        $status = $wrapper->setJobStatus(StatusType::ENABLED()->getValue());
+                                        if ($status == 1) {
+                                            $actual_model->status = 1;
+                                        }
+                                        else {
+                                            //$wrapper->deleteCurrentJob();
+                                            //and error
+                                            $actual_model->status = 0;
+                                        }
+                                        $actual_model->link_id = $wrapper->getLinkId();
+                                        $actual_model->user_id = $user;
+                                        $actual_model->dt_add = $date;
+                                        $actual_model->type_id = $model->type_id;
+                                        $actual_model->url = $model->link;
+                                        $actual_model->balance = $model->balance;
+                                        $actual_model->quantity = $model->balance;
+                                        $actual_model->sum =$model->price;
+                                        $status = $actual_model->save();
+                                        HistoryCash::create(
+                                            $user,
+                                            HistoryCash::TRANSFER_FROM_BALANCE,
+                                            $model->price,
+                                            'Снятие денег за услуг накрутки №'.$actual_model->id);
+                                        $balance_cash->removeFromBalance($model->price);
+                                        $this->redirect(['index']);
+                                    } else {
+                                        $error = $wrapper->getError();
+                                        $wrapper->deleteCurrentJob();
+                                        // default error will be used if Job couldn't be created
+                                        // will pretty much be spammin 'till someone adds funds
+                                        $this->sendBalanceEmail(Settings::getSetting('balance_handler_email'));
                                     }
-                                    else {
-                                        //$wrapper->deleteCurrentJob();
-                                        //and error
-                                        $actual_model->status = 0;
-                                    }
-                                    $actual_model->link_id = $wrapper->getLinkId();
-                                    $actual_model->user_id = $user;
-                                    $actual_model->dt_add = $date;
-                                    $actual_model->type_id = $model->type_id;
-                                    $actual_model->url = $model->link;
-                                    $actual_model->balance = $model->balance;
-                                    $actual_model->quantity = $model->balance;
-                                    $actual_model->sum =$model->price;
-                                    $status = $actual_model->save();
-                                    HistoryCash::create(
-                                        $user,
-                                        HistoryCash::TRANSFER_FROM_BALANCE,
-                                        $model->price,
-                                        'Снятие денег за услуг накрутки №'.$actual_model->id);
-                                    $balance_cash->removeFromBalance($model->price);
-                                    $this->redirect(['index']);
-                                } else {
-                                    $error = $wrapper->getError();
-                                    $wrapper->deleteCurrentJob();
-                                    // default error will be used if Job couldn't be created
-                                    // will pretty much be spammin 'till someone adds funds
-                                    $this->sendBalanceEmail(Settings::getSetting('balance_handler_email'));
                                 }
+                                else {
+                                    $error = $wrapper->getError();
+                                }
+                                // default error will be used if Job couldn't be created
                             }
                             else {
-                                $error = $wrapper->getError();
+                                $error = 'Возникли следующие ошибки:<br>'.$result['error'];
                             }
-                            // default error will be used if Job couldn't be created
                         }
-                        else {
-                            $error = 'Возникли следующие ошибки:<br>'.$result['error'];
-                        }
+                    } else {
+                        $error = "Произошла неизвестная ошибка, пожалуйста введите параметры ещё раз<br>Введенная в прошлый раз вами ссылка - $model->link";
                     }
-                } else {
-                    $error = "Произошла неизвестная ошибка, пожалуйста введите параметры ещё раз<br>Введенная в прошлый раз вами ссылка - $model->link";
                 }
             }
         }

@@ -32,6 +32,7 @@ class HistoryCash extends \yii\db\ActiveRecord
      * @param $type
      * @param $amount
      * @param $desc
+     * @return int
      */
     public static function create($user, $type, $amount, $desc)
     {
@@ -42,6 +43,7 @@ class HistoryCash extends \yii\db\ActiveRecord
         $history->type = $type;
         $history->dt_add = date("Y-m-d H:i:s");
         $history->save();
+        return $history->id;
     }
 
     /**

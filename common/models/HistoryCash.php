@@ -16,8 +16,8 @@ use Yii;
  */
 class HistoryCash extends \yii\db\ActiveRecord
 {
-	const TRANSFER_TO_BALANCE = 'Зачисление на баланс';
-	const TRANSFER_FROM_BALANCE = 'Снятие с баланса';
+    const TRANSFER_TO_BALANCE = 'Зачисление на баланс';
+    const TRANSFER_FROM_BALANCE = 'Снятие с баланса';
 
     /**
      * {@inheritdoc}
@@ -25,6 +25,23 @@ class HistoryCash extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'history_cash';
+    }
+
+    /**
+     * @param $user
+     * @param $type
+     * @param $amount
+     * @param $desc
+     */
+    public static function create($user, $type, $amount, $desc)
+    {
+        $history = new HistoryCash();
+        $history->user_id = $user;
+        $history->amount = $amount;
+        $history->description = $desc;
+        $history->type = $type;
+        $history->dt_add = date("Y-m-d H:i:s");
+        $history->save();
     }
 
     /**
@@ -55,7 +72,6 @@ class HistoryCash extends \yii\db\ActiveRecord
         ];
     }
 
-
     public function beforeSave($insert)
     {
 
@@ -64,29 +80,10 @@ class HistoryCash extends \yii\db\ActiveRecord
         return true;
     }
 
-    /**
-     * @param $user
-     * @param $type
-     * @param $amount
-     * @param $desc
-     */
-	public static function create($user,$type,$amount,$desc)
+    public function getUser()
     {
-        $history = new self;
-        $history->user_id = $user;
-        $history->amount = $amount;
-        $history->description = $desc;
-        $history->type = $type;
-        $history->dt_add = date("Y-m-d H:i:s");
-        $history->save();
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
-	
 
-
-	public function getUser()
-    {
-        return $this->hasOne(User::className(),['id'=>'user_id']);
-    }
-	
 
 }

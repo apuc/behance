@@ -29,7 +29,9 @@
       "ext-json": "*",
         "2amigos/yii2-transliterator-helper": "*",
         "himiklab/yii2-sitemap-module": "*",
-      "ext-curl": "*"
+      "ext-curl": "*",
+        "katzgrau/klogger": "dev-master",
+        "monolog/monolog": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -8,6 +8,8 @@ use common\models\OrdersCash;
 use common\models\Settings;
 use DateTime;
 use frontend\modules\api\services\TelegramApiServices;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use Yii;
 use common\models\Cases;
 use common\models\Balance;
@@ -55,12 +57,17 @@ class PaymentController extends \yii\web\Controller
 
     public function actionPaymentResults()
     {
+        $log = new Logger('name');
+        $log->pushHandler(new StreamHandler($_SERVER['DOCUMENT_ROOT'].'/error.log', Logger::ERROR));
 
         try
         {
+            $log->error("POST DATA: ".implode(Yii::$app->request->post()));
             $curr_date = new DateTime(date("Y-m-d H:i:s"));
 
             $post = Yii::$app->request->post();
+            error_log($post);
+
             $sign = FreeCassa::generateSign($post['AMOUNT'],FreeCassa::SECRET_2, $post['MERCHANT_ORDER_ID']);
 
             if ($sign == $post['SIGN'])
@@ -72,7 +79,6 @@ class PaymentController extends \yii\web\Controller
                     if ($post['AMOUNT'] == $case->price) {
                         $balance = Balance::findOne(['user_id' => $user]);
                         $balance->addBalance($case->likes, $case->views);
-
                         History::create(
                             $user,
                             History::TRANSFER_TO_BALANCE,
@@ -104,12 +110,23 @@ class PaymentController extends \yii\web\Controller
                                     $balance->addBalance($amount);
                                     $order->is_paid = 1;
                                     $order->save();
-                                    HistoryCash::create(
+                                    $log->error("IS_PAID: ".$order->is_paid);
+                                    $log->error("USER ID: ".$user);
+                                    $log->error("AMOUNT: ".$amount);
+                                    $log->error("post[us_usd]: ".$post['us_usd']);
+
+                                    $status = HistoryCash::create(
                                         $user,
                                         HistoryCash::TRANSFER_TO_BALANCE,
                                         $amount,
                                         "Пополнено на " . $post['us_usd'] . '$'
                                     );
+                                    error_log("Save history cash: ".$status);
+                                    error_log(HistoryCash::findOne(['id' => $status]));
+
+                                    $log->error("Save history cash: ".$status);
+                                    $log->error("HISTORY CASH ID FROM DB: ".(string)HistoryCash::findOne(['id' => $status])->user_id);
+
                                     $messenger = new TelegramApiServices(Yii::$app->params['telegram_api_url']);
                                     $messenger->sendTelegramMessage(Yii::$app->name,
                                         "<b>Новая оплата!</b>\n<b>Сумма: </b>" . $amount . "\n");

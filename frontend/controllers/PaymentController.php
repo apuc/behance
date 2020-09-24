@@ -27,7 +27,7 @@ class PaymentController extends \yii\web\Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    //'payment-results' => ['post'],
+                    'payment-results' => ['post'],
                 ],
             ],
         ];

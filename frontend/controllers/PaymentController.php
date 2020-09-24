@@ -7,7 +7,7 @@ use common\models\HistoryCash;
 use common\models\OrdersCash;
 use common\models\Settings;
 use DateTime;
-use frontend\modules\api\controllers\ApiController;
+use frontend\modules\api\services\TelegramApiServices;
 use Yii;
 use common\models\Cases;
 use common\models\Balance;
@@ -104,15 +104,15 @@ class PaymentController extends \yii\web\Controller
                                     $balance->addBalance($amount);
                                     $order->is_paid = 1;
                                     $order->save();
-                                    ApiController::sendTelegramMessage([
-                                        'text' => "<b>Новая оплата!</b>\n<b>Сумма: </b>" . $amount . "\n",
-                                        'site' => Yii::$app->name]);
                                     HistoryCash::create(
                                         $user,
                                         HistoryCash::TRANSFER_TO_BALANCE,
                                         $amount,
                                         "Пополнено на " . $post['us_usd'] . '$'
                                     );
+                                    $messenger = new TelegramApiServices(Yii::$app->params['telegram_api_url']);
+                                    $messenger->sendTelegramMessage(Yii::$app->name,
+                                        "<b>Новая оплата!</b>\n<b>Сумма: </b>" . $amount . "\n");
                                 } else {
                                     throw new \Exception("Order has expired!");
                                 }

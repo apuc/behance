@@ -29,12 +29,7 @@ class SupportController extends Controller
     {
         $searchModel = new SupportSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        HistoryCash::create(
-            Yii::$app->user->id,
-            HistoryCash::TRANSFER_TO_BALANCE,
-            14,
-            "Пополнено на " . 123 . '$'
-        );
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

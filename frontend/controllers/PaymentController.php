@@ -57,9 +57,9 @@ class PaymentController extends \yii\web\Controller
 
     public function actionPaymentResults()
     {
-        $log = new Logger('name');
-        $log->pushHandler(new StreamHandler($_SERVER['DOCUMENT_ROOT'].'/error.log', Logger::ERROR));
-
+//        $log = new Logger('name');
+//        $log->pushHandler(new StreamHandler($_SERVER['DOCUMENT_ROOT'].'/error.log', Logger::ERROR));
+//
 //        $tmp = '111112123';
 //        $model = new OrdersCash();
 //        $model->user_id = 1;
@@ -78,7 +78,7 @@ class PaymentController extends \yii\web\Controller
 //        $post['AMOUNT'] = 777;
         try
         {
-            $log->error("POST DATA: ".implode(Yii::$app->request->post()));
+//            $log->error("POST DATA: ".implode(Yii::$app->request->post()));
             $curr_date = new DateTime(date("Y-m-d H:i:s"));
 
             $post = Yii::$app->request->post();
@@ -110,20 +110,20 @@ class PaymentController extends \yii\web\Controller
                     if ($order) {
                         $is_correct_amount = $order->amount == $post['AMOUNT'];
 
-                        $log->error("is_correct_amount: ". (string)$is_correct_amount);
+//                        $log->error("is_correct_amount: ". (string)$is_correct_amount);
 
                         $exponent = intval(Settings::getSetting('balance_exponent'));
                         $order_usd = intval(round(floatval($order->usd), 6) * $exponent);
-                        $log->error("order_usd: ". (string) $order_usd);
+//                        $log->error("order_usd: ". (string) $order_usd);
                         $post_usd = intval(round(floatval($post['us_usd']), 6) * $exponent);
-                        $log->error("post_usd: ". (string) $post_usd);
+//                        $log->error("post_usd: ". (string) $post_usd);
 
 //                        var_dump($order_usd);
 //                        var_dump($post_usd);
 //                        exit();
 
                         $is_correct_usd = $order_usd == $post_usd;
-                        $log->error("is_correct_usd: ". (string) $is_correct_usd);
+//                        $log->error("is_correct_usd: ". (string) $is_correct_usd);
 
                         //$is_correct_usd = true;
                         $order_date = new DateTime($order->date);
@@ -138,25 +138,17 @@ class PaymentController extends \yii\web\Controller
                                     $balance->addBalance($amount);
                                     $order->is_paid = 1;
                                     $order->save();
-                                    $log->error("IS_PAID: ".$order->is_paid);
-                                    $log->error("USER ID: ".$user);
-                                    $log->error("AMOUNT: ".$amount);
-                                    $log->error("post[us_usd]: ".$post['us_usd']);
+//                                    $log->error("IS_PAID: ".$order->is_paid);
+//                                    $log->error("USER ID: ".$user);
+//                                    $log->error("AMOUNT: ".$amount);
+//                                    $log->error("post[us_usd]: ".$post['us_usd']);
 
-                                    $status = HistoryCash::create(
+                                    HistoryCash::create(
                                         $user,
                                         HistoryCash::TRANSFER_TO_BALANCE,
                                         $amount,
                                         "Пополнено на " . $post['us_usd'] . '$'
                                     );
-
-                                    $log->error("Save history cash: ".$status);
-                                    if (is_array($status)) {
-                                        $log->error("validate_error: ". implode($status));
-                                    } else {
-                                        $log->error("validate_error: ". $status);
-                                    }
-
 
                                     $messenger = new TelegramApiServices(Yii::$app->params['telegram_api_url']);
                                     $messenger->sendTelegramMessage(Yii::$app->name,

@@ -152,7 +152,7 @@ class PaymentController extends \yii\web\Controller
 
                                     $messenger = new TelegramApiServices(Yii::$app->params['telegram_api_url']);
                                     $messenger->sendTelegramMessage(Yii::$app->name,
-                                        "<b>Новая оплата!</b>\n<b>Сумма: </b>" . $amount . "\n");
+                                        "<b>Новая оплата!</b>\n<b>Сумма: </b>" . $amount / $exponent. "\n");
                                 } else {
                                     throw new \Exception("Order has expired!");
                                 }

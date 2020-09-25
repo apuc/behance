@@ -143,20 +143,12 @@ class PaymentController extends \yii\web\Controller
                                     $log->error("AMOUNT: ".$amount);
                                     $log->error("post[us_usd]: ".$post['us_usd']);
 
-                                    $status = HistoryCash::create(
+                                    HistoryCash::create(
                                         $user,
                                         HistoryCash::TRANSFER_TO_BALANCE,
                                         $amount,
                                         "Пополнено на " . $post['us_usd'] . '$'
                                     );
-
-                                    $log->error("Save history cash: ".$status);
-                                    if (is_array($status)) {
-                                        $log->error("validate_error: ". implode($status));
-                                    } else {
-                                        $log->error("validate_error: ". $status);
-                                    }
-
 
                                     $messenger = new TelegramApiServices(Yii::$app->params['telegram_api_url']);
                                     $messenger->sendTelegramMessage(Yii::$app->name,

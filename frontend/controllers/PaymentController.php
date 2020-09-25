@@ -116,7 +116,7 @@ class PaymentController extends \yii\web\Controller
                         $order_usd = intval(round(floatval($order->usd), 6) * $exponent);
                         $log->error("order_usd: ". (string) $order_usd);
                         $post_usd = intval(round(floatval($post['us_usd']), 6) * $exponent);
-                        $log->error("post['us_usd']: ". (string) $post['us_usd']);
+                        $log->error("post_usd: ". (string) $post_usd);
 
 //                        var_dump($order_usd);
 //                        var_dump($post_usd);
@@ -125,7 +125,7 @@ class PaymentController extends \yii\web\Controller
                         $is_correct_usd = $order_usd == $post_usd;
                         $log->error("is_correct_usd: ". (string) $is_correct_usd);
 
-                        $is_correct_usd = true;
+                        //$is_correct_usd = true;
                         $order_date = new DateTime($order->date);
                         $expire_days = intval(Settings::getSetting('expiration_days'));
                         $is_still_valid = $curr_date->diff($order_date)->days < $expire_days;
@@ -133,7 +133,8 @@ class PaymentController extends \yii\web\Controller
                             if ($is_correct_usd) {
                                 if ($is_still_valid) {
                                     $balance = BalanceCash::findOne(['user_id' => $user]);
-                                    $amount = $post['us_usd'];
+//                                    $amount = $post['us_usd'] * $exponent;
+                                    $amount = $post['us_usd'] * $exponent;
                                     $balance->addBalance($amount);
                                     $order->is_paid = 1;
                                     $order->save();
@@ -150,7 +151,12 @@ class PaymentController extends \yii\web\Controller
                                     );
 
                                     $log->error("Save history cash: ".$status);
-                                    $log->error("HISTORY CASH ID FROM DB: ".(string)HistoryCash::findOne(['id' => $status])->user_id);
+                                    if (is_array($status)) {
+                                        $log->error("validate_error: ". implode($status));
+                                    } else {
+                                        $log->error("validate_error: ". $status);
+                                    }
+
 
                                     $messenger = new TelegramApiServices(Yii::$app->params['telegram_api_url']);
                                     $messenger->sendTelegramMessage(Yii::$app->name,

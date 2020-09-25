@@ -8,16 +8,12 @@
 
 namespace frontend\modules\cabinet\controllers;
 
-use common\models\Cases;
-use common\models\History;
+use common\classes\FreeCassa;
 use common\models\OrdersCash;
 use common\models\Settings;
 use frontend\modules\api\controllers\ApiController;
-use frontend\modules\cabinet\models\Balance;
-use yii\helpers\ArrayHelper;
-use yii\web\Controller;
 use Yii;
-use common\classes\FreeCassa;
+use yii\web\Controller;
 
 
 class PaymentCashController extends Controller
@@ -25,29 +21,29 @@ class PaymentCashController extends Controller
 
     public function actionIndex()
     {
-            //$cases = Cases::findAll(['status'=>1]);
-       //$res = array();
-       //$defaultCase = $cases[0];
-       $default_sum = 150;
-       $exchange_rate = floatval(Settings::getSetting('exchange_rate_usd'));
-       $default_usd = round($default_sum / floatval($exchange_rate), 6);
+        //$cases = Cases::findAll(['status'=>1]);
+        //$res = array();
+        //$defaultCase = $cases[0];
+        $default_sum = 150;
+        $exchange_rate = floatval(Settings::getSetting('exchange_rate_usd'));
+        $default_usd = round($default_sum / floatval($exchange_rate), 6);
 
-       $order_id = uniqid('id_', true).'_'.Yii::$app->user->id;
-       $form_sign = FreeCassa::generateSign($default_sum.'.00',FreeCassa::SECRET_1,$order_id);
+        $order_id = uniqid('id_', true) . '_' . Yii::$app->user->id;
+        $form_sign = FreeCassa::generateSign($default_sum . '.00', FreeCassa::SECRET_1, $order_id);
 
-       //foreach ($cases as $case)
-       //{
-       //   $res[$case->id."|".$case->price] = $case->__toString();
-       //}
+        //foreach ($cases as $case)
+        //{
+        //   $res[$case->id."|".$case->price] = $case->__toString();
+        //}
 
-       return $this->render('pay-form',[
-           'default_sum' => $default_sum,
-           'merchant_id' => FreeCassa::SHOP_ID,
-           'form_sign' => $form_sign,
-           'order_id' => $order_id,
-           'exchange_rate' => $exchange_rate,
-           'default_usd' => $default_usd
-       ]);
+        return $this->render('pay-form', [
+            'default_sum' => $default_sum,
+            'merchant_id' => FreeCassa::SHOP_ID,
+            'form_sign' => $form_sign,
+            'order_id' => $order_id,
+            'exchange_rate' => $exchange_rate,
+            'default_usd' => $default_usd
+        ]);
     }
 
     public function actionPutOrder()
@@ -66,7 +62,7 @@ class PaymentCashController extends Controller
                 $model->amount = $data['amount'];
                 $model->date = date('Y-m-d H-i-s');
                 $model->is_paid = 0;
-                if($model->save()) {
+                if ($model->save()) {
                     return [
                         'code' => 200,
                         'usd' => $usd

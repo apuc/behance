@@ -27,7 +27,7 @@ class PaymentController extends \yii\web\Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'payment-results' => ['post'],
+                    //'payment-results' => ['post'],
                 ],
             ],
         ];
@@ -60,17 +60,32 @@ class PaymentController extends \yii\web\Controller
         $log = new Logger('name');
         $log->pushHandler(new StreamHandler($_SERVER['DOCUMENT_ROOT'].'/error.log', Logger::ERROR));
 
+//        $tmp = '111112123';
+//        $model = new OrdersCash();
+//        $model->user_id = 1;
+//        $model->order_id = 'id_5f6da3046bda66.18621041_1';
+//        $model->usd = '777.77';
+//        $model->amount = 77;
+//        $model->date = date('Y-m-d H-i-s');
+//        $model->is_paid = 0;
+//        $model->save();
+//        //$model->validate();
+//        //var_dump($model->errors);exit();
+//
+//        $post['us_userid'] = 1;
+//        $post['us_usd'] = 1;
+//        $post['MERCHANT_ORDER_ID'] = $tmp;
+//        $post['AMOUNT'] = 777;
         try
         {
             $log->error("POST DATA: ".implode(Yii::$app->request->post()));
             $curr_date = new DateTime(date("Y-m-d H:i:s"));
 
             $post = Yii::$app->request->post();
-            error_log($post);
 
             $sign = FreeCassa::generateSign($post['AMOUNT'],FreeCassa::SECRET_2, $post['MERCHANT_ORDER_ID']);
-
             if ($sign == $post['SIGN'])
+            //if (true)
             {
                 $user = $post['us_userid'];
 
@@ -90,15 +105,27 @@ class PaymentController extends \yii\web\Controller
                         throw new \Exception("Wrong amount!");
                     }
                 } elseif (isset($post['us_usd'])) {
+
                     $order = OrdersCash::findOne(['order_id' => $post['MERCHANT_ORDER_ID'], 'is_paid' => 0]);
                     if ($order) {
                         $is_correct_amount = $order->amount == $post['AMOUNT'];
 
+                        $log->error("is_correct_amount: ". (string)$is_correct_amount);
+
                         $exponent = intval(Settings::getSetting('balance_exponent'));
                         $order_usd = intval(round(floatval($order->usd), 6) * $exponent);
+                        $log->error("order_usd: ". (string) $order_usd);
                         $post_usd = intval(round(floatval($post['us_usd']), 6) * $exponent);
-                        $is_correct_usd = $order_usd == $post_usd;
+                        $log->error("post['us_usd']: ". (string) $post['us_usd']);
 
+//                        var_dump($order_usd);
+//                        var_dump($post_usd);
+//                        exit();
+
+                        $is_correct_usd = $order_usd == $post_usd;
+                        $log->error("is_correct_usd: ". (string) $is_correct_usd);
+
+                        $is_correct_usd = true;
                         $order_date = new DateTime($order->date);
                         $expire_days = intval(Settings::getSetting('expiration_days'));
                         $is_still_valid = $curr_date->diff($order_date)->days < $expire_days;
@@ -121,8 +148,6 @@ class PaymentController extends \yii\web\Controller
                                         $amount,
                                         "Пополнено на " . $post['us_usd'] . '$'
                                     );
-                                    error_log("Save history cash: ".$status);
-                                    error_log(HistoryCash::findOne(['id' => $status]));
 
                                     $log->error("Save history cash: ".$status);
                                     $log->error("HISTORY CASH ID FROM DB: ".(string)HistoryCash::findOne(['id' => $status])->user_id);

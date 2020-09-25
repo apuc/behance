@@ -30,7 +30,6 @@
         "2amigos/yii2-transliterator-helper": "*",
         "himiklab/yii2-sitemap-module": "*",
       "ext-curl": "*",
-        "katzgrau/klogger": "dev-master",
         "monolog/monolog": "dev-master"
     },
     "require-dev": {

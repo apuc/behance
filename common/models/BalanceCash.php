@@ -60,8 +60,8 @@ class BalanceCash extends \yii\db\ActiveRecord
      */
     public function addBalance($amount)
     {
-        $exponent = intval(Settings::getSetting('balance_exponent'));
-        $this->amount += ((float)$amount * $exponent);
+//        $exponent = intval(Settings::getSetting('balance_exponent'));
+        $this->amount += ((integer)$amount);
         $this->save();
 
         return true;
@@ -74,8 +74,8 @@ class BalanceCash extends \yii\db\ActiveRecord
      */
     public function withdrawBalance($amount)
     {
-        $exponent = intval(Settings::getSetting('balance_exponent'));
-        $this->amount -= ((float)$amount * $exponent);
+//        $exponent = intval(Settings::getSetting('balance_exponent'));
+        $this->amount -= ((integer)$amount);
         if ($this->amount < 0) {
             $this->amount = 0;
         }

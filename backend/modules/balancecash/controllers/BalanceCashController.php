@@ -5,6 +5,7 @@ namespace backend\modules\balancecash\controllers;
 use backend\modules\balancecash\models\BalanceCash;
 use backend\modules\balancecash\models\BalanceCashSearch;
 use common\models\HistoryCash;
+use common\models\Settings;
 use common\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -70,7 +71,8 @@ class BalanceCashController extends Controller
             return "Укажите количество средств!";
         }
 
-        $amount = (float)$post['amount'];
+        $exponent = intval(Settings::getSetting('balance_exponent'));
+        $amount = (float)$post['amount'] * $exponent;
         $balanceCashModel->addBalance($amount);
 
         HistoryCash::create(
@@ -98,8 +100,8 @@ class BalanceCashController extends Controller
             return "Укажите количество средств!";
         }
 
-        $amount = (float)$post['amount'];
-
+        $exponent = intval(Settings::getSetting('balance_exponent'));
+        $amount = (float)$post['amount'] * $exponent;
         $balanceCashModel->withdrawBalance($amount);
 
         HistoryCash::create(

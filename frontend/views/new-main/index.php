@@ -62,22 +62,7 @@ if($seo)
                       </h1>
                   </div>
                   <div class="about__main-items">
-                      <div class="item">
-                          <div class="item-header">
-                              <img src="/images/uploaded/be.png" alt="">
-                              <p class="item-title behance">Behance</p>
-                          </div>
-
-                          <div class="item-description">
-                                  <p><a href="<?= Url::to(['/behance']) ?>">Накрутка лайков Behance</a></p>
-                          </div>
-                          <div class="item-description">
-                              <p><a href="<?= Url::to(['/behance']) ?>">Накрутка просмотров Behance</a></p>
-                          </div>
-                          <div class="item-description">
-                              <p><a href="<?= Url::to(['/behance/chat']) ?>">Накрутка комментариев Behance</a></p>
-                          </div>
-                      </div>
+                      
                       <?php
                         foreach ($socials as $social) { ?>
                             <div class="item">

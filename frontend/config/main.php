@@ -69,7 +69,7 @@ return [
 	            'request-password-reset' => '/site/request-password-reset',
 	            'account-confirm' => '/site/account-confirm',
                 //'behance' => '/site/index',
-                'behance/chat' => '/new-main/chat',
+                //'behance/chat' => '/new-main/chat',
                 'about' => 'new-main/about'
             ],
         ],
